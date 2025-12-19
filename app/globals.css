@@ -1,1 +1,12 @@
 @import "tailwindcss";
+
+:root {
+	--font-poppins: 'Poppins', system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial;
+	--brand: #9810fa;
+	--brand-50: rgba(152,16,250,0.06);
+	--accent: #7c3aed;
+}
+
+html, body {
+	font-family: var(--font-poppins);
+}

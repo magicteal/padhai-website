@@ -2,7 +2,7 @@ import Link from "next/link";
 
 export default function Navbar() {
   return (
-    <header className="bg-white shadow-lg">
+    <header className="bg-purple-600 shadow-lg">
       <div className="max-w-7xl mx-auto px-4 py-3 grid grid-cols-3 items-center">
         
         {/* Logo */}
@@ -12,38 +12,36 @@ export default function Navbar() {
               src="/images/mainLogo.svg"
               alt="Padhai logo"
               className="h-8 w-auto"
+              style={{ filter: 'brightness(0) invert(1)' }}
             />
           </Link>
         </div>
 
         {/* Navigation */}
-        <nav
-          className="flex justify-center gap-6"
-          aria-label="Primary navigation"
-        >
-          <a href="#" className="text-gray-600 font-medium hover:text-gray-900">
+        <nav className="flex justify-center gap-6" aria-label="Primary navigation">
+          <a href="#" className="text-white font-medium hover:text-white/90">
             Why AI
           </a>
-          <a href="#" className="text-gray-600 font-medium hover:text-gray-900">
+          <a href="#" className="text-white font-medium hover:text-white/90">
             Course details
           </a>
-          <a href="#" className="text-gray-600 font-medium hover:text-gray-900">
+          <a href="#" className="text-white font-medium hover:text-white/90">
             Projects
           </a>
-          <a href="#" className="text-gray-600 font-medium hover:text-gray-900">
+          <a href="#" className="text-white font-medium hover:text-white/90">
             Pricing
           </a>
-          <a href="#" className="text-gray-600 font-medium hover:text-gray-900">
+          <a href="#" className="text-white font-medium hover:text-white/90">
             FAQ
           </a>
         </nav>
 
         {/* Actions */}
         <div className="flex justify-end items-center gap-3">
-          <button className="px-5 py-2 rounded-full font-semibold border border-purple-600 text-purple-600 bg-white hover:bg-purple-50 transition">
+          <button className="px-5 py-2 rounded-full font-semibold border border-white text-white bg-transparent hover:bg-white/10 transition">
             Log in
           </button>
-          <button className="px-5 py-2 rounded-full font-semibold bg-purple-600 text-white hover:bg-purple-700 transition">
+          <button className="px-5 py-2 rounded-full font-semibold bg-white text-purple-600 hover:bg-gray-100 transition">
             Sign up
           </button>
         </div>
