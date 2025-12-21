@@ -28,12 +28,12 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
   }
 
   useEffect(() => {
-    if (!isAuthenticated) {
-      router.push('/admin/login');
+    if (!isAuthenticated || currentUser?.role !== 'admin') {
+      router.push('/login');
     }
-  }, [isAuthenticated, router]);
+  }, [isAuthenticated, currentUser, router]);
 
-  if (!isAuthenticated) {
+  if (!isAuthenticated || currentUser?.role !== 'admin') {
     return null;
   }
 
@@ -41,11 +41,12 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
     { href: '/admin', label: 'Dashboard', icon: LayoutDashboard, emoji: '📊' },
     { href: '/admin/projects', label: 'Projects', icon: FolderKanban, emoji: '🎨' },
     { href: '/admin/testimonials', label: 'Testimonials', icon: MessageSquareQuote, emoji: '💬' },
+    { href: '/admin/users', label: 'Users', icon: MessageSquareQuote, emoji: '👥' },
   ];
 
   const handleLogout = () => {
     logout();
-    router.push('/admin/login');
+    router.push('/login');
   };
 
   return (

@@ -63,10 +63,7 @@ export default function Navbar() {
                     href={link.href} 
                     className="relative px-3 py-2 lg:px-4 text-white font-medium hover:text-white/90 transition-all group text-sm lg:text-base"
                   >
-                    <span className="flex items-center gap-1">
-                      <span className="hidden lg:inline">{link.emoji}</span>
-                      {link.label}
-                    </span>
+                    <span className="flex items-center gap-1">{link.label}</span>
                     <motion.span 
                       className="absolute bottom-0 left-1/2 w-0 h-0.5 bg-white rounded-full group-hover:w-3/4 transition-all duration-300"
                       style={{ transform: 'translateX(-50%)' }}
@@ -82,22 +79,24 @@ export default function Navbar() {
               animate={{ opacity: 1, x: 0 }}
               className="hidden md:flex items-center gap-2 lg:gap-3"
             >
-              <Link href="/admin/login">
+              <Link href="/login">
                 <motion.button 
                   className="px-4 py-2 lg:px-5 rounded-full font-semibold border-2 border-white text-white bg-transparent hover:bg-white/10 transition text-sm lg:text-base"
                   whileHover={{ scale: 1.05 }}
                   whileTap={{ scale: 0.95 }}
                 >
-                  Log in
+                  Login
                 </motion.button>
               </Link>
-              <motion.button 
-                className="px-4 py-2 lg:px-5 rounded-full font-semibold bg-white text-purple-600 hover:bg-yellow-300 hover:text-purple-700 transition shadow-lg text-sm lg:text-base"
-                whileHover={{ scale: 1.05, boxShadow: "0 10px 30px rgba(255,255,255,0.3)" }}
-                whileTap={{ scale: 0.95 }}
-              >
-                Sign up ✨
-              </motion.button>
+              <Link href="/signup">
+                <motion.button 
+                  className="px-4 py-2 lg:px-5 rounded-full font-semibold bg-white text-purple-600 hover:bg-yellow-300 hover:text-purple-700 transition shadow-lg text-sm lg:text-base"
+                  whileHover={{ scale: 1.05, boxShadow: "0 10px 30px rgba(255,255,255,0.3)" }}
+                  whileTap={{ scale: 0.95 }}
+                >
+                  Sign up ✨
+                </motion.button>
+              </Link>
             </motion.div>
 
             {/* Mobile Menu Button */}
@@ -142,7 +141,6 @@ export default function Navbar() {
                         onClick={() => setIsOpen(false)}
                         className="flex items-center gap-4 text-white text-2xl font-bold py-4 px-6 rounded-2xl hover:bg-white/10 transition-all active:scale-95"
                       >
-                        <span className="text-3xl">{link.emoji}</span>
                         {link.label}
                       </Link>
                     </motion.div>
@@ -155,14 +153,16 @@ export default function Navbar() {
                   transition={{ delay: 0.5 }}
                   className="space-y-3 mt-auto"
                 >
-                  <Link href="/admin/login" onClick={() => setIsOpen(false)} className="block">
+                  <Link href="/login" onClick={() => setIsOpen(false)} className="block">
                     <button className="w-full px-6 py-4 rounded-2xl font-bold text-lg border-2 border-white text-white bg-transparent hover:bg-white/10 transition">
-                      Log in
+                      Login
                     </button>
                   </Link>
-                  <button className="w-full px-6 py-4 rounded-2xl font-bold text-lg bg-white text-purple-600 hover:bg-yellow-300 transition shadow-xl">
-                    Sign up ✨
-                  </button>
+                  <Link href="/signup" onClick={() => setIsOpen(false)} className="block">
+                    <button className="w-full px-6 py-4 rounded-2xl font-bold text-lg bg-white text-purple-600 hover:bg-yellow-300 transition shadow-xl">
+                      Sign up ✨
+                    </button>
+                  </Link>
                 </motion.div>
               </div>
             </div>

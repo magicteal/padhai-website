@@ -1,6 +1,6 @@
 import { create } from 'zustand';
 import { persist } from 'zustand/middleware';
-import { Project, Testimonial, AdminUser } from './types';
+import { Project, Testimonial, User } from './types';
 
 // Initial Projects Data
 const initialProjects: Project[] = [
@@ -185,13 +185,41 @@ const initialTestimonials: Testimonial[] = [
 ];
 
 // Admin User (default credentials - in production, use environment variables and proper auth)
-const defaultAdmin: AdminUser = {
-  id: '1',
+const defaultAdmin: User = {
+  id: 'admin-1',
   email: 'admin@padhai.com',
   password: 'admin123', // In production, this should be hashed
   name: 'Admin User',
   role: 'admin',
+  createdAt: '2024-01-01',
 };
+
+// Initial users (includes admin + some sample users)
+const initialUsers: User[] = [
+  defaultAdmin,
+  {
+    id: 'user-1',
+    email: 'parent1@example.com',
+    password: 'user123',
+    name: 'Rajesh Kumar',
+    role: 'user',
+    createdAt: '2024-02-15',
+    phone: '+91 98765 43210',
+    location: 'Whitefield, Bangalore',
+    enrolledCourses: ['AI Foundation Course'],
+  },
+  {
+    id: 'user-2',
+    email: 'parent2@example.com',
+    password: 'user123',
+    name: 'Priya Sharma',
+    role: 'user',
+    createdAt: '2024-03-01',
+    phone: '+91 98765 43211',
+    location: 'Koramangala, Bangalore',
+    enrolledCourses: ['AI Foundation Course'],
+  },
+];
 
 interface AppState {
   // Projects
@@ -206,10 +234,17 @@ interface AppState {
   updateTestimonial: (id: string, testimonial: Partial<Testimonial>) => void;
   deleteTestimonial: (id: string) => void;
   
+  // Users
+  users: User[];
+  addUser: (user: Omit<User, 'id' | 'createdAt'>) => void;
+  updateUser: (id: string, user: Partial<User>) => void;
+  deleteUser: (id: string) => void;
+  
   // Auth
   isAuthenticated: boolean;
-  currentUser: AdminUser | null;
+  currentUser: User | null;
   login: (email: string, password: string) => boolean;
+  signup: (email: string, password: string, name: string, phone?: string, location?: string) => boolean;
   logout: () => void;
 }
 
@@ -262,15 +297,70 @@ export const useAppStore = create<AppState>()(
         }));
       },
 
+      // Users
+      users: initialUsers,
+      addUser: (user) => {
+        const newUser: User = {
+          ...user,
+          id: `user-${Date.now()}`,
+          createdAt: new Date().toISOString().split('T')[0],
+        };
+        set((state) => ({ users: [...state.users, newUser] }));
+      },
+      updateUser: (id, updatedUser) => {
+        set((state) => ({
+          users: state.users.map((u) =>
+            u.id === id ? { ...u, ...updatedUser } : u
+          ),
+        }));
+      },
+      deleteUser: (id) => {
+        // Prevent deleting admin
+        const user = get().users.find(u => u.id === id);
+        if (user?.role === 'admin') {
+          return;
+        }
+        set((state) => ({
+          users: state.users.filter((u) => u.id !== id),
+        }));
+      },
+
       // Auth
       isAuthenticated: false,
       currentUser: null,
       login: (email, password) => {
-        if (email === defaultAdmin.email && password === defaultAdmin.password) {
-          set({ isAuthenticated: true, currentUser: defaultAdmin });
+        const user = get().users.find(u => u.email === email && u.password === password);
+        if (user) {
+          set({ isAuthenticated: true, currentUser: user });
           return true;
         }
         return false;
+      },
+      signup: (email, password, name, phone, location) => {
+        // Check if email already exists
+        const existingUser = get().users.find(u => u.email === email);
+        if (existingUser) {
+          return false;
+        }
+        
+        const newUser: User = {
+          id: `user-${Date.now()}`,
+          email,
+          password,
+          name,
+          role: 'user',
+          createdAt: new Date().toISOString().split('T')[0],
+          phone,
+          location,
+          enrolledCourses: [],
+        };
+        
+        set((state) => ({ 
+          users: [...state.users, newUser],
+          isAuthenticated: true,
+          currentUser: newUser
+        }));
+        return true;
       },
       logout: () => {
         set({ isAuthenticated: false, currentUser: null });
@@ -281,6 +371,7 @@ export const useAppStore = create<AppState>()(
       partialize: (state) => ({
         projects: state.projects,
         testimonials: state.testimonials,
+        users: state.users,
         isAuthenticated: state.isAuthenticated,
         currentUser: state.currentUser,
       }),

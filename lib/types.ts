@@ -41,13 +41,20 @@ export interface Testimonial {
   createdAt: string;
 }
 
-export interface AdminUser {
+export interface User {
   id: string;
   email: string;
   password: string;
   name: string;
-  role: 'admin' | 'editor';
+  role: 'admin' | 'user';
+  createdAt: string;
+  enrolledCourses?: string[];
+  phone?: string;
+  location?: string;
 }
+
+// For backwards compatibility
+export type AdminUser = User;
 
 export const PROJECT_CATEGORIES: { value: ProjectCategory; label: string; emoji: string }[] = [
   { value: 'all', label: 'All Projects', emoji: '🌟' },

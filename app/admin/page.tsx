@@ -5,7 +5,7 @@ import { FolderKanban, MessageSquareQuote, TrendingUp, Users, Star, Sparkles } f
 import Link from 'next/link';
 
 export default function AdminDashboard() {
-  const { projects, testimonials, currentUser } = useAppStore();
+  const { projects, testimonials, users, currentUser } = useAppStore();
 
   const stats = [
     { 
@@ -17,12 +17,12 @@ export default function AdminDashboard() {
       href: '/admin/projects'
     },
     { 
-      label: 'Featured Projects', 
-      value: projects.filter(p => p.featured).length, 
-      icon: Star, 
-      color: 'from-yellow-500 to-orange-500',
-      emoji: '⭐',
-      href: '/admin/projects'
+      label: 'Total Users', 
+      value: users.length, 
+      icon: Users, 
+      color: 'from-green-500 to-emerald-500',
+      emoji: '👥',
+      href: '/admin/users'
     },
     { 
       label: 'Total Testimonials', 
@@ -33,12 +33,12 @@ export default function AdminDashboard() {
       href: '/admin/testimonials'
     },
     { 
-      label: 'Video Testimonials', 
-      value: testimonials.filter(t => t.type === 'video').length, 
-      icon: TrendingUp, 
-      color: 'from-pink-500 to-rose-500',
-      emoji: '🎥',
-      href: '/admin/testimonials'
+      label: 'Featured Projects', 
+      value: projects.filter(p => p.featured).length, 
+      icon: Star, 
+      color: 'from-yellow-500 to-orange-500',
+      emoji: '⭐',
+      href: '/admin/projects'
     },
   ];
 

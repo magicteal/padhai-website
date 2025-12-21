@@ -97,12 +97,13 @@ export default function HeroSection({
                   Turn Your Child's Screen Time Into
                 </motion.span>
                 <motion.span 
-                  className="block text-transparent bg-clip-text bg-gradient-to-r from-yellow-300 via-pink-300 to-purple-300"
+                  className="block text-purple-600"
+                  style={{ WebkitTextStroke: '0.5px white', WebkitTextFillColor: '#7c3aed' }}
                   initial={{ opacity: 0, y: 20 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ delay: 0.4 }}
                 >
-                  Superpower Time 🦸‍♂️
+                  Superpower Time
                 </motion.span>
               </h1>
 
@@ -124,9 +125,7 @@ export default function HeroSection({
                 animate={{ opacity: 1 }}
                 transition={{ delay: 0.6 }}
               >
-                The safest, most productive way for Bangalore kids to learn, create, and build their future early. 
-                <span className="font-semibold text-yellow-300"> Live Online Classes + Mentorship</span>
-              </motion.p>
+                The safest, most productive way for Bangalore kids to learn, create, and build their future early.               </motion.p>
 
               {/* Features List */}
               <motion.ul 
