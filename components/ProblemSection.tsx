@@ -40,58 +40,118 @@ const SOLUTION_BENEFITS: string[] = [
   'Use technology safely with mentorship',
 ];
 
+const TESTIMONIAL_VIDEOS: string[] = [
+  'https://res.cloudinary.com/di98qhrpu/video/upload/v1766146752/Testimonial-three_w0jrjs.mp4',
+  'https://res.cloudinary.com/di98qhrpu/video/upload/v1766144351/Testimonial-two_pr7z6d.mp4',
+  'https://res.cloudinary.com/di98qhrpu/video/upload/v1766144343/Testimonial-one_rbjmsn.mp4',
+];
+
 export default function ProblemSection() {
   return (
-    <Section id="problem" variant="light">
-      <div className="text-center max-w-3xl mx-auto mb-16">
-        <h2 className="font-display text-3xl md:text-4xl font-bold mb-4" style={{ color: 'var(--brand)' }}>
-          The Bangalore Parenting Reality
-        </h2>
-        <p className="text-lg text-slate-600">
-          Parents Are Busy. Kids Are On Screens. <br />
-          <span className="font-bold" style={{ color: 'var(--brand)' }}>We convert that into good skill time.</span>
-        </p>
-      </div>
+    <section 
+      id="problem" 
+      className="py-16 md:py-24 relative overflow-hidden bg-cover bg-center"
+      style={{ backgroundImage: 'url(/images/problemsection.png)' }}
+    >
+      
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10"> 
+        <div className="text-center max-w-3xl mx-auto mb-10 relative z-10">
+          <h2 className="font-display text-3xl md:text-4xl font-extrabold leading-tight mb-3 text-slate-900">
+            Bangalore Parents Section
+          </h2>
+        </div>
 
-      <div className="grid md:grid-cols-2 gap-8 lg:gap-16">
-        {/* The Problem */}
-        <div className="bg-white p-8 rounded-3xl shadow-lg border-l-8 border-red-400 relative">
-          <div className="absolute -top-6 left-8 bg-red-500 text-white px-4 py-2 rounded-lg font-bold shadow-md">
-            The Struggle
-          </div>
-          <h3 className="text-xl font-bold mb-6 text-slate-800 mt-2">Every Bangalore family knows this story:</h3>
-          <ul className="space-y-4">
+        <div className="grid md:grid-cols-3 gap-6 items-start relative z-10">
+        {/* Left Card - Problem (message bubble from left) */}
+        <div className="relative bg-white/95 backdrop-blur-sm p-5 rounded-2xl shadow-xl border-2 border-purple-200 max-w-sm md:-translate-y-6">
+          <h3 className="text-lg font-bold text-slate-900 mb-3">😔 The Struggle</h3>
+          <ul className="space-y-2.5 text-sm">
             {REALITY_CHECKS.map((item, idx) => (
-              <li key={idx} className="flex items-start gap-3 text-slate-600">
-                <XCircle className="w-6 h-6 text-red-400 shrink-0" />
-                <span>{item}</span>
+              <li key={idx} className="flex items-start gap-2">
+                <div className="w-8 h-8 rounded-lg flex items-center justify-center bg-gradient-to-br from-purple-400 to-violet-500 shadow-md flex-shrink-0">
+                  <XCircle className="w-4 h-4 text-white" />
+                </div>
+                <span className="text-slate-800 font-medium pt-1">{item}</span>
               </li>
             ))}
           </ul>
+          {/* tail */}
+          <span
+            aria-hidden
+            style={{
+              position: 'absolute',
+              left: '-20px',
+              bottom: '18px',
+              width: 0,
+              height: 0,
+              borderTop: '14px solid transparent',
+              borderBottom: '14px solid transparent',
+              borderRight: '22px solid rgba(255,255,255,0.95)'
+            }}
+          />
         </div>
 
-        {/* The Solution */}
-        <div className="bg-white p-8 rounded-3xl shadow-xl border-l-8 border-green-500 relative transform md:-translate-y-4 md:scale-105 z-10 ring-1 ring-black/5">
-          <div className="absolute -top-6 left-8 bg-green-500 text-white px-4 py-2 rounded-lg font-bold shadow-md">
-            The PadhAi Way
-          </div>
-          <h3 className="text-xl font-bold mb-6 text-slate-800 mt-2">Imagine if your child used the same screen to:</h3>
-          <ul className="space-y-4">
-            {SOLUTION_BENEFITS.map((item, idx) => (
-              <li key={idx} className="flex items-start gap-3 text-slate-700 font-medium">
-                <CheckCircle className="w-6 h-6 text-green-500 shrink-0" />
-                <span>{item}</span>
+        {/* Center - Building illustration (empty space for background) */}
+        <div className="hidden md:block h-64"></div>
+
+        {/* Right Card - Solution (message bubble from right) */}
+        <div className="relative bg-white/95 backdrop-blur-sm p-5 rounded-2xl shadow-xl border-2 border-indigo-200 max-w-sm ml-auto md:translate-y-2">
+          <h3 className="text-lg font-bold text-slate-900 mb-3">✨ The PadhAi Way</h3>
+          <ul className="space-y-2.5 text-sm">
+            {SOLUTION_BENEFITS.slice(0, 5).map((item, idx) => (
+              <li key={idx} className="flex items-start gap-2">
+                <div className="w-8 h-8 rounded-lg flex items-center justify-center bg-gradient-to-br from-indigo-400 to-purple-500 shadow-md flex-shrink-0">
+                  <CheckCircle className="w-4 h-4 text-white" />
+                </div>
+                <span className="text-slate-800 font-medium pt-1">{item}</span>
               </li>
             ))}
           </ul>
+          {/* tail */}
+          <span
+            aria-hidden
+            style={{
+              position: 'absolute',
+              right: '-18px',
+              bottom: '18px',
+              width: 0,
+              height: 0,
+              borderTop: '12px solid transparent',
+              borderBottom: '12px solid transparent',
+              borderLeft: '20px solid rgba(255,255,255,0.95)'
+            }}
+          />
         </div>
       </div>
 
-      <div className="mt-16 text-center">
-        <p className="text-xl font-display font-semibold text-brand-800 bg-brand-100 inline-block px-8 py-4 rounded-2xl">
-          It is the first structured, safe, high-impact AI learning program <br /> designed specifically for Bangalore children.
-        </p>
+      <div className="mt-10">
+        <div className="flex items-center justify-center gap-2 mb-5">
+          <span className="text-3xl">🎥</span>
+          <h4 className="text-xl font-extrabold text-slate-900">Watch Kids Share Their Experience!</h4>
+        </div>
+        <div className="grid grid-cols-1 sm:grid-cols-3 gap-5 justify-items-center">
+          {TESTIMONIAL_VIDEOS.map((src, i) => (
+            <div key={i} className="w-full max-w-xs">
+              <video
+                src={src}
+                controls
+                playsInline
+                className="w-full h-[300px] sm:h-[350px] md:h-[400px] object-cover rounded-[1.5rem] shadow-xl border-3 border-white bg-slate-50"
+                aria-label={`Testimonial video ${i + 1}`}
+              />
+            </div>
+          ))}
+        </div>
       </div>
-    </Section>
+
+      <div className="mt-12 text-center">
+        <div className="inline-block px-6 py-4 rounded-2xl bg-gradient-to-r from-purple-200 via-violet-200 to-indigo-200 shadow-xl border-3 border-white">
+          <p className="text-slate-900 font-extrabold text-lg">
+            🌟 First structured, safe AI program for Bangalore kids! 🚀
+          </p>
+        </div>
+      </div>
+      </div>
+    </section>
   );
 }

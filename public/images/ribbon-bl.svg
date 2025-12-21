@@ -1,0 +1,18 @@
+<svg viewBox="0 0 420 220" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="ribbonBL" x1="1" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#38BDF8" />
+      <stop offset="50%" stop-color="#A855F7" />
+      <stop offset="100%" stop-color="#F472B6" />
+    </linearGradient>
+  </defs>
+
+  <path
+    d="M380 200
+       C240 180, 180 40, 40 20
+       L70 0
+       C210 20, 280 160, 400 180
+       Z"
+    fill="url(#ribbonBL)"
+  />
+</svg>

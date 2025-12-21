@@ -58,26 +58,34 @@ const TRUST_FEATURES: FeatureItem[] = [
 ];
 
 export const Curriculum: React.FC = () => {
+  const emojis = ['✨', '🧠', '🏆'];
   return (
-    <Section id="curriculum">
-      <div className="text-center mb-16">
-        <h2 className="font-display text-3xl md:text-4xl font-bold mb-4" style={{ color: 'var(--brand)' }}>
+    <Section id="curriculum" variant="light">
+      <div className="text-center mb-10">
+        <div className="inline-block mb-2">
+          <span className="text-4xl">📚</span>
+        </div>
+        <h2 className="font-display text-3xl md:text-4xl font-extrabold mb-3 bg-gradient-to-r from-[var(--brand)] to-[#7c3aed] bg-clip-text text-transparent">
           What Your Child Will Learn
         </h2>
-        <p className="text-slate-600">A Future-Ready Skillset for Bangalore Kids</p>
+        <p className="text-slate-600 text-base">🎯 A Future-Ready Skillset for Bangalore Kids 🚀</p>
       </div>
 
-          <div className="grid md:grid-cols-3 gap-8">
+          <div className="grid md:grid-cols-3 gap-5">
             {CURRICULUM_MODULES.map((module, idx) => (
               <div
                 key={idx}
-                className="bg-[var(--brand-50)] p-8 rounded-3xl hover:bg-white hover:shadow-xl transition-all duration-300 border border-transparent hover:border-[var(--brand)] group"
+                className="bg-gradient-to-br from-white via-purple-50 to-pink-50 p-6 rounded-[1.5rem] shadow-xl border-2 border-white/60 hover:scale-105 transition-all duration-300 group relative overflow-hidden"
               >
-                <div className="w-16 h-16 bg-white rounded-2xl flex items-center justify-center mb-6 shadow-md text-[var(--brand)] group-hover:bg-[var(--brand)] group-hover:text-white transition-colors duration-300">
-                  <module.icon className="w-8 h-8" />
+                <div className="absolute top-0 right-0 w-24 h-24 bg-gradient-to-br from-purple-200/30 to-pink-200/30 rounded-full blur-xl"></div>
+                <div className="relative z-10">
+                  <div className="text-4xl mb-3">{emojis[idx]}</div>
+                  <div className="w-12 h-12 bg-gradient-to-br from-[var(--brand)] to-[#7c3aed] rounded-xl flex items-center justify-center mb-4 shadow-lg group-hover:scale-110 transition-transform duration-300">
+                    <module.icon className="w-6 h-6 text-white" />
+                  </div>
+                  <h3 className="font-display text-xl font-bold text-slate-900 mb-2">{module.title}</h3>
+                  <p className="text-slate-700 text-sm leading-relaxed">{module.description}</p>
                 </div>
-                <h3 className="font-display text-xl font-bold text-[var(--brand)] mb-3">{module.title}</h3>
-                <p className="text-slate-600 text-sm leading-relaxed">{module.description}</p>
               </div>
             ))}
           </div>
@@ -91,28 +99,28 @@ export const Trust: React.FC = () => {
        <div className="absolute top-0 right-0 w-64 h-64 bg-brand-500 rounded-full blur-[100px] opacity-20"></div>
        <div className="absolute bottom-0 left-0 w-64 h-64 bg-accent-500 rounded-full blur-[100px] opacity-20"></div>
        
-      <div className="text-center mb-16 relative z-10">
-        <h2 className="font-display text-3xl md:text-4xl font-bold text-white mb-4">
+      <div className="text-center mb-12 relative z-10">
+        <h2 className="font-display text-2xl md:text-3xl font-bold text-white mb-3">
           Why PadhAi Club Works
         </h2>
-        <p className="text-slate-300 text-lg">
+        <p className="text-slate-300 text-base">
           Because we don’t just teach AI — we teach <span className="text-accent-400 font-bold">discipline, mindset, and values.</span>
         </p>
       </div>
 
-      <div className="grid grid-cols-2 md:grid-cols-4 gap-6 relative z-10">
+      <div className="grid grid-cols-2 md:grid-cols-4 gap-4 relative z-10">
         {TRUST_FEATURES.map((feature, idx) => (
-          <div key={idx} className="group text-center p-6 bg-white/5 rounded-2xl border border-white/10 backdrop-blur-sm">
-            <div className="mx-auto mb-4 p-3 rounded-full bg-white/5 transition-colors duration-200 group-hover:bg-[var(--brand)]">
-              <feature.icon className="w-6 h-6 text-accent-400 group-hover:text-white transition-colors duration-200" />
+          <div key={idx} className="group text-center p-4 bg-white/5 rounded-xl border border-white/10 backdrop-blur-sm">
+            <div className="mx-auto mb-3 p-2 rounded-full bg-white/5 transition-colors duration-200 group-hover:bg-[var(--brand)]">
+              <feature.icon className="w-5 h-5 text-accent-400 group-hover:text-white transition-colors duration-200" />
             </div>
-            <h4 className="text-white font-bold mb-2">{feature.title}</h4>
-            <p className="text-slate-400 text-sm">{feature.description}</p>
+            <h4 className="text-white font-bold mb-1.5 text-sm">{feature.title}</h4>
+            <p className="text-slate-400 text-xs">{feature.description}</p>
           </div>
         ))}
       </div>
       
-      <div className="mt-12 text-center text-slate-300 relative z-10">
+      <div className="mt-10 text-center text-slate-300 text-sm relative z-10">
         Bangalore is India’s tech hub — your child deserves world-class learning early.
       </div>
     </Section>

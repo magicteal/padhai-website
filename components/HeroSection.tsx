@@ -13,7 +13,7 @@ export default function HeroSection({
   return (
     <section
       aria-label="Hero"
-      className="relative overflow-hidden rounded-b-2xl bg-cover bg-center bg-no-repeat"
+      className="relative overflow-hidden bg-cover bg-center bg-no-repeat"
       style={{ backgroundImage: `url(${bgImage})` }}
     >
       {/* Full black film overlay covering the hero */}
@@ -23,7 +23,7 @@ export default function HeroSection({
         <div className="max-w-7xl mx-auto px-4 py-16 md:py-28">
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
             {/* LEFT */}
-            <div className="text-center md:text-left">
+            <div className="text-center md:text-left transform md:-translate-x-8">
               <h1 className="text-3xl md:text-5xl lg:text-6xl font-extrabold leading-tight">
                 <span className="block text-white text-2xl md:text-3xl lg:text-4xl">Turn Your Child’s Screen Time Into</span>
                 <span className="block text-purple-600">Superpower Time</span>

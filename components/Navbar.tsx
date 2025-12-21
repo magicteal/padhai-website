@@ -12,7 +12,6 @@ export default function Navbar() {
               src="/images/mainLogo.svg"
               alt="Padhai logo"
               className="h-8 w-auto"
-              style={{ filter: 'brightness(0) invert(1)' }}
             />
           </Link>
         </div>
