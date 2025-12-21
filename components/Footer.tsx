@@ -1,169 +1,174 @@
+"use client";
 import React from 'react';
-import { Mail, Phone, MapPin, Facebook, Instagram, Linkedin, Youtube } from 'lucide-react';
+import { motion } from 'framer-motion';
+import { Mail, Phone, MapPin, Facebook, Instagram, Linkedin, Youtube, Heart, Sparkles } from 'lucide-react';
+import Link from 'next/link';
 
 export default function Footer() {
-  return (
-    <footer className="bg-gradient-to-br from-[#5b21b6] via-[#7c3aed] to-[#9810fa] text-white relative overflow-hidden">
-      {/* Decorative elements */}
-      <div className="absolute top-0 right-0 w-64 h-64 bg-white/5 rounded-full blur-3xl"></div>
-      <div className="absolute bottom-0 left-0 w-96 h-96 bg-white/5 rounded-full blur-3xl"></div>
+  const socialLinks = [
+    { icon: Facebook, href: "#", label: "Facebook" },
+    { icon: Instagram, href: "#", label: "Instagram" },
+    { icon: Linkedin, href: "#", label: "LinkedIn" },
+    { icon: Youtube, href: "#", label: "YouTube" },
+  ];
 
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 relative z-10">
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 mb-8">
+  return (
+    <footer className="bg-gradient-to-br from-purple-700 via-violet-700 to-fuchsia-700 text-white relative overflow-hidden">
+      {/* Decorative elements */}
+      <div className="absolute top-0 right-0 w-48 sm:w-64 h-48 sm:h-64 bg-white/5 rounded-full blur-3xl animate-float" />
+      <div className="absolute bottom-0 left-0 w-64 sm:w-96 h-64 sm:h-96 bg-fuchsia-500/10 rounded-full blur-3xl animate-float" style={{ animationDelay: '2s' }} />
+      
+      {/* Fun wave at top */}
+      <div className="absolute top-0 left-0 right-0 h-8 bg-gradient-to-r from-purple-50 via-fuchsia-50 to-pink-50" 
+           style={{ clipPath: 'ellipse(70% 100% at 50% 0%)' }} />
+
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10 sm:py-12 pt-16 relative z-10">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 mb-8">
           {/* Brand Column */}
-          <div className="text-center">
-            <div className="flex items-center gap-3 mb-4 justify-center">
-              <a href="/" className="flex items-center gap-3">
-                <img src="/images/mainLogo.svg" alt="PadhAi Club" className="w-20 h-20 object-contain" />
-              </a>
-            </div>
-            <p className="text-white/80 text-sm mb-4 leading-relaxed mx-auto max-w-xs text-center">
+          <motion.div 
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            className="text-center sm:text-left"
+          >
+            <Link href="/" className="inline-flex items-center gap-3 mb-4 group">
+              <motion.img 
+                src="/images/mainLogo.svg" 
+                alt="PadhAi Club" 
+                className="w-16 h-16 sm:w-20 sm:h-20 object-contain"
+                whileHover={{ rotate: 10 }}
+              />
+              <Sparkles className="w-5 h-5 text-yellow-300 opacity-0 group-hover:opacity-100 transition-opacity animate-sparkle" />
+            </Link>
+            <p className="text-white/80 text-sm mb-4 leading-relaxed max-w-xs mx-auto sm:mx-0">
               AI + Sanskar for the Next Generation. Bangalore's Favorite AI Foundation Course for Kids (Ages 5–15).
             </p>
-            <p className="text-white/60 text-xs text-center">
-              Safe · Creative · Future-Ready
-            </p>
-          </div>
+            <div className="flex items-center justify-center sm:justify-start gap-2 text-white/60 text-xs">
+              <span className="px-2 py-1 rounded-full bg-white/10">Safe</span>
+              <span className="px-2 py-1 rounded-full bg-white/10">Creative</span>
+              <span className="px-2 py-1 rounded-full bg-white/10">Future-Ready</span>
+            </div>
+          </motion.div>
 
           {/* Quick Links */}
-          <div>
-            <h4 className="font-semibold mb-4 text-lg">Quick Links</h4>
-            <ul className="space-y-3">
-              <li>
-                <a href="#problem" className="text-white/80 hover:text-white transition text-sm flex items-center gap-2">
-                  <span className="w-1.5 h-1.5 bg-white/60 rounded-full"></span>
-                  About Us
-                </a>
-              </li>
-              <li>
-                <a href="#curriculum" className="text-white/80 hover:text-white transition text-sm flex items-center gap-2">
-                  <span className="w-1.5 h-1.5 bg-white/60 rounded-full"></span>
-                  Curriculum
-                </a>
-              </li>
-              <li>
-                <a href="#projects" className="text-white/80 hover:text-white transition text-sm flex items-center gap-2">
-                  <span className="w-1.5 h-1.5 bg-white/60 rounded-full"></span>
-                  Student Projects
-                </a>
-              </li>
-              <li>
-                <a href="#testimonials" className="text-white/80 hover:text-white transition text-sm flex items-center gap-2">
-                  <span className="w-1.5 h-1.5 bg-white/60 rounded-full"></span>
-                  Testimonials
-                </a>
-              </li>
-              <li>
-                <a href="#pricing" className="text-white/80 hover:text-white transition text-sm flex items-center gap-2">
-                  <span className="w-1.5 h-1.5 bg-white/60 rounded-full"></span>
-                  Pricing
-                </a>
-              </li>
-              <li>
-                <a href="#faq" className="text-white/80 hover:text-white transition text-sm flex items-center gap-2">
-                  <span className="w-1.5 h-1.5 bg-white/60 rounded-full"></span>
-                  FAQ
-                </a>
-              </li>
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ delay: 0.1 }}
+          >
+            <h4 className="font-bold mb-4 text-base sm:text-lg flex items-center gap-2 justify-center sm:justify-start">
+              <span>🔗</span> Quick Links
+            </h4>
+            <ul className="space-y-2 text-center sm:text-left">
+              {[
+                { href: "#problem", label: "About Us" },
+                { href: "#curriculum", label: "Curriculum" },
+                { href: "#projects", label: "Student Projects" },
+                { href: "#testimonials", label: "Testimonials" },
+                { href: "#pricing", label: "Pricing" },
+                { href: "#faq", label: "FAQ" },
+              ].map((link, idx) => (
+                <motion.li key={idx} whileHover={{ x: 5 }}>
+                  <a href={link.href} className="text-white/80 hover:text-white transition text-sm flex items-center gap-2 justify-center sm:justify-start group">
+                    <span className="w-1.5 h-1.5 bg-fuchsia-400 rounded-full group-hover:scale-150 transition-transform" />
+                    {link.label}
+                  </a>
+                </motion.li>
+              ))}
             </ul>
-          </div>
+          </motion.div>
 
           {/* Contact Info */}
-          <div>
-            <h4 className="font-semibold mb-4 text-lg">Contact Us</h4>
-            <ul className="space-y-3">
-              <li className="flex items-start gap-3 text-sm text-white/80">
-                <Mail className="w-5 h-5 shrink-0 mt-0.5" />
-                <div>
-                  <a href="mailto:hello@padhaiclub.com" className="hover:text-white transition">
-                    hello@padhaiclub.com
-                  </a>
-                </div>
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ delay: 0.2 }}
+          >
+            <h4 className="font-bold mb-4 text-base sm:text-lg flex items-center gap-2 justify-center sm:justify-start">
+              <span>📞</span> Contact Us
+            </h4>
+            <ul className="space-y-3 text-center sm:text-left">
+              <li className="flex items-start gap-3 text-sm text-white/80 justify-center sm:justify-start">
+                <Mail className="w-4 h-4 sm:w-5 sm:h-5 shrink-0 mt-0.5 text-fuchsia-300" />
+                <a href="mailto:hello@padhaiclub.com" className="hover:text-white transition">
+                  hello@padhaiclub.com
+                </a>
               </li>
-              <li className="flex items-start gap-3 text-sm text-white/80">
-                <Phone className="w-5 h-5 shrink-0 mt-0.5" />
-                <div>
-                  <a href="tel:+919876543210" className="hover:text-white transition">
-                    +91 98765 43210
-                  </a>
-                </div>
+              <li className="flex items-start gap-3 text-sm text-white/80 justify-center sm:justify-start">
+                <Phone className="w-4 h-4 sm:w-5 sm:h-5 shrink-0 mt-0.5 text-fuchsia-300" />
+                <a href="tel:+919876543210" className="hover:text-white transition">
+                  +91 98765 43210
+                </a>
               </li>
-              <li className="flex items-start gap-3 text-sm text-white/80">
-                <MapPin className="w-5 h-5 shrink-0 mt-0.5" />
-                <div>
-                  Bangalore, Karnataka<br />
-                  India
-                </div>
+              <li className="flex items-start gap-3 text-sm text-white/80 justify-center sm:justify-start">
+                <MapPin className="w-4 h-4 sm:w-5 sm:h-5 shrink-0 mt-0.5 text-fuchsia-300" />
+                <span>Bangalore, Karnataka, India</span>
               </li>
             </ul>
-          </div>
+          </motion.div>
 
           {/* Programs & Social */}
-          <div>
-            <h4 className="font-semibold mb-4 text-lg">Our Programs</h4>
-            <ul className="space-y-3 mb-6">
-              <li className="text-white/80 text-sm">AI Foundation Course</li>
-              <li className="text-white/80 text-sm">Management Skills</li>
-              <li className="text-white/80 text-sm">Creative Projects</li>
-              <li className="text-white/80 text-sm">Live Mentorship</li>
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ delay: 0.3 }}
+          >
+            <h4 className="font-bold mb-4 text-base sm:text-lg flex items-center gap-2 justify-center sm:justify-start">
+              <span>🎓</span> Our Programs
+            </h4>
+            <ul className="space-y-2 mb-6 text-center sm:text-left">
+              {["AI Foundation Course", "Management Skills", "Creative Projects", "Live Mentorship"].map((item, idx) => (
+                <li key={idx} className="text-white/80 text-sm flex items-center gap-2 justify-center sm:justify-start">
+                  <span className="text-yellow-300">✨</span> {item}
+                </li>
+              ))}
             </ul>
 
-            <h4 className="font-semibold mb-3 text-sm">Follow Us</h4>
-            <div className="flex gap-3">
-              <a
-                href="#"
-                className="w-9 h-9 rounded-lg bg-white/10 hover:bg-white/20 flex items-center justify-center transition backdrop-blur-sm"
-                aria-label="Facebook"
-              >
-                <Facebook className="w-4 h-4" />
-              </a>
-              <a
-                href="#"
-                className="w-9 h-9 rounded-lg bg-white/10 hover:bg-white/20 flex items-center justify-center transition backdrop-blur-sm"
-                aria-label="Instagram"
-              >
-                <Instagram className="w-4 h-4" />
-              </a>
-              <a
-                href="#"
-                className="w-9 h-9 rounded-lg bg-white/10 hover:bg-white/20 flex items-center justify-center transition backdrop-blur-sm"
-                aria-label="LinkedIn"
-              >
-                <Linkedin className="w-4 h-4" />
-              </a>
-              <a
-                href="#"
-                className="w-9 h-9 rounded-lg bg-white/10 hover:bg-white/20 flex items-center justify-center transition backdrop-blur-sm"
-                aria-label="YouTube"
-              >
-                <Youtube className="w-4 h-4" />
-              </a>
+            <h4 className="font-bold mb-3 text-sm flex items-center gap-2 justify-center sm:justify-start">
+              <span>🌐</span> Follow Us
+            </h4>
+            <div className="flex gap-2 sm:gap-3 justify-center sm:justify-start">
+              {socialLinks.map((social, idx) => (
+                <motion.a
+                  key={idx}
+                  href={social.href}
+                  className="w-9 h-9 sm:w-10 sm:h-10 rounded-xl bg-white/10 hover:bg-gradient-to-br hover:from-fuchsia-500 hover:to-purple-500 flex items-center justify-center transition-all touch-target"
+                  aria-label={social.label}
+                  whileHover={{ scale: 1.1, rotate: 5 }}
+                  whileTap={{ scale: 0.9 }}
+                >
+                  <social.icon className="w-4 h-4 sm:w-5 sm:h-5" />
+                </motion.a>
+              ))}
             </div>
-          </div>
+          </motion.div>
         </div>
 
         {/* Bottom Bar */}
-        <div className="border-t border-white/10 pt-6 mt-8">
+        <motion.div 
+          initial={{ opacity: 0 }}
+          whileInView={{ opacity: 1 }}
+          viewport={{ once: true }}
+          className="border-t border-white/10 pt-6 mt-8"
+        >
           <div className="flex flex-col sm:flex-row items-center justify-between gap-4">
-            <p className="text-white/60 text-sm text-center sm:text-left">
-              © {new Date().getFullYear()} PadhAi Club. All rights reserved.
+            <p className="text-white/60 text-xs sm:text-sm text-center sm:text-left flex items-center gap-1">
+              © {new Date().getFullYear()} PadhAi Club. Made with <Heart className="w-4 h-4 text-pink-400 fill-pink-400" /> in Bangalore
             </p>
-            <div className="flex gap-6 text-sm text-white/60">
-              <a href="#" className="hover:text-white transition">
-                Privacy Policy
-              </a>
-              <a href="#" className="hover:text-white transition">
-                Terms of Service
-              </a>
-              <a href="#" className="hover:text-white transition">
-                Refund Policy
-              </a>
+            <div className="flex gap-4 sm:gap-6 text-xs sm:text-sm text-white/60">
+              <a href="#" className="hover:text-white transition">Privacy</a>
+              <a href="#" className="hover:text-white transition">Terms</a>
+              <a href="#" className="hover:text-white transition">Refund</a>
             </div>
           </div>
-          <p className="text-white/40 text-xs text-center mt-4">
-            Trusted by 13,000+ Bangalore Parents · Supported by Hema's Community
+          <p className="text-white/40 text-xs text-center mt-4 flex items-center justify-center gap-2">
+            <span>👩‍👩‍👧</span>
+            Trusted by 13,000+ Bangalore Parents
           </p>
-        </div>
+        </motion.div>
       </div>
     </footer>
   );

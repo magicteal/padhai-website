@@ -1,13 +1,12 @@
 "use client";
 import React, { useState, useMemo } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import Link from 'next/link';
 import { useAppStore } from '@/lib/store';
 import { ProjectCategory, GradeLevel } from '@/lib/types';
 import ProjectFilter from './ProjectFilter';
 import ProjectCard from './ProjectCard';
 
-export default function ProjectsSection() {
+export default function FeaturedProjects() {
   const { projects } = useAppStore();
   const [selectedCategory, setSelectedCategory] = useState<ProjectCategory>('all');
   const [selectedGrade, setSelectedGrade] = useState<GradeLevel>('all');
@@ -17,14 +16,11 @@ export default function ProjectsSection() {
       const categoryMatch = selectedCategory === 'all' || project.category === selectedCategory;
       const gradeMatch = selectedGrade === 'all' || project.grade.includes(selectedGrade.replace('Grade ', ''));
       return categoryMatch && gradeMatch;
-    }).slice(0, 6); // Show only 6 on home page
+    });
   }, [projects, selectedCategory, selectedGrade]);
 
   return (
-    <section 
-      id="projects" 
-      className="py-12 sm:py-16 md:py-24 relative overflow-hidden bg-gradient-to-br from-purple-50 via-violet-50 to-fuchsia-50"
-    >
+    <section className="py-12 sm:py-16 md:py-20 relative overflow-hidden bg-gradient-to-br from-purple-50 via-fuchsia-50 to-pink-50">
       {/* Decorative elements */}
       <div className="absolute top-20 left-10 w-40 h-40 bg-purple-300/20 rounded-full blur-3xl animate-float" />
       <div className="absolute bottom-20 right-10 w-60 h-60 bg-fuchsia-300/20 rounded-full blur-3xl animate-float" style={{ animationDelay: '1.5s' }} />
@@ -45,11 +41,9 @@ export default function ProjectsSection() {
             🎨
           </motion.span>
           <h2 className="text-2xl sm:text-3xl md:text-4xl font-extrabold leading-tight mb-3 gradient-text">
-            What Real Kids Are Already Creating
+            The Innovation Gallery
           </h2>
-          <p className="text-slate-700 text-sm sm:text-base font-medium">
-            🌟 Made by PadhAi Students 🌟
-          </p>
+          <p className="text-slate-700 text-sm sm:text-base font-medium">🌟 Real projects built by real students 🌟</p>
         </motion.div>
 
         {/* Filters */}
@@ -65,7 +59,6 @@ export default function ProjectsSection() {
             selectedGrade={selectedGrade}
             onCategoryChange={setSelectedCategory}
             onGradeChange={setSelectedGrade}
-            compact
           />
         </motion.div>
 
@@ -95,34 +88,6 @@ export default function ProjectsSection() {
             </button>
           </motion.div>
         )}
-
-        {/* Bottom CTA */}
-        <motion.div 
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          className="mt-10 sm:mt-12 text-center"
-        >
-          <div className="inline-block px-4 sm:px-6 py-3 sm:py-4 rounded-2xl bg-gradient-to-r from-purple-100 via-violet-100 to-fuchsia-100 shadow-lg border-2 border-white mb-6">
-            <p className="text-slate-900 font-bold text-sm sm:text-base">
-              🌟 Kids start simple. 
-              <span className="block sm:inline"> </span>
-              <span className="gradient-text">With the right guidance, they build amazing things!</span> 🚀
-            </p>
-          </div>
-          
-          <div className="mt-4 sm:mt-6">
-            <Link href="/projects">
-              <motion.button 
-                className="btn-primary text-base sm:text-lg px-6 sm:px-8 py-3 sm:py-4"
-                whileHover={{ scale: 1.05 }}
-                whileTap={{ scale: 0.95 }}
-              >
-                View All Projects 🎨
-              </motion.button>
-            </Link>
-          </div>
-        </motion.div>
       </div>
     </section>
   );
