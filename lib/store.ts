@@ -219,6 +219,17 @@ const initialUsers: User[] = [
     location: 'Koramangala, Bangalore',
     enrolledCourses: ['AI Foundation Course'],
   },
+  {
+    id: 'user-3',
+    email: 'parent3@example.com',
+    password: 'user123',
+    name: 'test user3',
+    role: 'user',
+    createdAt: '2024-03-03',
+    phone: '+91 98765 43211',
+    location: 'Koramangala, Bangalore',
+    enrolledCourses: ['AI Foundation Course'],
+  },
 ];
 
 interface AppState {
@@ -368,6 +379,38 @@ export const useAppStore = create<AppState>()(
     }),
     {
       name: 'padhai-storage',
+      version: 2,
+      migrate: (persistedState, _version) => {
+        const state = persistedState as {
+          projects?: Project[];
+          testimonials?: Testimonial[];
+          users?: User[];
+          isAuthenticated?: boolean;
+          currentUser?: User | null;
+        } | undefined;
+        if (!state || !state.users) {
+          return {
+            projects: initialProjects,
+            testimonials: initialTestimonials,
+            users: initialUsers,
+            isAuthenticated: false,
+            currentUser: null,
+          };
+        }
+        const byEmail = new Map<string, User>(state.users.map((u) => [u.email, u]));
+        for (const seed of initialUsers) {
+          if (!byEmail.has(seed.email)) {
+            byEmail.set(seed.email, seed);
+          }
+        }
+        return {
+          projects: state.projects ?? initialProjects,
+          testimonials: state.testimonials ?? initialTestimonials,
+          users: Array.from(byEmail.values()),
+          isAuthenticated: state.isAuthenticated ?? false,
+          currentUser: state.currentUser ?? null,
+        };
+      },
       partialize: (state) => ({
         projects: state.projects,
         testimonials: state.testimonials,

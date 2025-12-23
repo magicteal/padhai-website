@@ -1,35 +1,60 @@
 "use client";
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { useRouter } from 'next/navigation';
 import { useAppStore } from '@/lib/store';
 import { motion } from 'framer-motion';
-import { BookOpen, Calendar, Award, TrendingUp, LogOut, User } from 'lucide-react';
+import { BookOpen, Calendar, Award, TrendingUp, User } from 'lucide-react';
 import Link from 'next/link';
 
 export default function UserDashboard() {
-  const { isAuthenticated, currentUser, logout, projects } = useAppStore();
+  const isAuthenticated = useAppStore((s) => s.isAuthenticated);
+  const currentUser = useAppStore((s) => s.currentUser);
+  const logout = useAppStore((s) => s.logout);
+  const projects = useAppStore((s) => s.projects);
+  const [mounted, setMounted] = useState(false);
   const router = useRouter();
 
   useEffect(() => {
-    if (!isAuthenticated || !currentUser) {
-      router.push('/login');
+    setMounted(true);
+  }, []);
+
+  useEffect(() => {
+    if (!mounted) return;
+
+    // Read persisted auth to avoid redirect while store rehydrates
+    let persistedAuth = false;
+    let persistedRole: string | null = null;
+    if (typeof window !== 'undefined') {
+      try {
+        const raw = localStorage.getItem('padhai-storage');
+        if (raw) {
+          const data = JSON.parse(raw);
+          const st = data?.state;
+          persistedAuth = st?.isAuthenticated === true && !!st?.currentUser;
+          persistedRole = st?.currentUser?.role ?? null;
+        }
+      } catch {}
+    }
+
+    // If persisted shows an authenticated user, skip redirect until store is ready
+    if (persistedAuth && (!isAuthenticated || !currentUser)) {
       return;
     }
-    
-    // Redirect admin to admin dashboard
-    if (currentUser.role === 'admin') {
-      router.push('/admin');
-    }
-  }, [isAuthenticated, currentUser, router]);
 
-  if (!isAuthenticated || !currentUser || currentUser.role === 'admin') {
+    if (!isAuthenticated || !currentUser) {
+      router.replace('/login');
+      return;
+    }
+    if (currentUser.role === 'admin' || persistedRole === 'admin') {
+      router.replace('/admin');
+    }
+  }, [mounted, isAuthenticated, currentUser, router]);
+
+  if (!mounted || !isAuthenticated || !currentUser || currentUser.role === 'admin') {
     return null;
   }
 
-  const handleLogout = () => {
-    logout();
-    router.push('/');
-  };
+  // Logout handled by Navbar; no local logout button here
 
   const stats = [
     { label: 'Enrolled Courses', value: currentUser.enrolledCourses?.length || 0, icon: BookOpen, color: 'from-purple-500 to-fuchsia-500' },
@@ -46,26 +71,14 @@ export default function UserDashboard() {
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-purple-50 via-white to-fuchsia-50">
-      {/* Header */}
-      <header className="bg-gradient-to-r from-purple-600 to-fuchsia-600 text-white shadow-lg">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
-          <div className="flex items-center justify-between">
-            <div className="flex items-center gap-4">
-              <Link href="/">
-                <img src="/images/mainLogo.svg" alt="PadhAI" className="h-10 w-auto" />
-              </Link>
-              <div>
-                <h1 className="text-2xl font-extrabold">My Dashboard</h1>
-                <p className="text-purple-100 text-sm">Welcome back, {currentUser.name}!</p>
-              </div>
+      {/* Page Title (text-only; spaced below fixed navbar) */}
+      <header className="mt-16 sm:mt-20">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="flex items-start justify-between">
+            <div>
+              <h1 className="text-3xl sm:text-4xl font-extrabold tracking-tight text-slate-900">My Dashboard</h1>
+              <p className="mt-1 text-slate-600 text-sm sm:text-base">Welcome back, {currentUser.name}!</p>
             </div>
-            <button
-              onClick={handleLogout}
-              className="flex items-center gap-2 px-4 py-2 bg-white/20 hover:bg-white/30 rounded-full transition"
-            >
-              <LogOut className="w-4 h-4" />
-              <span className="hidden sm:inline">Logout</span>
-            </button>
           </div>
         </div>
       </header>
