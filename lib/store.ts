@@ -1,6 +1,7 @@
 import { create } from 'zustand';
 import { persist } from 'zustand/middleware';
 import { Project, Testimonial, User } from './types';
+import { testimonialVideos } from '../data/testimonialVideos';
 
 // Initial Projects Data
 const initialProjects: Project[] = [
@@ -128,7 +129,7 @@ const initialTestimonials: Testimonial[] = [
   {
     id: '1',
     type: 'video',
-    videoSrc: 'https://res.cloudinary.com/di98qhrpu/video/upload/v1766146752/Testimonial-three_w0jrjs.mp4',
+    videoSrc: testimonialVideos['testimonial-three'],
     author: 'Student Testimonial 1',
     rating: 5,
     featured: true,
@@ -137,7 +138,7 @@ const initialTestimonials: Testimonial[] = [
   {
     id: '2',
     type: 'video',
-    videoSrc: 'https://res.cloudinary.com/di98qhrpu/video/upload/v1766144351/Testimonial-two_pr7z6d.mp4',
+    videoSrc: testimonialVideos['testimonial-two'],
     author: 'Student Testimonial 2',
     rating: 5,
     featured: true,
@@ -146,7 +147,7 @@ const initialTestimonials: Testimonial[] = [
   {
     id: '3',
     type: 'video',
-    videoSrc: 'https://res.cloudinary.com/di98qhrpu/video/upload/v1766144343/Testimonial-one_rbjmsn.mp4',
+    videoSrc: testimonialVideos['testimonial-one'],
     author: 'Student Testimonial 3',
     rating: 5,
     featured: true,

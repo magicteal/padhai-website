@@ -2,6 +2,7 @@
 import React from 'react';
 import { motion } from 'framer-motion';
 import { XCircle, CheckCircle } from 'lucide-react';
+import testimonialVideos from '../data/testimonialVideos';
 
 const REALITY_CHECKS = [
   { text: 'Parents working long hours', emoji: '⏰' },
@@ -19,11 +20,7 @@ const SOLUTION_BENEFITS = [
   { text: 'Explore hobbies & early career paths', emoji: '🎯' },
 ];
 
-const TESTIMONIAL_VIDEOS = [
-  'https://res.cloudinary.com/di98qhrpu/video/upload/v1766146752/Testimonial-three_w0jrjs.mp4',
-  'https://res.cloudinary.com/di98qhrpu/video/upload/v1766144351/Testimonial-two_pr7z6d.mp4',
-  'https://res.cloudinary.com/di98qhrpu/video/upload/v1766144343/Testimonial-one_rbjmsn.mp4',
-];
+// testimonialVideos imported from data/testimonialVideos.ts
 
 export default function ProblemSection() {
   return (
@@ -94,8 +91,6 @@ export default function ProblemSection() {
               animate={{ y: [0, -10, 0] }}
               transition={{ repeat: Infinity, duration: 3 }}
             >
-              <span className="text-6xl block">🏢</span>
-              <span className="text-4xl block mt-2">💻</span>
             </motion.div>
           </div>
 
@@ -141,17 +136,9 @@ export default function ProblemSection() {
           className="mt-12 sm:mt-16"
         >
           <div className="flex items-center justify-center gap-2 mb-6">
-            <motion.span 
-              className="text-2xl sm:text-3xl"
-              animate={{ rotate: [0, 10, -10, 0] }}
-              transition={{ repeat: Infinity, duration: 2 }}
-            >
-              🎥
-            </motion.span>
-            <h4 className="text-lg sm:text-xl font-extrabold text-slate-900">Watch Kids Share Their Experience!</h4>
           </div>
           <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 sm:gap-5 justify-items-center">
-            {TESTIMONIAL_VIDEOS.map((src, i) => (
+            {testimonialVideos.slice(0, 3).map((src, i) => (
               <motion.div 
                 key={i} 
                 className="w-full max-w-xs"
@@ -166,6 +153,7 @@ export default function ProblemSection() {
                 >
                   <video
                     src={src}
+                    poster={`/images/testimonials/testimonial-${['four','five','six'][i]}.svg`}
                     controls
                     playsInline
                     className="w-full h-[280px] sm:h-[320px] md:h-[380px] object-cover"

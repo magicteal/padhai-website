@@ -1,5 +1,4 @@
 "use client";
-import React from 'react';
 import { motion } from 'framer-motion';
 import { Mail, Phone, MapPin, Facebook, Instagram, Linkedin, Youtube, Heart, Sparkles } from 'lucide-react';
 import Link from 'next/link';
@@ -18,9 +17,7 @@ export default function Footer() {
       <div className="absolute top-0 right-0 w-48 sm:w-64 h-48 sm:h-64 bg-white/5 rounded-full blur-3xl animate-float" />
       <div className="absolute bottom-0 left-0 w-64 sm:w-96 h-64 sm:h-96 bg-fuchsia-500/10 rounded-full blur-3xl animate-float" style={{ animationDelay: '2s' }} />
       
-      {/* Fun wave at top */}
-      <div className="absolute top-0 left-0 right-0 h-8 bg-gradient-to-r from-purple-50 via-fuchsia-50 to-pink-50" 
-           style={{ clipPath: 'ellipse(70% 100% at 50% 0%)' }} />
+      {/* decorative elements cleaned - removed fun wave for cleaner footer */}
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10 sm:py-12 pt-16 relative z-10">
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 mb-8">

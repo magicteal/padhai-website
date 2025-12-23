@@ -18,6 +18,20 @@
 	--kid-orange: #fb923c;
 }
 
+/* Utility: white fill with purple outline (text-stroke) + fallback via text-shadow */
+.text-outline-purple {
+  color: #ffffff; /* fill color */
+  -webkit-text-fill-color: #ffffff;
+  -webkit-text-stroke-width: 1.5px;
+  -webkit-text-stroke-color: var(--purple-700);
+  /* Fallback for non-WebKit: multiple text-shadows to simulate an outline */
+  text-shadow:
+    -1.5px -1.5px var(--purple-700),
+    1.5px -1.5px var(--purple-700),
+    -1.5px 1.5px var(--purple-700),
+    1.5px 1.5px var(--purple-700),
+    0 0 0 rgba(0,0,0,0);
+}
 html, body {
 	font-family: var(--font-poppins);
 	scroll-behavior: smooth;

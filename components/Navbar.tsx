@@ -20,7 +20,7 @@ export default function Navbar() {
     { href: "/why-ai", label: "Why AI"},
     { href: "/course-details", label: "Course Details"},
     { href: "/projects", label: "Projects"},
-    { href: "#pricing", label: "Pricing"},
+    { href: "/pricing", label: "Pricing"},
   ];
 
   return (
@@ -51,17 +51,19 @@ export default function Navbar() {
             </motion.div>
 
             {/* Desktop Navigation */}
-            <nav className="hidden md:flex items-center gap-1 lg:gap-2" aria-label="Primary navigation">
+            <nav className="hidden md:flex items-center gap-4 lg:gap-6" aria-label="Primary navigation">
               {navLinks.map((link, idx) => (
                 <motion.div
                   key={link.href}
                   initial={{ opacity: 0, y: -20 }}
                   animate={{ opacity: 1, y: 0 }}
-                  transition={{ delay: idx * 0.1 }}
+                  transition={{ delay: idx * 0.08 }}
+                  whileHover={{ scale: 1.12 }}
+                  whileTap={{ scale: 0.98 }}
                 >
                   <Link 
                     href={link.href} 
-                    className="relative px-3 py-2 lg:px-4 text-white font-medium hover:text-white/90 transition-all group text-sm lg:text-base"
+                    className="relative px-4 py-2 lg:px-5 text-white font-medium transition-transform duration-300 transform-gpu origin-center group text-sm lg:text-base"
                   >
                     <span className="flex items-center gap-1">{link.label}</span>
                     <motion.span 

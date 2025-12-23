@@ -12,167 +12,192 @@ export default function StorySection() {
   };
 
   const itemVariants = {
-    hidden: { opacity: 0, x: -20 },
-    visible: { opacity: 1, x: 0 }
+    hidden: { opacity: 0, y: 20 },
+    visible: { opacity: 1, y: 0 }
   };
 
+  const problems = [
+    { icon: '📱', title: 'Screen Addicted', desc: 'Kids on screens' },
+    { icon: '😰', title: 'Parents Stressed', desc: 'Worried about future' },
+    { icon: '🏫', title: 'Schools Overloaded', desc: 'No time for new skills' },
+    { icon: '⚠️', title: 'Skills Gap', desc: 'Future not taught' }
+  ];
+
+  const transformations = [
+    { before: '📱 Screen time', after: '🎯 Skill time' },
+    { before: '🎨 Creativity', after: '💪 Confidence' },
+    { before: '❓ Questions', after: '🤝 Mentorship' },
+    { before: '🤖 AI distraction', after: '🧠 AI learning tool' }
+  ];
+
   return (
-    <section className="py-12 sm:py-16 md:py-20 relative overflow-hidden bg-gradient-to-br from-purple-50 via-violet-50 to-indigo-50">
+    <section className="py-20 relative overflow-hidden bg-gradient-to-b from-purple-50 via-white to-purple-50">
       {/* Decorative elements */}
       <div className="absolute top-20 left-10 w-40 h-40 bg-purple-300/20 rounded-full blur-3xl animate-float" />
       <div className="absolute bottom-20 right-10 w-60 h-60 bg-indigo-300/20 rounded-full blur-3xl animate-float" style={{ animationDelay: '2s' }} />
       
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-        <div className="grid lg:grid-cols-2 gap-8 lg:gap-12 items-center">
-          {/* Copy column */}
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 space-y-16">
+        {/* Header */}
+        <motion.div
+          initial={{ opacity: 0, y: -20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          className="text-center space-y-4"
+        >
+          <motion.span 
+            className="text-5xl sm:text-6xl inline-block"
+            animate={{ rotate: [0, 10, -10, 0] }}
+            transition={{ repeat: Infinity, duration: 3 }}
+          >
+            📖
+          </motion.span>
+          <h2 className="text-3xl sm:text-4xl md:text-5xl font-extrabold gradient-text">
+            The PadhAi Story
+          </h2>
+          <p className="text-slate-700 text-lg sm:text-xl font-medium max-w-2xl mx-auto">
+            ✨ Every Bangalore parent wants their child to stand out.
+          </p>
+        </motion.div>
+
+        {/* Problem Cards - Grid */}
+        <div className="space-y-8">
+          <motion.h3 
+            initial={{ opacity: 0 }}
+            whileInView={{ opacity: 1 }}
+            viewport={{ once: true }}
+            className="text-2xl sm:text-3xl font-bold text-center flex items-center justify-center gap-3"
+          >
+            <span>😔</span>
+            <span className="text-slate-900">But here's the reality:</span>
+          </motion.h3>
+
+          <motion.div 
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true }}
+            variants={containerVariants}
+            className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6"
+          >
+            {problems.map((item, idx) => (
+              <motion.div
+                key={idx}
+                variants={itemVariants}
+                whileHover={{ scale: 1.05, y: -5 }}
+                className="bg-white rounded-2xl shadow-md hover:shadow-xl transition-all p-6 text-center space-y-3 border-2 border-slate-100"
+              >
+                <div className="w-16 h-16 mx-auto bg-gradient-to-br from-red-100 to-orange-100 rounded-full flex items-center justify-center">
+                  <span className="text-3xl">{item.icon}</span>
+                </div>
+                <h4 className="font-bold text-lg text-slate-900">{item.title}</h4>
+                <p className="text-sm text-slate-600">{item.desc}</p>
+              </motion.div>
+            ))}
+          </motion.div>
+        </div>
+
+        {/* Transformation Flow */}
+        <div className="space-y-8">
+          <motion.h3 
+            initial={{ opacity: 0 }}
+            whileInView={{ opacity: 1 }}
+            viewport={{ once: true }}
+            className="text-2xl sm:text-3xl font-bold text-center flex items-center justify-center gap-3"
+          >
+            <span>✨</span>
+            <span className="gradient-text">So we created PadhAi Club.</span>
+          </motion.h3>
+
           <motion.div
             initial="hidden"
             whileInView="visible"
             viewport={{ once: true }}
             variants={containerVariants}
+            className="grid grid-cols-1 md:grid-cols-2 gap-6 max-w-5xl mx-auto"
           >
-            <motion.div variants={itemVariants} className="inline-block mb-3">
-              <motion.span 
-                className="text-4xl sm:text-5xl inline-block"
-                animate={{ rotate: [0, 10, -10, 0] }}
-                transition={{ repeat: Infinity, duration: 3 }}
+            {transformations.map((item, idx) => (
+              <motion.div
+                key={idx}
+                variants={itemVariants}
+                className="flex items-center gap-4 bg-white rounded-2xl shadow-md hover:shadow-xl transition-all p-6"
               >
-                📖
-              </motion.span>
-            </motion.div>
-            
-            <motion.h2 
-              variants={itemVariants}
-              className="text-2xl sm:text-3xl md:text-4xl font-extrabold leading-tight mb-4 gradient-text"
-            >
-              The PadhAi Story
-            </motion.h2>
-            
-            <motion.p 
-              variants={itemVariants}
-              className="text-slate-800 text-base sm:text-lg mb-6 font-medium"
-            >
-              ✨ Every Bangalore parent wants their child to stand out.
-            </motion.p>
-
-            {/* Problem Card */}
-            <motion.div 
-              variants={itemVariants}
-              className="card-kid mb-6"
-              whileHover={{ scale: 1.02 }}
-            >
-              <h3 className="text-lg sm:text-xl font-bold mb-3 flex items-center gap-2">
-                <span>😔</span>
-                <span className="text-slate-900">But here's the reality:</span>
-              </h3>
-              <ul className="space-y-2 text-slate-800 text-sm sm:text-base">
-                {[
-                  { icon: '📱', text: 'Kids are on screens.' },
-                  { icon: '😰', text: 'Parents are stressed.' },
-                  { icon: '🏫', text: 'Schools are overloaded.' },
-                  { icon: '⚠️', text: 'Future skills are not being taught.' }
-                ].map((item, idx) => (
-                  <motion.li 
-                    key={idx}
-                    className="flex items-start gap-2"
-                    initial={{ opacity: 0, x: -10 }}
-                    whileInView={{ opacity: 1, x: 0 }}
-                    viewport={{ once: true }}
-                    transition={{ delay: 0.3 + idx * 0.1 }}
-                  >
-                    <span>{item.icon}</span>
-                    <span>{item.text}</span>
-                  </motion.li>
-                ))}
-              </ul>
-            </motion.div>
-
-            <motion.h3 
-              variants={itemVariants}
-              className="text-lg sm:text-xl font-bold mb-4 flex items-center gap-2"
-            >
-              <span>✨</span>
-              <span className="gradient-text">So we created PadhAi Club.</span>
-            </motion.h3>
-
-            {/* Solution Card */}
-            <motion.div 
-              variants={itemVariants}
-              className="card-kid border-indigo-200 mb-6"
-              whileHover={{ scale: 1.02 }}
-            >
-              <ul className="space-y-3 sm:space-y-4">
-                {[
-                  { icon: '📱', text: 'Screen time becomes skill time' },
-                  { icon: '🎨', text: 'Creativity becomes confidence' },
-                  { icon: '🤝', text: 'Mentorship becomes guidance' },
-                  { icon: '🧠', text: 'AI becomes a tool for learning, not distraction' }
-                ].map((item, idx) => (
-                  <motion.li 
-                    key={idx}
-                    className="flex items-start gap-3"
-                    initial={{ opacity: 0, x: -10 }}
-                    whileInView={{ opacity: 1, x: 0 }}
-                    viewport={{ once: true }}
-                    transition={{ delay: 0.5 + idx * 0.1 }}
-                  >
-                    <span className="text-2xl sm:text-3xl">{item.icon}</span>
-                    <p className="text-slate-900 font-bold text-sm sm:text-base">{item.text}</p>
-                  </motion.li>
-                ))}
-              </ul>
-            </motion.div>
-
-            {/* CTA Banner */}
-            <motion.div 
-              variants={itemVariants}
-              className="bg-gradient-to-r from-purple-500 to-indigo-500 text-white px-4 sm:px-6 py-3 sm:py-4 rounded-2xl shadow-xl"
-              whileHover={{ scale: 1.02 }}
-            >
-              <p className="text-sm sm:text-lg font-bold text-center">
-                🌟 This is where children learn to think smarter, grow faster, and dream bigger! 🚀
-              </p>
-            </motion.div>
-          </motion.div>
-
-          {/* Visual column */}
-          <motion.div 
-            className="relative"
-            initial={{ opacity: 0, x: 50 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.6 }}
-          >
-            <motion.div 
-              className="rounded-3xl h-64 sm:h-80 md:h-[28rem] w-full bg-gradient-to-br from-purple-300 via-violet-300 to-indigo-400 border-4 border-white shadow-2xl flex items-center justify-center p-4 sm:p-6 relative overflow-hidden"
-              whileHover={{ scale: 1.02 }}
-            >
-              {/* Animated background elements */}
-              <div className="absolute top-4 left-4 w-16 h-16 bg-white/20 rounded-full animate-float" />
-              <div className="absolute bottom-8 right-8 w-24 h-24 bg-white/20 rounded-full animate-float" style={{ animationDelay: '1s' }} />
-              <div className="absolute top-1/3 right-1/4 w-12 h-12 bg-white/30 rounded-full animate-pulse-glow" />
-              
-              <div className="text-center relative z-10">
+                <div className="flex-1 text-center p-4 bg-slate-100 rounded-xl">
+                  <p className="text-sm sm:text-base font-medium text-slate-600">{item.before}</p>
+                </div>
+                <div className="text-2xl font-bold text-purple-500">→</div>
                 <motion.div 
-                  className="text-5xl sm:text-6xl md:text-7xl mb-4"
-                  animate={{ 
-                    y: [0, -10, 0],
-                    rotate: [0, 5, -5, 0]
-                  }}
-                  transition={{ repeat: Infinity, duration: 3 }}
+                  className="flex-1 text-center p-4 bg-gradient-to-br from-purple-500 to-indigo-500 rounded-xl"
+                  whileHover={{ scale: 1.05 }}
                 >
-                  🤖
+                  <p className="text-sm sm:text-base font-bold text-white">{item.after}</p>
                 </motion.div>
-                <h3 className="text-2xl sm:text-3xl font-extrabold mb-3 text-white drop-shadow-lg">
-                  PadhAi Club
-                </h3>
-                <p className="text-white/90 text-sm sm:text-base font-medium max-w-md leading-relaxed px-2">
-                  Mentor-led sessions, playful projects, and safe tools turn everyday screen time into future-ready learning! 🎯
-                </p>
-              </div>
-            </motion.div>
+              </motion.div>
+            ))}
           </motion.div>
         </div>
+
+        {/* Hero Visual Card */}
+        <motion.div
+          initial={{ opacity: 0, scale: 0.9 }}
+          whileInView={{ opacity: 1, scale: 1 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.6 }}
+          className="max-w-4xl mx-auto"
+        >
+          <motion.div 
+            className="rounded-3xl h-80 bg-gradient-to-br from-purple-400 via-violet-400 to-indigo-500 shadow-2xl flex items-center justify-center relative overflow-hidden"
+            whileHover={{ scale: 1.02 }}
+          >
+            {/* Floating decorative circles */}
+            <div className="absolute top-8 left-8 w-20 h-20 bg-white/20 rounded-full animate-float" />
+            <div className="absolute bottom-12 right-12 w-32 h-32 bg-white/20 rounded-full animate-float" style={{ animationDelay: '1s' }} />
+            <div className="absolute top-1/3 right-1/4 w-16 h-16 bg-white/30 rounded-full animate-pulse-glow" />
+            
+            <div className="text-center relative z-10 px-6">
+              <motion.div 
+                className="text-7xl sm:text-8xl mb-6"
+                animate={{ 
+                  y: [0, -15, 0],
+                  rotate: [0, 5, -5, 0]
+                }}
+                transition={{ repeat: Infinity, duration: 3 }}
+              >
+                🤖
+              </motion.div>
+              <h3 className="text-4xl sm:text-5xl font-extrabold text-white drop-shadow-lg mb-4">
+                PadhAi Club
+              </h3>
+              <p className="text-white/95 text-lg sm:text-xl font-semibold max-w-2xl">
+                Where screen time becomes future-ready learning! 🎯
+              </p>
+            </div>
+          </motion.div>
+        </motion.div>
+
+        {/* Bottom CTA Banner */}
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          whileHover={{ scale: 1.02 }}
+          className="bg-gradient-to-r from-purple-500 via-pink-500 to-indigo-500 rounded-full shadow-2xl px-8 py-8 max-w-5xl mx-auto"
+        >
+          <div className="flex flex-col sm:flex-row items-center justify-center gap-6 sm:gap-8 text-white text-center">
+            <div className="flex items-center gap-2">
+              <span className="text-2xl">🌟</span>
+              <p className="text-lg sm:text-xl font-bold">Think Smarter</p>
+            </div>
+            <div className="hidden sm:block w-1 h-8 bg-white/40 rounded-full" />
+            <div className="flex items-center gap-2">
+              <span className="text-2xl">🚀</span>
+              <p className="text-lg sm:text-xl font-bold">Grow Faster</p>
+            </div>
+            <div className="hidden sm:block w-1 h-8 bg-white/40 rounded-full" />
+            <div className="flex items-center gap-2">
+              <span className="text-2xl">💫</span>
+              <p className="text-lg sm:text-xl font-bold">Dream Bigger</p>
+            </div>
+          </div>
+        </motion.div>
       </div>
     </section>
   );

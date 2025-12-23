@@ -3,11 +3,16 @@ import React from 'react';
 import { motion } from 'framer-motion';
 import { Star } from 'lucide-react';
 import { useAppStore } from '@/lib/store';
+import testimonialVideosArray from '../data/testimonialVideos';
 
 export default function TestimonialsSection() {
   const { testimonials } = useAppStore();
   
+  // Use centralized video list (show videos 4-6, 3 total) — falls back to store videos if empty
   const videoTestimonials = testimonials.filter(t => t.type === 'video' && t.featured);
+  const videoList = testimonialVideosArray && testimonialVideosArray.length > 0
+    ? testimonialVideosArray.slice(3, 6)
+    : videoTestimonials.map(t => t.videoSrc).slice(0, 3);
   const textTestimonials = testimonials.filter(t => t.type === 'text' && t.featured);
 
   return (
@@ -61,9 +66,9 @@ export default function TestimonialsSection() {
           </div>
           
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-5 justify-items-center">
-            {videoTestimonials.map((testimonial, i) => (
+            {videoList.map((src, i) => (
               <motion.div 
-                key={testimonial.id}
+                key={src}
                 className="w-full max-w-sm"
                 initial={{ opacity: 0, scale: 0.9 }}
                 whileInView={{ opacity: 1, scale: 1 }}
@@ -76,10 +81,11 @@ export default function TestimonialsSection() {
                   transition={{ type: "spring", stiffness: 300 }}
                 >
                   <video
-                    src={testimonial.videoSrc}
+                    src={src}
+                    poster={`/images/testimonials/testimonial-${['three','two','one'][i]}.svg`}
                     controls
                     playsInline
-                    className="w-full h-[280px] sm:h-[320px] md:h-[380px] object-cover bg-slate-100"
+                    className="w-full h-[240px] sm:h-[280px] md:h-[340px] object-cover bg-slate-100"
                     aria-label={`Kid testimonial video ${i + 1}`}
                   />
                   <div className="absolute bottom-0 left-0 right-0 p-3 bg-gradient-to-t from-purple-900/80 to-transparent">
@@ -169,6 +175,24 @@ export default function TestimonialsSection() {
         </motion.div>
 
         {/* Community Badge */}
+        {/* Small project gallery: student creations */}
+        <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} className="mb-10">
+          <h3 className="text-center text-xl sm:text-2xl font-extrabold mb-6">Student Project Gallery</h3>
+          <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-3">
+            {useAppStore.getState().projects.slice(0, 8).map((p) => (
+              <div key={p.id} className="rounded-xl overflow-hidden bg-white shadow-md p-3 flex flex-col items-center">
+                {p.imageSrc ? (
+                  <img src={p.imageSrc} alt={p.title} className="w-full h-28 object-cover rounded-md mb-2" />
+                ) : (
+                  <div className="w-full h-28 rounded-md bg-gradient-to-br from-purple-200 to-pink-200 flex items-center justify-center text-3xl">{p.emoji}</div>
+                )}
+                <div className="text-sm font-bold text-slate-800 mt-2 text-center">{p.title}</div>
+                <div className="text-xs text-slate-500">by {p.studentName}</div>
+              </div>
+            ))}
+          </div>
+        </motion.div>
+
         <motion.div 
           initial={{ opacity: 0, scale: 0.9 }}
           whileInView={{ opacity: 1, scale: 1 }}

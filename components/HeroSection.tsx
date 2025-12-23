@@ -89,7 +89,7 @@ export default function HeroSection({
 
               <h1 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl xl:text-6xl font-extrabold leading-tight">
                 <motion.span 
-                  className="block text-white text-lg sm:text-xl md:text-2xl lg:text-3xl xl:text-4xl mb-2"
+                  className="block text-white text-lg sm:text-xl md:text-2xl lg:text-3xl xl:text-4xl mb-2 text-outline-purple"
                   initial={{ opacity: 0, y: 20 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ delay: 0.3 }}
@@ -97,8 +97,8 @@ export default function HeroSection({
                   Turn Your Child's Screen Time Into
                 </motion.span>
                 <motion.span 
-                  className="block text-purple-600"
-                  style={{ WebkitTextStroke: '0.5px white', WebkitTextFillColor: '#7c3aed' }}
+                  className="block text-purple-900 text-outline-purple"
+                  style={{ WebkitTextStroke: '0.5px white', WebkitTextFillColor: '#4c1d95', textShadow: '0 1px 0 rgba(255,255,255,0.12)' }}
                   initial={{ opacity: 0, y: 20 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ delay: 0.4 }}
@@ -190,8 +190,6 @@ export default function HeroSection({
                       animate={{ y: [0, -10, 0] }}
                       transition={{ repeat: Infinity, duration: 3 }}
                     >
-                      <span className="text-8xl block mb-4">🧒</span>
-                      <span className="text-6xl">💻</span>
                     </motion.div>
                   </div>
                 )}
