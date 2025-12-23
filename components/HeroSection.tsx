@@ -192,7 +192,7 @@ export default function HeroSection({
                     >
                       <span className="text-8xl block mb-4">🧒</span>
                       <span className="text-6xl">💻</span>
-                    </motion.div>
+                    </motion.div> */}
                   </div>
                 )}
               </div>
