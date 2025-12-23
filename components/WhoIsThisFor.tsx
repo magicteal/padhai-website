@@ -1,3 +1,5 @@
+import { CheckCircle } from 'lucide-react';
+
 export default function WhoIsThisFor() {
   return (
     <section className="py-16 px-4">
@@ -6,31 +8,31 @@ export default function WhoIsThisFor() {
           Is This Right for Your Child?
         </h2>
 
-        <div className="bg-white rounded-3xl p-10 shadow-xl border-2 border-purple-200">
+        <div className="bg-white rounded-2xl p-10 shadow-lg border-2 border-purple-100">
           <div className="space-y-5">
             <div className="flex items-start gap-4">
-              <span className="text-green-500 font-bold text-2xl flex-shrink-0">✅</span>
+              <CheckCircle className="w-6 h-6 text-purple-600 flex-shrink-0 mt-0.5" />
               <p className="text-lg text-gray-800">
                 If your child loves asking <span className="font-semibold">"Why?"</span> and <span className="font-semibold">"How?"</span>
               </p>
             </div>
 
             <div className="flex items-start gap-4">
-              <span className="text-green-500 font-bold text-2xl flex-shrink-0">✅</span>
+              <CheckCircle className="w-6 h-6 text-purple-600 flex-shrink-0 mt-0.5" />
               <p className="text-lg text-gray-800">
                 If your child is creative but struggles to put ideas on paper.
               </p>
             </div>
 
             <div className="flex items-start gap-4">
-              <span className="text-green-500 font-bold text-2xl flex-shrink-0">✅</span>
+              <CheckCircle className="w-6 h-6 text-purple-600 flex-shrink-0 mt-0.5" />
               <p className="text-lg text-gray-800">
                 If you are worried about their addiction to games/videos.
               </p>
             </div>
 
             <div className="flex items-start gap-4">
-              <span className="text-green-500 font-bold text-2xl flex-shrink-0">✅</span>
+              <CheckCircle className="w-6 h-6 text-purple-600 flex-shrink-0 mt-0.5" />
               <p className="text-lg text-gray-800">
                 If you want them to be <span className="font-semibold">leaders</span>, not just followers.
               </p>

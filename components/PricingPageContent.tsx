@@ -2,7 +2,7 @@
 
 import React from "react";
 import { motion } from "framer-motion";
-import { Check, Sparkles, Gift, Shield, Star } from "lucide-react";
+import { Check, Sparkles, Gift, Shield, Star, Phone, Rocket, Video, Save, Users, MessageCircle, Dumbbell, Palette, GraduationCap, Trophy, Clock, Monitor, AlertCircle, MapPin, AlertTriangle } from "lucide-react";
 
 export default function PricingPageContent() {
   const containerVariants = {
@@ -19,16 +19,16 @@ export default function PricingPageContent() {
   };
 
   const includedFeatures = [
-    { icon: '🎥', text: 'Live AI Classes (No recorded-only learning)' },
-    { icon: '📹', text: 'Class Recordings (If your child misses a session)' },
-    { icon: '👨‍🏫', text: 'Personal Mentorship & Doubt Solving' },
-    { icon: '🛡️', text: 'Child-Safe AI Tools & Prompts' },
-    { icon: '📊', text: 'Weekly Parent Updates (PTM-style care)' },
-    { icon: '💪', text: 'Management & Discipline Module' },
-    { icon: '🎨', text: 'Final AI Project (Child chooses based on interest)' },
-    { icon: '🎓', text: 'Certificate of Completion' },
-    { icon: '🏆', text: 'Scholarship Opportunity (Top performers)' },
-    { icon: '🚀', text: 'Future Hackathon & Workshop Invites' }
+    { icon: Video, text: 'Live AI Classes (No recorded-only learning)' },
+    { icon: Save, text: 'Class Recordings (If your child misses a session)' },
+    { icon: Users, text: 'Personal Mentorship & Doubt Solving' },
+    { icon: Shield, text: 'Child-Safe AI Tools & Prompts' },
+    { icon: MessageCircle, text: 'Weekly Parent Updates (PTM-style care)' },
+    { icon: Dumbbell, text: 'Management & Discipline Module' },
+    { icon: Palette, text: 'Final AI Project (Child chooses based on interest)' },
+    { icon: GraduationCap, text: 'Certificate of Completion' },
+    { icon: Trophy, text: 'Scholarship Opportunity (Top performers)' },
+    { icon: Rocket, text: 'Future Hackathon & Workshop Invites' }
   ];
 
   const typicalVsPadhAi = [
@@ -39,10 +39,10 @@ export default function PricingPageContent() {
   ];
 
   const bangaloreParents = [
-    { icon: '⏰', text: 'Fit after-school hours' },
-    { icon: '📚', text: 'Reduce homework stress' },
-    { icon: '⚡', text: 'Make learning faster & smarter' },
-    { icon: '📱', text: 'Turn "phone time" into productive time' }
+    { icon: Clock, text: 'Fit after-school hours' },
+    { icon: GraduationCap, text: 'Reduce homework stress' },
+    { icon: Sparkles, text: 'Make learning faster & smarter' },
+    { icon: Monitor, text: 'Turn "phone time" into productive time' }
   ];
 
   const trustFeatures = [
@@ -66,13 +66,13 @@ export default function PricingPageContent() {
           viewport={{ once: true }}
           className="text-center space-y-4"
         >
-          <motion.span 
-            className="text-5xl sm:text-6xl inline-block"
-            animate={{ scale: [1, 1.1, 1] }}
+          <motion.div 
+            className="w-16 h-16 mx-auto mb-4 rounded-2xl bg-purple-100 flex items-center justify-center"
+            animate={{ scale: [1, 1.05, 1] }}
             transition={{ repeat: Infinity, duration: 2 }}
           >
-            💎
-          </motion.span>
+            <Gift className="w-8 h-8 text-purple-600" />
+          </motion.div>
           <h2 className="text-3xl sm:text-4xl md:text-5xl font-extrabold gradient-text">
             Pricing That Focuses on Your Child&apos;s Growth
           </h2>
@@ -106,7 +106,7 @@ export default function PricingPageContent() {
             viewport={{ once: true }}
             className="text-2xl sm:text-3xl font-bold text-center flex items-center justify-center gap-3"
           >
-            <span>🎓</span>
+            <GraduationCap className="w-8 h-8 text-purple-600" />
             <span className="gradient-text">AI FOUNDATION + MANAGEMENT PROGRAM</span>
           </motion.h3>
 
@@ -123,7 +123,7 @@ export default function PricingPageContent() {
               className="card-kid p-6"
             >
               <div className="flex items-center gap-3 mb-4">
-                <span className="text-3xl">⏳</span>
+                <Clock className="w-8 h-8 text-purple-600" />
                 <h4 className="text-lg sm:text-xl font-bold text-slate-900">Duration</h4>
               </div>
               <p className="text-base sm:text-lg font-bold text-slate-900 mb-3">6 Weeks Total</p>
@@ -147,7 +147,7 @@ export default function PricingPageContent() {
               className="card-kid p-6"
             >
               <div className="flex items-center gap-3 mb-4">
-                <span className="text-3xl">🧑‍🏫</span>
+                <Monitor className="w-8 h-8 text-purple-600" />
                 <h4 className="text-lg sm:text-xl font-bold text-slate-900">Mode</h4>
               </div>
               <ul className="space-y-2">
@@ -177,7 +177,7 @@ export default function PricingPageContent() {
         >
           <div className="relative">
             {/* Glow effect */}
-            <div className="absolute inset-0 bg-gradient-to-r from-purple-400 to-fuchsia-400 rounded-3xl blur-xl opacity-30 animate-pulse-glow" />
+            <div className="absolute inset-0 bg-gradient-to-r from-purple-400 to-purple-500 rounded-2xl blur-xl opacity-20" />
             
             {/* Badge */}
             <motion.div 
@@ -187,10 +187,9 @@ export default function PricingPageContent() {
               viewport={{ once: true }}
               transition={{ delay: 0.3, type: "spring" }}
             >
-              <div className="bg-gradient-to-r from-purple-600 to-fuchsia-600 text-white px-4 py-1.5 rounded-full text-xs sm:text-sm font-bold flex items-center gap-1.5 shadow-lg">
+              <div className="bg-gradient-to-r from-purple-600 to-purple-700 text-white px-4 py-1.5 rounded-xl text-xs sm:text-sm font-bold flex items-center gap-1.5 shadow-lg">
                 <Gift className="w-3.5 h-3.5" />
                 <span>32% OFF</span>
-                <Sparkles className="w-3.5 h-3.5" />
               </div>
             </motion.div>
 
@@ -200,9 +199,9 @@ export default function PricingPageContent() {
                 <p className="text-sm sm:text-base text-slate-600 mb-2">Regular Program Value</p>
                 <p className="text-xl sm:text-2xl text-slate-400 line-through mb-4">₹23,600</p>
                 
-                <div className="inline-flex items-center gap-2 bg-gradient-to-r from-green-50 to-emerald-50 px-4 py-2 rounded-full mb-3">
-                  <span className="text-xl">🎉</span>
-                  <span className="text-xs sm:text-sm font-semibold text-green-700">January Launch Offer</span>
+                <div className="inline-flex items-center gap-2 bg-gradient-to-r from-purple-50 to-purple-100 px-4 py-2 rounded-xl mb-3">
+                  <Sparkles className="w-4 h-4 text-purple-600" />
+                  <span className="text-xs sm:text-sm font-semibold text-purple-700">January Launch Offer</span>
                 </div>
                 
                 <h3 className="text-4xl sm:text-5xl md:text-6xl font-extrabold gradient-text mb-2">
@@ -220,19 +219,19 @@ export default function PricingPageContent() {
               {/* CTA Buttons */}
               <div className="space-y-3">
                 <motion.button 
-                  className="btn-primary w-full text-base sm:text-lg"
-                  whileHover={{ scale: 1.05 }}
+                  className="btn-primary w-full text-base sm:text-lg flex items-center justify-center gap-2"
+                  whileHover={{ scale: 1.03 }}
                   whileTap={{ scale: 0.98 }}
                 >
-                  <span className="mr-2">📞</span>
+                  <Phone className="w-5 h-5" />
                   Book a Free Child Skill Consultation
                 </motion.button>
                 <motion.button 
-                  className="w-full px-6 py-3 rounded-full bg-white border-2 border-purple-500 text-purple-600 font-bold text-base sm:text-lg hover:bg-purple-50 transition-all"
-                  whileHover={{ scale: 1.05 }}
+                  className="w-full px-6 py-3 rounded-xl bg-white border-2 border-purple-500 text-purple-600 font-bold text-base sm:text-lg hover:bg-purple-50 transition-all flex items-center justify-center gap-2"
+                  whileHover={{ scale: 1.03 }}
                   whileTap={{ scale: 0.98 }}
                 >
-                  <span className="mr-2">🚀</span>
+                  <Rocket className="w-5 h-5" />
                   Enroll for January Batch (Limited Seats)
                 </motion.button>
               </div>
@@ -256,7 +255,9 @@ export default function PricingPageContent() {
             viewport={{ once: true }}
             className="text-2xl sm:text-3xl font-bold text-center flex items-center justify-center gap-3"
           >
-            <span>✨</span>
+            <span className="w-10 h-10 rounded-xl bg-purple-100 flex items-center justify-center">
+              <Sparkles className="w-5 h-5 text-purple-600" />
+            </span>
             <span className="text-slate-900">What&apos;s Included</span>
           </motion.h3>
 
@@ -313,7 +314,9 @@ export default function PricingPageContent() {
               className="card-kid p-6"
             >
               <div className="flex items-center gap-3 mb-4">
-                <span className="text-3xl">😔</span>
+                <span className="w-12 h-12 rounded-xl bg-red-100 flex items-center justify-center">
+                  <AlertCircle className="w-6 h-6 text-red-500" />
+                </span>
                 <h4 className="text-lg sm:text-xl font-bold text-slate-900">Most Online Courses</h4>
               </div>
               <ul className="space-y-3">
@@ -334,7 +337,9 @@ export default function PricingPageContent() {
               className="card-kid p-6 border-2 border-purple-200"
             >
               <div className="flex items-center gap-3 mb-4">
-                <span className="text-3xl">🌟</span>
+                <span className="w-12 h-12 rounded-xl bg-purple-100 flex items-center justify-center">
+                  <Star className="w-6 h-6 text-purple-600" />
+                </span>
                 <h4 className="text-lg sm:text-xl font-bold gradient-text">PadhAi Club</h4>
               </div>
               <ul className="space-y-3">
@@ -384,7 +389,9 @@ export default function PricingPageContent() {
             viewport={{ once: true }}
             className="text-2xl sm:text-3xl font-bold text-center flex items-center justify-center gap-3"
           >
-            <span>🏙️</span>
+            <span className="w-10 h-10 rounded-xl bg-purple-100 flex items-center justify-center">
+              <MapPin className="w-5 h-5 text-purple-600" />
+            </span>
             <span className="text-slate-900">For Working Bangalore Parents</span>
           </motion.h3>
 
@@ -429,11 +436,11 @@ export default function PricingPageContent() {
           <div className="absolute -bottom-10 left-4 h-24 w-24 rounded-full bg-white/10 blur-2xl" />
           
           <motion.div
-            className="inline-flex items-center justify-center gap-2 rounded-full bg-white/20 px-4 py-2 text-xs sm:text-sm font-bold relative z-10"
+            className="inline-flex items-center justify-center gap-2 rounded-xl bg-white/20 px-4 py-2 text-xs sm:text-sm font-bold relative z-10"
             animate={{ scale: [1, 1.05, 1] }}
             transition={{ repeat: Infinity, duration: 2, ease: "easeInOut" }}
           >
-            <span>⚠️</span>
+            <AlertTriangle className="w-4 h-4" />
             <span>Limited Seats</span>
           </motion.div>
           
@@ -481,19 +488,19 @@ export default function PricingPageContent() {
             className="max-w-md mx-auto space-y-3"
           >
             <motion.button 
-              className="btn-primary w-full text-base sm:text-lg"
-              whileHover={{ scale: 1.05 }}
+              className="btn-primary w-full text-base sm:text-lg flex items-center justify-center gap-2"
+              whileHover={{ scale: 1.03 }}
               whileTap={{ scale: 0.98 }}
             >
-              <span className="mr-2">📞</span>
+              <Phone className="w-5 h-5" />
               Book a Free Child Skill Consultation
             </motion.button>
             <motion.button 
-              className="w-full px-6 py-3 rounded-full bg-gradient-to-r from-purple-600 to-indigo-600 text-white font-bold text-base sm:text-lg hover:from-purple-700 hover:to-indigo-700 transition-all shadow-lg"
-              whileHover={{ scale: 1.05 }}
+              className="w-full px-6 py-3 rounded-xl bg-gradient-to-r from-purple-600 to-purple-700 text-white font-bold text-base sm:text-lg hover:from-purple-700 hover:to-purple-800 transition-all shadow-lg flex items-center justify-center gap-2"
+              whileHover={{ scale: 1.03 }}
               whileTap={{ scale: 0.98 }}
             >
-              <span className="mr-2">🚀</span>
+              <Rocket className="w-5 h-5" />
               Enroll for January Batch (Limited Seats)
             </motion.button>
           </motion.div>

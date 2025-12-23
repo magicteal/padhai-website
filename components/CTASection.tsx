@@ -1,11 +1,11 @@
 "use client";
 import React from 'react';
 import { motion } from 'framer-motion';
-import { Phone, Rocket, Clock, Users } from 'lucide-react';
+import { Phone, Rocket, Clock, Users, Star, Shield, Lock } from 'lucide-react';
 
 export default function CTASection() {
   return (
-    <section className="py-12 sm:py-16 md:py-20 relative overflow-hidden bg-gradient-to-br from-purple-600 via-fuchsia-600 to-indigo-600">
+    <section className="py-12 sm:py-16 md:py-20 relative overflow-hidden bg-gradient-to-br from-purple-600 via-purple-700 to-purple-800">
       {/* Animated background elements */}
       <div className="absolute inset-0">
         <div className="absolute top-10 left-10 w-40 h-40 bg-white/10 rounded-full blur-3xl animate-float" />
@@ -26,14 +26,13 @@ export default function CTASection() {
           transition={{ type: "spring", stiffness: 200 }}
         >
           <motion.div 
-            className="text-5xl sm:text-6xl md:text-7xl inline-block"
+            className="w-16 h-16 sm:w-20 sm:h-20 mx-auto rounded-2xl bg-white/10 backdrop-blur-sm flex items-center justify-center"
             animate={{ 
-              y: [0, -10, 0],
-              rotate: [0, 5, -5, 0]
+              y: [0, -8, 0]
             }}
             transition={{ repeat: Infinity, duration: 3 }}
           >
-            🦸
+            <Rocket className="w-8 h-8 sm:w-10 sm:h-10 text-white" />
           </motion.div>
         </motion.div>
         
@@ -45,8 +44,8 @@ export default function CTASection() {
           className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-extrabold leading-tight mb-4 sm:mb-5 text-white"
         >
           Give Your Child a{' '}
-          <span className="text-violet-200">Superpower</span>{' '}
-          This January! 🌟
+          <span className="text-purple-200">Superpower</span>{' '}
+          This January!
         </motion.h2>
         
         {/* Subheading */}
@@ -57,7 +56,7 @@ export default function CTASection() {
           transition={{ delay: 0.1 }}
           className="text-lg sm:text-xl md:text-2xl mb-2 sm:mb-3 font-bold text-white/95"
         >
-          ✨ Turn screen time into skill time! ✨
+          Turn screen time into skill time!
         </motion.p>
         
         <motion.p 
@@ -67,7 +66,7 @@ export default function CTASection() {
           transition={{ delay: 0.2 }}
           className="text-base sm:text-lg md:text-xl mb-6 sm:mb-8 text-white/80"
         >
-          🎯 Start with a <span className="font-bold text-violet-200">FREE counselling call!</span> 📞
+          Start with a <span className="font-bold text-purple-200">FREE counselling call!</span>
         </motion.p>
 
         {/* CTA Buttons */}
@@ -79,20 +78,20 @@ export default function CTASection() {
           className="flex flex-col sm:flex-row gap-3 sm:gap-5 justify-center items-center mb-6"
         >
           <motion.button 
-            className="group w-full sm:w-auto bg-white text-purple-600 hover:bg-violet-100 font-extrabold py-3 sm:py-4 px-6 sm:px-8 rounded-full shadow-xl transition-all text-base sm:text-lg flex items-center justify-center gap-2"
-            whileHover={{ scale: 1.05 }}
+            className="group w-full sm:w-auto bg-white text-purple-700 hover:bg-purple-50 font-extrabold py-3 sm:py-4 px-6 sm:px-8 rounded-xl shadow-xl transition-all text-base sm:text-lg flex items-center justify-center gap-2"
+            whileHover={{ scale: 1.03 }}
             whileTap={{ scale: 0.98 }}
           >
-            <Phone className="w-5 h-5 group-hover:animate-wiggle" />
+            <Phone className="w-5 h-5" />
             Book Free Call
           </motion.button>
           
           <motion.button 
-            className="group w-full sm:w-auto bg-violet-400 hover:bg-violet-300 text-white font-extrabold py-3 sm:py-4 px-6 sm:px-8 rounded-full shadow-xl transition-all text-base sm:text-lg flex items-center justify-center gap-2"
-            whileHover={{ scale: 1.05 }}
+            className="group w-full sm:w-auto bg-purple-500 hover:bg-purple-400 text-white font-extrabold py-3 sm:py-4 px-6 sm:px-8 rounded-xl shadow-xl transition-all text-base sm:text-lg flex items-center justify-center gap-2 border-2 border-white/20"
+            whileHover={{ scale: 1.03 }}
             whileTap={{ scale: 0.98 }}
           >
-            <Rocket className="w-5 h-5 group-hover:animate-wiggle" />
+            <Rocket className="w-5 h-5" />
             Enroll Now – Limited Seats!
           </motion.button>
         </motion.div>
@@ -103,12 +102,11 @@ export default function CTASection() {
           whileInView={{ opacity: 1, scale: 1 }}
           viewport={{ once: true }}
           transition={{ delay: 0.4, type: "spring" }}
-          className="inline-flex items-center gap-2 sm:gap-3 bg-white/15 backdrop-blur-md px-4 sm:px-6 py-2 sm:py-3 rounded-full border-2 border-white/30"
+          className="inline-flex items-center gap-2 sm:gap-3 bg-white/15 backdrop-blur-md px-4 sm:px-6 py-2 sm:py-3 rounded-xl border-2 border-white/30"
         >
-          <Clock className="w-4 h-4 sm:w-5 sm:h-5 text-yellow-300" />
+          <Clock className="w-4 h-4 sm:w-5 sm:h-5 text-purple-200" />
           <p className="text-white font-bold text-sm sm:text-base flex items-center gap-1.5 sm:gap-2 flex-wrap justify-center">
-            Only <span className="text-yellow-300">40 seats</span> left!
-            <span className="text-lg sm:text-xl">🔥</span>
+            Only <span className="text-purple-200">40 seats</span> left!
           </p>
         </motion.div>
 
@@ -125,11 +123,11 @@ export default function CTASection() {
             <span>200+ enrolled</span>
           </div>
           <div className="flex items-center gap-1.5">
-            <span>⭐</span>
+            <Star className="w-4 h-4" />
             <span>4.9/5 rating</span>
           </div>
           <div className="flex items-center gap-1.5">
-            <span>🔒</span>
+            <Lock className="w-4 h-4" />
             <span>Secure payment</span>
           </div>
         </motion.div>

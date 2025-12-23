@@ -2,6 +2,7 @@
 
 import React from "react";
 import { motion } from "framer-motion";
+import { HelpCircle, Zap, Palette, MessageCircle, Dumbbell, Smartphone, GraduationCap, Wrench, Microscope, BookOpen, Pencil, Megaphone, Mic, Settings, Laptop, Bot, Rocket, Brain, Shield, Users, Sparkles } from "lucide-react";
 
 export default function WhyAIContentSection() {
   const containerVariants = {
@@ -18,17 +19,17 @@ export default function WhyAIContentSection() {
   };
 
   const aiSkills = [
-    { icon: '❓', text: 'Ask better questions' },
-    { icon: '⚡', text: 'Understand concepts faster' },
-    { icon: '🎨', text: 'Explore ideas creatively' },
-    { icon: '💬', text: 'Improve communication' },
-    { icon: '💪', text: 'Build confidence in learning' }
+    { icon: HelpCircle, text: 'Ask better questions' },
+    { icon: Zap, text: 'Understand concepts faster' },
+    { icon: Palette, text: 'Explore ideas creatively' },
+    { icon: MessageCircle, text: 'Improve communication' },
+    { icon: Dumbbell, text: 'Build confidence in learning' }
   ];
 
   const transformations = [
-    { before: '📱 Screen time', after: '🎓 Learning time' },
-    { before: '🤔 Curiosity', after: '🎨 Creation' },
-    { before: '📲 Scrolling', after: '🛠️ Skill-building' }
+    { before: 'Screen time', beforeIcon: Smartphone, after: 'Learning time', afterIcon: GraduationCap },
+    { before: 'Curiosity', beforeIcon: HelpCircle, after: 'Creation', afterIcon: Palette },
+    { before: 'Scrolling', beforeIcon: Smartphone, after: 'Skill-building', afterIcon: Wrench }
   ];
 
   const safetyFeatures = [
@@ -40,12 +41,12 @@ export default function WhyAIContentSection() {
   ];
 
   const interests = [
-    { icon: '🔬', text: 'Science & innovation', gradient: 'from-blue-400 to-cyan-400' },
-    { icon: '🎨', text: 'Art & creativity', gradient: 'from-purple-400 to-pink-400' },
-    { icon: '📚', text: 'Storytelling & writing', gradient: 'from-green-400 to-emerald-400' },
-    { icon: '✏️', text: 'Design & animation', gradient: 'from-orange-400 to-red-400' },
-    { icon: '📣', text: 'Marketing & content', gradient: 'from-yellow-400 to-orange-400' },
-    { icon: '🎤', text: 'Presentations & communication', gradient: 'from-pink-400 to-rose-400' }
+    { icon: Microscope, text: 'Science & innovation', gradient: 'from-purple-500 to-violet-500' },
+    { icon: Palette, text: 'Art & creativity', gradient: 'from-purple-600 to-purple-400' },
+    { icon: BookOpen, text: 'Storytelling & writing', gradient: 'from-violet-500 to-purple-500' },
+    { icon: Pencil, text: 'Design & animation', gradient: 'from-purple-400 to-violet-600' },
+    { icon: Megaphone, text: 'Marketing & content', gradient: 'from-violet-600 to-purple-500' },
+    { icon: Mic, text: 'Presentations & communication', gradient: 'from-purple-500 to-purple-600' }
   ];
 
   const earlyBenefits = [
@@ -57,10 +58,10 @@ export default function WhyAIContentSection() {
   ];
 
   const bangaloreContext = [
-    { icon: '⚙️', text: 'Automation' },
-    { icon: '💻', text: 'Digital tools' },
-    { icon: '🤖', text: 'AI-assisted jobs' },
-    { icon: '🚀', text: 'Creative tech careers' }
+    { icon: Settings, text: 'Automation' },
+    { icon: Laptop, text: 'Digital tools' },
+    { icon: Bot, text: 'AI-assisted jobs' },
+    { icon: Rocket, text: 'Creative tech careers' }
   ];
 
   return (
@@ -77,18 +78,18 @@ export default function WhyAIContentSection() {
           viewport={{ once: true }}
           className="text-center space-y-4"
         >
-          <motion.span 
-            className="text-5xl sm:text-6xl inline-block"
-            animate={{ rotate: [0, 10, -10, 0] }}
+          <motion.div 
+            className="w-16 h-16 mx-auto mb-4 rounded-2xl bg-purple-100 flex items-center justify-center"
+            animate={{ rotate: [0, 5, -5, 0] }}
             transition={{ repeat: Infinity, duration: 3 }}
           >
-            🤖
-          </motion.span>
+            <Bot className="w-8 h-8 text-purple-600" />
+          </motion.div>
           <h2 className="text-3xl sm:text-4xl md:text-5xl font-extrabold gradient-text">
             Why Should Children Learn AI Today?
           </h2>
           <p className="text-slate-700 text-lg sm:text-xl font-medium max-w-2xl mx-auto">
-            ✨ Because the world your child will grow into is already changing.
+            Because the world your child will grow into is already changing.
           </p>
         </motion.div>
 
@@ -122,7 +123,7 @@ export default function WhyAIContentSection() {
             viewport={{ once: true }}
             className="text-2xl sm:text-3xl font-bold text-center flex items-center justify-center gap-3"
           >
-            <span>🧠</span>
+            <Brain className="w-8 h-8 text-purple-600" />
             <span className="gradient-text">AI Is Not About Coding. It&apos;s About Thinking Smarter.</span>
           </motion.h3>
 
@@ -156,8 +157,10 @@ export default function WhyAIContentSection() {
                     variants={itemVariants}
                     className="flex items-start gap-3"
                   >
-                    <span className="text-xl flex-shrink-0">{item.icon}</span>
-                    <span className="text-sm sm:text-base text-slate-700">{item.text}</span>
+                    <div className="w-8 h-8 rounded-lg bg-purple-100 flex items-center justify-center flex-shrink-0">
+                      <item.icon className="w-4 h-4 text-purple-600" />
+                    </div>
+                    <span className="text-sm sm:text-base text-slate-700 mt-1">{item.text}</span>
                   </motion.li>
                 ))}
               </ul>
@@ -173,7 +176,7 @@ export default function WhyAIContentSection() {
             viewport={{ once: true }}
             className="text-2xl sm:text-3xl font-bold text-center flex items-center justify-center gap-3"
           >
-            <span>📱</span>
+            <Smartphone className="w-8 h-8 text-purple-600" />
             <span className="text-slate-900">From "Bad Screen Time" to "Good Skill Time"</span>
           </motion.h3>
 
@@ -207,14 +210,16 @@ export default function WhyAIContentSection() {
                 variants={itemVariants}
                 className="flex flex-col items-center gap-4 card-kid p-6"
               >
-                <div className="text-center p-4 bg-slate-100 rounded-xl w-full">
+                <div className="text-center p-4 bg-slate-100 rounded-xl w-full flex items-center justify-center gap-2">
+                  <item.beforeIcon className="w-5 h-5 text-slate-500" />
                   <p className="text-sm sm:text-base font-medium text-slate-600">{item.before}</p>
                 </div>
                 <div className="text-2xl font-bold text-purple-500">↓</div>
                 <motion.div 
-                  className="text-center p-4 bg-gradient-to-br from-purple-500 to-indigo-500 rounded-xl w-full"
+                  className="text-center p-4 bg-gradient-to-br from-purple-500 to-purple-600 rounded-xl w-full flex items-center justify-center gap-2"
                   whileHover={{ scale: 1.05 }}
                 >
+                  <item.afterIcon className="w-5 h-5 text-white" />
                   <p className="text-sm sm:text-base font-bold text-white">{item.after}</p>
                 </motion.div>
               </motion.div>
@@ -234,7 +239,7 @@ export default function WhyAIContentSection() {
             viewport={{ once: true }}
             className="text-2xl sm:text-3xl font-bold text-center flex items-center justify-center gap-3"
           >
-            <span>🛡️</span>
+            <Shield className="w-8 h-8 text-purple-600" />
             <span className="gradient-text">Safe AI Matters More Than AI Itself</span>
           </motion.h3>
 
@@ -285,7 +290,7 @@ export default function WhyAIContentSection() {
             viewport={{ once: true }}
             className="text-2xl sm:text-3xl font-bold text-center flex items-center justify-center gap-3"
           >
-            <span>🚀</span>
+            <Rocket className="w-8 h-8 text-purple-600" />
             <span className="text-slate-900">AI Helps Every Type of Child</span>
           </motion.h3>
 
@@ -304,11 +309,11 @@ export default function WhyAIContentSection() {
               <motion.div
                 key={idx}
                 variants={itemVariants}
-                whileHover={{ scale: 1.05, y: -5 }}
-                className="bg-white rounded-2xl shadow-md hover:shadow-xl transition-all p-6 text-center space-y-3 border-2 border-slate-100"
+                whileHover={{ scale: 1.03, y: -4 }}
+                className="bg-white rounded-xl shadow-md hover:shadow-lg transition-all p-6 text-center space-y-3 border-2 border-purple-50"
               >
-                <div className={`w-16 h-16 mx-auto bg-gradient-to-br ${item.gradient} rounded-full flex items-center justify-center`}>
-                  <span className="text-3xl">{item.icon}</span>
+                <div className={`w-14 h-14 mx-auto bg-gradient-to-br ${item.gradient} rounded-xl flex items-center justify-center`}>
+                  <item.icon className="w-7 h-7 text-white" />
                 </div>
                 <p className="text-sm sm:text-base font-bold text-slate-900">{item.text}</p>
               </motion.div>
@@ -328,7 +333,7 @@ export default function WhyAIContentSection() {
             viewport={{ once: true }}
             className="text-2xl sm:text-3xl font-bold text-center flex items-center justify-center gap-3"
           >
-            <span>🌱</span>
+            <Sparkles className="w-8 h-8 text-purple-600" />
             <span className="gradient-text">Early Exposure Builds Confidence, Not Pressure</span>
           </motion.h3>
 
@@ -347,9 +352,9 @@ export default function WhyAIContentSection() {
                 <motion.div
                   key={idx}
                   variants={itemVariants}
-                  className="flex items-start gap-3 bg-green-50 rounded-xl p-3"
+                  className="flex items-start gap-3 bg-purple-50 rounded-xl p-3"
                 >
-                  <span className="text-green-600 font-bold flex-shrink-0">•</span>
+                  <span className="text-purple-600 font-bold flex-shrink-0">•</span>
                   <span className="text-sm sm:text-base text-slate-700">{item}</span>
                 </motion.div>
               ))}
@@ -368,7 +373,7 @@ export default function WhyAIContentSection() {
             viewport={{ once: true }}
             className="text-2xl sm:text-3xl font-bold text-center flex items-center justify-center gap-3"
           >
-            <span>👨‍👩‍👧</span>
+            <Users className="w-8 h-8 text-purple-600" />
             <span className="text-slate-900">For Bangalore Parents, This Matters Even More</span>
           </motion.h3>
 
@@ -387,11 +392,11 @@ export default function WhyAIContentSection() {
               <motion.div
                 key={idx}
                 variants={itemVariants}
-                whileHover={{ scale: 1.05, y: -5 }}
-                className="bg-white rounded-2xl shadow-md hover:shadow-xl transition-all p-6 text-center space-y-3 border-2 border-slate-100"
+                whileHover={{ scale: 1.03, y: -4 }}
+                className="bg-white rounded-xl shadow-md hover:shadow-lg transition-all p-6 text-center space-y-3 border-2 border-purple-50"
               >
-                <div className="w-16 h-16 mx-auto bg-gradient-to-br from-sky-100 to-blue-100 rounded-full flex items-center justify-center">
-                  <span className="text-3xl">{item.icon}</span>
+                <div className="w-14 h-14 mx-auto bg-gradient-to-br from-purple-100 to-purple-200 rounded-xl flex items-center justify-center">
+                  <item.icon className="w-7 h-7 text-purple-600" />
                 </div>
                 <p className="text-sm sm:text-base font-bold text-slate-900">{item.text}</p>
               </motion.div>
@@ -422,17 +427,17 @@ export default function WhyAIContentSection() {
           initial={{ opacity: 0, scale: 0.95 }}
           whileInView={{ opacity: 1, scale: 1 }}
           viewport={{ once: true }}
-          className="bg-gradient-to-r from-purple-500 to-indigo-500 rounded-3xl p-8 sm:p-10 text-white text-center space-y-4 shadow-2xl max-w-4xl mx-auto relative overflow-hidden"
+          className="bg-gradient-to-r from-purple-600 to-purple-700 rounded-2xl p-8 sm:p-10 text-white text-center space-y-4 shadow-xl max-w-4xl mx-auto relative overflow-hidden"
         >
           <div className="absolute -top-10 right-6 h-28 w-28 rounded-full bg-white/10 blur-2xl" />
           <div className="absolute -bottom-10 left-4 h-24 w-24 rounded-full bg-white/10 blur-2xl" />
           
           <motion.div
-            className="inline-flex items-center justify-center gap-2 rounded-full bg-white/20 px-4 py-2 text-xs sm:text-sm font-bold relative z-10"
+            className="inline-flex items-center justify-center gap-2 rounded-xl bg-white/20 px-4 py-2 text-xs sm:text-sm font-bold relative z-10"
             animate={{ y: [0, -3, 0] }}
             transition={{ repeat: Infinity, duration: 2.6, ease: "easeInOut" }}
           >
-            <span>💬</span>
+            <MessageCircle className="w-4 h-4" />
             <span>In Simple Words</span>
           </motion.div>
           

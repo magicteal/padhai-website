@@ -1,10 +1,10 @@
 // Global type augmentation for mongoose caching
-import mongoose from 'mongoose';
+import mongooseType from 'mongoose';
 
 declare global {
   var mongoose: {
-    conn: typeof mongoose | null;
-    promise: Promise<typeof mongoose> | null;
+    conn: typeof mongooseType | null;
+    promise: Promise<typeof mongooseType> | null;
   };
 }
 

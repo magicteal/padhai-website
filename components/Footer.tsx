@@ -1,6 +1,6 @@
 "use client";
 import { motion } from 'framer-motion';
-import { Mail, Phone, MapPin, Facebook, Instagram, Linkedin, Youtube, Heart, Sparkles } from 'lucide-react';
+import { Mail, Phone, MapPin, Facebook, Instagram, Linkedin, Youtube, Heart, Link2, BookOpen, Globe, Users } from 'lucide-react';
 import Link from 'next/link';
 
 export default function Footer() {
@@ -12,10 +12,10 @@ export default function Footer() {
   ];
 
   return (
-    <footer className="bg-gradient-to-br from-purple-700 via-violet-700 to-fuchsia-700 text-white relative overflow-hidden">
+    <footer className="bg-gradient-to-br from-purple-700 via-purple-800 to-purple-900 text-white relative overflow-hidden">
       {/* Decorative elements */}
-      <div className="absolute top-0 right-0 w-48 sm:w-64 h-48 sm:h-64 bg-white/5 rounded-full blur-3xl animate-float" />
-      <div className="absolute bottom-0 left-0 w-64 sm:w-96 h-64 sm:h-96 bg-fuchsia-500/10 rounded-full blur-3xl animate-float" style={{ animationDelay: '2s' }} />
+      <div className="absolute top-0 right-0 w-48 sm:w-64 h-48 sm:h-64 bg-white/5 rounded-full blur-3xl" />
+      <div className="absolute bottom-0 left-0 w-64 sm:w-96 h-64 sm:h-96 bg-purple-500/10 rounded-full blur-3xl" />
       
       {/* decorative elements cleaned - removed fun wave for cleaner footer */}
 
@@ -33,9 +33,8 @@ export default function Footer() {
                 src="/images/mainLogo.svg" 
                 alt="PadhAi Club" 
                 className="w-16 h-16 sm:w-20 sm:h-20 object-contain"
-                whileHover={{ rotate: 10 }}
+                whileHover={{ scale: 1.05 }}
               />
-              <Sparkles className="w-5 h-5 text-yellow-300 opacity-0 group-hover:opacity-100 transition-opacity animate-sparkle" />
             </Link>
             <p className="text-white/80 text-sm mb-4 leading-relaxed max-w-xs mx-auto sm:mx-0">
               AI + Sanskar for the Next Generation. Bangalore's Favorite AI Foundation Course for Kids (Ages 5–15).
@@ -55,7 +54,7 @@ export default function Footer() {
             transition={{ delay: 0.1 }}
           >
             <h4 className="font-bold mb-4 text-base sm:text-lg flex items-center gap-2 justify-center sm:justify-start">
-              <span>🔗</span> Quick Links
+              <Link2 className="w-4 h-4" /> Quick Links
             </h4>
             <ul className="space-y-2 text-center sm:text-left">
               {[
@@ -84,23 +83,23 @@ export default function Footer() {
             transition={{ delay: 0.2 }}
           >
             <h4 className="font-bold mb-4 text-base sm:text-lg flex items-center gap-2 justify-center sm:justify-start">
-              <span>📞</span> Contact Us
+              <Phone className="w-4 h-4" /> Contact Us
             </h4>
             <ul className="space-y-3 text-center sm:text-left">
               <li className="flex items-start gap-3 text-sm text-white/80 justify-center sm:justify-start">
-                <Mail className="w-4 h-4 sm:w-5 sm:h-5 shrink-0 mt-0.5 text-fuchsia-300" />
+                <Mail className="w-4 h-4 sm:w-5 sm:h-5 shrink-0 mt-0.5 text-purple-300" />
                 <a href="mailto:hello@padhaiclub.com" className="hover:text-white transition">
                   hello@padhaiclub.com
                 </a>
               </li>
               <li className="flex items-start gap-3 text-sm text-white/80 justify-center sm:justify-start">
-                <Phone className="w-4 h-4 sm:w-5 sm:h-5 shrink-0 mt-0.5 text-fuchsia-300" />
+                <Phone className="w-4 h-4 sm:w-5 sm:h-5 shrink-0 mt-0.5 text-purple-300" />
                 <a href="tel:+919876543210" className="hover:text-white transition">
                   +91 98765 43210
                 </a>
               </li>
               <li className="flex items-start gap-3 text-sm text-white/80 justify-center sm:justify-start">
-                <MapPin className="w-4 h-4 sm:w-5 sm:h-5 shrink-0 mt-0.5 text-fuchsia-300" />
+                <MapPin className="w-4 h-4 sm:w-5 sm:h-5 shrink-0 mt-0.5 text-purple-300" />
                 <span>Bangalore, Karnataka, India</span>
               </li>
             </ul>
@@ -114,28 +113,28 @@ export default function Footer() {
             transition={{ delay: 0.3 }}
           >
             <h4 className="font-bold mb-4 text-base sm:text-lg flex items-center gap-2 justify-center sm:justify-start">
-              <span>🎓</span> Our Programs
+              <BookOpen className="w-4 h-4" /> Our Programs
             </h4>
             <ul className="space-y-2 mb-6 text-center sm:text-left">
               {["AI Foundation Course", "Management Skills", "Creative Projects", "Live Mentorship"].map((item, idx) => (
                 <li key={idx} className="text-white/80 text-sm flex items-center gap-2 justify-center sm:justify-start">
-                  <span className="text-yellow-300">✨</span> {item}
+                  <span className="w-1.5 h-1.5 bg-purple-300 rounded-full"></span> {item}
                 </li>
               ))}
             </ul>
 
             <h4 className="font-bold mb-3 text-sm flex items-center gap-2 justify-center sm:justify-start">
-              <span>🌐</span> Follow Us
+              <Globe className="w-4 h-4" /> Follow Us
             </h4>
             <div className="flex gap-2 sm:gap-3 justify-center sm:justify-start">
               {socialLinks.map((social, idx) => (
                 <motion.a
                   key={idx}
                   href={social.href}
-                  className="w-9 h-9 sm:w-10 sm:h-10 rounded-xl bg-white/10 hover:bg-gradient-to-br hover:from-fuchsia-500 hover:to-purple-500 flex items-center justify-center transition-all touch-target"
+                  className="w-9 h-9 sm:w-10 sm:h-10 rounded-xl bg-white/10 hover:bg-purple-500 flex items-center justify-center transition-all touch-target"
                   aria-label={social.label}
-                  whileHover={{ scale: 1.1, rotate: 5 }}
-                  whileTap={{ scale: 0.9 }}
+                  whileHover={{ scale: 1.1 }}
+                  whileTap={{ scale: 0.95 }}
                 >
                   <social.icon className="w-4 h-4 sm:w-5 sm:h-5" />
                 </motion.a>
@@ -162,7 +161,7 @@ export default function Footer() {
             </div>
           </div>
           <p className="text-white/40 text-xs text-center mt-4 flex items-center justify-center gap-2">
-            <span>👩‍👩‍👧</span>
+            <Users className="w-4 h-4" />
             Trusted by 13,000+ Bangalore Parents
           </p>
         </motion.div>

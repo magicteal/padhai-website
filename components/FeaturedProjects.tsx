@@ -5,6 +5,7 @@ import { useAppStore } from '@/lib/store';
 import { ProjectCategory, GradeLevel } from '@/lib/types';
 import ProjectFilter from './ProjectFilter';
 import ProjectCard from './ProjectCard';
+import { Palette, Star, Search } from 'lucide-react';
 
 export default function FeaturedProjects() {
   const { projects } = useAppStore();
@@ -34,16 +35,20 @@ export default function FeaturedProjects() {
           className="text-center max-w-3xl mx-auto mb-8 sm:mb-10"
         >
           <motion.span 
-            className="text-4xl sm:text-5xl inline-block mb-3"
+            className="w-14 h-14 rounded-xl bg-purple-100 flex items-center justify-center mb-3 mx-auto"
             animate={{ rotate: [0, 10, -10, 0] }}
             transition={{ repeat: Infinity, duration: 2 }}
           >
-            🎨
+            <Palette className="w-7 h-7 text-purple-600" />
           </motion.span>
           <h2 className="text-2xl sm:text-3xl md:text-4xl font-extrabold leading-tight mb-3 gradient-text">
             The Innovation Gallery
           </h2>
-          <p className="text-slate-700 text-sm sm:text-base font-medium">🌟 Real projects built by real students 🌟</p>
+          <p className="text-slate-700 text-sm sm:text-base font-medium flex items-center justify-center gap-2">
+            <Star className="w-4 h-4 text-purple-500" />
+            <span>Real projects built by real students</span>
+            <Star className="w-4 h-4 text-purple-500" />
+          </p>
         </motion.div>
 
         {/* Filters */}
@@ -78,11 +83,13 @@ export default function FeaturedProjects() {
             animate={{ opacity: 1 }}
             className="text-center py-12"
           >
-            <span className="text-6xl mb-4 block">🔍</span>
+            <span className="w-16 h-16 rounded-xl bg-purple-100 flex items-center justify-center mx-auto mb-4">
+              <Search className="w-8 h-8 text-purple-500" />
+            </span>
             <p className="text-slate-600 text-lg">No projects found with these filters.</p>
             <button 
               onClick={() => { setSelectedCategory('all'); setSelectedGrade('all'); }}
-              className="mt-4 px-6 py-2 bg-purple-600 text-white rounded-full font-medium hover:bg-purple-700 transition"
+              className="mt-4 px-6 py-2 bg-purple-600 text-white rounded-xl font-medium hover:bg-purple-700 transition"
             >
               Clear Filters
             </button>

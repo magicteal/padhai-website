@@ -1,16 +1,17 @@
 "use client";
 
 import { useState } from "react";
+import { Sparkles, Microscope, Palette, Bot, BookOpen } from "lucide-react";
 
 export default function ProjectCategories() {
   const [activeCategory, setActiveCategory] = useState("all");
 
   const categories = [
-    { id: "all", label: "All Projects", emoji: "✨" },
-    { id: "science", label: "Science Models", emoji: "🔬" },
-    { id: "art", label: "Digital Art & Stories", emoji: "🎨" },
-    { id: "robotics", label: "Robotics & Code", emoji: "🤖" },
-    { id: "presentations", label: "School Presentations", emoji: "📚" },
+    { id: "all", label: "All Projects", icon: Sparkles },
+    { id: "science", label: "Science Models", icon: Microscope },
+    { id: "art", label: "Digital Art & Stories", icon: Palette },
+    { id: "robotics", label: "Robotics & Code", icon: Bot },
+    { id: "presentations", label: "School Presentations", icon: BookOpen },
   ];
 
   return (
@@ -24,20 +25,23 @@ export default function ProjectCategories() {
         </p>
 
         <div className="flex flex-wrap justify-center gap-4">
-          {categories.map((category) => (
-            <button
-              key={category.id}
-              onClick={() => setActiveCategory(category.id)}
-              className={`px-6 py-3 rounded-full font-semibold text-lg transition shadow-md ${
-                activeCategory === category.id
-                  ? "bg-purple-600 text-white shadow-lg scale-105"
-                  : "bg-white text-purple-600 border-2 border-purple-200 hover:bg-purple-50"
-              }`}
-            >
-              <span className="mr-2">{category.emoji}</span>
-              {category.label}
-            </button>
-          ))}
+          {categories.map((category) => {
+            const Icon = category.icon;
+            return (
+              <button
+                key={category.id}
+                onClick={() => setActiveCategory(category.id)}
+                className={`px-6 py-3 rounded-xl font-semibold text-lg transition shadow-md flex items-center gap-2 ${
+                  activeCategory === category.id
+                    ? "bg-purple-600 text-white shadow-lg scale-105"
+                    : "bg-white text-purple-600 border-2 border-purple-200 hover:bg-purple-50"
+                }`}
+              >
+                <Icon className="w-5 h-5" />
+                {category.label}
+              </button>
+            );
+          })}
         </div>
 
         {activeCategory === "all" && (

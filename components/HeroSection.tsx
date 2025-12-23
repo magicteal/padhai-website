@@ -1,8 +1,7 @@
 "use client";
 import React from "react";
 import { motion } from "framer-motion";
-import { BsCheckSquare } from "react-icons/bs";
-import { Sparkles, Star, Rocket, Shield, Brain } from "lucide-react";
+import { CheckCircle, Sparkles, Star, Rocket, Shield, Palette, Phone, Gift, ArrowRight } from "lucide-react";
 
 type HeroSectionProps = {
   illustration?: React.ReactNode;
@@ -23,20 +22,20 @@ export default function HeroSection({
     {
       title: "Creativity Superpowers",
       description: "Unleash imagination with AI-powered creative tools",
-      icon: "🎨",
-      gradient: "from-purple-500 to-fuchsia-500",
+      icon: Palette,
+      gradient: "from-purple-500 to-violet-500",
     },
     {
       title: "Safe AI Use",
       description: "Learn to use AI responsibly and securely",
-      icon: "🛡️",
-      gradient: "from-blue-500 to-cyan-500",
+      icon: Shield,
+      gradient: "from-purple-600 to-purple-400",
     },
     {
       title: "Future-Ready Skills",
       description: "Build skills for tomorrow's world today",
-      icon: "🚀",
-      gradient: "from-pink-500 to-orange-500",
+      icon: Rocket,
+      gradient: "from-violet-500 to-purple-500",
     },
   ];
 
@@ -82,9 +81,8 @@ export default function HeroSection({
                 transition={{ delay: 0.2 }}
                 className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/10 backdrop-blur-sm border border-white/20 mb-4 sm:mb-6"
               >
-                <span className="animate-sparkle">✨</span>
+                <Star className="w-4 h-4 text-yellow-300" />
                 <span className="text-white text-xs sm:text-sm font-medium">Bangalore's #1 AI Course for Kids</span>
-                <span className="animate-sparkle">✨</span>
               </motion.div>
 
               <h1 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl xl:text-6xl font-extrabold leading-tight">
@@ -159,18 +157,19 @@ export default function HeroSection({
               >
                 <motion.button
                   className="w-full sm:w-auto btn-primary flex items-center justify-center gap-2 text-sm sm:text-base"
-                  whileHover={{ scale: 1.05, boxShadow: "0 0 30px rgba(147,51,234,0.5)" }}
-                  whileTap={{ scale: 0.95 }}
+                  whileHover={{ scale: 1.03 }}
+                  whileTap={{ scale: 0.98 }}
                 >
+                  <Phone className="w-4 h-4" />
                   <span>Book Free Counselling</span>
-                  <span className="text-lg">📞</span>
                 </motion.button>
                 <motion.button
-                  className="w-full sm:w-auto px-6 py-3 rounded-full bg-gradient-to-r from-yellow-400 to-orange-400 text-purple-900 font-bold hover:from-yellow-300 hover:to-orange-300 transition shadow-lg text-sm sm:text-base"
-                  whileHover={{ scale: 1.05 }}
-                  whileTap={{ scale: 0.95 }}
+                  className="w-full sm:w-auto px-6 py-3 rounded-xl bg-white text-purple-600 font-bold hover:bg-purple-50 transition shadow-lg text-sm sm:text-base flex items-center gap-2 border-2 border-purple-200"
+                  whileHover={{ scale: 1.03 }}
+                  whileTap={{ scale: 0.98 }}
                 >
-                  January Offer 🎁
+                  <Gift className="w-4 h-4" />
+                  January Offer
                 </motion.button>
               </motion.div>
             </motion.div>
@@ -213,7 +212,7 @@ export default function HeroSection({
                 <motion.div
                   key={idx}
                   className="card-kid p-4 sm:p-5 cursor-pointer"
-                  whileHover={{ y: -8, scale: 1.02 }}
+                  whileHover={{ y: -6 }}
                   initial={{ opacity: 0, y: 20 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ delay: 1.3 + idx * 0.1 }}
@@ -221,9 +220,9 @@ export default function HeroSection({
                   <div className="flex items-start gap-3 sm:gap-4">
                     <motion.div 
                       className={`flex-shrink-0 h-12 w-12 sm:h-14 sm:w-14 rounded-xl bg-gradient-to-br ${card.gradient} flex items-center justify-center shadow-lg`}
-                      whileHover={{ rotate: 10 }}
+                      whileHover={{ rotate: 5 }}
                     >
-                      <span className="text-2xl sm:text-3xl">{card.icon}</span>
+                      <card.icon className="w-6 h-6 sm:w-7 sm:h-7 text-white" />
                     </motion.div>
                     <div>
                       <h3 className="font-bold text-slate-900 text-sm sm:text-base">{card.title}</h3>

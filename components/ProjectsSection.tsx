@@ -6,6 +6,7 @@ import { useAppStore } from '@/lib/store';
 import { ProjectCategory, GradeLevel } from '@/lib/types';
 import ProjectFilter from './ProjectFilter';
 import ProjectCard from './ProjectCard';
+import { Palette, Star, Search, Rocket, ArrowRight } from 'lucide-react';
 
 export default function ProjectsSection() {
   const { projects } = useAppStore();
@@ -38,17 +39,19 @@ export default function ProjectsSection() {
           className="text-center max-w-3xl mx-auto mb-8 sm:mb-10"
         >
           <motion.span 
-            className="text-4xl sm:text-5xl inline-block mb-3"
+            className="w-14 h-14 rounded-xl bg-purple-100 flex items-center justify-center mb-3"
             animate={{ rotate: [0, 10, -10, 0] }}
             transition={{ repeat: Infinity, duration: 2 }}
           >
-            🎨
+            <Palette className="w-7 h-7 text-purple-600" />
           </motion.span>
           <h2 className="text-2xl sm:text-3xl md:text-4xl font-extrabold leading-tight mb-3 gradient-text">
             What Real Kids Are Already Creating
           </h2>
-          <p className="text-slate-700 text-sm sm:text-base font-medium">
-            🌟 Made by PadhAi Students 🌟
+          <p className="text-slate-700 text-sm sm:text-base font-medium flex items-center justify-center gap-2">
+            <Star className="w-4 h-4 text-purple-500" />
+            <span>Made by PadhAi Students</span>
+            <Star className="w-4 h-4 text-purple-500" />
           </p>
         </motion.div>
 
@@ -85,11 +88,13 @@ export default function ProjectsSection() {
             animate={{ opacity: 1 }}
             className="text-center py-12"
           >
-            <span className="text-6xl mb-4 block">🔍</span>
+            <span className="w-16 h-16 rounded-xl bg-purple-100 flex items-center justify-center mx-auto mb-4">
+              <Search className="w-8 h-8 text-purple-500" />
+            </span>
             <p className="text-slate-600 text-lg">No projects found with these filters.</p>
             <button 
               onClick={() => { setSelectedCategory('all'); setSelectedGrade('all'); }}
-              className="mt-4 px-6 py-2 bg-purple-600 text-white rounded-full font-medium hover:bg-purple-700 transition"
+              className="mt-4 px-6 py-2 bg-purple-600 text-white rounded-xl font-medium hover:bg-purple-700 transition"
             >
               Clear Filters
             </button>
@@ -103,22 +108,24 @@ export default function ProjectsSection() {
           viewport={{ once: true }}
           className="mt-10 sm:mt-12 text-center"
         >
-          <div className="inline-block px-4 sm:px-6 py-3 sm:py-4 rounded-2xl bg-gradient-to-r from-purple-100 via-violet-100 to-fuchsia-100 shadow-lg border-2 border-white mb-6">
-            <p className="text-slate-900 font-bold text-sm sm:text-base">
-              🌟 Kids start simple. 
-              <span className="block sm:inline"> </span>
-              <span className="gradient-text">With the right guidance, they build amazing things!</span> 🚀
+          <div className="inline-block px-4 sm:px-6 py-3 sm:py-4 rounded-2xl bg-gradient-to-r from-purple-100 via-violet-100 to-purple-50 shadow-lg border-2 border-white mb-6">
+            <p className="text-slate-900 font-bold text-sm sm:text-base flex items-center gap-2 flex-wrap justify-center">
+              <Star className="w-4 h-4 text-purple-500" />
+              <span>Kids start simple.</span>
+              <span className="gradient-text">With the right guidance, they build amazing things!</span>
+              <Rocket className="w-4 h-4 text-purple-500" />
             </p>
           </div>
           
           <div className="mt-4 sm:mt-6">
             <Link href="/projects">
               <motion.button 
-                className="btn-primary text-base sm:text-lg px-6 sm:px-8 py-3 sm:py-4"
+                className="btn-primary text-base sm:text-lg px-6 sm:px-8 py-3 sm:py-4 flex items-center gap-2"
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
               >
-                View All Projects 🎨
+                View All Projects
+                <ArrowRight className="w-5 h-5" />
               </motion.button>
             </Link>
           </div>

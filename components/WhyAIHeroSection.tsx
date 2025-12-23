@@ -1,5 +1,6 @@
 "use client";
 import { motion } from 'framer-motion';
+import { Rocket, BookOpen, Code } from 'lucide-react';
 
 export default function WhyAIHeroSection() {
   return (
@@ -25,8 +26,8 @@ export default function WhyAIHeroSection() {
               animate={{ scale: 1 }}
               transition={{ delay: 0.2, type: "spring" }}
             >
-              <span className="bg-white/20 backdrop-blur-md px-4 py-2 rounded-full text-sm font-medium">
-                🚀 Why AI Education Matters
+              <span className="bg-white/20 backdrop-blur-md px-4 py-2 rounded-xl text-sm font-medium flex items-center gap-2">
+                <Rocket className="w-4 h-4" /> Why AI Education Matters
               </span>
             </motion.div>
             
@@ -50,14 +51,14 @@ export default function WhyAIHeroSection() {
             </motion.p>
             
             <motion.button 
-              className="w-full sm:w-auto px-6 sm:px-8 py-3 sm:py-4 rounded-full font-bold text-base sm:text-lg bg-white text-purple-600 hover:bg-violet-100 transition shadow-xl"
+              className="w-full sm:w-auto px-6 sm:px-8 py-3 sm:py-4 rounded-xl font-bold text-base sm:text-lg bg-white text-purple-600 hover:bg-purple-50 transition shadow-xl flex items-center justify-center gap-2"
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.5 }}
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.98 }}
             >
-              See The Syllabus 📚
+              See The Syllabus <BookOpen className="w-5 h-5" />
             </motion.button>
           </motion.div>
 
@@ -77,14 +78,14 @@ export default function WhyAIHeroSection() {
               <div className="absolute -bottom-3 -left-3 w-16 h-16 bg-fuchsia-400/30 rounded-full blur-xl" />
               
               <motion.div 
-                className="text-7xl sm:text-8xl md:text-9xl text-center"
+                className="w-28 h-28 sm:w-32 sm:h-32 md:w-36 md:h-36 rounded-2xl bg-white/20 flex items-center justify-center mx-auto"
                 animate={{ 
                   y: [0, -10, 0],
                   rotate: [0, 5, -5, 0]
                 }}
                 transition={{ repeat: Infinity, duration: 4 }}
               >
-                👨‍💻
+                <Code className="w-14 h-14 sm:w-16 sm:h-16 md:w-20 md:h-20 text-white" />
               </motion.div>
               <p className="text-center mt-4 text-purple-100 font-medium text-sm sm:text-base">
                 A confident creator, not just a consumer

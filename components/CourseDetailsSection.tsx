@@ -1,7 +1,7 @@
 "use client";
 import React from 'react';
 import { motion } from 'framer-motion';
-import { Check, Sparkles, Star, Gift } from 'lucide-react';
+import { Check, Sparkles, Star, Gift, Rocket, Lock, Users } from 'lucide-react';
 import { useAppStore } from '@/lib/store';
 
 export default function CourseDetailsSection() {
@@ -29,11 +29,11 @@ export default function CourseDetailsSection() {
           className="text-center mb-10 sm:mb-12"
         >
           <motion.div 
-            className="text-4xl sm:text-5xl mb-3"
+            className="w-14 h-14 rounded-xl bg-purple-100 flex items-center justify-center mx-auto mb-3"
             animate={{ rotate: [0, 10, -10, 0] }}
             transition={{ repeat: Infinity, duration: 2 }}
           >
-            🎁
+            <Gift className="w-7 h-7 text-purple-600" />
           </motion.div>
           <h2 className="text-2xl sm:text-3xl md:text-4xl font-extrabold gradient-text mb-2">
             New Year Special Offer
@@ -48,7 +48,9 @@ export default function CourseDetailsSection() {
             {useAppStore.getState().testimonials.filter(t => t.type === 'text' && t.featured).slice(0,2).map((t) => (
               <div key={t.id} className="card-kid p-4 bg-white/90 rounded-2xl shadow-md">
                 <div className="flex items-start gap-3">
-                  <div className="w-10 h-10 rounded-full bg-gradient-to-br from-purple-400 to-fuchsia-400 flex items-center justify-center text-white">👩‍👦</div>
+                  <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-purple-400 to-purple-500 flex items-center justify-center text-white">
+                    <Users className="w-5 h-5" />
+                  </div>
                   <div>
                     <div className="font-bold text-sm text-slate-900">{t.author}</div>
                     <div className="text-xs text-slate-600 mt-2">{t.quote}</div>
@@ -182,11 +184,11 @@ export default function CourseDetailsSection() {
 
               {/* CTA Button */}
               <motion.button 
-                className="btn-primary w-full text-base sm:text-lg"
+                className="btn-primary w-full text-base sm:text-lg flex items-center justify-center gap-2"
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.98 }}
               >
-                <span className="mr-2">🚀</span>
+                <Rocket className="w-5 h-5" />
                 Enroll Now
               </motion.button>
 
@@ -209,8 +211,8 @@ export default function CourseDetailsSection() {
           transition={{ delay: 0.6 }}
           className="text-center mt-8 sm:mt-10"
         >
-          <div className="inline-flex items-center gap-2 bg-green-100 text-green-700 px-4 py-2 rounded-full text-xs sm:text-sm font-medium">
-            <span>🔒</span>
+          <div className="inline-flex items-center gap-2 bg-green-100 text-green-700 px-4 py-2 rounded-xl text-xs sm:text-sm font-medium">
+            <Lock className="w-4 h-4" />
             <span>Secure Payment</span>
             <span>•</span>
             <span>7-day money-back guarantee</span>

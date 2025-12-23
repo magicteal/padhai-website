@@ -2,6 +2,7 @@
 import React from 'react';
 import { motion } from 'framer-motion';
 import { PROJECT_CATEGORIES, GRADE_LEVELS, ProjectCategory, GradeLevel } from '@/lib/types';
+import { Target, BookOpen } from 'lucide-react';
 
 interface ProjectFilterProps {
   selectedCategory: ProjectCategory;
@@ -23,7 +24,7 @@ export default function ProjectFilter({
       {/* Category Filter */}
       <div>
         <h3 className={`font-bold text-slate-800 mb-3 flex items-center gap-2 ${compact ? 'text-sm' : 'text-base'}`}>
-          <span>🎯</span> Filter by Category
+          <Target className="w-4 h-4 text-purple-600" /> Filter by Category
         </h3>
         <div className="flex flex-wrap gap-2">
           {PROJECT_CATEGORIES.map((cat) => (
@@ -51,7 +52,7 @@ export default function ProjectFilter({
       {/* Grade Filter */}
       <div>
         <h3 className={`font-bold text-slate-800 mb-3 flex items-center gap-2 ${compact ? 'text-sm' : 'text-base'}`}>
-          <span>📚</span> Filter by Grade
+          <BookOpen className="w-4 h-4 text-purple-600" /> Filter by Grade
         </h3>
         <div className="flex flex-wrap gap-2">
           {GRADE_LEVELS.map((grade) => (

@@ -1,6 +1,7 @@
 "use client";
 import React from 'react';
 import { motion } from 'framer-motion';
+import { Smartphone, Frown, School, AlertTriangle, Target, Dumbbell, Users, Bot, Brain, Sparkles, BookOpen, Star, Rocket } from 'lucide-react';
 
 export default function StorySection() {
   const containerVariants = {
@@ -17,17 +18,17 @@ export default function StorySection() {
   };
 
   const problems = [
-    { icon: '📱', title: 'Screen Addicted', desc: 'Kids on screens' },
-    { icon: '😰', title: 'Parents Stressed', desc: 'Worried about future' },
-    { icon: '🏫', title: 'Schools Overloaded', desc: 'No time for new skills' },
-    { icon: '⚠️', title: 'Skills Gap', desc: 'Future not taught' }
+    { icon: Smartphone, title: 'Screen Addicted', desc: 'Kids on screens' },
+    { icon: Frown, title: 'Parents Stressed', desc: 'Worried about future' },
+    { icon: School, title: 'Schools Overloaded', desc: 'No time for new skills' },
+    { icon: AlertTriangle, title: 'Skills Gap', desc: 'Future not taught' }
   ];
 
   const transformations = [
-    { before: '📱 Screen time', after: '🎯 Skill time' },
-    { before: '🎨 Creativity', after: '💪 Confidence' },
-    { before: '❓ Questions', after: '🤝 Mentorship' },
-    { before: '🤖 AI distraction', after: '🧠 AI learning tool' }
+    { beforeIcon: Smartphone, beforeText: 'Screen time', afterIcon: Target, afterText: 'Skill time' },
+    { beforeIcon: Sparkles, beforeText: 'Creativity', afterIcon: Dumbbell, afterText: 'Confidence' },
+    { beforeIcon: AlertTriangle, beforeText: 'Questions', afterIcon: Users, afterText: 'Mentorship' },
+    { beforeIcon: Bot, beforeText: 'AI distraction', afterIcon: Brain, afterText: 'AI learning tool' }
   ];
 
   return (
@@ -45,17 +46,18 @@ export default function StorySection() {
           className="text-center space-y-4"
         >
           <motion.span 
-            className="text-5xl sm:text-6xl inline-block"
+            className="w-16 h-16 rounded-xl bg-purple-100 flex items-center justify-center mx-auto"
             animate={{ rotate: [0, 10, -10, 0] }}
             transition={{ repeat: Infinity, duration: 3 }}
           >
-            📖
+            <BookOpen className="w-8 h-8 text-purple-600" />
           </motion.span>
           <h2 className="text-3xl sm:text-4xl md:text-5xl font-extrabold gradient-text">
             The PadhAi Story
           </h2>
-          <p className="text-slate-700 text-lg sm:text-xl font-medium max-w-2xl mx-auto">
-            ✨ Every Bangalore parent wants their child to stand out.
+          <p className="text-slate-700 text-lg sm:text-xl font-medium max-w-2xl mx-auto flex items-center justify-center gap-2">
+            <Sparkles className="w-5 h-5 text-purple-500" />
+            <span>Every Bangalore parent wants their child to stand out.</span>
           </p>
         </motion.div>
 
@@ -67,8 +69,10 @@ export default function StorySection() {
             viewport={{ once: true }}
             className="text-2xl sm:text-3xl font-bold text-center flex items-center justify-center gap-3"
           >
-            <span>😔</span>
-            <span className="text-slate-900">But here's the reality:</span>
+            <span className="w-10 h-10 rounded-xl bg-red-100 flex items-center justify-center">
+              <Frown className="w-5 h-5 text-red-500" />
+            </span>
+            <span className="text-slate-900">But here&apos;s the reality:</span>
           </motion.h3>
 
           <motion.div 
@@ -78,20 +82,23 @@ export default function StorySection() {
             variants={containerVariants}
             className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6"
           >
-            {problems.map((item, idx) => (
-              <motion.div
-                key={idx}
-                variants={itemVariants}
-                whileHover={{ scale: 1.05, y: -5 }}
-                className="bg-white rounded-2xl shadow-md hover:shadow-xl transition-all p-6 text-center space-y-3 border-2 border-slate-100"
-              >
-                <div className="w-16 h-16 mx-auto bg-gradient-to-br from-red-100 to-orange-100 rounded-full flex items-center justify-center">
-                  <span className="text-3xl">{item.icon}</span>
-                </div>
-                <h4 className="font-bold text-lg text-slate-900">{item.title}</h4>
-                <p className="text-sm text-slate-600">{item.desc}</p>
-              </motion.div>
-            ))}
+            {problems.map((item, idx) => {
+              const Icon = item.icon;
+              return (
+                <motion.div
+                  key={idx}
+                  variants={itemVariants}
+                  whileHover={{ scale: 1.05, y: -5 }}
+                  className="bg-white rounded-2xl shadow-md hover:shadow-xl transition-all p-6 text-center space-y-3 border-2 border-slate-100"
+                >
+                  <div className="w-16 h-16 mx-auto bg-gradient-to-br from-red-100 to-orange-100 rounded-xl flex items-center justify-center">
+                    <Icon className="w-8 h-8 text-red-500" />
+                  </div>
+                  <h4 className="font-bold text-lg text-slate-900">{item.title}</h4>
+                  <p className="text-sm text-slate-600">{item.desc}</p>
+                </motion.div>
+              );
+            })}
           </motion.div>
         </div>
 
@@ -103,7 +110,9 @@ export default function StorySection() {
             viewport={{ once: true }}
             className="text-2xl sm:text-3xl font-bold text-center flex items-center justify-center gap-3"
           >
-            <span>✨</span>
+            <span className="w-10 h-10 rounded-xl bg-purple-100 flex items-center justify-center">
+              <Sparkles className="w-5 h-5 text-purple-600" />
+            </span>
             <span className="gradient-text">So we created PadhAi Club.</span>
           </motion.h3>
 
@@ -114,24 +123,34 @@ export default function StorySection() {
             variants={containerVariants}
             className="grid grid-cols-1 md:grid-cols-2 gap-6 max-w-5xl mx-auto"
           >
-            {transformations.map((item, idx) => (
-              <motion.div
-                key={idx}
-                variants={itemVariants}
-                className="flex items-center gap-4 bg-white rounded-2xl shadow-md hover:shadow-xl transition-all p-6"
-              >
-                <div className="flex-1 text-center p-4 bg-slate-100 rounded-xl">
-                  <p className="text-sm sm:text-base font-medium text-slate-600">{item.before}</p>
-                </div>
-                <div className="text-2xl font-bold text-purple-500">→</div>
-                <motion.div 
-                  className="flex-1 text-center p-4 bg-gradient-to-br from-purple-500 to-indigo-500 rounded-xl"
-                  whileHover={{ scale: 1.05 }}
+            {transformations.map((item, idx) => {
+              const BeforeIcon = item.beforeIcon;
+              const AfterIcon = item.afterIcon;
+              return (
+                <motion.div
+                  key={idx}
+                  variants={itemVariants}
+                  className="flex items-center gap-4 bg-white rounded-2xl shadow-md hover:shadow-xl transition-all p-6"
                 >
-                  <p className="text-sm sm:text-base font-bold text-white">{item.after}</p>
+                  <div className="flex-1 text-center p-4 bg-slate-100 rounded-xl">
+                    <div className="flex items-center justify-center gap-2">
+                      <BeforeIcon className="w-5 h-5 text-slate-500" />
+                      <p className="text-sm sm:text-base font-medium text-slate-600">{item.beforeText}</p>
+                    </div>
+                  </div>
+                  <div className="text-2xl font-bold text-purple-500">→</div>
+                  <motion.div 
+                    className="flex-1 text-center p-4 bg-gradient-to-br from-purple-500 to-purple-600 rounded-xl"
+                    whileHover={{ scale: 1.05 }}
+                  >
+                    <div className="flex items-center justify-center gap-2">
+                      <AfterIcon className="w-5 h-5 text-white" />
+                      <p className="text-sm sm:text-base font-bold text-white">{item.afterText}</p>
+                    </div>
+                  </motion.div>
                 </motion.div>
-              </motion.div>
-            ))}
+              );
+            })}
           </motion.div>
         </div>
 
@@ -154,20 +173,21 @@ export default function StorySection() {
             
             <div className="text-center relative z-10 px-6">
               <motion.div 
-                className="text-7xl sm:text-8xl mb-6"
+                className="w-24 h-24 sm:w-28 sm:h-28 rounded-2xl bg-white/20 backdrop-blur-sm flex items-center justify-center mx-auto mb-6"
                 animate={{ 
                   y: [0, -15, 0],
                   rotate: [0, 5, -5, 0]
                 }}
                 transition={{ repeat: Infinity, duration: 3 }}
               >
-                🤖
+                <Bot className="w-14 h-14 sm:w-16 sm:h-16 text-white" />
               </motion.div>
               <h3 className="text-4xl sm:text-5xl font-extrabold text-white drop-shadow-lg mb-4">
                 PadhAi Club
               </h3>
-              <p className="text-white/95 text-lg sm:text-xl font-semibold max-w-2xl">
-                Where screen time becomes future-ready learning! 🎯
+              <p className="text-white/95 text-lg sm:text-xl font-semibold max-w-2xl flex items-center justify-center gap-2">
+                <span>Where screen time becomes future-ready learning!</span>
+                <Target className="w-5 h-5" />
               </p>
             </div>
           </motion.div>
@@ -179,21 +199,21 @@ export default function StorySection() {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           whileHover={{ scale: 1.02 }}
-          className="bg-gradient-to-r from-purple-500 via-pink-500 to-indigo-500 rounded-full shadow-2xl px-8 py-8 max-w-5xl mx-auto"
+          className="bg-gradient-to-r from-purple-500 via-purple-600 to-purple-700 rounded-2xl shadow-2xl px-8 py-8 max-w-5xl mx-auto"
         >
           <div className="flex flex-col sm:flex-row items-center justify-center gap-6 sm:gap-8 text-white text-center">
             <div className="flex items-center gap-2">
-              <span className="text-2xl">🌟</span>
+              <Star className="w-6 h-6" />
               <p className="text-lg sm:text-xl font-bold">Think Smarter</p>
             </div>
             <div className="hidden sm:block w-1 h-8 bg-white/40 rounded-full" />
             <div className="flex items-center gap-2">
-              <span className="text-2xl">🚀</span>
+              <Rocket className="w-6 h-6" />
               <p className="text-lg sm:text-xl font-bold">Grow Faster</p>
             </div>
             <div className="hidden sm:block w-1 h-8 bg-white/40 rounded-full" />
             <div className="flex items-center gap-2">
-              <span className="text-2xl">💫</span>
+              <Sparkles className="w-6 h-6" />
               <p className="text-lg sm:text-xl font-bold">Dream Bigger</p>
             </div>
           </div>

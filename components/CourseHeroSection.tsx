@@ -1,13 +1,13 @@
 "use client";
 import { motion } from 'framer-motion';
-import { Calendar, Monitor, Users, Languages } from 'lucide-react';
+import { Calendar, Monitor, Users, Languages, GraduationCap, Rocket, FileText } from 'lucide-react';
 
 export default function CourseHeroSection() {
   const stats = [
-    { icon: Calendar, emoji: '📅', label: 'Duration', value: '6 Weeks' },
-    { icon: Monitor, emoji: '💻', label: 'Mode', value: 'Live Online' },
-    { icon: Users, emoji: '👶', label: 'Ages', value: '5–15 Years' },
-    { icon: Languages, emoji: '🗣️', label: 'Languages', value: 'EN, HI, KA' },
+    { icon: Calendar, label: 'Duration', value: '6 Weeks' },
+    { icon: Monitor, label: 'Mode', value: 'Live Online' },
+    { icon: Users, label: 'Ages', value: '5–15 Years' },
+    { icon: Languages, label: 'Languages', value: 'EN, HI, KA' },
   ];
 
   return (
@@ -26,8 +26,8 @@ export default function CourseHeroSection() {
           animate={{ scale: 1 }}
           transition={{ type: "spring" }}
         >
-          <span className="bg-white/20 backdrop-blur-md px-4 py-2 rounded-full text-sm font-medium">
-            🎓 Course Details
+          <span className="bg-white/20 backdrop-blur-md px-4 py-2 rounded-xl text-sm font-medium flex items-center gap-2">
+            <GraduationCap className="w-4 h-4" /> Course Details
           </span>
         </motion.div>
         
@@ -67,11 +67,11 @@ export default function CourseHeroSection() {
               whileHover={{ scale: 1.05, backgroundColor: 'rgba(255,255,255,0.15)' }}
             >
               <motion.div 
-                className="text-2xl sm:text-3xl mb-2"
+                className="w-10 h-10 rounded-xl bg-white/20 flex items-center justify-center mx-auto mb-2"
                 animate={{ y: [0, -5, 0] }}
                 transition={{ repeat: Infinity, duration: 2, delay: idx * 0.2 }}
               >
-                {stat.emoji}
+                <stat.icon className="w-5 h-5 text-white" />
               </motion.div>
               <div className="font-semibold text-sm sm:text-base">{stat.label}</div>
               <div className="text-xs sm:text-sm text-purple-100">{stat.value}</div>
@@ -87,18 +87,18 @@ export default function CourseHeroSection() {
           transition={{ delay: 0.5 }}
         >
           <motion.button 
-            className="w-full sm:w-auto px-6 sm:px-8 py-3 sm:py-4 rounded-full font-bold text-base sm:text-lg bg-white text-purple-600 hover:bg-violet-100 transition shadow-xl"
+            className="w-full sm:w-auto px-6 sm:px-8 py-3 sm:py-4 rounded-xl font-bold text-base sm:text-lg bg-white text-purple-600 hover:bg-purple-50 transition shadow-xl flex items-center justify-center gap-2"
             whileHover={{ scale: 1.05 }}
             whileTap={{ scale: 0.98 }}
           >
-            🚀 Enroll Now (₹16,000)
+            <Rocket className="w-5 h-5" /> Enroll Now (₹16,000)
           </motion.button>
           <motion.button 
-            className="w-full sm:w-auto px-6 sm:px-8 py-3 sm:py-4 rounded-full font-semibold text-base sm:text-lg border-2 border-white text-white hover:bg-white/10 transition"
+            className="w-full sm:w-auto px-6 sm:px-8 py-3 sm:py-4 rounded-xl font-semibold text-base sm:text-lg border-2 border-white text-white hover:bg-white/10 transition flex items-center justify-center gap-2"
             whileHover={{ scale: 1.05 }}
             whileTap={{ scale: 0.98 }}
           >
-            📄 Download Syllabus PDF
+            <FileText className="w-5 h-5" /> Download Syllabus PDF
           </motion.button>
         </motion.div>
       </div>

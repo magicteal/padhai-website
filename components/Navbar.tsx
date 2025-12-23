@@ -1,7 +1,7 @@
 "use client";
 import Link from "next/link";
 import { useState, useEffect } from "react";
-import { Menu, X, Sparkles } from "lucide-react";
+import { Menu, X, ArrowRight } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 import { useAppStore } from "../lib/store";
 import { useRouter } from "next/navigation";
@@ -39,8 +39,8 @@ export default function Navbar() {
     <>
       <header className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
         scrolled 
-          ? 'bg-gradient-to-r from-purple-600 via-violet-600 to-purple-700 shadow-lg shadow-purple-500/20' 
-          : 'bg-gradient-to-r from-purple-600 to-violet-600'
+          ? 'bg-purple-700 shadow-lg shadow-purple-900/20 text-white' 
+          : 'bg-gradient-to-r from-purple-600 to-purple-700 text-white backdrop-blur-sm'
       }`}>
         <div className="max-w-7xl mx-auto px-4 py-3">
           <div className="flex items-center justify-between">
@@ -55,10 +55,9 @@ export default function Navbar() {
                   src="/images/mainLogo.svg"
                   alt="Padhai logo"
                   className="h-8 w-auto sm:h-10"
-                  whileHover={{ scale: 1.1, rotate: 5 }}
+                  whileHover={{ scale: 1.05 }}
                   transition={{ type: "spring", stiffness: 400 }}
                 />
-                <Sparkles className="w-4 h-4 text-yellow-300 opacity-0 group-hover:opacity-100 transition-opacity animate-sparkle" />
               </Link>
             </motion.div>
 
@@ -75,7 +74,7 @@ export default function Navbar() {
                 >
                   <Link 
                     href={link.href} 
-                    className="relative px-4 py-2 lg:px-5 text-white font-medium transition-transform duration-300 transform-gpu origin-center group text-sm lg:text-base"
+                    className="relative px-4 py-2 lg:px-5 text-white hover:text-white/90 font-medium transition-colors duration-300 group text-sm lg:text-base"
                   >
                     <span className="flex items-center gap-1">{link.label}</span>
                     <motion.span 
@@ -97,20 +96,21 @@ export default function Navbar() {
                 <>
                   <Link href="/login">
                     <motion.button 
-                      className="px-4 py-2 lg:px-5 rounded-full font-semibold border-2 border-white text-white bg-transparent hover:bg-white/10 transition text-sm lg:text-base"
-                      whileHover={{ scale: 1.05 }}
-                      whileTap={{ scale: 0.95 }}
+                      className="px-4 py-2 lg:px-5 rounded-xl font-semibold border-2 border-white text-white bg-transparent hover:bg-white/10 transition text-sm lg:text-base"
+                      whileHover={{ scale: 1.02 }}
+                      whileTap={{ scale: 0.98 }}
                     >
                       Login
                     </motion.button>
                   </Link>
                   <Link href="/signup">
                     <motion.button 
-                      className="px-4 py-2 lg:px-5 rounded-full font-semibold bg-white text-purple-600 hover:bg-yellow-300 hover:text-purple-700 transition shadow-lg text-sm lg:text-base"
-                      whileHover={{ scale: 1.05, boxShadow: "0 10px 30px rgba(255,255,255,0.3)" }}
-                      whileTap={{ scale: 0.95 }}
+                      className="px-4 py-2 lg:px-5 rounded-xl font-semibold bg-white text-purple-600 hover:bg-purple-50 transition shadow-md shadow-purple-200 text-sm lg:text-base flex items-center gap-2"
+                      whileHover={{ scale: 1.02 }}
+                      whileTap={{ scale: 0.98 }}
                     >
-                      Sign up ✨
+                      Get Started
+                      <ArrowRight className="w-4 h-4" />
                     </motion.button>
                   </Link>
                 </>
@@ -119,9 +119,9 @@ export default function Navbar() {
                   {currentUser?.role === "admin" ? (
                     <Link href="/admin">
                       <motion.button 
-                        className="px-4 py-2 lg:px-5 rounded-full font-semibold bg-white text-purple-600 hover:bg-yellow-300 hover:text-purple-700 transition shadow-lg text-sm lg:text-base"
-                        whileHover={{ scale: 1.05 }}
-                        whileTap={{ scale: 0.95 }}
+                        className="px-4 py-2 lg:px-5 rounded-xl font-semibold bg-white text-purple-600 hover:bg-purple-50 transition shadow-md text-sm lg:text-base"
+                        whileHover={{ scale: 1.02 }}
+                        whileTap={{ scale: 0.98 }}
                       >
                         Admin Dashboard
                       </motion.button>
@@ -129,9 +129,9 @@ export default function Navbar() {
                   ) : (
                     <Link href="/dashboard">
                       <motion.button 
-                        className="px-4 py-2 lg:px-5 rounded-full font-semibold bg-white text-purple-600 hover:bg-yellow-300 hover:text-purple-700 transition shadow-lg text-sm lg:text-base"
-                        whileHover={{ scale: 1.05 }}
-                        whileTap={{ scale: 0.95 }}
+                        className="px-4 py-2 lg:px-5 rounded-xl font-semibold bg-white text-purple-600 hover:bg-purple-50 transition shadow-md text-sm lg:text-base"
+                        whileHover={{ scale: 1.02 }}
+                        whileTap={{ scale: 0.98 }}
                       >
                         My Dashboard
                       </motion.button>
@@ -139,9 +139,9 @@ export default function Navbar() {
                   )}
                   <motion.button 
                     onClick={handleLogout}
-                    className="px-4 py-2 lg:px-5 rounded-full font-semibold border-2 border-white text-white bg-transparent hover:bg-white/10 transition text-sm lg:text-base"
-                    whileHover={{ scale: 1.05 }}
-                    whileTap={{ scale: 0.95 }}
+                    className="px-4 py-2 lg:px-5 rounded-xl font-semibold border-2 border-white text-white bg-transparent hover:bg-white/10 transition text-sm lg:text-base"
+                    whileHover={{ scale: 1.02 }}
+                    whileTap={{ scale: 0.98 }}
                   >
                     Logout
                   </motion.button>
@@ -172,10 +172,10 @@ export default function Navbar() {
             transition={{ type: "spring", damping: 25, stiffness: 200 }}
             className="fixed inset-0 z-40 md:hidden"
           >
-            <div className="absolute inset-0 bg-gradient-to-br from-purple-600 via-violet-600 to-fuchsia-600">
+            <div className="absolute inset-0 bg-gradient-to-br from-purple-600 via-purple-700 to-purple-800">
               {/* Decorative Elements */}
-              <div className="absolute top-20 right-10 w-32 h-32 bg-white/10 rounded-full blur-2xl animate-float" />
-              <div className="absolute bottom-40 left-10 w-40 h-40 bg-pink-400/20 rounded-full blur-3xl animate-float" style={{ animationDelay: '1s' }} />
+              <div className="absolute top-20 right-10 w-32 h-32 bg-white/10 rounded-full blur-2xl" />
+              <div className="absolute bottom-40 left-10 w-40 h-40 bg-purple-400/20 rounded-full blur-3xl" />
               
               <div className="flex flex-col h-full pt-20 px-6 pb-8">
                 <nav className="flex-1 flex flex-col justify-center gap-4">
@@ -211,8 +211,9 @@ export default function Navbar() {
                         </button>
                       </Link>
                       <Link href="/signup" onClick={() => setIsOpen(false)} className="block">
-                        <button className="w-full px-6 py-4 rounded-2xl font-bold text-lg bg-white text-purple-600 hover:bg-yellow-300 transition shadow-xl">
-                          Sign up ✨
+                        <button className="w-full px-6 py-4 rounded-2xl font-bold text-lg bg-white text-purple-600 hover:bg-purple-50 transition shadow-xl flex items-center justify-center gap-2">
+                          Get Started
+                          <ArrowRight className="w-5 h-5" />
                         </button>
                       </Link>
                     </>
@@ -220,13 +221,13 @@ export default function Navbar() {
                     <>
                       {currentUser?.role === "admin" ? (
                         <Link href="/admin" onClick={() => setIsOpen(false)} className="block">
-                          <button className="w-full px-6 py-4 rounded-2xl font-bold text-lg bg-white text-purple-600 hover:bg-yellow-300 transition shadow-xl">
+                          <button className="w-full px-6 py-4 rounded-2xl font-bold text-lg bg-white text-purple-600 hover:bg-purple-50 transition shadow-xl">
                             Admin Dashboard
                           </button>
                         </Link>
                       ) : (
                         <Link href="/dashboard" onClick={() => setIsOpen(false)} className="block">
-                          <button className="w-full px-6 py-4 rounded-2xl font-bold text-lg bg-white text-purple-600 hover:bg-yellow-300 transition shadow-xl">
+                          <button className="w-full px-6 py-4 rounded-2xl font-bold text-lg bg-white text-purple-600 hover:bg-purple-50 transition shadow-xl">
                             My Dashboard
                           </button>
                         </Link>

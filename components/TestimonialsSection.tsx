@@ -1,7 +1,7 @@
 "use client";
 import React from 'react';
 import { motion } from 'framer-motion';
-import { Star } from 'lucide-react';
+import { Star, Video, MessageSquare, User, Users } from 'lucide-react';
 import { useAppStore } from '@/lib/store';
 import testimonialVideosArray from '../data/testimonialVideos';
 
@@ -18,11 +18,11 @@ export default function TestimonialsSection() {
   return (
     <section 
       id="testimonials" 
-      className="py-12 sm:py-16 md:py-24 relative overflow-hidden bg-gradient-to-br from-purple-50 via-fuchsia-50 to-pink-50"
+      className="py-12 sm:py-16 md:py-24 relative overflow-hidden bg-gradient-to-br from-purple-50 via-white to-purple-50"
     >
       {/* Decorative elements */}
-      <div className="absolute top-10 right-10 w-32 h-32 bg-purple-300/30 rounded-full blur-3xl animate-float" />
-      <div className="absolute bottom-20 left-10 w-48 h-48 bg-fuchsia-300/20 rounded-full blur-3xl animate-float" style={{ animationDelay: '2s' }} />
+      <div className="absolute top-10 right-10 w-32 h-32 bg-purple-200/30 rounded-full blur-3xl" />
+      <div className="absolute bottom-20 left-10 w-48 h-48 bg-purple-300/20 rounded-full blur-3xl" />
       
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         {/* Header */}
@@ -32,18 +32,20 @@ export default function TestimonialsSection() {
           viewport={{ once: true }}
           className="text-center mb-8 sm:mb-12"
         >
-          <motion.span 
-            className="text-4xl sm:text-5xl inline-block mb-3"
-            animate={{ scale: [1, 1.2, 1] }}
+          <motion.div 
+            className="w-16 h-16 mx-auto mb-4 rounded-2xl bg-purple-100 flex items-center justify-center"
+            animate={{ scale: [1, 1.05, 1] }}
             transition={{ repeat: Infinity, duration: 2 }}
           >
-            💬
-          </motion.span>
+            <MessageSquare className="w-8 h-8 text-purple-600" />
+          </motion.div>
           <h2 className="text-2xl sm:text-3xl md:text-4xl font-extrabold leading-tight mb-3 gradient-text">
             What Parents & Kids Say
           </h2>
-          <p className="text-base sm:text-xl text-slate-700 font-bold">
-            ⭐ Trusted by Parents. Loved by Kids! ⭐
+          <p className="text-base sm:text-xl text-slate-700 font-medium flex items-center justify-center gap-2">
+            <Star className="w-5 h-5 text-yellow-500 fill-yellow-500" />
+            Trusted by Parents. Loved by Kids!
+            <Star className="w-5 h-5 text-yellow-500 fill-yellow-500" />
           </p>
         </motion.div>
 
@@ -55,13 +57,13 @@ export default function TestimonialsSection() {
           className="mb-10 sm:mb-14"
         >
           <div className="flex items-center justify-center gap-2 sm:gap-3 mb-6">
-            <motion.span 
-              className="text-2xl sm:text-3xl"
-              animate={{ rotate: [0, 10, -10, 0] }}
+            <motion.div 
+              className="w-10 h-10 rounded-xl bg-purple-100 flex items-center justify-center"
+              animate={{ rotate: [0, 5, -5, 0] }}
               transition={{ repeat: Infinity, duration: 2 }}
             >
-              🎥
-            </motion.span>
+              <Video className="w-5 h-5 text-purple-600" />
+            </motion.div>
             <h3 className="text-xl sm:text-2xl font-extrabold text-slate-900">What Kids Are Saying</h3>
           </div>
           
@@ -109,13 +111,13 @@ export default function TestimonialsSection() {
           className="mb-10 sm:mb-14"
         >
           <div className="flex items-center justify-center gap-2 sm:gap-3 mb-6">
-            <motion.span 
-              className="text-2xl sm:text-3xl"
-              animate={{ y: [0, -5, 0] }}
+            <motion.div 
+              className="w-10 h-10 rounded-xl bg-purple-100 flex items-center justify-center"
+              animate={{ y: [0, -3, 0] }}
               transition={{ repeat: Infinity, duration: 1.5 }}
             >
-              📝
-            </motion.span>
+              <MessageSquare className="w-5 h-5 text-purple-600" />
+            </motion.div>
             <h3 className="text-xl sm:text-2xl font-extrabold text-slate-900">What Parents Are Saying</h3>
           </div>
           
@@ -135,10 +137,10 @@ export default function TestimonialsSection() {
                 <div className="flex items-start gap-3 sm:gap-4">
                   <motion.div 
                     className="flex-shrink-0"
-                    whileHover={{ rotate: 10 }}
+                    whileHover={{ rotate: 5 }}
                   >
-                    <div className="w-10 h-10 sm:w-12 sm:h-12 rounded-full bg-gradient-to-br from-purple-400 via-fuchsia-400 to-pink-400 flex items-center justify-center text-white text-lg sm:text-xl">
-                      👩
+                    <div className="w-10 h-10 sm:w-12 sm:h-12 rounded-full bg-gradient-to-br from-purple-400 to-purple-600 flex items-center justify-center text-white">
+                      <User className="w-5 h-5 sm:w-6 sm:h-6" />
                     </div>
                   </motion.div>
                   <div className="flex-1 min-w-0">
@@ -200,20 +202,20 @@ export default function TestimonialsSection() {
           className="text-center"
         >
           <motion.div 
-            className="inline-block px-4 sm:px-6 py-3 sm:py-4 rounded-2xl bg-gradient-to-r from-purple-100 via-fuchsia-100 to-pink-100 shadow-xl border-3 border-white"
-            whileHover={{ scale: 1.05 }}
+            className="inline-block px-4 sm:px-6 py-3 sm:py-4 rounded-xl bg-white shadow-lg border-2 border-purple-100"
+            whileHover={{ scale: 1.02 }}
           >
             <div className="flex items-center gap-2 sm:gap-3 flex-wrap justify-center">
-              <motion.span 
-                className="text-3xl sm:text-4xl"
-                animate={{ scale: [1, 1.1, 1] }}
+              <motion.div 
+                className="w-12 h-12 rounded-xl bg-purple-100 flex items-center justify-center"
+                animate={{ scale: [1, 1.05, 1] }}
                 transition={{ repeat: Infinity, duration: 2 }}
               >
-                👩‍👩‍👧
-              </motion.span>
+                <Users className="w-6 h-6 text-purple-600" />
+              </motion.div>
               <div className="text-center sm:text-left">
                 <p className="text-slate-900 font-extrabold text-base sm:text-lg">
-                  Supported by <span className="gradient-text">13,000+</span> Bangalore Moms
+                  Supported by <span className="gradient-text">13,000+</span> Bangalore Families
                 </p>
               </div>
             </div>

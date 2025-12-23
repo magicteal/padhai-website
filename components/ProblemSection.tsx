@@ -1,23 +1,23 @@
 "use client";
 import React from 'react';
 import { motion } from 'framer-motion';
-import { XCircle, CheckCircle } from 'lucide-react';
+import { XCircle, CheckCircle, Clock, Car, Smartphone, AlertCircle, TrendingUp, Sparkles, BookOpen, Brain, Dumbbell, Target, Building } from 'lucide-react';
 import testimonialVideos from '../data/testimonialVideos';
 
 const REALITY_CHECKS = [
-  { text: 'Parents working long hours', emoji: '⏰' },
-  { text: 'Heavy traffic, late evenings', emoji: '🚗' },
-  { text: 'Kids using phones/tablets', emoji: '📱' },
-  { text: "Fear of 'bad screen time'", emoji: '😟' },
-  { text: 'Worry about future competition', emoji: '🏃' },
+  { text: 'Parents working long hours', icon: Clock },
+  { text: 'Heavy traffic, late evenings', icon: Car },
+  { text: 'Kids using phones/tablets', icon: Smartphone },
+  { text: "Fear of 'bad screen time'", icon: AlertCircle },
+  { text: 'Worry about future competition', icon: TrendingUp },
 ];
 
 const SOLUTION_BENEFITS = [
-  { text: 'Create stories, characters & animations', emoji: '✨' },
-  { text: 'Make school projects in minutes', emoji: '📚' },
-  { text: 'Use AI for homework & understanding', emoji: '🧠' },
-  { text: 'Build discipline and communication', emoji: '💪' },
-  { text: 'Explore hobbies & early career paths', emoji: '🎯' },
+  { text: 'Create stories, characters & animations', icon: Sparkles },
+  { text: 'Make school projects in minutes', icon: BookOpen },
+  { text: 'Use AI for homework & understanding', icon: Brain },
+  { text: 'Build discipline and communication', icon: Dumbbell },
+  { text: 'Explore hobbies & early career paths', icon: Target },
 ];
 
 // testimonialVideos imported from data/testimonialVideos.ts
@@ -37,13 +37,13 @@ export default function ProblemSection() {
           viewport={{ once: true }}
           className="text-center max-w-3xl mx-auto mb-8 sm:mb-12"
         >
-          <motion.span 
-            className="text-4xl sm:text-5xl inline-block mb-3"
-            animate={{ scale: [1, 1.1, 1] }}
+          <motion.div 
+            className="w-16 h-16 mx-auto mb-4 rounded-2xl bg-purple-100 flex items-center justify-center"
+            animate={{ scale: [1, 1.05, 1] }}
             transition={{ repeat: Infinity, duration: 2 }}
           >
-            🏙️
-          </motion.span>
+            <Building className="w-8 h-8 text-purple-600" />
+          </motion.div>
           <h2 className="text-2xl sm:text-3xl md:text-4xl font-extrabold leading-tight mb-3 text-slate-900">
             Bangalore Parents, <span className="gradient-text">We Get It!</span>
           </h2>
@@ -59,7 +59,7 @@ export default function ProblemSection() {
             className="card-kid p-5 sm:p-6 md:-translate-y-4"
           >
             <div className="flex items-center gap-2 mb-4">
-              <span className="text-2xl">😔</span>
+              <XCircle className="w-6 h-6 text-red-500" />
               <h3 className="text-lg font-bold text-slate-900">The Struggle</h3>
             </div>
             <ul className="space-y-3">
@@ -75,9 +75,9 @@ export default function ProblemSection() {
                   <div className="w-8 h-8 rounded-lg flex items-center justify-center bg-gradient-to-br from-red-400 to-rose-500 shadow-md flex-shrink-0">
                     <XCircle className="w-4 h-4 text-white" />
                   </div>
-                  <div>
+                  <div className="flex items-center gap-2">
                     <span className="text-slate-800 font-medium text-sm">{item.text}</span>
-                    <span className="ml-2">{item.emoji}</span>
+                    <item.icon className="w-4 h-4 text-slate-400" />
                   </div>
                 </motion.li>
               ))}
@@ -102,7 +102,7 @@ export default function ProblemSection() {
             className="card-kid p-5 sm:p-6 md:translate-y-4"
           >
             <div className="flex items-center gap-2 mb-4">
-              <span className="text-2xl">✨</span>
+              <CheckCircle className="w-6 h-6 text-purple-600" />
               <h3 className="text-lg font-bold text-slate-900">The PadhAi Way</h3>
             </div>
             <ul className="space-y-3">
@@ -115,12 +115,12 @@ export default function ProblemSection() {
                   transition={{ delay: idx * 0.1 }}
                   className="flex items-start gap-3"
                 >
-                  <div className="w-8 h-8 rounded-lg flex items-center justify-center bg-gradient-to-br from-purple-500 to-fuchsia-500 shadow-md flex-shrink-0">
+                  <div className="w-8 h-8 rounded-lg flex items-center justify-center bg-gradient-to-br from-purple-500 to-violet-500 shadow-md flex-shrink-0">
                     <CheckCircle className="w-4 h-4 text-white" />
                   </div>
-                  <div>
+                  <div className="flex items-center gap-2">
                     <span className="text-slate-800 font-medium text-sm">{item.text}</span>
-                    <span className="ml-2">{item.emoji}</span>
+                    <item.icon className="w-4 h-4 text-purple-400" />
                   </div>
                 </motion.li>
               ))}
@@ -173,11 +173,11 @@ export default function ProblemSection() {
           className="mt-10 sm:mt-12 text-center"
         >
           <motion.div 
-            className="inline-block px-4 sm:px-6 py-3 sm:py-4 rounded-2xl bg-gradient-to-r from-purple-200 via-violet-200 to-fuchsia-200 shadow-xl border-3 border-white"
-            whileHover={{ scale: 1.05 }}
+            className="inline-block px-4 sm:px-6 py-3 sm:py-4 rounded-xl bg-white shadow-lg border-2 border-purple-100"
+            whileHover={{ scale: 1.02 }}
           >
             <p className="text-slate-900 font-extrabold text-sm sm:text-lg">
-              🌟 First structured, safe AI program for Bangalore kids! 🚀
+              First structured, safe AI program for Bangalore kids!
             </p>
           </motion.div>
         </motion.div>

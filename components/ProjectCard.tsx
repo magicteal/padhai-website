@@ -2,6 +2,7 @@
 import React from 'react';
 import { motion } from 'framer-motion';
 import { Project } from '@/lib/types';
+import { Star, Trophy } from 'lucide-react';
 
 interface ProjectCardProps {
   project: Project;
@@ -54,11 +55,11 @@ export default function ProjectCard({ project, index }: ProjectCardProps) {
         {project.featured && (
           <div className="absolute top-3 left-3">
             <motion.span 
-              className="px-2.5 py-1 bg-gradient-to-r from-yellow-400 to-orange-400 rounded-full text-xs font-bold text-white shadow-lg"
+              className="px-2.5 py-1 bg-gradient-to-r from-purple-500 to-purple-600 rounded-xl text-xs font-bold text-white shadow-lg flex items-center gap-1"
               animate={{ scale: [1, 1.05, 1] }}
               transition={{ repeat: Infinity, duration: 2 }}
             >
-              ⭐ Featured
+              <Star className="w-3 h-3" /> Featured
             </motion.span>
           </div>
         )}
@@ -67,7 +68,9 @@ export default function ProjectCard({ project, index }: ProjectCardProps) {
       {/* Content */}
       <figcaption className="p-4 sm:p-5 bg-gradient-to-br from-white to-purple-50/50">
         <div className="flex items-start gap-2 mb-2">
-          <span className="text-xl sm:text-2xl mt-0.5 flex-shrink-0">🏆</span>
+          <span className="w-8 h-8 rounded-lg bg-purple-100 flex items-center justify-center flex-shrink-0">
+            <Trophy className="w-4 h-4 text-purple-600" />
+          </span>
           <div className="min-w-0 flex-1">
             <h3 className="text-base sm:text-lg font-bold text-slate-900 leading-tight truncate">
               {project.title}

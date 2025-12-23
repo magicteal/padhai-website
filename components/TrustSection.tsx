@@ -1,17 +1,17 @@
 "use client";
 import React from 'react';
 import { motion } from 'framer-motion';
-import { CheckCircle } from 'lucide-react';
+import { Check, Video, Save, HelpCircle, Users, Home, Shield, Clock, Rocket, Award, Star } from 'lucide-react';
 
 const TRUST_POINTS = [
-  { text: 'Live Classes (Not just videos)', emoji: '📹' },
-  { text: 'Class Recordings Provided', emoji: '💾' },
-  { text: 'Weekly Doubt Solving', emoji: '❓' },
-  { text: 'Dedicated Mentorship', emoji: '👨‍🏫' },
-  { text: 'PTM-Level Parent Support', emoji: '👪' },
-  { text: 'Safe AI Environment (Child-Friendly Tools)', emoji: '🛡️' },
-  { text: 'Bangalore-Lifestyle Friendly Timings', emoji: '⏰' },
-  { text: 'Early Career Exposure', emoji: '🚀' },
+  { text: 'Live Classes (Not just videos)', icon: Video },
+  { text: 'Class Recordings Provided', icon: Save },
+  { text: 'Weekly Doubt Solving', icon: HelpCircle },
+  { text: 'Dedicated Mentorship', icon: Users },
+  { text: 'PTM-Level Parent Support', icon: Home },
+  { text: 'Safe AI Environment (Child-Friendly Tools)', icon: Shield },
+  { text: 'Bangalore-Lifestyle Friendly Timings', icon: Clock },
+  { text: 'Early Career Exposure', icon: Rocket },
 ];
 
 export default function TrustSection() {
@@ -27,10 +27,10 @@ export default function TrustSection() {
   ];
   
   return (
-    <section id="trust" className="py-12 sm:py-16 md:py-24 relative overflow-hidden bg-gradient-to-br from-purple-50 via-fuchsia-50 to-pink-50">
+    <section id="trust" className="py-12 sm:py-16 md:py-24 relative overflow-hidden bg-gradient-to-br from-purple-50 via-white to-purple-50">
       {/* Decorative elements */}
-      <div className="absolute top-10 right-10 w-40 h-40 bg-purple-300/20 rounded-full blur-3xl animate-float" />
-      <div className="absolute bottom-20 left-10 w-60 h-60 bg-fuchsia-300/20 rounded-full blur-3xl animate-float" style={{ animationDelay: '2s' }} />
+      <div className="absolute top-10 right-10 w-40 h-40 bg-purple-200/20 rounded-full blur-3xl" />
+      <div className="absolute bottom-20 left-10 w-60 h-60 bg-purple-300/20 rounded-full blur-3xl" />
       
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         {/* Header */}
@@ -41,18 +41,20 @@ export default function TrustSection() {
           className="text-center mb-8 sm:mb-10"
         >
           <motion.span 
-            className="text-4xl sm:text-5xl inline-block mb-3"
+            className="w-14 h-14 rounded-xl bg-green-100 flex items-center justify-center mx-auto mb-3"
             animate={{ scale: [1, 1.1, 1] }}
             transition={{ repeat: Infinity, duration: 2 }}
           >
-            ✅
+            <Check className="w-7 h-7 text-green-600" />
           </motion.span>
           <h2 className="text-2xl sm:text-3xl md:text-4xl font-extrabold leading-tight mb-3 gradient-text">
             Why PadhAi Club Works
           </h2>
-          <p className="text-slate-700 text-sm sm:text-lg font-medium max-w-3xl mx-auto">
-            🌟 Because we don't just teach AI — we teach{' '}
-            <span className="gradient-text font-bold">discipline, mindset, and values!</span> 🌟
+          <p className="text-slate-700 text-sm sm:text-lg font-medium max-w-3xl mx-auto flex items-center justify-center gap-2 flex-wrap">
+            <Star className="w-5 h-5 text-purple-500" />
+            <span>Because we don&apos;t just teach AI — we teach</span>
+            <span className="gradient-text font-bold">discipline, mindset, and values!</span>
+            <Star className="w-5 h-5 text-purple-500" />
           </p>
         </motion.div>
 
@@ -65,17 +67,16 @@ export default function TrustSection() {
               whileInView={{ opacity: 1, x: 0 }}
               viewport={{ once: true }}
               transition={{ delay: idx * 0.1 }}
-              whileHover={{ scale: 1.03, y: -3 }}
+              whileHover={{ scale: 1.02, y: -2 }}
               className="card-kid p-4 sm:p-5 flex items-center gap-3 sm:gap-4"
             >
               <motion.div 
-                className={`w-10 h-10 sm:w-12 sm:h-12 flex items-center justify-center rounded-xl bg-gradient-to-br ${colors[idx]} shadow-lg flex-shrink-0`}
-                whileHover={{ rotate: 10 }}
+                className={`w-10 h-10 sm:w-12 sm:h-12 flex items-center justify-center rounded-xl bg-gradient-to-br ${colors[idx]} shadow-md flex-shrink-0`}
+                whileHover={{ rotate: 5 }}
               >
-                <CheckCircle className="w-5 h-5 sm:w-6 sm:h-6 text-white" />
+                <point.icon className="w-5 h-5 sm:w-6 sm:h-6 text-white" />
               </motion.div>
               <div className="flex items-center gap-2 flex-wrap">
-                <span className="text-xl sm:text-2xl">{point.emoji}</span>
                 <span className="text-slate-800 font-semibold text-sm sm:text-base">{point.text}</span>
               </div>
             </motion.div>
@@ -90,12 +91,12 @@ export default function TrustSection() {
           className="mt-10 sm:mt-12 text-center"
         >
           <motion.div 
-            className="inline-block px-4 sm:px-6 py-3 sm:py-4 rounded-2xl bg-gradient-to-r from-purple-200 via-fuchsia-200 to-pink-200 shadow-lg border-2 sm:border-3 border-white"
-            whileHover={{ scale: 1.05 }}
+            className="inline-block px-4 sm:px-6 py-3 sm:py-4 rounded-xl bg-white shadow-lg border-2 border-purple-100"
+            whileHover={{ scale: 1.02 }}
           >
             <p className="text-slate-900 text-sm sm:text-lg font-bold">
-              🏛️ Bangalore is India's tech hub —
-              <span className="gradient-text"> your child deserves world-class learning early!</span> 🚀
+              Bangalore is India's tech hub —
+              <span className="gradient-text"> your child deserves world-class learning early!</span>
             </p>
           </motion.div>
         </motion.div>
