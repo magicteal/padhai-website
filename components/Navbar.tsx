@@ -3,10 +3,22 @@ import Link from "next/link";
 import { useState, useEffect } from "react";
 import { Menu, X, Sparkles } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
+import { useAppStore } from "../lib/store";
+import { useRouter } from "next/navigation";
 
 export default function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
+  const router = useRouter();
+  const isAuthenticated = useAppStore((s) => s.isAuthenticated);
+  const currentUser = useAppStore((s) => s.currentUser);
+  const logout = useAppStore((s) => s.logout);
+
+  const handleLogout = () => {
+    logout();
+    setIsOpen(false);
+    router.push("/");
+  };
 
   useEffect(() => {
     const handleScroll = () => {
@@ -81,24 +93,60 @@ export default function Navbar() {
               animate={{ opacity: 1, x: 0 }}
               className="hidden md:flex items-center gap-2 lg:gap-3"
             >
-              <Link href="/login">
-                <motion.button 
-                  className="px-4 py-2 lg:px-5 rounded-full font-semibold border-2 border-white text-white bg-transparent hover:bg-white/10 transition text-sm lg:text-base"
-                  whileHover={{ scale: 1.05 }}
-                  whileTap={{ scale: 0.95 }}
-                >
-                  Login
-                </motion.button>
-              </Link>
-              <Link href="/signup">
-                <motion.button 
-                  className="px-4 py-2 lg:px-5 rounded-full font-semibold bg-white text-purple-600 hover:bg-yellow-300 hover:text-purple-700 transition shadow-lg text-sm lg:text-base"
-                  whileHover={{ scale: 1.05, boxShadow: "0 10px 30px rgba(255,255,255,0.3)" }}
-                  whileTap={{ scale: 0.95 }}
-                >
-                  Sign up ✨
-                </motion.button>
-              </Link>
+              {!isAuthenticated ? (
+                <>
+                  <Link href="/login">
+                    <motion.button 
+                      className="px-4 py-2 lg:px-5 rounded-full font-semibold border-2 border-white text-white bg-transparent hover:bg-white/10 transition text-sm lg:text-base"
+                      whileHover={{ scale: 1.05 }}
+                      whileTap={{ scale: 0.95 }}
+                    >
+                      Login
+                    </motion.button>
+                  </Link>
+                  <Link href="/signup">
+                    <motion.button 
+                      className="px-4 py-2 lg:px-5 rounded-full font-semibold bg-white text-purple-600 hover:bg-yellow-300 hover:text-purple-700 transition shadow-lg text-sm lg:text-base"
+                      whileHover={{ scale: 1.05, boxShadow: "0 10px 30px rgba(255,255,255,0.3)" }}
+                      whileTap={{ scale: 0.95 }}
+                    >
+                      Sign up ✨
+                    </motion.button>
+                  </Link>
+                </>
+              ) : (
+                <>
+                  {currentUser?.role === "admin" ? (
+                    <Link href="/admin">
+                      <motion.button 
+                        className="px-4 py-2 lg:px-5 rounded-full font-semibold bg-white text-purple-600 hover:bg-yellow-300 hover:text-purple-700 transition shadow-lg text-sm lg:text-base"
+                        whileHover={{ scale: 1.05 }}
+                        whileTap={{ scale: 0.95 }}
+                      >
+                        Admin Dashboard
+                      </motion.button>
+                    </Link>
+                  ) : (
+                    <Link href="/dashboard">
+                      <motion.button 
+                        className="px-4 py-2 lg:px-5 rounded-full font-semibold bg-white text-purple-600 hover:bg-yellow-300 hover:text-purple-700 transition shadow-lg text-sm lg:text-base"
+                        whileHover={{ scale: 1.05 }}
+                        whileTap={{ scale: 0.95 }}
+                      >
+                        My Dashboard
+                      </motion.button>
+                    </Link>
+                  )}
+                  <motion.button 
+                    onClick={handleLogout}
+                    className="px-4 py-2 lg:px-5 rounded-full font-semibold border-2 border-white text-white bg-transparent hover:bg-white/10 transition text-sm lg:text-base"
+                    whileHover={{ scale: 1.05 }}
+                    whileTap={{ scale: 0.95 }}
+                  >
+                    Logout
+                  </motion.button>
+                </>
+              )}
             </motion.div>
 
             {/* Mobile Menu Button */}
@@ -155,16 +203,39 @@ export default function Navbar() {
                   transition={{ delay: 0.5 }}
                   className="space-y-3 mt-auto"
                 >
-                  <Link href="/login" onClick={() => setIsOpen(false)} className="block">
-                    <button className="w-full px-6 py-4 rounded-2xl font-bold text-lg border-2 border-white text-white bg-transparent hover:bg-white/10 transition">
-                      Login
-                    </button>
-                  </Link>
-                  <Link href="/signup" onClick={() => setIsOpen(false)} className="block">
-                    <button className="w-full px-6 py-4 rounded-2xl font-bold text-lg bg-white text-purple-600 hover:bg-yellow-300 transition shadow-xl">
-                      Sign up ✨
-                    </button>
-                  </Link>
+                  {!isAuthenticated ? (
+                    <>
+                      <Link href="/login" onClick={() => setIsOpen(false)} className="block">
+                        <button className="w-full px-6 py-4 rounded-2xl font-bold text-lg border-2 border-white text-white bg-transparent hover:bg-white/10 transition">
+                          Login
+                        </button>
+                      </Link>
+                      <Link href="/signup" onClick={() => setIsOpen(false)} className="block">
+                        <button className="w-full px-6 py-4 rounded-2xl font-bold text-lg bg-white text-purple-600 hover:bg-yellow-300 transition shadow-xl">
+                          Sign up ✨
+                        </button>
+                      </Link>
+                    </>
+                  ) : (
+                    <>
+                      {currentUser?.role === "admin" ? (
+                        <Link href="/admin" onClick={() => setIsOpen(false)} className="block">
+                          <button className="w-full px-6 py-4 rounded-2xl font-bold text-lg bg-white text-purple-600 hover:bg-yellow-300 transition shadow-xl">
+                            Admin Dashboard
+                          </button>
+                        </Link>
+                      ) : (
+                        <Link href="/dashboard" onClick={() => setIsOpen(false)} className="block">
+                          <button className="w-full px-6 py-4 rounded-2xl font-bold text-lg bg-white text-purple-600 hover:bg-yellow-300 transition shadow-xl">
+                            My Dashboard
+                          </button>
+                        </Link>
+                      )}
+                      <button onClick={handleLogout} className="w-full px-6 py-4 rounded-2xl font-bold text-lg border-2 border-white text-white bg-transparent hover:bg-white/10 transition">
+                        Logout
+                      </button>
+                    </>
+                  )}
                 </motion.div>
               </div>
             </div>

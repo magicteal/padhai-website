@@ -19,21 +19,48 @@ import { useState } from 'react';
 export default function AdminLayout({ children }: { children: React.ReactNode }) {
   const router = useRouter();
   const pathname = usePathname();
-  const { isAuthenticated, currentUser, logout } = useAppStore();
+  const isAuthenticated = useAppStore((s) => s.isAuthenticated);
+  const currentUser = useAppStore((s) => s.currentUser);
+  const logout = useAppStore((s) => s.logout);
   const [sidebarOpen, setSidebarOpen] = useState(false);
-
-  // Skip layout for login page
-  if (pathname === '/admin/login') {
-    return children;
-  }
+  const [mounted, setMounted] = useState(false);
+  const isAdminLoginRoute = pathname === '/admin/login';
 
   useEffect(() => {
-    if (!isAuthenticated || currentUser?.role !== 'admin') {
-      router.push('/login');
-    }
-  }, [isAuthenticated, currentUser, router]);
+    setMounted(true);
+  }, []);
 
-  if (!isAuthenticated || currentUser?.role !== 'admin') {
+  useEffect(() => {
+    if (!mounted) return;
+
+    // Read persisted auth/role to avoid redirect while store rehydrates
+    let persistedAuth = false;
+    let persistedRole: string | null = null;
+    if (typeof window !== 'undefined') {
+      try {
+        const raw = localStorage.getItem('padhai-storage');
+        if (raw) {
+          const data = JSON.parse(raw);
+          const st = data?.state;
+          persistedAuth = st?.isAuthenticated === true && !!st?.currentUser;
+          persistedRole = st?.currentUser?.role ?? null;
+        }
+      } catch {}
+    }
+
+    if (persistedAuth && persistedRole === 'admin' && (!isAuthenticated || currentUser?.role !== 'admin')) {
+      return; // skip redirect until store catches up
+    }
+
+    if (!isAuthenticated || currentUser?.role !== 'admin') {
+      router.replace('/login');
+    }
+  }, [mounted, isAuthenticated, currentUser, router]);
+
+  if (isAdminLoginRoute) {
+    return children;
+  }
+  if (!mounted || !isAuthenticated || currentUser?.role !== 'admin') {
     return null;
   }
 

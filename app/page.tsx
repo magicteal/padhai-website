@@ -6,7 +6,7 @@ import TrustSection from "@/components/TrustSection";
 import StorySection from "@/components/StorySection";
 import TestimonialsSection from "@/components/TestimonialsSection";
 import CourseDetailsSection from "@/components/CourseDetailsSection";
-import CTASection from "@/components/CTASection";
+// import CTASection from "@/components/CTASection";
 import FAQSection from "@/components/FAQSection";
 
 export default function Home() {
