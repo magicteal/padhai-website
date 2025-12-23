@@ -185,14 +185,14 @@ export default function HeroSection({
               <div className="relative mx-auto w-full max-w-md h-64 md:h-80 lg:h-96 flex items-center justify-center">
                 {illustration ?? (
                   <div className="w-full h-full flex items-center justify-center">
-                    <motion.div 
+                    {/* <motion.div 
                       className="text-center"
                       animate={{ y: [0, -10, 0] }}
                       transition={{ repeat: Infinity, duration: 3 }}
                     >
                       <span className="text-8xl block mb-4">🧒</span>
                       <span className="text-6xl">💻</span>
-                    </motion.div>
+                    </motion.div> */}
                   </div>
                 )}
               </div>
