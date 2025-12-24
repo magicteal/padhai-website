@@ -278,7 +278,7 @@ export default function PricingPageContent() {
                   <Check className="h-4 w-4 text-white" strokeWidth={3} />
                 </span>
                 <div>
-                  <span className="text-lg mr-2">{feature.icon}</span>
+                  <feature.icon className="text-lg mr-2" />
                   <span className="text-sm sm:text-base text-slate-700">{feature.text}</span>
                 </div>
               </motion.div>
@@ -417,7 +417,7 @@ export default function PricingPageContent() {
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
               {bangaloreParents.map((item, idx) => (
                 <div key={idx} className="flex items-start gap-3 bg-green-50 rounded-xl p-3">
-                  <span className="text-xl">{item.icon}</span>
+                  <item.icon className="text-xl" />
                   <span className="text-sm sm:text-base text-slate-700">{item.text}</span>
                 </div>
               ))}
