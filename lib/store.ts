@@ -256,6 +256,7 @@ interface AppState {
   isAuthenticated: boolean;
   currentUser: User | null;
   login: (email: string, password: string) => boolean;
+  setCurrentUser: (user: User) => void;
   signup: (email: string, password: string, name: string, phone?: string, location?: string) => boolean;
   logout: () => void;
 }
@@ -347,6 +348,9 @@ export const useAppStore = create<AppState>()(
           return true;
         }
         return false;
+      },
+      setCurrentUser: (user) => {
+        set({ isAuthenticated: true, currentUser: user });
       },
       signup: (email, password, name, phone, location) => {
         // Check if email already exists

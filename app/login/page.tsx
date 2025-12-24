@@ -4,6 +4,7 @@ import { useRouter } from 'next/navigation';
 import { motion } from 'framer-motion';
 import { Mail, Lock, LogIn, AlertCircle } from 'lucide-react';
 import Link from 'next/link';
+import { useAppStore } from '@/lib/store';
 
 export default function LoginPage() {
   const [email, setEmail] = useState('');
@@ -12,6 +13,7 @@ export default function LoginPage() {
   const [isLoading, setIsLoading] = useState(false);
   
   const router = useRouter();
+  const setCurrentUser = useAppStore((s) => s.setCurrentUser);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -32,6 +34,8 @@ export default function LoginPage() {
 
       if (data.success) {
         console.log('✅ User logged in:', data.user);
+        // Set user in store
+        setCurrentUser(data.user);
         // Redirect based on role
         if (data.user?.role === 'admin') {
           router.push('/admin');
