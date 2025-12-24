@@ -1,7 +1,7 @@
 "use client";
 import React from 'react';
 import { motion } from 'framer-motion';
-import { XCircle, CheckCircle, Clock, Car, Smartphone, AlertCircle, TrendingUp, Sparkles, BookOpen, Brain, Dumbbell, Target, Building } from 'lucide-react';
+import { XCircle, Clock, Car, Smartphone, AlertCircle, TrendingUp, Building } from 'lucide-react';
 import testimonialVideos from '../data/testimonialVideos';
 
 const REALITY_CHECKS = [
@@ -12,13 +12,7 @@ const REALITY_CHECKS = [
   { text: 'Worry about future competition', icon: TrendingUp },
 ];
 
-const SOLUTION_BENEFITS = [
-  { text: 'Create stories, characters & animations', icon: Sparkles },
-  { text: 'Make school projects in minutes', icon: BookOpen },
-  { text: 'Use AI for homework & understanding', icon: Brain },
-  { text: 'Build discipline and communication', icon: Dumbbell },
-  { text: 'Explore hobbies & early career paths', icon: Target },
-];
+// Solution card removed — benefits handled elsewhere
 
 // testimonialVideos imported from data/testimonialVideos.ts
 
@@ -49,39 +43,59 @@ export default function ProblemSection() {
           </h2>
         </motion.div>
 
-        {/* Problem & Solution Cards */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 items-start">
+        {/* Problem & Illustration */}
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 items-start">
           {/* Left Card - Problem */}
           <motion.div 
             initial={{ opacity: 0, x: -30 }}
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true }}
-            className="card-kid p-5 sm:p-6 md:-translate-y-4"
+            className="p-5 sm:p-6 md:-translate-y-4 md:col-span-2 bg-transparent w-full"
           >
-            <div className="flex items-center gap-2 mb-4">
-              <XCircle className="w-6 h-6 text-red-500" />
-              <h3 className="text-lg font-bold text-slate-900">The Struggle</h3>
-            </div>
-            <ul className="space-y-3">
-              {REALITY_CHECKS.map((item, idx) => (
-                <motion.li 
-                  key={idx} 
-                  initial={{ opacity: 0, x: -20 }}
-                  whileInView={{ opacity: 1, x: 0 }}
-                  viewport={{ once: true }}
-                  transition={{ delay: idx * 0.1 }}
-                  className="flex items-start gap-3"
-                >
-                  <div className="w-8 h-8 rounded-lg flex items-center justify-center bg-gradient-to-br from-red-400 to-rose-500 shadow-md flex-shrink-0">
-                    <XCircle className="w-4 h-4 text-white" />
-                  </div>
-                  <div className="flex items-center gap-2">
-                    <span className="text-slate-800 font-medium text-sm">{item.text}</span>
-                    <item.icon className="w-4 h-4 text-slate-400" />
-                  </div>
-                </motion.li>
-              ))}
-            </ul>
+            <div className="text-center mb-4">
+                <h3 className="text-lg font-bold text-slate-900">The Struggle</h3>
+              </div>
+              <ul className="space-y-4">
+                {REALITY_CHECKS.map((item, idx) => {
+                  const alignRight = idx % 2 === 0; // first message comes from right
+                  return (
+                    <motion.li
+                      key={idx}
+                      initial={{ opacity: 0, x: alignRight ? 40 : -40 }}
+                      whileInView={{ opacity: 1, x: 0 }}
+                      viewport={{ once: true }}
+                      transition={{ delay: idx * 0.08 }}
+                      className="w-full"
+                    >
+                      <div className={`flex ${alignRight ? 'justify-end' : 'justify-start'}`}>
+                        <div className="relative">
+                          <div className={`max-w-[80%] p-3 shadow-md flex items-center gap-3 bg-white ${alignRight ? 'rounded-tl-2xl rounded-tr-2xl rounded-bl-2xl rounded-br-lg' : 'rounded-tl-2xl rounded-tr-2xl rounded-br-2xl rounded-bl-lg'}`}>
+                            <div className="w-8 h-8 rounded-lg flex items-center justify-center bg-gradient-to-br from-red-400 to-rose-500 text-white flex-shrink-0">
+                              <XCircle className="w-4 h-4" />
+                            </div>
+                            <span className="text-slate-800 font-medium text-sm">{item.text}</span>
+                          </div>
+                          <span
+                            aria-hidden
+                            style={{
+                              position: 'absolute',
+                              bottom: -12,
+                              left: alignRight ? undefined : 28,
+                              right: alignRight ? 28 : undefined,
+                              width: 0,
+                              height: 0,
+                              borderLeft: '12px solid transparent',
+                              borderRight: '12px solid transparent',
+                              borderTop: '14px solid white',
+                              filter: 'drop-shadow(0 4px 6px rgba(0,0,0,0.08))'
+                            }}
+                          />
+                        </div>
+                      </div>
+                    </motion.li>
+                  );
+                })}
+              </ul>
           </motion.div>
 
           {/* Center - Building illustration space */}
@@ -94,38 +108,7 @@ export default function ProblemSection() {
             </motion.div>
           </div>
 
-          {/* Right Card - Solution */}
-          <motion.div 
-            initial={{ opacity: 0, x: 30 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            viewport={{ once: true }}
-            className="card-kid p-5 sm:p-6 md:translate-y-4"
-          >
-            <div className="flex items-center gap-2 mb-4">
-              <CheckCircle className="w-6 h-6 text-purple-600" />
-              <h3 className="text-lg font-bold text-slate-900">The PadhAi Way</h3>
-            </div>
-            <ul className="space-y-3">
-              {SOLUTION_BENEFITS.map((item, idx) => (
-                <motion.li 
-                  key={idx} 
-                  initial={{ opacity: 0, x: 20 }}
-                  whileInView={{ opacity: 1, x: 0 }}
-                  viewport={{ once: true }}
-                  transition={{ delay: idx * 0.1 }}
-                  className="flex items-start gap-3"
-                >
-                  <div className="w-8 h-8 rounded-lg flex items-center justify-center bg-gradient-to-br from-purple-500 to-violet-500 shadow-md flex-shrink-0">
-                    <CheckCircle className="w-4 h-4 text-white" />
-                  </div>
-                  <div className="flex items-center gap-2">
-                    <span className="text-slate-800 font-medium text-sm">{item.text}</span>
-                    <item.icon className="w-4 h-4 text-purple-400" />
-                  </div>
-                </motion.li>
-              ))}
-            </ul>
-          </motion.div>
+          {/* Right card removed */}
         </div>
 
         {/* Video Testimonials */}
@@ -138,7 +121,7 @@ export default function ProblemSection() {
           <div className="flex items-center justify-center gap-2 mb-6">
           </div>
           <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 sm:gap-5 justify-items-center">
-            {testimonialVideos.slice(0, 3).map((src, i) => (
+            {testimonialVideos.slice(3, 6).map((src, i) => (
               <motion.div 
                 key={i} 
                 className="w-full max-w-xs"
@@ -153,7 +136,7 @@ export default function ProblemSection() {
                 >
                   <video
                     src={src}
-                    poster={`/images/testimonials/testimonial-${['four','five','six'][i]}.svg`}
+                    poster={`/images/testimonials/testimonial-${['three','two','one'][i]}.svg`}
                     controls
                     playsInline
                     className="w-full h-[280px] sm:h-[320px] md:h-[380px] object-cover"

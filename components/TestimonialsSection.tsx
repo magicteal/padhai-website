@@ -11,7 +11,7 @@ export default function TestimonialsSection() {
   // Use centralized video list (show videos 4-6, 3 total) — falls back to store videos if empty
   const videoTestimonials = testimonials.filter(t => t.type === 'video' && t.featured);
   const videoList = testimonialVideosArray && testimonialVideosArray.length > 0
-    ? testimonialVideosArray.slice(3, 6)
+    ? testimonialVideosArray.slice(0, 3)
     : videoTestimonials.map(t => t.videoSrc).slice(0, 3);
   const textTestimonials = testimonials.filter(t => t.type === 'text' && t.featured);
 
@@ -84,7 +84,7 @@ export default function TestimonialsSection() {
                 >
                   <video
                     src={src}
-                    poster={`/images/testimonials/testimonial-${['three','two','one'][i]}.svg`}
+                    poster={`/images/testimonials/testimonial-${['four','five','six'][i]}.svg`}
                     controls
                     playsInline
                     className="w-full h-[240px] sm:h-[280px] md:h-[340px] object-cover bg-slate-100"
