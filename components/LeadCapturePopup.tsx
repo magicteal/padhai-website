@@ -23,13 +23,9 @@ export default function LeadCapturePopup() {
 
   useEffect(() => {
     if (typeof window === "undefined") return;
-    if (localStorage.getItem("lead_popup_dismissed") === "1") {
-      setDismissed(true);
-      return;
-    }
 
     let fired = false;
-    const delayMs = 8000 + Math.floor(Math.random() * 2001); // 8–10 sec
+    const delayMs = 8000; // fixed 8 sec
     const timer = window.setTimeout(() => {
       if (!fired) {
         fired = true;
@@ -59,9 +55,6 @@ export default function LeadCapturePopup() {
   const close = () => {
     setVisible(false);
     setDismissed(true);
-    try {
-      localStorage.setItem("lead_popup_dismissed", "1");
-    } catch (e) {}
   };
 
   const onSubmit = (e: React.FormEvent<HTMLFormElement>) => {
