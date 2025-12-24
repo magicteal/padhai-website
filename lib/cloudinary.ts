@@ -8,6 +8,30 @@ cloudinary.config({
   secure: true,
 });
 
+// Track if we've already logged Cloudinary status
+let cloudinaryLogged = false;
+
+/**
+ * Verify Cloudinary connection and log status
+ */
+export async function verifyCloudinary() {
+  if (cloudinaryLogged) return true;
+  
+  try {
+    // Ping Cloudinary by fetching account info
+    const result = await cloudinary.api.ping();
+    if (result.status === 'ok') {
+      console.log(`✅ Cloudinary connected (cloud_name=${process.env.CLOUDINARY_CLOUD_NAME})`);
+      cloudinaryLogged = true;
+      return true;
+    }
+    return false;
+  } catch (error: any) {
+    console.error('❌ Cloudinary connection error:', error.message);
+    return false;
+  }
+}
+
 /**
  * Upload image to Cloudinary
  * @param file - File path or base64 string

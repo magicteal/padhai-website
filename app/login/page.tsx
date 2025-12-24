@@ -1,7 +1,6 @@
 "use client";
 import { useState } from 'react';
 import { useRouter } from 'next/navigation';
-import { useAppStore } from '@/lib/store';
 import { motion } from 'framer-motion';
 import { Mail, Lock, LogIn, AlertCircle } from 'lucide-react';
 import Link from 'next/link';
@@ -12,7 +11,6 @@ export default function LoginPage() {
   const [error, setError] = useState('');
   const [isLoading, setIsLoading] = useState(false);
   
-  const { login, currentUser } = useAppStore();
   const router = useRouter();
 
   const handleSubmit = async (e: React.FormEvent) => {
@@ -20,21 +18,33 @@ export default function LoginPage() {
     setError('');
     setIsLoading(true);
 
-    // Simulate API delay
-    await new Promise(resolve => setTimeout(resolve, 500));
+    try {
+      // Call the real login API
+      const response = await fetch('/api/auth/login', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ email, password }),
+      });
 
-    const success = login(email, password);
-    
-    if (success) {
-      const user = useAppStore.getState().currentUser;
-      // Redirect based on role
-      if (user?.role === 'admin') {
-        router.push('/admin');
+      const data = await response.json();
+
+      if (data.success) {
+        console.log('✅ User logged in:', data.user);
+        // Redirect based on role
+        if (data.user?.role === 'admin') {
+          router.push('/admin');
+        } else {
+          router.push('/dashboard');
+        }
       } else {
-        router.push('/dashboard');
+        setError(data.message || 'Invalid email or password');
+        setIsLoading(false);
       }
-    } else {
-      setError('Invalid email or password');
+    } catch (err) {
+      console.error('Login error:', err);
+      setError('Something went wrong. Please try again.');
       setIsLoading(false);
     }
   };
@@ -135,7 +145,7 @@ export default function LoginPage() {
           {/* Sign Up Link */}
           <div className="mt-6 text-center">
             <p className="text-white/80 text-sm">
-              Don't have an account?{' '}
+              Don&apos;t have an account?{' '}
               <Link href="/signup" className="text-yellow-300 font-semibold hover:underline">
                 Sign up here
               </Link>

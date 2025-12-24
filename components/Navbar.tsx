@@ -3,21 +3,53 @@ import Link from "next/link";
 import { useState, useEffect } from "react";
 import { Menu, X, ArrowRight } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
-import { useAppStore } from "../lib/store";
 import { useRouter } from "next/navigation";
+
+type UserData = {
+  id: string;
+  name: string;
+  email: string;
+  role: string;
+};
 
 export default function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
+  const [currentUser, setCurrentUser] = useState<UserData | null>(null);
+  const [isAuthenticated, setIsAuthenticated] = useState(false);
   const router = useRouter();
-  const isAuthenticated = useAppStore((s) => s.isAuthenticated);
-  const currentUser = useAppStore((s) => s.currentUser);
-  const logout = useAppStore((s) => s.logout);
 
-  const handleLogout = () => {
-    logout();
-    setIsOpen(false);
-    router.push("/");
+  // Fetch current user on mount
+  useEffect(() => {
+    async function checkAuth() {
+      try {
+        const response = await fetch('/api/auth/me');
+        const data = await response.json();
+        if (data.success && data.user) {
+          setCurrentUser(data.user);
+          setIsAuthenticated(true);
+        } else {
+          setCurrentUser(null);
+          setIsAuthenticated(false);
+        }
+      } catch {
+        setCurrentUser(null);
+        setIsAuthenticated(false);
+      }
+    }
+    checkAuth();
+  }, []);
+
+  const handleLogout = async () => {
+    try {
+      await fetch('/api/auth/logout', { method: 'POST' });
+      setCurrentUser(null);
+      setIsAuthenticated(false);
+      setIsOpen(false);
+      router.push("/");
+    } catch (error) {
+      console.error('Logout error:', error);
+    }
   };
 
   useEffect(() => {

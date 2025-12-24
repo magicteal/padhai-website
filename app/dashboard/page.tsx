@@ -1,63 +1,69 @@
 "use client";
 import { useEffect, useState } from 'react';
 import { useRouter } from 'next/navigation';
-import { useAppStore } from '@/lib/store';
 import { motion } from 'framer-motion';
-import { BookOpen, Calendar, Award, TrendingUp, User } from 'lucide-react';
+import { BookOpen, Calendar, Award, TrendingUp, User, Loader2 } from 'lucide-react';
 import Link from 'next/link';
 
+type UserData = {
+  id: string;
+  name: string;
+  email: string;
+  role: string;
+  phone?: string;
+  childName?: string;
+  childAge?: number;
+  createdAt?: string;
+};
+
 export default function UserDashboard() {
-  const isAuthenticated = useAppStore((s) => s.isAuthenticated);
-  const currentUser = useAppStore((s) => s.currentUser);
-  const logout = useAppStore((s) => s.logout);
-  const projects = useAppStore((s) => s.projects);
-  const [mounted, setMounted] = useState(false);
+  const [currentUser, setCurrentUser] = useState<UserData | null>(null);
+  const [loading, setLoading] = useState(true);
   const router = useRouter();
 
   useEffect(() => {
-    setMounted(true);
-  }, []);
-
-  useEffect(() => {
-    if (!mounted) return;
-
-    // Read persisted auth to avoid redirect while store rehydrates
-    let persistedAuth = false;
-    let persistedRole: string | null = null;
-    if (typeof window !== 'undefined') {
+    // Fetch current user from API
+    async function fetchUser() {
       try {
-        const raw = localStorage.getItem('padhai-storage');
-        if (raw) {
-          const data = JSON.parse(raw);
-          const st = data?.state;
-          persistedAuth = st?.isAuthenticated === true && !!st?.currentUser;
-          persistedRole = st?.currentUser?.role ?? null;
+        const response = await fetch('/api/auth/me');
+        const data = await response.json();
+
+        if (data.success && data.user) {
+          // If admin, redirect to admin dashboard
+          if (data.user.role === 'admin') {
+            router.replace('/admin');
+            return;
+          }
+          setCurrentUser(data.user);
+        } else {
+          // Not authenticated, redirect to login
+          router.replace('/login');
         }
-      } catch {}
+      } catch (error) {
+        console.error('Error fetching user:', error);
+        router.replace('/login');
+      } finally {
+        setLoading(false);
+      }
     }
 
-    // If persisted shows an authenticated user, skip redirect until store is ready
-    if (persistedAuth && (!isAuthenticated || !currentUser)) {
-      return;
-    }
+    fetchUser();
+  }, [router]);
 
-    if (!isAuthenticated || !currentUser) {
-      router.replace('/login');
-      return;
-    }
-    if (currentUser.role === 'admin' || persistedRole === 'admin') {
-      router.replace('/admin');
-    }
-  }, [mounted, isAuthenticated, currentUser, router]);
+  if (loading) {
+    return (
+      <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-purple-50 via-white to-fuchsia-50">
+        <Loader2 className="w-8 h-8 text-purple-600 animate-spin" />
+      </div>
+    );
+  }
 
-  if (!mounted || !isAuthenticated || !currentUser || currentUser.role === 'admin') {
+  if (!currentUser) {
     return null;
   }
 
-  // Logout handled by Navbar; no local logout button here
-
   const stats = [
-    { label: 'Enrolled Courses', value: currentUser.enrolledCourses?.length || 0, icon: BookOpen, color: 'from-purple-500 to-fuchsia-500' },
+    { label: 'Enrolled Courses', value: 1, icon: BookOpen, color: 'from-purple-500 to-fuchsia-500' },
     { label: 'Classes Attended', value: '12/24', icon: Calendar, color: 'from-blue-500 to-cyan-500' },
     { label: 'Projects Completed', value: '3', icon: Award, color: 'from-pink-500 to-orange-500' },
     { label: 'Progress', value: '50%', icon: TrendingUp, color: 'from-green-500 to-emerald-500' },
@@ -67,6 +73,13 @@ export default function UserDashboard() {
     { title: 'AI Basics - Introduction to Machine Learning', date: 'Dec 23, 2025', time: '4:00 PM - 5:30 PM' },
     { title: 'Creative AI Tools Workshop', date: 'Dec 25, 2025', time: '4:00 PM - 5:30 PM' },
     { title: 'Build Your First AI Project', date: 'Dec 27, 2025', time: '4:00 PM - 5:30 PM' },
+  ];
+
+  const sampleProjects = [
+    { emoji: '🤖', title: 'Fire-Fighting Robot', grade: 'Grade 6' },
+    { emoji: '✈️', title: 'Drone Prototype', grade: 'Grade 7' },
+    { emoji: '💻', title: 'Arduino Coding', grade: 'Grade 8' },
+    { emoji: '🏠', title: 'Smart Safety', grade: 'Grade 5' },
   ];
 
   return (
@@ -148,7 +161,7 @@ export default function UserDashboard() {
                 My Projects
               </h2>
               <div className="grid sm:grid-cols-2 gap-4">
-                {projects.slice(0, 4).map((project, idx) => (
+                {sampleProjects.map((project, idx) => (
                   <div key={idx} className="p-4 rounded-xl bg-gradient-to-br from-purple-50 to-white border-2 border-purple-100">
                     <div className="text-3xl mb-2">{project.emoji}</div>
                     <h3 className="font-bold text-slate-900 text-sm mb-1">{project.title}</h3>
@@ -186,16 +199,14 @@ export default function UserDashboard() {
                     <p className="text-sm font-semibold text-slate-900">{currentUser.phone}</p>
                   </div>
                 )}
-                {currentUser.location && (
+                {currentUser.childName && (
                   <div>
-                    <p className="text-xs text-slate-500 mb-1">Location</p>
-                    <p className="text-sm font-semibold text-slate-900">{currentUser.location}</p>
+                    <p className="text-xs text-slate-500 mb-1">Child</p>
+                    <p className="text-sm font-semibold text-slate-900">
+                      {currentUser.childName} {currentUser.childAge ? `(Age ${currentUser.childAge})` : ''}
+                    </p>
                   </div>
                 )}
-                <div>
-                  <p className="text-xs text-slate-500 mb-1">Member Since</p>
-                  <p className="text-sm font-semibold text-slate-900">{currentUser.createdAt}</p>
-                </div>
               </div>
             </motion.div>
 

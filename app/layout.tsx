@@ -5,6 +5,10 @@ import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
 import FloatingWhatsAppCTA from "../components/FloatingWhatsAppCTA";
 import LeadCapturePopup from "../components/LeadCapturePopup";
+import initializeServices from "@/lib/init";
+
+// Initialize MongoDB and Cloudinary on app startup
+initializeServices();
 
 const poppins = Poppins({
   variable: "--font-poppins",

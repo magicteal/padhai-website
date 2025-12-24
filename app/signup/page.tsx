@@ -1,7 +1,6 @@
 "use client";
 import { useState } from 'react';
 import { useRouter } from 'next/navigation';
-import { useAppStore } from '@/lib/store';
 import { motion } from 'framer-motion';
 import { Mail, Lock, User, Phone, MapPin, UserPlus, AlertCircle } from 'lucide-react';
 import Link from 'next/link';
@@ -18,7 +17,6 @@ export default function SignupPage() {
   const [error, setError] = useState('');
   const [isLoading, setIsLoading] = useState(false);
   
-  const { signup } = useAppStore();
   const router = useRouter();
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -45,21 +43,33 @@ export default function SignupPage() {
 
     setIsLoading(true);
 
-    // Simulate API delay
-    await new Promise(resolve => setTimeout(resolve, 500));
+    try {
+      // Call the real signup API
+      const response = await fetch('/api/auth/signup', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          name: formData.name,
+          email: formData.email,
+          password: formData.password,
+          phone: formData.phone,
+        }),
+      });
 
-    const success = signup(
-      formData.email,
-      formData.password,
-      formData.name,
-      formData.phone,
-      formData.location
-    );
-    
-    if (success) {
-      router.push('/dashboard');
-    } else {
-      setError('Email already exists');
+      const data = await response.json();
+
+      if (data.success) {
+        console.log('✅ User registered:', data.user);
+        router.push('/dashboard');
+      } else {
+        setError(data.message || 'Registration failed');
+        setIsLoading(false);
+      }
+    } catch (err) {
+      console.error('Signup error:', err);
+      setError('Something went wrong. Please try again.');
       setIsLoading(false);
     }
   };
