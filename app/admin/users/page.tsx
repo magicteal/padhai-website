@@ -3,27 +3,64 @@ import { useEffect, useState } from 'react';
 import { useRouter } from 'next/navigation';
 import { useAppStore } from '@/lib/store';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Users, Search, Edit, Trash2, X, Mail, User as UserIcon, Phone, MapPin, Shield, UserPlus } from 'lucide-react';
-import { User } from '@/lib/types';
+import { Users, Search, Edit, Trash2, X, User as UserIcon, Phone, Shield, UserPlus, Loader2 } from 'lucide-react';
+
+interface ApiUser {
+  _id: string;
+  name: string;
+  email: string;
+  phone?: string;
+  role: 'admin' | 'user';
+  childName?: string;
+  childAge?: number;
+  createdAt: string;
+  updatedAt: string;
+}
 
 export default function AdminUsersPage() {
-  const { isAuthenticated, currentUser, users, addUser, updateUser, deleteUser } = useAppStore();
+  const { isAuthenticated, currentUser } = useAppStore();
   const router = useRouter();
   const [searchQuery, setSearchQuery] = useState('');
   const [isModalOpen, setIsModalOpen] = useState(false);
-  const [editingUser, setEditingUser] = useState<User | null>(null);
+  const [editingUser, setEditingUser] = useState<ApiUser | null>(null);
+  const [users, setUsers] = useState<ApiUser[]>([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState('');
   const [formData, setFormData] = useState({
     name: '',
     email: '',
     password: '',
     phone: '',
-    location: '',
+    childName: '',
+    childAge: '',
     role: 'user' as 'admin' | 'user',
   });
+
+  // Fetch users from API
+  const fetchUsers = async () => {
+    try {
+      setLoading(true);
+      const response = await fetch('/api/users');
+      const data = await response.json();
+      
+      if (data.success) {
+        setUsers(data.users);
+      } else {
+        setError(data.message || 'Failed to fetch users');
+      }
+    } catch (err) {
+      console.error('Error fetching users:', err);
+      setError('Failed to fetch users');
+    } finally {
+      setLoading(false);
+    }
+  };
 
   useEffect(() => {
     if (!isAuthenticated || currentUser?.role !== 'admin') {
       router.push('/login');
+    } else {
+      fetchUsers();
     }
   }, [isAuthenticated, currentUser, router]);
 
@@ -31,21 +68,30 @@ export default function AdminUsersPage() {
     return null;
   }
 
+  if (loading) {
+    return (
+      <div className="p-6 flex items-center justify-center min-h-[400px]">
+        <Loader2 className="w-8 h-8 text-purple-600 animate-spin" />
+      </div>
+    );
+  }
+
   const filteredUsers = users.filter(user =>
     user.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
     user.email.toLowerCase().includes(searchQuery.toLowerCase()) ||
-    user.location?.toLowerCase().includes(searchQuery.toLowerCase())
+    user.childName?.toLowerCase().includes(searchQuery.toLowerCase())
   );
 
-  const handleOpenModal = (user?: User) => {
+  const handleOpenModal = (user?: ApiUser) => {
     if (user) {
       setEditingUser(user);
       setFormData({
         name: user.name,
         email: user.email,
-        password: '', // Don't populate password for security
+        password: '',
         phone: user.phone || '',
-        location: user.location || '',
+        childName: user.childName || '',
+        childAge: user.childAge?.toString() || '',
         role: user.role,
       });
     } else {
@@ -55,7 +101,8 @@ export default function AdminUsersPage() {
         email: '',
         password: '',
         phone: '',
-        location: '',
+        childName: '',
+        childAge: '',
         role: 'user',
       });
     }
@@ -70,60 +117,44 @@ export default function AdminUsersPage() {
       email: '',
       password: '',
       phone: '',
-      location: '',
+      childName: '',
+      childAge: '',
       role: 'user',
     });
   };
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     
-    if (editingUser) {
-      // Update existing user
-      const updates: Partial<User> = {
-        name: formData.name,
-        email: formData.email,
-        phone: formData.phone,
-        location: formData.location,
-        role: formData.role,
-      };
-      
-      // Only update password if provided
-      if (formData.password) {
-        updates.password = formData.password;
-      }
-      
-      updateUser(editingUser.id, updates);
-    } else {
-      // Add new user
-      if (!formData.password) {
-        alert('Password is required for new users');
-        return;
-      }
-      
-      addUser({
-        name: formData.name,
-        email: formData.email,
-        password: formData.password,
-        phone: formData.phone,
-        location: formData.location,
-        role: formData.role,
-        enrolledCourses: [],
-      });
-    }
-    
+    // For now, just close modal - API endpoints for create/update can be added later
+    alert('User management API endpoints for create/update coming soon!');
     handleCloseModal();
   };
 
-  const handleDelete = (id: string) => {
-    const user = users.find(u => u.id === id);
+  const handleDelete = async (id: string) => {
+    const user = users.find(u => u._id === id);
     if (user?.role === 'admin') {
       alert('Cannot delete admin user');
       return;
     }
     
     if (confirm('Are you sure you want to delete this user?')) {
-      deleteUser(id);
+      try {
+        const response = await fetch(`/api/users?id=${id}`, {
+          method: 'DELETE',
+        });
+        const data = await response.json();
+        
+        if (data.success) {
+          // Remove user from local state
+          setUsers(users.filter(u => u._id !== id));
+        } else {
+          alert(data.message || 'Failed to delete user');
+        }
+      } catch (err) {
+        console.error('Error deleting user:', err);
+        alert('Failed to delete user');
+      }
     }
   };
 
@@ -197,7 +228,7 @@ export default function AdminUsersPage() {
             <tbody className="divide-y divide-slate-200">
               {filteredUsers.map((user, idx) => (
                 <motion.tr
-                  key={user.id}
+                  key={user._id}
                   initial={{ opacity: 0, y: 20 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ delay: idx * 0.05 }}
@@ -222,10 +253,10 @@ export default function AdminUsersPage() {
                           {user.phone}
                         </div>
                       )}
-                      {user.location && (
+                      {user.childName && (
                         <div className="flex items-center gap-1 text-slate-500 text-xs">
-                          <MapPin className="w-3 h-3" />
-                          {user.location}
+                          <UserIcon className="w-3 h-3" />
+                          Child: {user.childName} {user.childAge && `(Age ${user.childAge})`}
                         </div>
                       )}
                     </div>
@@ -241,7 +272,7 @@ export default function AdminUsersPage() {
                     </span>
                   </td>
                   <td className="px-6 py-4 text-sm text-slate-600">
-                    {user.createdAt}
+                    {new Date(user.createdAt).toLocaleDateString()}
                   </td>
                   <td className="px-6 py-4">
                     <div className="flex items-center gap-2">
@@ -254,7 +285,7 @@ export default function AdminUsersPage() {
                       </button>
                       {user.role !== 'admin' && (
                         <button
-                          onClick={() => handleDelete(user.id)}
+                          onClick={() => handleDelete(user._id)}
                           className="p-2 text-red-600 hover:bg-red-100 rounded-lg transition"
                           title="Delete"
                         >
@@ -343,11 +374,23 @@ export default function AdminUsersPage() {
                 </div>
 
                 <div>
-                  <label className="block text-sm font-medium text-slate-700 mb-1">Location</label>
+                  <label className="block text-sm font-medium text-slate-700 mb-1">Child Name</label>
                   <input
                     type="text"
-                    value={formData.location}
-                    onChange={(e) => setFormData({ ...formData, location: e.target.value })}
+                    value={formData.childName}
+                    onChange={(e) => setFormData({ ...formData, childName: e.target.value })}
+                    className="w-full px-3 py-2 border-2 border-slate-200 rounded-lg focus:outline-none focus:border-purple-500"
+                  />
+                </div>
+
+                <div>
+                  <label className="block text-sm font-medium text-slate-700 mb-1">Child Age</label>
+                  <input
+                    type="number"
+                    min="5"
+                    max="18"
+                    value={formData.childAge}
+                    onChange={(e) => setFormData({ ...formData, childAge: e.target.value })}
                     className="w-full px-3 py-2 border-2 border-slate-200 rounded-lg focus:outline-none focus:border-purple-500"
                   />
                 </div>
