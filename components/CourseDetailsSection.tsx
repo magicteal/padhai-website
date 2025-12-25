@@ -19,16 +19,16 @@ export default function CourseDetailsSection() {
       {/* Decorative elements */}
       <div className="absolute top-20 left-10 w-40 h-40 bg-purple-200/30 rounded-full blur-3xl animate-float" />
       <div className="absolute bottom-20 right-10 w-60 h-60 bg-fuchsia-200/30 rounded-full blur-3xl animate-float" style={{ animationDelay: '2s' }} />
-      
+
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         {/* Heading */}
-        <motion.div 
+        <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           className="text-center mb-10 sm:mb-12"
         >
-          <motion.div 
+          <motion.div
             className="w-14 h-14 rounded-xl bg-purple-100 flex items-center justify-center mx-auto mb-3"
             animate={{ rotate: [0, 10, -10, 0] }}
             transition={{ repeat: Infinity, duration: 2 }}
@@ -45,7 +45,7 @@ export default function CourseDetailsSection() {
         <div className="flex justify-center mb-6">
           <div className="max-w-3xl w-full grid grid-cols-1 md:grid-cols-2 gap-4">
             {/** show up to 2 featured parent text testimonials */}
-            {useAppStore.getState().testimonials.filter(t => t.featured).slice(0,2).map((t) => (
+            {useAppStore.getState().testimonials.filter(t => t.featured).slice(0, 2).map((t) => (
               <div key={t.id} className="card-kid p-4 bg-white/90 rounded-2xl shadow-md">
                 <div className="flex items-start gap-3">
                   <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-purple-400 to-purple-500 flex items-center justify-center text-white">
@@ -62,7 +62,7 @@ export default function CourseDetailsSection() {
         </div>
 
         <div className="flex justify-center">
-          <motion.div 
+          <motion.div
             initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
@@ -72,55 +72,8 @@ export default function CourseDetailsSection() {
             {/* Glow effect behind card */}
             <div className="absolute inset-0 bg-gradient-to-r from-purple-400 to-fuchsia-400 rounded-3xl blur-xl opacity-30 animate-pulse-glow" />
 
-            {/* Decorative ribbons (back + front) */}
-            {/* Back ribbons (appear behind the card) */}
-            <svg className="absolute -top-10 -right-12 w-56 h-40 pointer-events-none z-5 opacity-90 filter" viewBox="0 0 420 220" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden>
-              <defs>
-                <linearGradient id="ribbonTRBack" x1="0" y1="0" x2="1" y2="1">
-                  <stop offset="0%" stopColor="#E879F9" />
-                  <stop offset="50%" stopColor="#A855F7" />
-                  <stop offset="100%" stopColor="#38BDF8" />
-                </linearGradient>
-              </defs>
-              <path d="M40 20 C180 40, 240 180, 380 200 L350 220 C210 200, 140 60, 20 40 Z" fill="url(#ribbonTRBack)" />
-            </svg>
-
-            <svg className="absolute -bottom-10 -left-12 w-64 h-44 pointer-events-none z-5 opacity-90 filter" viewBox="0 0 420 220" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden>
-              <defs>
-                <linearGradient id="ribbonBLBack" x1="1" y1="0" x2="0" y2="1">
-                  <stop offset="0%" stopColor="#38BDF8" />
-                  <stop offset="50%" stopColor="#A855F7" />
-                  <stop offset="100%" stopColor="#F472B6" />
-                </linearGradient>
-              </defs>
-              <path d="M380 200 C240 180, 180 40, 40 20 L70 0 C210 20, 280 160, 400 180 Z" fill="url(#ribbonBLBack)" />
-            </svg>
-
-            {/* Front ribbons (appear above the card) */}
-            <svg className="absolute -top-8 -right-8 w-48 h-36 pointer-events-none z-40 filter drop-shadow-2xl" viewBox="0 0 420 220" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden>
-              <defs>
-                <linearGradient id="ribbonTR" x1="0" y1="0" x2="1" y2="1">
-                  <stop offset="0%" stopColor="#E879F9" />
-                  <stop offset="50%" stopColor="#A855F7" />
-                  <stop offset="100%" stopColor="#38BDF8" />
-                </linearGradient>
-              </defs>
-              <path d="M40 20 C180 40, 240 180, 380 200 L350 220 C210 200, 140 60, 20 40 Z" fill="url(#ribbonTR)" />
-            </svg>
-
-            <svg className="absolute -bottom-8 -left-8 w-56 h-40 pointer-events-none z-40 filter drop-shadow-2xl" viewBox="0 0 420 220" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden>
-              <defs>
-                <linearGradient id="ribbonBL" x1="1" y1="0" x2="0" y2="1">
-                  <stop offset="0%" stopColor="#38BDF8" />
-                  <stop offset="50%" stopColor="#A855F7" />
-                  <stop offset="100%" stopColor="#F472B6" />
-                </linearGradient>
-              </defs>
-              <path d="M380 200 C240 180, 180 40, 40 20 L70 0 C210 20, 280 160, 400 180 Z" fill="url(#ribbonBL)" />
-            </svg>
-
             {/* Badge (moved outside the overflow-hidden card to prevent clipping) */}
-            <motion.div 
+            <motion.div
               className="absolute -top-6 left-1/2 transform -translate-x-1/2 z-40"
               initial={{ scale: 0 }}
               whileInView={{ scale: 1 }}
@@ -135,14 +88,22 @@ export default function CourseDetailsSection() {
             </motion.div>
 
             {/* Pricing Card */}
-            <motion.div 
-              className="relative z-10 bg-white/90 backdrop-blur-md rounded-3xl border-2 border-purple-200 shadow-2xl p-8 sm:p-10 text-center overflow-hidden"
+            <motion.div
+              className="relative z-10 bg-white/90 backdrop-blur-md rounded-3xl border-2 border-purple-200 shadow-2xl p-8 sm:p-10 text-center "
               whileHover={{ scale: 1.02 }}
               transition={{ type: "spring", stiffness: 300 }}
             >
+              {/* Premium Ribbons - inside card so they scale together */}
+              <div className="ribbon ribbon-top-right z-50">
+                <span>New Year Deal</span>
+              </div>
+              <div className="ribbon ribbon-bottom-left">
+                <span>Limited Seats</span>
+              </div>
+
               {/* subtle inner corner highlights removed in favor of ribbons */}
               <div className="mt-4 mb-6">
-                <motion.div 
+                <motion.div
                   className="flex items-center justify-center gap-2 mb-1"
                   initial={{ opacity: 0 }}
                   whileInView={{ opacity: 1 }}
@@ -151,7 +112,7 @@ export default function CourseDetailsSection() {
                 >
                   <span className="text-slate-400 line-through text-lg sm:text-xl">₹23,600</span>
                 </motion.div>
-                <motion.h3 
+                <motion.h3
                   className="text-4xl sm:text-5xl font-extrabold gradient-text"
                   initial={{ scale: 0.8 }}
                   whileInView={{ scale: 1 }}
@@ -169,7 +130,7 @@ export default function CourseDetailsSection() {
                     'Price increases after January',
                     'Bangalore priority admissions',
                   ].map((line, idx) => (
-                    <motion.li 
+                    <motion.li
                       key={idx}
                       className="flex items-start gap-2 text-slate-700"
                       initial={{ opacity: 0, x: -15 }}
@@ -189,7 +150,7 @@ export default function CourseDetailsSection() {
               {/* Features */}
               <ul className="space-y-3 mb-8 text-left">
                 {features.map((feature, idx) => (
-                  <motion.li 
+                  <motion.li
                     key={idx}
                     className="flex items-start gap-3 text-slate-700"
                     initial={{ opacity: 0, x: -20 }}
@@ -206,7 +167,7 @@ export default function CourseDetailsSection() {
               </ul>
 
               {/* CTA Button */}
-              <motion.button 
+              <motion.button
                 className="btn-primary w-full text-base sm:text-lg flex items-center justify-center gap-2"
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.98 }}
@@ -216,7 +177,7 @@ export default function CourseDetailsSection() {
               </motion.button>
 
               {/* Secondary CTA */}
-              <motion.button 
+              <motion.button
                 className="mt-3 w-full px-6 py-3 rounded-2xl bg-white text-purple-700 font-bold hover:bg-purple-50 transition shadow-lg text-sm sm:text-base flex items-center justify-center gap-2 border-2 border-purple-200"
                 whileHover={{ scale: 1.03 }}
                 whileTap={{ scale: 0.98 }}
@@ -237,7 +198,7 @@ export default function CourseDetailsSection() {
         </div>
 
         {/* Bottom trust message */}
-        <motion.div 
+        <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}

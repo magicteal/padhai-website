@@ -367,3 +367,68 @@ html, body {
 	box-shadow: 0 4px 20px rgba(0,0,0,0.08);
 	border: 1px solid rgba(147,51,234,0.1);
 }
+
+
+
+
+.ribbon {
+  width: 140px;
+  height: 140px;
+  overflow: hidden;
+  position: absolute;
+  z-index: 30;
+}
+
+.ribbon::before,
+.ribbon::after {
+  position: absolute;
+  z-index: -1;
+  content: "";
+  display: block;
+  border: 6px solid rgba(168,85,247,0.6);
+}
+
+.ribbon span {
+  position: absolute;
+  display: block;
+  width: 210px;
+  padding: 14px 0;
+  background: linear-gradient(90deg,#a855f7,#ec4899,#6366f1);
+  color: #fff;
+  font: 700 14px/1 "Lato", sans-serif;
+  text-align: center;
+  text-transform: uppercase;
+  box-shadow: 0 10px 20px rgba(0,0,0,.15);
+}
+
+/* Top Right */
+.ribbon-top-right {
+  top: -12px;
+  right: -12px;
+}
+.ribbon-top-right::before,
+.ribbon-top-right::after {
+  border-top-color: transparent;
+  border-right-color: transparent;
+}
+.ribbon-top-right span {
+  left: -26px;
+  top: 32px;
+  transform: rotate(45deg);
+}
+
+/* Bottom Left */
+.ribbon-bottom-left {
+  bottom: -12px;
+  left: -12px;
+}
+.ribbon-bottom-left::before,
+.ribbon-bottom-left::after {
+  border-bottom-color: transparent;
+  border-left-color: transparent;
+}
+.ribbon-bottom-left span {
+  right: -26px;
+  bottom: 32px;
+  transform: rotate(225deg);
+}
