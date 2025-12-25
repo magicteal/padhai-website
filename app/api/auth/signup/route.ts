@@ -12,9 +12,9 @@ export async function POST(request: NextRequest) {
     const { name, email, password, phone, childName, childAge } = await request.json();
 
     // Validation
-    if (!name || !email || !password) {
+    if (!name || !email || !password || !phone) {
       return NextResponse.json(
-        { success: false, message: 'Please provide name, email, and password' },
+        { success: false, message: 'Please provide name, email, phone, and password' },
         { status: 400 }
       );
     }

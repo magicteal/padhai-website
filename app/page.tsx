@@ -6,8 +6,9 @@ import TrustSection from "@/components/TrustSection";
 import StorySection from "@/components/StorySection";
 import TestimonialsSection from "@/components/TestimonialsSection";
 import CourseDetailsSection from "@/components/CourseDetailsSection";
-// import CTASection from "@/components/CTASection";
 import FAQSection from "@/components/FAQSection";
+import HomeJanuaryOfferBox from "@/components/HomeJanuaryOfferBox";
+import HomeBottomButtonsCTA from "@/components/HomeBottomButtonsCTA";
 
 export default function Home() {
   return (
@@ -16,12 +17,14 @@ export default function Home() {
       <ProblemSection />
       <Cirriculum />
       <ProjectsSection />
+      <HomeJanuaryOfferBox />
       <TrustSection />
       <StorySection />
       <TestimonialsSection />
+      <HomeJanuaryOfferBox />
       <CourseDetailsSection />
-      {/* <CTASection /> */}
       <FAQSection />
+      <HomeBottomButtonsCTA />
     </main>
   );
 }

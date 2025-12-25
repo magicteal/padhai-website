@@ -31,13 +31,12 @@ export interface Project {
 
 export interface Testimonial {
   id: string;
-  type: 'video' | 'text';
-  videoSrc?: string;
-  quote?: string;
+  quote: string;
   author: string;
   location?: string;
   rating: number;
   featured: boolean;
+  imageSrc?: string | null;
   createdAt: string;
 }
 

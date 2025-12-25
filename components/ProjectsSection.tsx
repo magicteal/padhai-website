@@ -39,7 +39,7 @@ export default function ProjectsSection() {
           className="text-center max-w-3xl mx-auto mb-8 sm:mb-10"
         >
           <motion.span 
-            className="w-14 h-14 rounded-xl bg-purple-100 flex items-center justify-center mb-3"
+            className="w-14 h-14 rounded-xl bg-purple-100 flex items-center justify-center mb-3 mx-auto"
             animate={{ rotate: [0, 10, -10, 0] }}
             transition={{ repeat: Infinity, duration: 2 }}
           >
@@ -120,7 +120,7 @@ export default function ProjectsSection() {
           <div className="mt-4 sm:mt-6">
             <Link href="/projects">
               <motion.button 
-                className="btn-primary text-base sm:text-lg px-6 sm:px-8 py-3 sm:py-4 flex items-center gap-2"
+                className="btn-primary text-base sm:text-lg px-6 sm:px-8 py-3 sm:py-4 flex items-center gap-2 mx-auto"
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
               >

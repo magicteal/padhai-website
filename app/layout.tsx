@@ -1,8 +1,8 @@
 import type { Metadata } from "next";
 import { Poppins } from "next/font/google";
 import "./globals.css";
-import Navbar from "../components/Navbar";
-import Footer from "../components/Footer";
+import ConditionalNavbar from "../components/ConditionalNavbar";
+import ConditionalFooter from "../components/ConditionalFooter";
 import FloatingWhatsAppCTA from "../components/FloatingWhatsAppCTA";
 import LeadCapturePopup from "../components/LeadCapturePopup";
 import initializeServices from "@/lib/init";
@@ -29,9 +29,9 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={`${poppins.variable} antialiased`}>
-        <Navbar />
+        <ConditionalNavbar />
         {children}
-        <Footer />
+        <ConditionalFooter />
         <FloatingWhatsAppCTA />
         <LeadCapturePopup />
       </body>

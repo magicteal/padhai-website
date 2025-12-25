@@ -2,6 +2,7 @@
 import React from "react";
 import { motion } from "framer-motion";
 import { CheckCircle, Sparkles, Star, Rocket, Shield, Palette, Phone, Gift, ArrowRight } from "lucide-react";
+import HomeJanuaryOfferBox from "@/components/HomeJanuaryOfferBox";
 
 type HeroSectionProps = {
   illustration?: React.ReactNode;
@@ -202,6 +203,10 @@ export default function HeroSection({
         {/* Bottom Feature Cards */}
         <div className="relative pb-8 sm:pb-12">
           <div className="max-w-7xl mx-auto px-4">
+            <div className="-mt-2 sm:-mt-4 mb-4 sm:mb-6">
+              <HomeJanuaryOfferBox variant="bare" />
+            </div>
+
             <motion.div 
               className="grid grid-cols-1 sm:grid-cols-3 gap-4"
               initial={{ opacity: 0, y: 40 }}
@@ -234,7 +239,11 @@ export default function HeroSection({
             </motion.div>
           </div>
         </div>
+       
       </div>
+
+      
+
     </section>
   );
 }

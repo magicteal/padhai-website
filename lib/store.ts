@@ -1,7 +1,7 @@
 import { create } from 'zustand';
 import { persist } from 'zustand/middleware';
 import { Project, Testimonial, User } from './types';
-import { testimonialVideos } from '../data/testimonialVideos';
+// Video testimonials are handled via static assets in the marketing site.
 
 // Initial Projects Data
 const initialProjects: Project[] = [
@@ -124,63 +124,36 @@ const initialProjects: Project[] = [
   },
 ];
 
-// Initial Testimonials Data
+// Initial Parent Testimonials Data
 const initialTestimonials: Testimonial[] = [
   {
-    id: '1',
-    type: 'video',
-    videoSrc: testimonialVideos['testimonial-three'],
-    author: 'Student Testimonial 1',
-    rating: 5,
-    featured: true,
-    createdAt: '2024-01-01',
-  },
-  {
-    id: '2',
-    type: 'video',
-    videoSrc: testimonialVideos['testimonial-two'],
-    author: 'Student Testimonial 2',
-    rating: 5,
-    featured: true,
-    createdAt: '2024-01-02',
-  },
-  {
-    id: '3',
-    type: 'video',
-    videoSrc: testimonialVideos['testimonial-one'],
-    author: 'Student Testimonial 3',
-    rating: 5,
-    featured: true,
-    createdAt: '2024-01-03',
-  },
-  {
     id: '4',
-    type: 'text',
     quote: '"My son now uses his tablet for creating instead of gaming."',
     author: 'Parent',
     location: 'Whitefield',
     rating: 5,
     featured: true,
+    imageSrc: null,
     createdAt: '2024-02-01',
   },
   {
     id: '5',
-    type: 'text',
     quote: '"My daughter made her school project with AI — unbelievable!"',
     author: 'Parent',
     location: 'Koramangala',
     rating: 5,
     featured: true,
+    imageSrc: null,
     createdAt: '2024-02-15',
   },
   {
     id: '6',
-    type: 'text',
     quote: '"This is the first course that made screen time useful."',
     author: 'Parent',
     location: 'Indiranagar',
     rating: 5,
     featured: true,
+    imageSrc: null,
     createdAt: '2024-03-01',
   },
 ];
@@ -384,7 +357,7 @@ export const useAppStore = create<AppState>()(
     }),
     {
       name: 'padhai-storage',
-      version: 2,
+      version: 3,
       migrate: (persistedState, _version) => {
         const state = persistedState as {
           projects?: Project[];
@@ -408,9 +381,28 @@ export const useAppStore = create<AppState>()(
             byEmail.set(seed.email, seed);
           }
         }
+        const migratedTestimonials = Array.isArray(state.testimonials)
+          ? (state.testimonials as any[])
+              .map((t) => {
+                // v2 format supported video/text; keep only text-like testimonials
+                if (t?.type === 'video') return null;
+                const quote = typeof t?.quote === 'string' ? t.quote : '';
+                const author = typeof t?.author === 'string' ? t.author : 'Parent';
+                const location = typeof t?.location === 'string' ? t.location : undefined;
+                const rating = typeof t?.rating === 'number' ? t.rating : 5;
+                const featured = typeof t?.featured === 'boolean' ? t.featured : true;
+                const imageSrc = typeof t?.imageSrc === 'string' ? t.imageSrc : null;
+                const createdAt = typeof t?.createdAt === 'string' ? t.createdAt : new Date().toISOString().split('T')[0];
+                const id = typeof t?.id === 'string' ? t.id : Date.now().toString();
+                if (!quote) return null;
+                return { id, quote, author, location, rating, featured, imageSrc, createdAt } as Testimonial;
+              })
+              .filter(Boolean) as Testimonial[]
+          : initialTestimonials;
+
         return {
           projects: state.projects ?? initialProjects,
-          testimonials: state.testimonials ?? initialTestimonials,
+          testimonials: migratedTestimonials.length > 0 ? migratedTestimonials : initialTestimonials,
           users: Array.from(byEmail.values()),
           isAuthenticated: state.isAuthenticated ?? false,
           currentUser: state.currentUser ?? null,

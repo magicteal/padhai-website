@@ -149,7 +149,7 @@ export default function SignupPage() {
             </div>
 
             <div>
-              <label className="block text-white font-medium mb-2 text-sm">Phone (optional)</label>
+              <label className="block text-white font-medium mb-2 text-sm">Phone *</label>
               <div className="relative">
                 <Phone className="absolute left-3 top-1/2 transform -translate-y-1/2 w-5 h-5 text-purple-300" />
                 <input
@@ -159,6 +159,7 @@ export default function SignupPage() {
                   onChange={handleChange}
                   className="w-full pl-10 pr-4 py-3 rounded-xl bg-white/20 border-2 border-white/30 text-white placeholder-purple-200 focus:outline-none focus:border-white/50 transition"
                   placeholder="+91 98765 43210"
+                  required
                 />
               </div>
             </div>

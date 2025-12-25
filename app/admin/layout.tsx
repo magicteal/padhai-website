@@ -14,6 +14,7 @@ import {
   Sparkles,
   ChevronRight
 } from 'lucide-react';
+import { Home } from 'lucide-react';
 import { useState } from 'react';
 
 export default function AdminLayout({ children }: { children: React.ReactNode }) {
@@ -129,6 +130,18 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
 
               {/* Navigation */}
               <nav className="flex-1 p-4 space-y-2">
+                <Link 
+                  href="/"
+                  onClick={() => setSidebarOpen(false)}
+                >
+                  <motion.div
+                    className="flex items-center gap-3 px-4 py-3 rounded-xl text-white/70 hover:bg-white/10 hover:text-white transition-all"
+                    whileHover={{ x: 5 }}
+                  >
+                    <Home className="w-5 h-5" />
+                    <span className="font-medium">Back to Website</span>
+                  </motion.div>
+                </Link>
                 {navItems.map((item) => {
                   const isActive = pathname === item.href;
                   return (

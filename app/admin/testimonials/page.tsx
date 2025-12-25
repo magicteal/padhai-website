@@ -1,9 +1,9 @@
 "use client";
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { useAppStore } from '@/lib/store';
 import { Testimonial } from '@/lib/types';
-import { Plus, Pencil, Trash2, X, Search, Star, AlertTriangle, Video, MessageSquare } from 'lucide-react';
+import { Plus, Pencil, Trash2, X, Search, Star, AlertTriangle } from 'lucide-react';
 
 export default function AdminTestimonialsPage() {
   const { testimonials, addTestimonial, updateTestimonial, deleteTestimonial } = useAppStore();
@@ -11,7 +11,8 @@ export default function AdminTestimonialsPage() {
   const [editingTestimonial, setEditingTestimonial] = useState<Testimonial | null>(null);
   const [deleteConfirm, setDeleteConfirm] = useState<string | null>(null);
   const [searchQuery, setSearchQuery] = useState('');
-  const [testimonialType, setTestimonialType] = useState<'video' | 'text'>('text');
+  const [imageSrc, setImageSrc] = useState<string>('');
+  const [uploading, setUploading] = useState(false);
 
   const filteredTestimonials = testimonials.filter(t => 
     t.author.toLowerCase().includes(searchQuery.toLowerCase()) ||
@@ -24,17 +25,12 @@ export default function AdminTestimonialsPage() {
     const formData = new FormData(e.currentTarget);
     
     const testimonialData: Omit<Testimonial, 'id' | 'createdAt'> = {
-      type: testimonialType,
       author: formData.get('author') as string,
+      quote: formData.get('quote') as string,
+      location: formData.get('location') as string,
       rating: parseInt(formData.get('rating') as string),
       featured: formData.get('featured') === 'on',
-      ...(testimonialType === 'video' 
-        ? { videoSrc: formData.get('videoSrc') as string }
-        : { 
-            quote: formData.get('quote') as string,
-            location: formData.get('location') as string,
-          }
-      ),
+      imageSrc: (formData.get('imageSrc') as string) || null,
     };
 
     if (editingTestimonial) {
@@ -49,7 +45,6 @@ export default function AdminTestimonialsPage() {
 
   const handleEdit = (testimonial: Testimonial) => {
     setEditingTestimonial(testimonial);
-    setTestimonialType(testimonial.type);
     setIsModalOpen(true);
   };
 
@@ -60,8 +55,32 @@ export default function AdminTestimonialsPage() {
 
   const openAddModal = () => {
     setEditingTestimonial(null);
-    setTestimonialType('text');
     setIsModalOpen(true);
+  };
+
+  useEffect(() => {
+    if (isModalOpen) {
+      setImageSrc(editingTestimonial?.imageSrc || '');
+    }
+  }, [isModalOpen, editingTestimonial]);
+
+  const handleFileChange = async (e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0];
+    if (!file) return;
+    setUploading(true);
+    try {
+      const fd = new FormData();
+      fd.append('file', file);
+      const res = await fetch('/api/testimonials/upload', { method: 'POST', body: fd });
+      if (!res.ok) throw new Error('Upload failed');
+      const data = await res.json();
+      setImageSrc(data.url);
+    } catch (err) {
+      console.error(err);
+      alert('Image upload failed');
+    } finally {
+      setUploading(false);
+    }
   };
 
   return (
@@ -87,27 +106,6 @@ export default function AdminTestimonialsPage() {
           <Plus className="w-5 h-5" />
           <span>Add Testimonial</span>
         </motion.button>
-      </motion.div>
-
-      {/* Stats */}
-      <motion.div 
-        initial={{ opacity: 0, y: 20 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ delay: 0.1 }}
-        className="grid grid-cols-2 sm:grid-cols-4 gap-4"
-      >
-        {[
-          { label: 'Video', count: testimonials.filter(t => t.type === 'video').length, emoji: '🎥' },
-          { label: 'Text', count: testimonials.filter(t => t.type === 'text').length, emoji: '📝' },
-          { label: 'Featured', count: testimonials.filter(t => t.featured).length, emoji: '⭐' },
-          { label: '5-Star', count: testimonials.filter(t => t.rating === 5).length, emoji: '🌟' },
-        ].map((stat, idx) => (
-          <div key={idx} className="admin-card p-4 text-center">
-            <span className="text-2xl block mb-1">{stat.emoji}</span>
-            <p className="text-2xl font-bold text-slate-800">{stat.count}</p>
-            <p className="text-sm text-slate-500">{stat.label}</p>
-          </div>
-        ))}
       </motion.div>
 
       {/* Search */}
@@ -142,41 +140,36 @@ export default function AdminTestimonialsPage() {
             transition={{ delay: idx * 0.05 }}
             className="admin-card p-5 relative group"
           >
-            {/* Type Badge */}
-            <div className="absolute top-4 right-4 flex items-center gap-2">
-              <span className={`px-2 py-1 rounded-full text-xs font-medium ${
-                testimonial.type === 'video' 
-                  ? 'bg-blue-100 text-blue-700' 
-                  : 'bg-green-100 text-green-700'
-              }`}>
-                {testimonial.type === 'video' ? '🎥 Video' : '📝 Text'}
-              </span>
-              {testimonial.featured && (
+            {/* Featured Badge */}
+            {testimonial.featured && (
+              <div className="absolute top-4 right-4">
                 <span className="px-2 py-1 rounded-full bg-yellow-100 text-yellow-700 text-xs font-medium">
                   ⭐ Featured
                 </span>
-              )}
-            </div>
+              </div>
+            )}
 
             {/* Content */}
             <div className="pr-24">
-              {testimonial.type === 'video' ? (
-                <div>
-                  <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-blue-100 to-cyan-100 flex items-center justify-center text-2xl mb-3">
-                    🎥
+              <div className="flex items-center gap-3 mb-3">
+                {testimonial.imageSrc ? (
+                  <img
+                    src={testimonial.imageSrc}
+                    alt={testimonial.author}
+                    className="w-12 h-12 rounded-full object-cover border"
+                  />
+                ) : (
+                  <div className="w-12 h-12 rounded-full bg-gradient-to-br from-purple-200 to-pink-200 flex items-center justify-center text-lg font-bold text-slate-700">
+                    {(testimonial.author || 'P').charAt(0).toUpperCase()}
                   </div>
-                  <h3 className="font-medium text-slate-800 mb-1">{testimonial.author}</h3>
-                  <p className="text-sm text-slate-500 truncate">{testimonial.videoSrc}</p>
+                )}
+                <div className="min-w-0">
+                  <h3 className="font-medium text-slate-800 truncate">{testimonial.author}</h3>
+                  <p className="text-sm text-slate-500 truncate">{testimonial.location}</p>
                 </div>
-              ) : (
-                <div>
-                  <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-green-100 to-emerald-100 flex items-center justify-center text-2xl mb-3">
-                    📝
-                  </div>
-                  <p className="text-slate-700 text-sm mb-2 line-clamp-2">{testimonial.quote}</p>
-                  <p className="text-sm text-slate-500">— {testimonial.author}, {testimonial.location}</p>
-                </div>
-              )}
+              </div>
+
+              <p className="text-slate-700 text-sm mb-2 line-clamp-2">{testimonial.quote}</p>
 
               {/* Rating */}
               <div className="flex items-center gap-1 mt-3">
@@ -249,39 +242,6 @@ export default function AdminTestimonialsPage() {
               </div>
 
               <form onSubmit={handleSubmit} className="p-6 space-y-5">
-                {/* Type Selector */}
-                {!editingTestimonial && (
-                  <div>
-                    <label className="block text-sm font-medium text-slate-700 mb-2">Type *</label>
-                    <div className="grid grid-cols-2 gap-3">
-                      <button
-                        type="button"
-                        onClick={() => setTestimonialType('text')}
-                        className={`p-4 rounded-xl border-2 transition-all flex items-center gap-3 ${
-                          testimonialType === 'text'
-                            ? 'border-purple-500 bg-purple-50'
-                            : 'border-slate-200 hover:border-purple-200'
-                        }`}
-                      >
-                        <MessageSquare className={`w-5 h-5 ${testimonialType === 'text' ? 'text-purple-600' : 'text-slate-400'}`} />
-                        <span className={testimonialType === 'text' ? 'text-purple-700 font-medium' : 'text-slate-600'}>Text Review</span>
-                      </button>
-                      <button
-                        type="button"
-                        onClick={() => setTestimonialType('video')}
-                        className={`p-4 rounded-xl border-2 transition-all flex items-center gap-3 ${
-                          testimonialType === 'video'
-                            ? 'border-purple-500 bg-purple-50'
-                            : 'border-slate-200 hover:border-purple-200'
-                        }`}
-                      >
-                        <Video className={`w-5 h-5 ${testimonialType === 'video' ? 'text-purple-600' : 'text-slate-400'}`} />
-                        <span className={testimonialType === 'video' ? 'text-purple-700 font-medium' : 'text-slate-600'}>Video</span>
-                      </button>
-                    </div>
-                  </div>
-                )}
-
                 <div>
                   <label className="block text-sm font-medium text-slate-700 mb-2">Author Name *</label>
                   <input
@@ -289,46 +249,61 @@ export default function AdminTestimonialsPage() {
                     defaultValue={editingTestimonial?.author}
                     required
                     className="w-full px-4 py-3 rounded-xl border-2 border-slate-200 focus:border-purple-500 focus:ring-4 focus:ring-purple-100 outline-none transition-all"
-                    placeholder={testimonialType === 'video' ? 'Student Name' : 'Parent'}
+                    placeholder="Parent name"
                   />
                 </div>
 
-                {testimonialType === 'video' ? (
-                  <div>
-                    <label className="block text-sm font-medium text-slate-700 mb-2">Video URL *</label>
+                <div>
+                  <label className="block text-sm font-medium text-slate-700 mb-2">Testimonial *</label>
+                  <textarea
+                    name="quote"
+                    defaultValue={editingTestimonial?.quote}
+                    required
+                    rows={3}
+                    className="w-full px-4 py-3 rounded-xl border-2 border-slate-200 focus:border-purple-500 focus:ring-4 focus:ring-purple-100 outline-none transition-all resize-none"
+                    placeholder='"My child loves learning with PadhAI..."'
+                  />
+                </div>
+
+                <div>
+                  <label className="block text-sm font-medium text-slate-700 mb-2">Location *</label>
+                  <input
+                    name="location"
+                    defaultValue={editingTestimonial?.location}
+                    required
+                    className="w-full px-4 py-3 rounded-xl border-2 border-slate-200 focus:border-purple-500 focus:ring-4 focus:ring-purple-100 outline-none transition-all"
+                    placeholder="Koramangala"
+                  />
+                </div>
+
+                <div>
+                  <label className="block text-sm font-medium text-slate-700 mb-2">Parent Image</label>
+                  <div className="flex items-center gap-4">
                     <input
-                      name="videoSrc"
-                      defaultValue={editingTestimonial?.videoSrc}
-                      required
+                      type="file"
+                      accept="image/*"
+                      onChange={handleFileChange}
+                      className="text-sm"
+                    />
+                    {uploading ? (
+                      <div className="text-sm text-slate-500">Uploading...</div>
+                    ) : imageSrc ? (
+                      <img src={imageSrc} alt="preview" className="w-16 h-16 rounded-full object-cover border" />
+                    ) : (
+                      <div className="text-sm text-slate-400">No image selected</div>
+                    )}
+                  </div>
+                  <div className="mt-3">
+                    <label className="block text-sm font-medium text-slate-700 mb-2">Or Image URL</label>
+                    <input
+                      name="imageSrc"
+                      value={imageSrc}
+                      onChange={(e) => setImageSrc(e.target.value)}
                       className="w-full px-4 py-3 rounded-xl border-2 border-slate-200 focus:border-purple-500 focus:ring-4 focus:ring-purple-100 outline-none transition-all"
                       placeholder="https://res.cloudinary.com/..."
                     />
                   </div>
-                ) : (
-                  <>
-                    <div>
-                      <label className="block text-sm font-medium text-slate-700 mb-2">Quote *</label>
-                      <textarea
-                        name="quote"
-                        defaultValue={editingTestimonial?.quote}
-                        required
-                        rows={3}
-                        className="w-full px-4 py-3 rounded-xl border-2 border-slate-200 focus:border-purple-500 focus:ring-4 focus:ring-purple-100 outline-none transition-all resize-none"
-                        placeholder='"My child loves learning with PadhAI..."'
-                      />
-                    </div>
-                    <div>
-                      <label className="block text-sm font-medium text-slate-700 mb-2">Location *</label>
-                      <input
-                        name="location"
-                        defaultValue={editingTestimonial?.location}
-                        required
-                        className="w-full px-4 py-3 rounded-xl border-2 border-slate-200 focus:border-purple-500 focus:ring-4 focus:ring-purple-100 outline-none transition-all"
-                        placeholder="Koramangala"
-                      />
-                    </div>
-                  </>
-                )}
+                </div>
 
                 <div>
                   <label className="block text-sm font-medium text-slate-700 mb-2">Rating *</label>

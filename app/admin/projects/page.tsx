@@ -1,5 +1,5 @@
 "use client";
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { useAppStore } from '@/lib/store';
 import { Project, PROJECT_CATEGORIES, ProjectCategory } from '@/lib/types';
@@ -9,6 +9,8 @@ export default function AdminProjectsPage() {
   const { projects, addProject, updateProject, deleteProject } = useAppStore();
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [editingProject, setEditingProject] = useState<Project | null>(null);
+  const [imageSrc, setImageSrc] = useState<string>('');
+  const [uploading, setUploading] = useState(false);
   const [deleteConfirm, setDeleteConfirm] = useState<string | null>(null);
   const [searchQuery, setSearchQuery] = useState('');
 
@@ -41,6 +43,31 @@ export default function AdminProjectsPage() {
 
     setIsModalOpen(false);
     setEditingProject(null);
+  };
+
+  useEffect(() => {
+    if (isModalOpen) {
+      setImageSrc(editingProject?.imageSrc || '');
+    }
+  }, [editingProject, isModalOpen]);
+
+  const handleFileChange = async (e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0];
+    if (!file) return;
+    setUploading(true);
+    try {
+      const fd = new FormData();
+      fd.append('file', file);
+      const res = await fetch('/api/projects/upload', { method: 'POST', body: fd });
+      if (!res.ok) throw new Error('Upload failed');
+      const data = await res.json();
+      setImageSrc(data.url);
+    } catch (err) {
+      console.error(err);
+      alert('Image upload failed');
+    } finally {
+      setUploading(false);
+    }
   };
 
   const handleEdit = (project: Project) => {
@@ -298,13 +325,32 @@ export default function AdminProjectsPage() {
                 </div>
 
                 <div>
-                  <label className="block text-sm font-medium text-slate-700 mb-2">Image URL</label>
-                  <input
-                    name="imageSrc"
-                    defaultValue={editingProject?.imageSrc || ''}
-                    className="w-full px-4 py-3 rounded-xl border-2 border-slate-200 focus:border-purple-500 focus:ring-4 focus:ring-purple-100 outline-none transition-all"
-                    placeholder="https://example.com/image.jpg"
-                  />
+                  <label className="block text-sm font-medium text-slate-700 mb-2">Image</label>
+                  <div className="flex items-center gap-4">
+                    <input
+                      type="file"
+                      accept="image/*"
+                      onChange={handleFileChange}
+                      className="text-sm"
+                    />
+                    {uploading ? (
+                      <div className="text-sm text-slate-500">Uploading...</div>
+                    ) : imageSrc ? (
+                      <img src={imageSrc} alt="preview" className="w-28 h-20 object-cover rounded-md border" />
+                    ) : (
+                      <div className="text-sm text-slate-400">No image selected</div>
+                    )}
+                  </div>
+                  <div className="mt-3">
+                    <label className="block text-sm font-medium text-slate-700 mb-2">Or Image URL</label>
+                    <input
+                      name="imageSrc"
+                      value={imageSrc}
+                      onChange={(e) => setImageSrc(e.target.value)}
+                      className="w-full px-4 py-3 rounded-xl border-2 border-slate-200 focus:border-purple-500 focus:ring-4 focus:ring-purple-100 outline-none transition-all"
+                      placeholder="https://example.com/image.jpg"
+                    />
+                  </div>
                 </div>
 
                 <div className="flex items-center gap-3">

@@ -1,19 +1,38 @@
 "use client";
 import React from 'react';
 import { motion } from 'framer-motion';
-import { Star, Video, MessageSquare, User, Users } from 'lucide-react';
+import { ChevronLeft, ChevronRight, Star, Video, MessageSquare, User, Users } from 'lucide-react';
 import { useAppStore } from '@/lib/store';
 import testimonialVideosArray from '../data/testimonialVideos';
 
 export default function TestimonialsSection() {
-  const { testimonials } = useAppStore();
-  
-  // Use centralized video list (show videos 4-6, 3 total) — falls back to store videos if empty
-  const videoTestimonials = testimonials.filter(t => t.type === 'video' && t.featured);
+  const { testimonials, projects } = useAppStore();
+  const [hydrated, setHydrated] = React.useState(false);
+  const [activePage, setActivePage] = React.useState(0);
+  React.useEffect(() => {
+    setHydrated(true);
+  }, []);
+
   const videoList = testimonialVideosArray && testimonialVideosArray.length > 0
     ? testimonialVideosArray.slice(0, 3)
-    : videoTestimonials.map(t => t.videoSrc).slice(0, 3);
-  const textTestimonials = testimonials.filter(t => t.type === 'text' && t.featured);
+    : [];
+
+  const featuredParents = testimonials.filter((t) => t.featured);
+  const parentTestimonials = featuredParents.length > 0 ? featuredParents : testimonials;
+  const pageSize = 3;
+  const pageCount = Math.max(1, Math.ceil(parentTestimonials.length / pageSize));
+  const safeActivePage = Math.min(activePage, pageCount - 1);
+  const pageStart = safeActivePage * pageSize;
+  const pageItems = parentTestimonials.slice(pageStart, pageStart + pageSize);
+
+  const goPrev = () => {
+    if (parentTestimonials.length === 0) return;
+    setActivePage((p) => (p - 1 + pageCount) % pageCount);
+  };
+  const goNext = () => {
+    if (parentTestimonials.length === 0) return;
+    setActivePage((p) => (p + 1) % pageCount);
+  };
 
   return (
     <section 
@@ -121,58 +140,138 @@ export default function TestimonialsSection() {
             <h3 className="text-xl sm:text-2xl font-extrabold text-slate-900">What Parents Are Saying</h3>
           </div>
           
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-4 sm:gap-5 justify-items-center">
-            {textTestimonials.map((review, idx) => (
-              <motion.div
-                key={review.id}
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ delay: idx * 0.1 }}
-                whileHover={{ scale: 1.03, y: -8 }}
-                className={`relative w-full max-w-sm card-kid p-5 sm:p-6 ${
-                  idx === 1 ? 'md:-translate-y-4 z-20' : ''
-                }`}
+          <div className="w-full max-w-5xl mx-auto">
+            <div className="flex items-center justify-center gap-3 sm:gap-4">
+              <button
+                type="button"
+                onClick={goPrev}
+                aria-label="Previous testimonial"
+                className="p-2 rounded-xl bg-white border-2 border-purple-100 text-slate-700 hover:bg-slate-50 transition-all"
               >
-                <div className="flex items-start gap-3 sm:gap-4">
-                  <motion.div 
-                    className="flex-shrink-0"
-                    whileHover={{ rotate: 5 }}
-                  >
-                    <div className="w-10 h-10 sm:w-12 sm:h-12 rounded-full bg-gradient-to-br from-purple-400 to-purple-600 flex items-center justify-center text-white">
-                      <User className="w-5 h-5 sm:w-6 sm:h-6" />
-                    </div>
-                  </motion.div>
-                  <div className="flex-1 min-w-0">
-                    <div className="flex items-center justify-between flex-wrap gap-2">
-                      <div className="flex items-center gap-1">
-                        {[...Array(review.rating)].map((_, i) => (
-                          <Star key={i} className="w-3 h-3 sm:w-4 sm:h-4 fill-yellow-400 text-yellow-400" />
-                        ))}
-                      </div>
-                      <p className="text-xs sm:text-sm text-slate-500">— {review.author}, {review.location}</p>
-                    </div>
-                    <p className="text-slate-800 font-semibold text-sm sm:text-base mt-3 leading-relaxed">
-                      {review.quote}
-                    </p>
-                  </div>
-                </div>
+                <ChevronLeft className="w-5 h-5" />
+              </button>
 
-                {/* Decorative tail */}
-                <span
-                  aria-hidden
-                  className="hidden md:block absolute -bottom-4 left-1/2 -translate-x-1/2"
-                  style={{
-                    width: 0,
-                    height: 0,
-                    borderLeft: '20px solid transparent',
-                    borderRight: '20px solid transparent',
-                    borderTop: '20px solid white',
-                    filter: 'drop-shadow(0 4px 6px rgba(0,0,0,0.1))'
-                  }}
-                />
+              <motion.div
+                key={hydrated ? `page-${safeActivePage}` : 'loading'}
+                initial={{ opacity: 0, y: 10 }}
+                animate={{ opacity: 1, y: 0 }}
+                className="w-full"
+              >
+                {!hydrated ? (
+                  <div className="grid grid-cols-1 lg:grid-cols-3 gap-4 sm:gap-5">
+                    {Array.from({ length: 3 }).map((_, idx) => (
+                      <div key={idx} className="card-kid p-5 sm:p-6 h-40 relative">
+                        <span
+                          aria-hidden
+                          className="absolute -bottom-3 left-10"
+                          style={{
+                            width: 0,
+                            height: 0,
+                            borderLeft: '14px solid transparent',
+                            borderRight: '14px solid transparent',
+                            borderTop: '14px solid white',
+                            filter: 'drop-shadow(0 4px 6px rgba(0,0,0,0.1))',
+                          }}
+                        />
+                      </div>
+                    ))}
+                  </div>
+                ) : pageItems.length > 0 ? (
+                  <div className="grid grid-cols-1 lg:grid-cols-3 gap-4 sm:gap-5">
+                    {pageItems.map((item) => (
+                      <motion.div
+                        key={item.id}
+                        whileHover={{ scale: 1.02, y: -4 }}
+                        className="card-kid p-5 sm:p-6 relative"
+                      >
+                        <div className="flex items-start gap-3 sm:gap-4">
+                          <motion.div className="flex-shrink-0" whileHover={{ rotate: 5 }}>
+                            {item.imageSrc ? (
+                              <img
+                                src={item.imageSrc}
+                                alt={item.author}
+                                className="w-10 h-10 sm:w-12 sm:h-12 rounded-full object-cover border"
+                              />
+                            ) : (
+                              <div className="w-10 h-10 sm:w-12 sm:h-12 rounded-full bg-gradient-to-br from-purple-400 to-purple-600 flex items-center justify-center text-white">
+                                <User className="w-5 h-5 sm:w-6 sm:h-6" />
+                              </div>
+                            )}
+                          </motion.div>
+
+                          <div className="flex-1 min-w-0">
+                            <div className="flex items-center justify-between flex-wrap gap-2">
+                              <div className="flex items-center gap-1">
+                                {[...Array(item.rating)].map((_, i) => (
+                                  <Star key={i} className="w-3 h-3 sm:w-4 sm:h-4 fill-yellow-400 text-yellow-400" />
+                                ))}
+                              </div>
+                              <p className="text-xs sm:text-sm text-slate-500">— {item.author}{item.location ? `, ${item.location}` : ''}</p>
+                            </div>
+                            <p className="text-slate-800 font-semibold text-sm sm:text-base mt-3 leading-relaxed">
+                              {item.quote}
+                            </p>
+                          </div>
+                        </div>
+
+                        {/* Speech-bubble tail */}
+                        <span
+                          aria-hidden
+                          className="absolute -bottom-3 left-10"
+                          style={{
+                            width: 0,
+                            height: 0,
+                            borderLeft: '14px solid transparent',
+                            borderRight: '14px solid transparent',
+                            borderTop: '14px solid white',
+                            filter: 'drop-shadow(0 4px 6px rgba(0,0,0,0.1))',
+                          }}
+                        />
+                      </motion.div>
+                    ))}
+                  </div>
+                ) : (
+                  <div className="card-kid p-5 sm:p-6 relative">
+                    <p className="text-center text-slate-500">No testimonials yet</p>
+                    <span
+                      aria-hidden
+                      className="absolute -bottom-3 left-10"
+                      style={{
+                        width: 0,
+                        height: 0,
+                        borderLeft: '14px solid transparent',
+                        borderRight: '14px solid transparent',
+                        borderTop: '14px solid white',
+                        filter: 'drop-shadow(0 4px 6px rgba(0,0,0,0.1))',
+                      }}
+                    />
+                  </div>
+                )}
               </motion.div>
-            ))}
+
+              <button
+                type="button"
+                onClick={goNext}
+                aria-label="Next testimonial"
+                className="p-2 rounded-xl bg-white border-2 border-purple-100 text-slate-700 hover:bg-slate-50 transition-all"
+              >
+                <ChevronRight className="w-5 h-5" />
+              </button>
+            </div>
+
+            {hydrated && pageCount > 1 && (
+              <div className="mt-4 flex items-center justify-center gap-2">
+                {Array.from({ length: pageCount }).map((_, i) => (
+                  <button
+                    key={i}
+                    type="button"
+                    onClick={() => setActivePage(i)}
+                    aria-label={`Go to testimonials set ${i + 1}`}
+                    className={`h-2.5 rounded-full transition-all ${i === safeActivePage ? 'w-6 bg-purple-600' : 'w-2.5 bg-purple-200'}`}
+                  />
+                ))}
+              </div>
+            )}
           </div>
         </motion.div>
 
@@ -181,15 +280,23 @@ export default function TestimonialsSection() {
         <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} className="mb-10">
           <h3 className="text-center text-xl sm:text-2xl font-extrabold mb-6">Student Project Gallery</h3>
           <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-3">
-            {useAppStore.getState().projects.slice(0, 8).map((p) => (
+            {(hydrated
+              ? projects.slice(0, 8)
+              : Array.from({ length: 8 }).map((_, idx) => ({
+                  id: `placeholder-${idx}`,
+                  title: '',
+                  studentName: '',
+                  emoji: '',
+                  imageSrc: null,
+                }))).map((p: any) => (
               <div key={p.id} className="rounded-xl overflow-hidden bg-white shadow-md p-3 flex flex-col items-center">
                 {p.imageSrc ? (
                   <img src={p.imageSrc} alt={p.title} className="w-full h-28 object-cover rounded-md mb-2" />
                 ) : (
-                  <div className="w-full h-28 rounded-md bg-gradient-to-br from-purple-200 to-pink-200 flex items-center justify-center text-3xl">{p.emoji}</div>
+                  <div className="w-full h-28 rounded-md bg-gradient-to-br from-purple-200 to-pink-200 flex items-center justify-center text-3xl">{hydrated ? p.emoji : ''}</div>
                 )}
-                <div className="text-sm font-bold text-slate-800 mt-2 text-center">{p.title}</div>
-                <div className="text-xs text-slate-500">by {p.studentName}</div>
+                <div className="text-sm font-bold text-slate-800 mt-2 text-center">{hydrated ? p.title : ''}</div>
+                <div className="text-xs text-slate-500">{hydrated ? `by ${p.studentName}` : ''}</div>
               </div>
             ))}
           </div>
