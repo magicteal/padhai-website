@@ -164,14 +164,14 @@ export default function AdminDashboard() {
                 className="flex items-center gap-4 p-3 rounded-xl hover:bg-purple-50 transition-colors"
               >
                 <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-blue-100 to-cyan-100 flex items-center justify-center text-2xl">
-                  {testimonial.type === 'video' ? '🎥' : '📝'}
+                  {'📝'}
                 </div>
                 <div className="flex-1 min-w-0">
                   <p className="font-medium text-slate-800 truncate">
-                    {testimonial.type === 'video' ? testimonial.author : testimonial.quote?.slice(0, 50) + '...'}
+                    {testimonial.quote?.slice(0, 60) + '...'}
                   </p>
                   <p className="text-sm text-slate-500">
-                    {testimonial.type === 'video' ? 'Video' : `${testimonial.author}, ${testimonial.location}`}
+                    {testimonial.author}{testimonial.location ? `, ${testimonial.location}` : ''}
                   </p>
                 </div>
                 <div className="flex items-center gap-1">

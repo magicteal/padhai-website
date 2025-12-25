@@ -138,7 +138,7 @@ const initialTestimonials: Testimonial[] = [
   },
   {
     id: '5',
-    quote: '"My daughter made her school project with AI — unbelievable!"',
+    quote: '"My daughter made her school project with AI, unbelievable!"',
     author: 'Parent',
     location: 'Koramangala',
     rating: 5,

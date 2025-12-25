@@ -1,7 +1,7 @@
 "use client";
 import React from 'react';
 import { motion } from 'framer-motion';
-import { Check, Sparkles, Star, Gift, Rocket, Lock, Users } from 'lucide-react';
+import { Check, Sparkles, Star, Gift, Rocket, Lock, Users, Phone } from 'lucide-react';
 import { useAppStore } from '@/lib/store';
 
 export default function CourseDetailsSection() {
@@ -36,16 +36,16 @@ export default function CourseDetailsSection() {
             <Gift className="w-7 h-7 text-purple-600" />
           </motion.div>
           <h2 className="text-2xl sm:text-3xl md:text-4xl font-extrabold gradient-text mb-2">
-            New Year Special Offer
+            January Special Launch
           </h2>
-          <p className="text-slate-600 text-sm sm:text-base">Limited time pricing for January 2025 batch</p>
+          <p className="text-slate-600 text-sm sm:text-base">Original Fee → ₹23,600 • Launch Price → ₹16,000 Only</p>
         </motion.div>
 
         {/* Parent testimonials placed before pricing to build trust */}
         <div className="flex justify-center mb-6">
           <div className="max-w-3xl w-full grid grid-cols-1 md:grid-cols-2 gap-4">
             {/** show up to 2 featured parent text testimonials */}
-            {useAppStore.getState().testimonials.filter(t => t.type === 'text' && t.featured).slice(0,2).map((t) => (
+            {useAppStore.getState().testimonials.filter(t => t.featured).slice(0,2).map((t) => (
               <div key={t.id} className="card-kid p-4 bg-white/90 rounded-2xl shadow-md">
                 <div className="flex items-start gap-3">
                   <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-purple-400 to-purple-500 flex items-center justify-center text-white">
@@ -149,7 +149,7 @@ export default function CourseDetailsSection() {
                   viewport={{ once: true }}
                   transition={{ delay: 0.2 }}
                 >
-                  <span className="text-slate-400 line-through text-lg sm:text-xl">₹22,600</span>
+                  <span className="text-slate-400 line-through text-lg sm:text-xl">₹23,600</span>
                 </motion.div>
                 <motion.h3 
                   className="text-4xl sm:text-5xl font-extrabold gradient-text"
@@ -161,6 +161,29 @@ export default function CourseDetailsSection() {
                   ₹16,000
                 </motion.h3>
                 <p className="text-slate-500 text-sm mt-1">One-time payment • No hidden fees</p>
+
+                {/* Urgency bullets below pricing */}
+                <ul className="mt-3 space-y-2 text-left">
+                  {[
+                    'Limited seats due to small batches',
+                    'Price increases after January',
+                    'Bangalore priority admissions',
+                  ].map((line, idx) => (
+                    <motion.li 
+                      key={idx}
+                      className="flex items-start gap-2 text-slate-700"
+                      initial={{ opacity: 0, x: -15 }}
+                      whileInView={{ opacity: 1, x: 0 }}
+                      viewport={{ once: true }}
+                      transition={{ delay: 0.25 + idx * 0.08 }}
+                    >
+                      <span className="mt-0.5 flex h-4 w-4 items-center justify-center rounded-full bg-green-500 flex-shrink-0">
+                        <Check className="h-3 w-3 text-white" strokeWidth={3} />
+                      </span>
+                      <span className="text-xs sm:text-sm">{line}</span>
+                    </motion.li>
+                  ))}
+                </ul>
               </div>
 
               {/* Features */}
@@ -189,7 +212,17 @@ export default function CourseDetailsSection() {
                 whileTap={{ scale: 0.98 }}
               >
                 <Rocket className="w-5 h-5" />
-                Enroll Now
+                Enroll at ₹16,000 (Limited Seats)
+              </motion.button>
+
+              {/* Secondary CTA */}
+              <motion.button 
+                className="mt-3 w-full px-6 py-3 rounded-2xl bg-white text-purple-700 font-bold hover:bg-purple-50 transition shadow-lg text-sm sm:text-base flex items-center justify-center gap-2 border-2 border-purple-200"
+                whileHover={{ scale: 1.03 }}
+                whileTap={{ scale: 0.98 }}
+              >
+                <Phone className="w-5 h-5" />
+                Book Free Parent Counselling Call
               </motion.button>
 
               {/* Trust indicators */}

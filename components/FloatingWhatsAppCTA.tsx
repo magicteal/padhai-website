@@ -34,8 +34,8 @@ export default function FloatingWhatsAppCTA() {
         </a>
 
         {/* Box appears only when the icon (peer) is hovered */}
-        <div className="pointer-events-none absolute bottom-16 right-0 w-[260px] sm:w-[300px] rounded-2xl bg-white/95 backdrop-blur border border-purple-100 shadow-lg shadow-purple-500/10 p-3 transform opacity-0 scale-95 translate-y-2 transition-all duration-200 ease-out peer-hover:opacity-100 peer-hover:scale-100 peer-hover:translate-y-0 peer-hover:pointer-events-auto">
-          <div className="text-sm font-extrabold text-purple-700">Free AI Counselling Call</div>
+        <div className="pointer-events-none absolute bottom-16 right-0 w-auto max-w-[180px] sm:max-w-[220px] rounded-xl bg-white/95 backdrop-blur border border-purple-100 shadow-lg shadow-purple-500/10 px-3 py-2 transform opacity-0 scale-95 translate-y-2 transition-all duration-200 ease-out peer-hover:opacity-100 peer-hover:scale-100 peer-hover:translate-y-0 peer-hover:pointer-events-auto">
+          <div className="text-xs font-bold text-purple-700">Free AI Counselling Call</div>
         </div>
       </div>
     </div>

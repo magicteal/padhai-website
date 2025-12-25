@@ -11,33 +11,39 @@ type FAQItem = {
 
 const FAQ_ITEMS: FAQItem[] = [
   {
-    question: 'Is AI safe for my child?',
-    answer: 'Yes! We use fully child-safe tools and strict guidance. Your child learns in a protected environment with age-appropriate content.',
+    question: 'Is AI really safe for my child?',
+    answer:
+      'Yes. We use child-safe, filtered AI tools designed for students, with no harmful content, no social media exposure, and no unsafe chats. Children learn only age-appropriate topics inside monitored live classes with trained mentors. Your child learns skills, not random internet browsing.',
     emoji: 'shield',
   },
   {
-    question: "My child doesn't know English properly.",
-    answer: 'No worries! Our trainers speak Kannada, Hindi, and English. We adapt to your child\'s comfort level.',
-    emoji: 'message',
-  },
-  {
-    question: 'My child is shy.',
-    answer: 'Perfect! We slowly build confidence through gentle interaction and small group activities. Many shy kids bloom here!',
-    emoji: 'sprout',
-  },
-  {
-    question: 'Will this help school studies?',
-    answer: 'Absolutely! Your child will use AI for homework, projects, better understanding, and creative assignments. Teachers will notice the difference!',
-    emoji: 'book',
-  },
-  {
     question: 'Will screen time increase?',
-    answer: 'Yes — but in a healthy, productive way! This is GOOD screen time focused on learning, creating, and building skills.',
+    answer:
+      'Screen time may increase, but it becomes good screen time. Instead of mindless scrolling, gaming addiction, or cartoon binge watching, your child will do projects, homework, creative building, science models, and design & presentations. We follow: Bad screen time → Good skill time.',
     emoji: 'clock',
   },
   {
+    question: 'My child is weak in studies. Will this help?',
+    answer:
+      'Yes, often these children improve the most. AI helps kids complete homework faster, understand concepts visually, build confidence, ask more questions, and enjoy learning. We do not judge marks; we unlock curiosity.',
+    emoji: 'book',
+  },
+  {
+    question: 'My child is shy or introvert. Will they be able to participate?',
+    answer:
+      'Yes. Many of our best performers were shy initially. We ensure small engaging batches, friendly teachers, camera-off comfort at the start, gradual confidence building, and appreciation-based learning. Confidence is built safely.',
+    emoji: 'sprout',
+  },
+  {
+    question: 'What exactly will my child learn in this course?',
+    answer:
+      'AI Skills: prompt writing; image & video creation; presentations with AI; homework assistance; chatbot usage; research using AI. Management & Life Skills: discipline; self-management; communication; goal clarity; curiosity; creativity; problem-solving. This is not just AI; it is mindset building.',
+    emoji: 'book',
+  },
+  {
     question: 'What if my child misses a class?',
-    answer: 'No problem! We provide full class recordings AND doubt-solving sessions so your child never falls behind.',
+    answer:
+      'No worries. We provide full class recordings, notes & assignments, and doubt-solving sessions, so your child never falls behind.',
     emoji: 'video',
   },
 ];

@@ -1,34 +1,39 @@
 "use client";
 import React from 'react';
 import { motion } from 'framer-motion';
-import { Sparkles, Brain, Award, Video, ShieldCheck, Users, Clock } from 'lucide-react';
+import { Sparkles, Brain, Award, BookOpen, Search, BarChart3, Presentation, Trophy, Star } from 'lucide-react';
 
 const CURRICULUM_MODULES = [
   {
-    title: 'AI Creativity & Prompting',
-    description: 'Kids learn how to use AI like a smart assistant to create stories, drawings, videos, and school assignments safely.',
+    title: 'AI Super Skills That Actually Matter',
+    description:
+      'Prompt writing, simple chatbot creation, image & video generation, homework help & assignment creation, presentations, stories & project designs, real-life skills, not theory.',
     icon: Sparkles,
     color: 'from-purple-500 to-violet-500',
   },
   {
-    title: 'Management for Kids',
-    description: 'Mind-Shaping Week teaching confidence, communication, time management, self-discipline, and habit building.',
+    title: 'Real-World & Future Skills (Kid Level)',
+    description:
+      'Creative problem solving, digital communication, brand & logo creation, marketing basics, innovation mindset, industry-relevant thinking in a kid-friendly way.',
     icon: Brain,
     color: 'from-purple-600 to-purple-400',
   },
   {
-    title: 'Final Project + Rewards',
-    description: 'Kids submit innovation projects (Science models, Storybooks, Game concepts) to win scholarships and kits.',
+    title: 'Personal Growth + Management Advantage',
+    description:
+      'Communication, presentation confidence, collaboration & teamwork, creative curiosity, focus & time management, plus balanced screen habits, task prioritisation, goal setting, discipline & self-confidence.',
     icon: Award,
     color: 'from-violet-500 to-purple-500',
   },
 ];
 
 const TRUST_FEATURES = [
-  { title: 'Live Classes', description: 'Interactive, not passive watching.', icon: Video },
-  { title: 'Safe Environment', description: 'Child-friendly tools only.', icon: ShieldCheck },
-  { title: 'Mentorship', description: 'Weekly doubt solving & guidance.', icon: Users },
-  { title: 'Bangalore Timings', description: 'Designed for busy schedules.', icon: Clock },
+  { title: 'Finish homework faster', description: 'Plan, research and draft efficiently.', icon: BookOpen },
+  { title: 'Understand concepts better', description: 'Clear explanations in simple language.', icon: Search },
+  { title: 'Make better projects', description: 'Improve structure, visuals and quality.', icon: BarChart3 },
+  { title: 'Present confidently in class', description: 'Practice talking points with cues.', icon: Presentation },
+  { title: 'Score better', description: 'Organised study with smart support.', icon: Trophy },
+  { title: 'Stand out in school exhibitions', description: 'Create polished, creative displays.', icon: Star },
 ];
 
 export default function Curriculum() {
@@ -58,7 +63,7 @@ export default function Curriculum() {
             <h2 className="text-2xl sm:text-3xl md:text-4xl font-extrabold mb-3 gradient-text">
               What Your Child Will Learn
             </h2>
-            <p className="text-slate-600 text-sm sm:text-base">A Future-Ready Skillset for Bangalore Kids</p>
+            <p className="text-slate-600 text-sm sm:text-base">The 360° Framework for Bangalore Kids</p>
           </motion.div>
 
           {/* Modules Grid */}
@@ -107,11 +112,10 @@ export default function Curriculum() {
             className="text-center mb-10 sm:mb-12"
           >
             <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-white mb-3">
-              Why PadhAi Club <span className="text-transparent bg-clip-text bg-gradient-to-r from-purple-300 to-purple-400">Works</span>
+              How This <span className="text-transparent bg-clip-text bg-gradient-to-r from-purple-300 to-purple-400">Helps School Performance</span>
             </h2>
             <p className="text-slate-300 text-sm sm:text-base">
-              Because we don't just teach AI — we teach{' '}
-              <span className="text-purple-300 font-bold">discipline, mindset, and values.</span>
+              <span className="opacity-90">Parents always ask:</span> <em className="not-italic">“Will this help my child in school?”</em> <span className="text-purple-200 font-bold">Yes, directly.</span>
             </p>
           </motion.div>
 
@@ -147,7 +151,7 @@ export default function Curriculum() {
             className="mt-10 text-center"
           >
             <p className="text-slate-300 text-sm sm:text-base">
-              Bangalore is India's tech hub — your child deserves world-class learning early.
+              AI becomes a learning partner, not a distraction.
             </p>
           </motion.div>
         </div>

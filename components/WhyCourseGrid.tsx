@@ -47,7 +47,7 @@ export default function WhyCourseGrid() {
               Real-World Project
             </h3>
             <p className="text-gray-700 leading-relaxed">
-              Every child builds a final innovation project—a brand, a robot concept, or a research paper.
+              Every child builds a final innovation project: a brand, a robot concept, or a research paper.
             </p>
           </div>
         </div>

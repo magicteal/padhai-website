@@ -31,13 +31,13 @@ export default function HomeBottomButtonsCTA() {
   if (!toWaMeNumber(number)) return null;
 
   return (
-    <section className="py-10 sm:py-12 bg-gradient-to-b from-purple-50 via-white to-purple-50">
+    <section className="py-10 sm:py-12 bg-gradient-to-b from-purple-50 via-transparent to-purple-50">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <motion.div
           initial={{ opacity: 0, y: 16 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          className="card-kid p-5 sm:p-6"
+          className="p-5 sm:p-6 bg-transparent"
         >
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-3 sm:gap-4">
             <motion.a

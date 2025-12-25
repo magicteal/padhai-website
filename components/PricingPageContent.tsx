@@ -90,7 +90,7 @@ export default function PricingPageContent() {
         >
           <div className="space-y-4 text-center">
             <p className="text-sm sm:text-base text-slate-700">
-              At PadhAi Club, we don&apos;t sell "AI classes". We help children convert screen time into real-life skills, confidence, and clarity — safely and responsibly.
+              At PadhAi Club, we don&apos;t sell "AI classes". We help children convert screen time into real-life skills, confidence, and clarity, safely and responsibly.
             </p>
             <p className="text-base sm:text-lg text-slate-800 font-bold">
               That&apos;s why our pricing includes mentorship, guidance, safety, projects, and parent involvement, not just videos.

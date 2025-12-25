@@ -34,7 +34,7 @@ export default function UrgencySection() {
           <div className="flex flex-col lg:flex-row lg:items-center lg:justify-between gap-5">
             <div>
               <h2 className="text-xl sm:text-2xl font-extrabold text-slate-900">
-                <span className="gradient-text">Urgency</span> — secure your child’s spot
+                <span className="gradient-text">Urgency</span>: secure your child’s spot
               </h2>
               <p className="mt-1 text-sm sm:text-base text-slate-600">
                 Our main goal is to get you on a quick call and recommend the right batch.

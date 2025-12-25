@@ -206,7 +206,7 @@ export default function TestimonialsSection() {
                                   <Star key={i} className="w-3 h-3 sm:w-4 sm:h-4 fill-yellow-400 text-yellow-400" />
                                 ))}
                               </div>
-                              <p className="text-xs sm:text-sm text-slate-500">— {item.author}{item.location ? `, ${item.location}` : ''}</p>
+                              <p className="text-xs sm:text-sm text-slate-500">{item.author}{item.location ? `, ${item.location}` : ''}</p>
                             </div>
                             <p className="text-slate-800 font-semibold text-sm sm:text-base mt-3 leading-relaxed">
                               {item.quote}
@@ -322,7 +322,7 @@ export default function TestimonialsSection() {
               </motion.div>
               <div className="text-center sm:text-left">
                 <p className="text-slate-900 font-extrabold text-base sm:text-lg">
-                  Supported by <span className="gradient-text">13,000+</span> Bangalore Families
+                  Supported by <span className="gradient-text">13,000+</span> Families
                 </p>
               </div>
             </div>

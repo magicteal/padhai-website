@@ -103,14 +103,14 @@ export default function WhyAIContentSection() {
           <div className="space-y-4 text-center">
             <p className="text-sm sm:text-base text-slate-700">
               AI is no longer a "future technology". It is already part of schools, jobs, creativity, and
-              daily life — especially in cities like Bangalore.
+              daily life, especially in cities like Bangalore.
             </p>
             <p className="text-sm sm:text-base text-slate-700">
               Your child doesn&apos;t need to become a programmer. They need to learn how to think, ask,
               create, and use technology wisely.
             </p>
             <p className="text-base sm:text-lg text-slate-800 font-bold">
-              That&apos;s exactly what AI helps with — when taught correctly.
+              That&apos;s exactly what AI helps with, when taught correctly.
             </p>
           </div>
         </motion.div>
@@ -321,7 +321,7 @@ export default function WhyAIContentSection() {
           </motion.div>
 
           <p className="text-center text-sm sm:text-base text-slate-700 font-medium max-w-2xl mx-auto">
-            AI adapts to the child — <span className="font-bold text-slate-900">not the other way around.</span>
+            AI adapts to the child, <span className="font-bold text-slate-900">not the other way around.</span>
           </p>
         </div>
 
@@ -445,7 +445,7 @@ export default function WhyAIContentSection() {
             AI is not replacing learning. AI is supporting better learning.
           </p>
           <p className="relative z-10 text-base sm:text-lg max-w-3xl mx-auto text-white/90">
-            When taught safely, slowly, and with guidance — AI becomes a <span className="font-bold">superpower</span> for your child.
+            When taught safely, slowly, and with guidance, AI becomes a <span className="font-bold">superpower</span> for your child.
           </p>
         </motion.div>
       </div>
