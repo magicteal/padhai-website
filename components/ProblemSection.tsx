@@ -62,8 +62,7 @@ export default function ProblemSection() {
   return (
     <section
       id="problem"
-      className="py-12 sm:py-16 md:py-24 relative overflow-hidden bg-cover bg-center"
-      style={{ backgroundImage: 'url(/images/problemsection.png)' }}
+      className="py-12 sm:py-16 md:py-24 relative overflow-hidden bg-cover bg-center bg-[url('/images/problemsection.png')]"
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         {/* Header */}

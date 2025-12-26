@@ -155,9 +155,8 @@ export default function Footer() {
               © {new Date().getFullYear()} PadhAi Club. Made with <Heart className="w-4 h-4 text-pink-400 fill-pink-400" /> in Bangalore
             </p>
             <div className="flex gap-4 sm:gap-6 text-xs sm:text-sm text-white/60">
-              <a href="#" className="hover:text-white transition">Privacy</a>
-              <a href="#" className="hover:text-white transition">Terms</a>
-              <a href="#" className="hover:text-white transition">Refund</a>
+              <Link href="/privacy" className="hover:text-white transition">Privacy</Link>
+              <Link href="/terms" className="hover:text-white transition">Terms</Link>
             </div>
           </div>
           <p className="text-white/40 text-xs text-center mt-4 flex items-center justify-center gap-2">

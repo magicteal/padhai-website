@@ -1,3 +1,4 @@
+"use client";
 import { FaWhatsapp } from "react-icons/fa";
 
 function toWaMeNumber(input: string) {
@@ -19,25 +20,56 @@ export default function FloatingWhatsAppCTA() {
 
   if (!toWaMeNumber(number)) return null;
 
+  const text = "Free AI Counselling Call • ";
+
   return (
     <div className="fixed bottom-6 right-6 z-50">
-      <div className="relative flex items-end">
-        {/* Icon is the peer that controls the box visibility */}
+      {/* Circular rotating text around icon */}
+      <div className="relative w-28 h-28 flex items-center justify-center">
+        {/* Rotating text circle */}
+        <svg 
+          className="absolute w-full h-full animate-spin-slow"
+          viewBox="0 0 100 100"
+        >
+          <defs>
+            <path
+              id="circlePath"
+              d="M 50, 50 m -37, 0 a 37,37 0 1,1 74,0 a 37,37 0 1,1 -74,0"
+              fill="none"
+            />
+          </defs>
+          <text className="text-[9px] font-bold fill-purple-700 uppercase tracking-wider">
+            <textPath href="#circlePath" startOffset="0%">
+              {text}{text}
+            </textPath>
+          </text>
+        </svg>
+
+        {/* WhatsApp Icon */}
         <a
           href={genericUrl}
           target="_blank"
           rel="noopener noreferrer"
           aria-label="Chat on WhatsApp"
-          className="peer h-14 w-14 rounded-full bg-gradient-to-br from-purple-600 via-violet-600 to-fuchsia-600 shadow-lg shadow-purple-500/30 flex items-center justify-center hover:scale-105 active:scale-95 transition animate-bounce-slow"
+          className="h-14 w-14 rounded-full bg-gradient-to-br from-purple-600 via-violet-600 to-fuchsia-600 shadow-lg shadow-purple-500/30 flex items-center justify-center hover:scale-110 active:scale-95 transition-transform"
         >
           <FaWhatsapp className="h-7 w-7 text-white" />
         </a>
-
-        {/* Box appears only when the icon (peer) is hovered */}
-        <div className="pointer-events-none absolute bottom-16 right-0 w-auto max-w-[180px] sm:max-w-[220px] rounded-xl bg-white/95 backdrop-blur border border-purple-100 shadow-lg shadow-purple-500/10 px-3 py-2 transform opacity-0 scale-95 translate-y-2 transition-all duration-200 ease-out peer-hover:opacity-100 peer-hover:scale-100 peer-hover:translate-y-0 peer-hover:pointer-events-auto">
-          <div className="text-xs font-bold text-purple-700">Free AI Counselling Call</div>
-        </div>
       </div>
+
+      <style jsx>{`
+        @keyframes spin-slow {
+          from {
+            transform: rotate(0deg);
+          }
+          to {
+            transform: rotate(360deg);
+          }
+        }
+        .animate-spin-slow {
+          animation: spin-slow 10s linear infinite;
+        }
+      `}</style>
     </div>
   );
 }

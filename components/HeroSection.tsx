@@ -14,11 +14,11 @@ export default function HeroSection({
   bgImage = "/images/heroImage.svg",
 }: HeroSectionProps) {
   const features = [
-    { icon: Sparkles, text: "Learn AI Tools, Prompting & Creative Problem Solving", color: "text-yellow-300" },
-    { icon: Star, text: "Real-World Skills: Chatbots, Storytelling, Projects", color: "text-pink-300" },
-    { icon: Rocket, text: "Management Learning: Focus, Discipline, Time Skills", color: "text-cyan-300" },
-    { icon: CheckCircle, text: "Homework Help, Confidence & Classroom Advantage", color: "text-green-300" },
-    { icon: Gift, text: "Final Showcase + Certificate + Scholarship", color: "text-purple-300" },
+    { icon: Sparkles, text: "Learn AI Tools, Prompting & Creative Problem Solving", color: "text-yellow-300", mobileText: "AI Tools & Creative Problem Solving", showOnMobile: true },
+    { icon: Star, text: "Real-World Skills: Chatbots, Storytelling, Projects", color: "text-pink-300", mobileText: "Chatbots, Storytelling & Projects", showOnMobile: true },
+    { icon: Rocket, text: "Management Learning: Focus, Discipline, Time Skills", color: "text-cyan-300", mobileText: "Focus, Discipline & Time Skills", showOnMobile: false },
+    { icon: CheckCircle, text: "Homework Help, Confidence & Classroom Advantage", color: "text-green-300", mobileText: "Homework Help & Confidence", showOnMobile: true },
+    { icon: Gift, text: "Final Showcase + Certificate + Scholarship", color: "text-purple-300", mobileText: "Certificate + Scholarship", showOnMobile: false },
   ];
 
   const cards = [
@@ -59,30 +59,30 @@ export default function HeroSection({
         }
       `}</style>
 
-      {/* Black overlay for mobile only */}
-      <div className="sm:hidden absolute inset-0 bg-black/50 z-0"></div>
+      {/* Gradient overlay for mobile only - better readability */}
+      <div className="sm:hidden absolute inset-0 bg-gradient-to-b from-black/60 via-black/50 to-purple-900/70 z-0"></div>
 
-      {/* Animated background elements */}
-      <div className="absolute inset-0 overflow-hidden pointer-events-none">
+      {/* Animated background elements - Hidden on mobile for cleaner look */}
+      <div className="hidden sm:block absolute inset-0 overflow-hidden pointer-events-none">
         <motion.div 
-          className="absolute top-20 left-10 w-20 sm:w-32 h-20 sm:h-32 bg-purple-400/20 rounded-full blur-2xl"
+          className="absolute top-20 left-10 w-32 h-32 bg-purple-400/20 rounded-full blur-2xl"
           animate={{ y: [0, 20, 0], scale: [1, 1.1, 1] }}
           transition={{ repeat: Infinity, duration: 5 }}
         />
         <motion.div 
-          className="absolute bottom-40 right-20 w-24 sm:w-40 h-24 sm:h-40 bg-fuchsia-400/20 rounded-full blur-3xl"
+          className="absolute bottom-40 right-20 w-40 h-40 bg-fuchsia-400/20 rounded-full blur-3xl"
           animate={{ y: [0, -30, 0], scale: [1, 1.2, 1] }}
           transition={{ repeat: Infinity, duration: 7, delay: 1 }}
         />
         <motion.div 
-          className="absolute top-1/2 left-1/4 w-16 sm:w-24 h-16 sm:h-24 bg-yellow-400/10 rounded-full blur-2xl"
+          className="absolute top-1/2 left-1/4 w-24 h-24 bg-yellow-400/10 rounded-full blur-2xl"
           animate={{ x: [0, 20, 0] }}
           transition={{ repeat: Infinity, duration: 6, delay: 2 }}
         />
       </div>
 
       <div className="relative z-10">
-        <div className="max-w-7xl mx-auto px-4 py-6 sm:py-12 md:py-20 lg:py-28">
+        <div className="max-w-7xl mx-auto px-5 py-8 sm:py-12 md:py-20 lg:py-28">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12 items-center">
             {/* LEFT CONTENT */}
             <motion.div 
@@ -96,56 +96,56 @@ export default function HeroSection({
                 initial={{ opacity: 0, y: -20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: 0.2 }}
-                className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/10 backdrop-blur-sm border border-white/20 mb-4 sm:mb-6"
+                className="inline-flex items-center gap-2 px-3 sm:px-4 py-1.5 sm:py-2 rounded-full bg-white/15 backdrop-blur-md border border-white/30 mb-5 sm:mb-6 shadow-lg"
               >
-                <Star className="w-4 h-4 text-yellow-300" />
-                <span className="text-white text-xs sm:text-sm font-medium">Bangalore's #1 AI Course for Kids</span>
+                <Star className="w-3.5 h-3.5 sm:w-4 sm:h-4 text-yellow-300 fill-yellow-300" />
+                <span className="text-white text-[11px] sm:text-sm font-semibold">#1 AI Course for Kids</span>
               </motion.div>
 
-              <h1 className="text-xl sm:text-3xl md:text-4xl lg:text-5xl xl:text-6xl font-extrabold leading-tight">
+              <h1 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl xl:text-6xl font-extrabold leading-tight">
                 <motion.span 
-                  className="block text-white text-sm sm:text-xl md:text-2xl lg:text-3xl xl:text-4xl mb-2 text-outline-purple"
+                  className="block text-white/90 text-base sm:text-xl md:text-2xl lg:text-3xl xl:text-4xl mb-1 sm:mb-2"
                   initial={{ opacity: 0, y: 20 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ delay: 0.3 }}
                 >
-                  Turn Your Child's Screen Time Into
+                  Turn Screen Time Into
                 </motion.span>
                 <motion.span 
-                  className="block text-purple-900 text-outline-purple"
-                  style={{ WebkitTextStroke: '0.5px white', WebkitTextFillColor: '#4c1d95', textShadow: '0 1px 0 rgba(255,255,255,0.12)' }}
+                  className="block bg-gradient-to-r from-yellow-300 via-pink-300 to-purple-300 bg-clip-text text-transparent drop-shadow-lg"
                   initial={{ opacity: 0, y: 20 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ delay: 0.4 }}
                 >
-                  Future-Ready Skill Time
+                  Future-Ready Skills
                 </motion.span>
               </h1>
 
               <motion.p 
-                className="mt-3 sm:mt-4 text-sm sm:text-lg md:text-xl text-white/90 font-semibold max-w-xl mx-auto lg:mx-0"
+                className="mt-3 sm:mt-4 text-sm sm:text-lg md:text-xl text-white font-bold max-w-xl mx-auto lg:mx-0"
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
                 transition={{ delay: 0.5 }}
               >
-                AI + Real Life Skills + Management Program
+                <span className="hidden sm:inline">AI + Real Life Skills + Management Program</span>
+                <span className="sm:hidden">AI + Life Skills + Management</span>
               </motion.p>
 
-              <motion.p 
-                className="mt-2 sm:mt-3 text-xs sm:text-base text-white/80 max-w-xl mx-auto lg:mx-0"
+              <motion.div 
+                className="mt-3 sm:mt-3 flex items-center justify-center lg:justify-start gap-2"
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
                 transition={{ delay: 0.6 }}
               >
-                Live Online Course Designed for Bangalore Kids{" "}
-                <span className="inline-block px-3 py-1 bg-gradient-to-r from-purple-500 to-fuchsia-500 rounded-full text-white text-xs sm:text-sm">
-                  (5–14 yrs)
+                <span className="text-white/80 text-xs sm:text-base">Live Online Course</span>
+                <span className="px-2.5 sm:px-3 py-1 bg-gradient-to-r from-purple-500 to-fuchsia-500 rounded-full text-white text-[10px] sm:text-sm font-semibold shadow-lg">
+                  Ages 5–14
                 </span>
-              </motion.p>
+              </motion.div>
 
-              {/* Features List */}
+              {/* Features List - Condensed on mobile */}
               <motion.ul 
-                className="mt-4 sm:mt-6 space-y-1 sm:space-y-3 max-w-xl mx-auto lg:mx-0"
+                className="mt-5 sm:mt-6 space-y-2.5 sm:space-y-3 max-w-xl mx-auto lg:mx-0"
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
                 transition={{ delay: 0.7 }}
@@ -153,15 +153,18 @@ export default function HeroSection({
                 {features.map((feature, idx) => (
                   <motion.li 
                     key={idx}
-                    className="flex items-center gap-3 justify-center lg:justify-start"
+                    className={`flex items-center gap-2.5 sm:gap-3 justify-center lg:justify-start ${!feature.showOnMobile ? 'hidden sm:flex' : ''}`}
                     initial={{ opacity: 0, x: -20 }}
                     animate={{ opacity: 1, x: 0 }}
                     transition={{ delay: 0.8 + idx * 0.1 }}
                   >
-                    <div className={`p-1.5 rounded-lg bg-white/10 ${feature.color}`}>
-                      <feature.icon className="w-4 h-4" />
+                    <div className={`p-1.5 sm:p-2 rounded-lg bg-white/15 backdrop-blur-sm ${feature.color} shadow-sm`}>
+                      <feature.icon className="w-3.5 h-3.5 sm:w-4 sm:h-4" />
                     </div>
-                    <span className="text-white text-xs sm:text-base">{feature.text}</span>
+                    <span className="text-white text-[11px] sm:text-base font-medium">
+                      <span className="hidden sm:inline">{feature.text}</span>
+                      <span className="sm:hidden">{feature.mobileText}</span>
+                    </span>
                   </motion.li>
                 ))}
               </motion.ul>
@@ -174,48 +177,50 @@ export default function HeroSection({
                 transition={{ delay: 1 }}
               >
                 <motion.button
-                  className="w-full sm:w-auto btn-primary flex items-center justify-center gap-2 text-xs sm:text-base"
+                  className="w-full sm:w-auto px-6 py-3.5 sm:py-3 rounded-xl bg-gradient-to-r from-green-500 to-emerald-500 text-white font-bold shadow-xl shadow-green-500/30 flex items-center justify-center gap-2 text-sm sm:text-base"
                   whileHover={{ scale: 1.03 }}
                   whileTap={{ scale: 0.98 }}
                 >
                   <Phone className="w-4 h-4" />
                   <span>Book Free Counselling</span>
+                  <ArrowRight className="w-4 h-4 hidden sm:block" />
                 </motion.button>
                 <motion.button
-                  className="w-full sm:w-auto px-6 py-3 rounded-xl bg-white text-purple-600 font-bold hover:bg-purple-50 transition shadow-lg text-xs sm:text-base flex items-center gap-2 border-2 border-purple-200"
+                  className="w-full sm:w-auto px-6 py-3 rounded-xl bg-white/95 text-purple-700 font-bold hover:bg-white transition shadow-lg text-sm sm:text-base flex items-center justify-center gap-2"
                   whileHover={{ scale: 1.03 }}
                   whileTap={{ scale: 0.98 }}
                 >
-                  <Gift className="w-4 h-4" />
-                  January Offer
+                  <Gift className="w-4 h-4 text-purple-500" />
+                  <span className="hidden sm:inline">January Offer</span>
+                  <span className="sm:hidden">View Offer</span>
                 </motion.button>
               </motion.div>
             </motion.div>
 
-            {/* RIGHT - Illustration Area */}
-            <motion.div 
-              className="relative hidden lg:block"
-              initial={{ opacity: 0, x: 30 }}
-              animate={{ opacity: 1, x: 0 }}
-              transition={{ duration: 0.6, delay: 0.3 }}
-            >
-              <div className="relative mx-auto w-full max-w-md h-64 md:h-80 lg:h-96 flex items-center justify-center">
-                {illustration ?? (
-                  <div className="w-full h-full flex items-center justify-center">
-                    {/* <motion.div 
-                      className="text-center"
-                      animate={{ y: [0, -10, 0] }}
-                      transition={{ repeat: Infinity, duration: 3 }}
-                    >
-                      <span className="text-8xl block mb-4">🧒</span>
-                      <span className="text-6xl">💻</span>
-                    </motion.div> */}
-                  </div>
-                )}
-              </div>
-            </motion.div>
+        
           </div>
         </div>
+
+        {/* January Offer Box - Mobile Version */}
+        <motion.div 
+          className="sm:hidden px-4 pb-6"
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: 1.1 }}
+        >
+          <div className="bg-gradient-to-r from-yellow-400 via-orange-400 to-pink-500 rounded-2xl p-4 border border-white/30 shadow-xl">
+            <div className="flex items-center gap-3">
+              <div className="p-2.5 bg-white/20 backdrop-blur-sm rounded-xl">
+                <Gift className="w-5 h-5 text-white" />
+              </div>
+              <div className="flex-1">
+                <p className="text-white font-bold text-sm">🎉 January Special Offer</p>
+                <p className="text-white/90 text-xs mt-0.5">Enroll now & get exclusive discounts!</p>
+              </div>
+              <Sparkles className="w-5 h-5 text-white/80" />
+            </div>
+          </div>
+        </motion.div>
 
         {/* Bottom Feature Cards - Hidden on Mobile */}
         <div className="hidden sm:block relative pb-8 sm:pb-12">
