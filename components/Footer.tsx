@@ -1,14 +1,11 @@
 "use client";
 import { motion } from 'framer-motion';
-import { Mail, Phone, MapPin, Facebook, Instagram, Linkedin, Youtube, Heart, Link2, BookOpen, Globe, Users } from 'lucide-react';
+import { Mail, Phone, MapPin, Instagram, Heart, Link2, BookOpen, Globe, Users } from 'lucide-react';
 import Link from 'next/link';
 
 export default function Footer() {
   const socialLinks = [
-    { icon: Facebook, href: "#", label: "Facebook" },
-    { icon: Instagram, href: "#", label: "Instagram" },
-    { icon: Linkedin, href: "#", label: "LinkedIn" },
-    { icon: Youtube, href: "#", label: "YouTube" },
+    { icon: Instagram, href: "https://www.instagram.com/padhai.club", label: "Instagram" },
   ];
 
   return (
@@ -88,14 +85,14 @@ export default function Footer() {
             <ul className="space-y-3 text-center sm:text-left">
               <li className="flex items-start gap-3 text-sm text-white/80 justify-center sm:justify-start">
                 <Mail className="w-4 h-4 sm:w-5 sm:h-5 shrink-0 mt-0.5 text-purple-300" />
-                <a href="mailto:hello@padhaiclub.com" className="hover:text-white transition">
-                  hello@padhaiclub.com
+                <a href="mailto:support@padhaiclub.com" className="hover:text-white transition">
+                  support@padhaiclub.com
                 </a>
               </li>
               <li className="flex items-start gap-3 text-sm text-white/80 justify-center sm:justify-start">
                 <Phone className="w-4 h-4 sm:w-5 sm:h-5 shrink-0 mt-0.5 text-purple-300" />
-                <a href="tel:+919876543210" className="hover:text-white transition">
-                  +91 98765 43210
+                <a href="tel:+917849878567" className="hover:text-white transition">
+                  +91 78498 78567
                 </a>
               </li>
               <li className="flex items-start gap-3 text-sm text-white/80 justify-center sm:justify-start">
@@ -123,9 +120,9 @@ export default function Footer() {
               ))}
             </ul>
 
-            <h4 className="font-bold mb-3 text-sm flex items-center gap-2 justify-center sm:justify-start">
+            {/* <h4 className="font-bold mb-3 text-sm flex items-center gap-2 justify-center sm:justify-start">
               <Globe className="w-4 h-4" /> Follow Us
-            </h4>
+            </h4> */}
             <div className="flex gap-2 sm:gap-3 justify-center sm:justify-start">
               {socialLinks.map((social, idx) => (
                 <motion.a

@@ -13,8 +13,8 @@ function buildWhatsAppUrl(numberRaw: string, message?: string) {
   return `${base}?text=${encodeURIComponent(message)}`;
 }
 
-export default function LeadCapturePopup() {
-  const [visible, setVisible] = useState(false);
+export default function LeadCapturePopup({ onClose }: { onClose?: () => void }) {
+  const [visible, setVisible] = useState(true);
   const [dismissed, setDismissed] = useState(false);
 
   const [parentName, setParentName] = useState("");
@@ -23,6 +23,8 @@ export default function LeadCapturePopup() {
 
   useEffect(() => {
     if (typeof window === "undefined") return;
+    // Skip auto-show logic if onClose is provided (controlled externally)
+    if (onClose) return;
 
     let fired = false;
     const delayMs = 8000; // fixed 8 sec
@@ -55,6 +57,7 @@ export default function LeadCapturePopup() {
   const close = () => {
     setVisible(false);
     setDismissed(true);
+    onClose?.();
   };
 
   const onSubmit = (e: React.FormEvent<HTMLFormElement>) => {

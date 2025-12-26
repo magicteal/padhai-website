@@ -1,8 +1,10 @@
 "use client";
-import React from "react";
+import React, { useState } from "react";
 import { motion } from "framer-motion";
 import { CheckCircle, Sparkles, Star, Rocket, Shield, Palette, Phone, Gift, ArrowRight } from "lucide-react";
 import HomeJanuaryOfferBox from "@/components/HomeJanuaryOfferBox";
+import LeadCapturePopup from "@/components/LeadCapturePopup";
+import DemoBookingPopup from "@/components/DemoBookingPopup";
 
 type HeroSectionProps = {
   illustration?: React.ReactNode;
@@ -13,6 +15,9 @@ export default function HeroSection({
   illustration,
   bgImage = "/images/heroImage.svg",
 }: HeroSectionProps) {
+  const [showPopup, setShowPopup] = useState(false);
+  const [showDemoPopup, setShowDemoPopup] = useState(false);
+
   const features = [
     { icon: Sparkles, text: "Learn AI Tools, Prompting & Creative Problem Solving", color: "text-yellow-300", mobileText: "AI Tools & Creative Problem Solving", showOnMobile: true },
     { icon: Star, text: "Real-World Skills: Chatbots, Storytelling, Projects", color: "text-pink-300", mobileText: "Chatbots, Storytelling & Projects", showOnMobile: true },
@@ -96,15 +101,15 @@ export default function HeroSection({
                 initial={{ opacity: 0, y: -20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: 0.2 }}
-                className="inline-flex items-center gap-2 px-3 sm:px-4 py-1.5 sm:py-2 rounded-full bg-white/15 backdrop-blur-md border border-white/30 mb-5 sm:mb-6 shadow-lg"
+                className="inline-flex items-center gap-1 sm:gap-2 px-2 sm:px-4 py-1 sm:py-2 rounded-full bg-white/15 backdrop-blur-md border border-white/30 mb-5 sm:mb-6 shadow-lg"
               >
-                <Star className="w-3.5 h-3.5 sm:w-4 sm:h-4 text-yellow-300 fill-yellow-300" />
-                <span className="text-white text-[11px] sm:text-sm font-semibold">#1 AI Course for Kids</span>
+                <Star className="w-3 h-3 sm:w-4 sm:h-4 text-yellow-300 fill-yellow-300" />
+                <span className="text-white text-[9px] sm:text-sm font-semibold">#1 AI Course for Kids</span>
               </motion.div>
 
               <h1 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl xl:text-6xl font-extrabold leading-tight">
                     <motion.span 
-                  className="block text-white text-sm sm:text-xl md:text-2xl lg:text-3xl xl:text-4xl mb-2 text-outline-purple"
+                  className="block text-white text-sm sm:text-xl md:text-2xl lg:text-3xl xl:text-4xl mb-2 text-outline-purple font-normal sm:font-extrabold"
                   initial={{ opacity: 0, y: 20 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ delay: 0.3 }}
@@ -112,7 +117,7 @@ export default function HeroSection({
                   Turn Your Child's Screen Time Into
                 </motion.span>
                 <motion.span 
-                  className="block text-purple-900 text-outline-purple"
+                  className="block text-purple-900 text-outline-purple text-4xl sm:text-3xl md:text-4xl lg:text-5xl xl:text-6xl"
                   style={{ WebkitTextStroke: '0.5px white', WebkitTextFillColor: '#4c1d95', textShadow: '0 1px 0 rgba(255,255,255,0.12)' }}
                   initial={{ opacity: 0, y: 20 }}
                   animate={{ opacity: 1, y: 0 }}
@@ -123,13 +128,12 @@ export default function HeroSection({
               </h1>
 
               <motion.p 
-                className="mt-3 sm:mt-4 text-sm sm:text-lg md:text-xl text-white font-bold max-w-xl mx-auto lg:mx-0"
+                className="hidden sm:block mt-3 sm:mt-4 text-sm sm:text-lg md:text-xl text-white font-bold max-w-xl mx-auto lg:mx-0"
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
                 transition={{ delay: 0.5 }}
               >
-                <span className="hidden sm:inline">AI + Real Life Skills + Management Program</span>
-                <span className="sm:hidden">AI + Life Skills + Management</span>
+                AI + Real Life Skills + Management Program
               </motion.p>
 
               <motion.div 
@@ -139,7 +143,7 @@ export default function HeroSection({
                 transition={{ delay: 0.6 }}
               >
                 <span className="text-white/80 text-xs sm:text-base">Live Online Course</span>
-                <span className="px-2.5 sm:px-3 py-1 bg-gradient-to-r from-purple-500 to-fuchsia-500 rounded-full text-white text-[10px] sm:text-sm font-semibold shadow-lg">
+                <span className="px-1.5 sm:px-3 py-0.5 sm:py-1 bg-gradient-to-r from-purple-500 to-fuchsia-500 rounded-full text-white text-[8px] sm:text-sm font-semibold shadow-lg">
                   Ages 5–14
                 </span>
               </motion.div>
@@ -172,42 +176,55 @@ export default function HeroSection({
 
               {/* CTA Buttons */}
               <motion.div 
-                className="mt-6 sm:mt-8 flex flex-col sm:flex-row items-center justify-center lg:justify-start gap-3 sm:gap-4"
+                className="mt-28 sm:mt-10 flex flex-row items-center justify-center lg:justify-start gap-2 sm:gap-4"
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: 1 }}
               >
                 <motion.button
-                  className="w-full sm:w-auto px-6 py-3.5 sm:py-3 rounded-xl bg-purple-900 text-white font-bold shadow-xl shadow-green-500/30 flex items-center justify-center gap-2 text-sm sm:text-base"
+                  onClick={() => setShowPopup(true)}
+                  className="flex-1 sm:flex-none sm:w-auto px-3 sm:px-6 py-2 sm:py-3 rounded-lg sm:rounded-xl bg-purple-900 text-white font-bold shadow-xl shadow-green-500/30 flex items-center justify-center gap-1 sm:gap-2 text-xs sm:text-base"
                   whileHover={{ scale: 1.03 }}
                   whileTap={{ scale: 0.98 }}
                 >
-                  <Phone className="w-4 h-4" />
-                  <span>Book Free Counselling</span>
-                  <ArrowRight className="w-4 h-4 hidden sm:block" />
+                  <Phone className="w-3 h-3 sm:w-4 sm:h-4" />
+                  <span className="hidden sm:inline">Free Guidance Call </span>
+                  <span className="sm:hidden">Book Free Call</span>
+                  <ArrowRight className="w-3 h-3 sm:w-4 sm:h-4 hidden sm:block" />
                 </motion.button>
                 <motion.button
-                  className="w-full sm:w-auto px-6 py-3 rounded-xl bg-white/95 text-purple-700 font-bold hover:bg-white transition shadow-lg text-sm sm:text-base flex items-center justify-center gap-2"
+                  onClick={() => setShowDemoPopup(true)}
+                  className="flex-1 sm:flex-none sm:w-auto px-3 sm:px-6 py-2 sm:py-3 rounded-lg sm:rounded-xl bg-white/95 text-purple-700 font-bold hover:bg-white transition shadow-lg text-xs sm:text-base flex items-center justify-center gap-1 sm:gap-2"
                   whileHover={{ scale: 1.03 }}
                   whileTap={{ scale: 0.98 }}
                 >
-                  <Gift className="w-4 h-4 text-purple-500" />
-                  <span className="hidden sm:inline">January Offer</span>
-                  <span className="sm:hidden">View Offer</span>
+                  <Gift className="w-3 h-3 sm:w-4 sm:h-4 text-purple-500" />
+                  <span>Book a Demo Seat</span>
                 </motion.button>
               </motion.div>
+
+              {/* January Offer Box - Below buttons on mobile */}
+              <div className="mt-5 sm:hidden scale-90">
+                <HomeJanuaryOfferBox 
+                  variant="bare" 
+                  text="New Year Offer: ₹23,600 → ₹16,000, Only 60 Bangalore seats for January batch" 
+                />
+              </div>
             </motion.div>
 
-        
+            {/* Right side grid column - hidden on mobile, empty spacer on desktop */}
+            <div className="hidden lg:block"></div>
           </div>
         </div>
 
-  
-        
+        {/* January Offer Box - Desktop position */}
+        <div className="hidden sm:block mb-4 sm:mt-2 sm:mb-6">
+          <HomeJanuaryOfferBox 
+            variant="bare" 
+            text="New Year Offer: ₹23,600 → ₹16,000 | Only 60 Bangalore seats for January batch" 
+          />
+        </div>
 
-            <div className="mb-4 sm:-mt-4 sm:mb-6">
-              <HomeJanuaryOfferBox variant="bare" />
-            </div>
         {/* Bottom Feature Cards - Hidden on Mobile */}
         <div className="hidden sm:block relative pb-8 sm:pb-12">
           <div className="max-w-7xl mx-auto px-4">
@@ -247,7 +264,8 @@ export default function HeroSection({
        
       </div>
 
-      
+      {showPopup && <LeadCapturePopup onClose={() => setShowPopup(false)} />}
+      {showDemoPopup && <DemoBookingPopup onClose={() => setShowDemoPopup(false)} />}
 
     </section>
   );

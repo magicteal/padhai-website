@@ -54,10 +54,6 @@ export const REALITY_CHAT_MESSAGES = [
   }
 ];
 
-
-
-
-
 export default function ProblemSection() {
   return (
     <section
@@ -132,6 +128,12 @@ export default function ProblemSection() {
           className="mt-12 sm:mt-16"
         >
           <div className="flex items-center justify-center gap-2 mb-6">
+            <h3
+              className="text-center text-2xl sm:text-3xl font-extrabold"
+              style={{ WebkitTextStroke: '0.6px white', WebkitTextFillColor: '#4c1d95', color: '#4c1d95' }}
+            >
+              See what students saying
+            </h3>
           </div>
           <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 sm:gap-5 justify-items-center">
             {testimonialVideos.slice(3, 6).map((src, i) => (

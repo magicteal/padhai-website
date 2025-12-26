@@ -4,10 +4,12 @@ import { motion } from "framer-motion";
 
 type HomeJanuaryOfferBoxProps = {
   variant?: "section" | "bare";
+  text?: string;
 };
 
 export default function HomeJanuaryOfferBox({
   variant = "section",
+  text = "January Launch Offer: ₹23,600 → ₹16,000 (Limited Bangalore Seats)",
 }: HomeJanuaryOfferBoxProps) {
   const box = (
     <motion.div
@@ -19,7 +21,7 @@ export default function HomeJanuaryOfferBox({
       className="mx-auto max-w-3xl text-center rounded-2xl bg-red-600 text-white px-6 sm:px-8 py-5 sm:py-6 shadow-2xl border-2 border-red-500"
     >
       <div className="font-extrabold text-sm sm:text-base">
-        January Launch Offer: ₹23,600 → ₹16,000 (Limited Bangalore Seats)
+        {text}
       </div>
     </motion.div>
   );

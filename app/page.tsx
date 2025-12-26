@@ -17,11 +17,10 @@ export default function Home() {
       <ProblemSection />
       <Cirriculum />
       <ProjectsSection />
-      <HomeJanuaryOfferBox />
       <TrustSection />
       <StorySection />
       <TestimonialsSection />
-      <HomeJanuaryOfferBox />
+      <HomeJanuaryOfferBox variant="section" text="Secure your seat now, decide later after demo"/>
       <CourseDetailsSection />
       <FAQSection />
       <HomeBottomButtonsCTA />
