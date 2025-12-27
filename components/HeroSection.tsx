@@ -87,7 +87,7 @@ export default function HeroSection({
       </div>
 
       <div className="relative z-10">
-        <div className="max-w-7xl mx-auto px-5 py-8 sm:py-12 md:py-20 lg:py-28">
+        <div className="max-w-7xl mx-auto px-5 pt-78 sm:py-12 md:py-20 lg:py-28">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12 items-center">
             {/* LEFT CONTENT */}
             <motion.div 
@@ -109,21 +109,12 @@ export default function HeroSection({
 
               <h1 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl xl:text-6xl font-extrabold leading-tight">
                     <motion.span 
-                  className="block text-white text-sm sm:text-xl md:text-2xl lg:text-3xl xl:text-4xl mb-2 text-outline-purple font-normal sm:font-extrabold"
+                      className="block text-purple-900 text-sm sm:text-xl md:text-2xl lg:text-3xl xl:text-4xl mb-2 text-outline-purple font-normal sm:font-extrabold"
                   initial={{ opacity: 0, y: 20 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ delay: 0.3 }}
                 >
-                  Turn Your Child's Screen Time Into
-                </motion.span>
-                <motion.span 
-                  className="block text-purple-900 text-outline-purple text-4xl sm:text-3xl md:text-4xl lg:text-5xl xl:text-6xl"
-                  style={{ WebkitTextStroke: '0.5px white', WebkitTextFillColor: '#4c1d95', textShadow: '0 1px 0 rgba(255,255,255,0.12)' }}
-                  initial={{ opacity: 0, y: 20 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ delay: 0.4 }}
-                >
-                  Future Ready Skill 
+                      Turn Your Child's Screen Time Into Future Ready Skill 
                 </motion.span>
               </h1>
 
@@ -137,7 +128,7 @@ export default function HeroSection({
               </motion.p>
 
               <motion.div 
-                className="mt-3 sm:mt-3 flex items-center justify-center lg:justify-start gap-2"
+                className="mt-3 sm:mt-3 hidden sm:flex items-center justify-center lg:justify-start gap-2"
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
                 transition={{ delay: 0.6 }}
@@ -150,7 +141,7 @@ export default function HeroSection({
 
               {/* Features List - Condensed on mobile */}
               <motion.ul 
-                className="mt-5 sm:mt-6 space-y-2.5 sm:space-y-3 max-w-xl mx-auto lg:mx-0 "
+                className="hidden sm:block mt-5 sm:mt-6 space-y-2.5 sm:space-y-3 max-w-xl mx-auto lg:mx-0 "
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
                 transition={{ delay: 0.7 }}
@@ -176,7 +167,7 @@ export default function HeroSection({
 
               {/* CTA Buttons */}
               <motion.div 
-                className="mt-28 sm:mt-10 flex flex-row items-center justify-center lg:justify-start gap-2 sm:gap-4"
+                className="mt-6 sm:mt-10 flex flex-row items-center justify-center lg:justify-start gap-2 sm:gap-4"
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: 1 }}
