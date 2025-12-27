@@ -158,7 +158,7 @@ export default function Footer() {
           </div>
           <p className="text-white/40 text-xs text-center mt-4 flex items-center justify-center gap-2">
             <Users className="w-4 h-4" />
-            Trusted by 13,000+ Bangalore Parents
+            Trusted by 13,000+ Families
           </p>
         </motion.div>
       </div>

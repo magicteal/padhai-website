@@ -1,7 +1,7 @@
 "use client";
 import React from "react";
 import { motion } from "framer-motion";
-import { Clock, Users, Sparkles, ArrowRight } from "lucide-react";
+import { Clock, Users, Sparkles, ArrowRight, Star, Heart, Bot } from "lucide-react";
 
 export default function UrgencySection() {
   const items = [
@@ -23,8 +23,31 @@ export default function UrgencySection() {
   ];
 
   return (
-    <section className="py-10 sm:py-12 bg-gradient-to-b from-purple-50 via-white to-purple-50">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <section className="py-10 sm:py-12 bg-gradient-to-b from-purple-50 via-white to-purple-50 relative overflow-hidden">
+      {/* Mobile decorations */}
+      <motion.div
+        className="absolute top-6 right-4 md:hidden"
+        animate={{ rotate: 360, scale: [1, 1.15, 1] }}
+        transition={{ rotate: { repeat: Infinity, duration: 10, ease: "linear" }, scale: { repeat: Infinity, duration: 2.5 } }}
+      >
+        <Star className="w-4 h-4 text-yellow-400 fill-yellow-400 opacity-70" />
+      </motion.div>
+      <motion.div
+        className="absolute bottom-8 left-3 md:hidden"
+        animate={{ y: [0, -6, 0], scale: [1, 1.1, 1] }}
+        transition={{ repeat: Infinity, duration: 3 }}
+      >
+        <Heart className="w-3 h-3 text-pink-400 fill-pink-400 opacity-60" />
+      </motion.div>
+      <motion.div
+        className="absolute top-1/3 left-2 md:hidden"
+        animate={{ scale: [1, 1.2, 1], opacity: [0.4, 0.7, 0.4] }}
+        transition={{ repeat: Infinity, duration: 2.5 }}
+      >
+        <Bot className="w-4 h-4 text-purple-400 opacity-50" />
+      </motion.div>
+      
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         <motion.div
           initial={{ opacity: 0, y: 16 }}
           whileInView={{ opacity: 1, y: 0 }}

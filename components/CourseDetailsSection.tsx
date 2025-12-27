@@ -298,7 +298,7 @@ export default function CourseDetailsSection() {
                             className="group w-full sm:w-auto bg-purple-500 hover:bg-purple-400 text-white font-extrabold py-3 sm:py-4 px-6 sm:px-8 rounded-xl shadow-xl transition-all text-base sm:text-lg flex items-center justify-center gap-2 border-2 border-white/20"
                           >
                             <Rocket className="w-5 h-5" />
-                            Enroll at ₹16,000 (Limited Seats)
+                            Enroll Now (Limited Seats)
                           </RazorpayButton>
                      
                 

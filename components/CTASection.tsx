@@ -1,7 +1,7 @@
 "use client";
 import React from 'react';
 import { motion } from 'framer-motion';
-import { Phone, Rocket, Clock, Users, Star, Shield, Lock } from 'lucide-react';
+import { Phone, Rocket, Clock, Users, Star, Shield, Lock, Heart, Sparkles, Gift } from 'lucide-react';
 import RazorpayButton from './RazorpayButton';
 
 export default function CTASection() {
@@ -16,6 +16,36 @@ export default function CTASection() {
         {/* Pattern overlay */}
         <div className="absolute inset-0 bg-[url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNjAiIGhlaWdodD0iNjAiIHZpZXdCb3g9IjAgMCA2MCA2MCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48ZyBmaWxsPSJub25lIiBmaWxsLXJ1bGU9ImV2ZW5vZGQiPjxnIGZpbGw9IiNmZmYiIGZpbGwtb3BhY2l0eT0iMC4xIj48cGF0aCBkPSJNMzYgMzRjMC0yLjIxIDEuNzktNCA0LTRzNCAxLjc5IDQgNC0xLjc5IDQtNCA0LTQtMS43OS00LTR6bTAtMjBjMC0yLjIxIDEuNzktNCA0LTRzNCAxLjc5IDQgNC0xLjc5IDQtNCA0LTQtMS43OS00LTR6Ii8+PC9nPjwvZz48L3N2Zz4=')] opacity-20" />
       </div>
+      
+      {/* Mobile decorations */}
+      <motion.div
+        className="absolute top-8 right-4 md:hidden z-10"
+        animate={{ rotate: 360, scale: [1, 1.15, 1] }}
+        transition={{ rotate: { repeat: Infinity, duration: 10, ease: "linear" }, scale: { repeat: Infinity, duration: 2.5 } }}
+      >
+        <Star className="w-4 h-4 text-yellow-300 fill-yellow-300 opacity-80" />
+      </motion.div>
+      <motion.div
+        className="absolute bottom-20 left-3 md:hidden z-10"
+        animate={{ y: [0, -6, 0], scale: [1, 1.1, 1] }}
+        transition={{ repeat: Infinity, duration: 3 }}
+      >
+        <Heart className="w-3 h-3 text-pink-300 fill-pink-300 opacity-70" />
+      </motion.div>
+      <motion.div
+        className="absolute top-1/3 left-2 md:hidden z-10"
+        animate={{ scale: [1, 1.2, 1], opacity: [0.5, 0.8, 0.5] }}
+        transition={{ repeat: Infinity, duration: 2.5 }}
+      >
+        <Sparkles className="w-4 h-4 text-purple-200 opacity-60" />
+      </motion.div>
+      <motion.div
+        className="absolute bottom-1/3 right-3 md:hidden z-10"
+        animate={{ y: [0, -5, 0] }}
+        transition={{ repeat: Infinity, duration: 3.5 }}
+      >
+        <Gift className="w-4 h-4 text-white opacity-50" />
+      </motion.div>
       
       <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 text-center">
         {/* Icon */}

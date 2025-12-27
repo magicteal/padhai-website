@@ -264,7 +264,7 @@ export default function FAQSection() {
           viewport={{ once: true }}
           className="mt-10 sm:mt-12 text-center"
         >
-          <motion.div 
+          {/* <motion.div 
             className="inline-block px-4 sm:px-6 py-3 sm:py-4 rounded-xl bg-white shadow-lg border-2 border-purple-100"
             whileHover={{ scale: 1.02 }}
           >
@@ -273,7 +273,7 @@ export default function FAQSection() {
               <span className="gradient-text">Book a FREE call with us!</span> 
               <Phone className="w-5 h-5 text-purple-600" />
             </p>
-          </motion.div>
+          </motion.div> */}
         </motion.div>
       </div>
     </section>
