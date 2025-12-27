@@ -7,7 +7,6 @@ import RazorpayButton from './RazorpayButton';
 
 export default function CourseDetailsSection() {
   const features = [
-    '24 weeks of mentor-led AI learning',
     'Build 6+ real-world AI projects',
     'Small batch sizes (max 12 students)',
     'Weekly progress reports for parents',
@@ -240,7 +239,7 @@ export default function CourseDetailsSection() {
                 >
                   ₹16,000
                 </motion.h3>
-                <p className="text-slate-500 text-sm mt-1">One-time payment • No hidden fees</p>
+                <p className="text-slate-500 text-sm mt-1">One time payment • No hidden fees</p>
 
                 {/* Urgency bullets below pricing */}
                 <ul className="mt-3 space-y-2 text-left">
@@ -295,7 +294,7 @@ export default function CourseDetailsSection() {
                             courseId="ai-foundation"
                             courseName="AI Foundation + Management Program"
                             amount={16000}
-                            className="group w-full sm:w-auto bg-purple-500 hover:bg-purple-400 text-white font-extrabold py-3 sm:py-4 px-6 sm:px-8 rounded-xl shadow-xl transition-all text-base sm:text-lg flex items-center justify-center gap-2 border-2 border-white/20"
+                            className="group w-full sm:w-auto bg-purple-500 hover:bg-purple-400 text-white font-extrabold py-3 sm:py-4 px-6 sm:px-8 rounded-xl shadow-xl transition-all text-xs sm:text-lg flex items-center justify-center gap-2 border-2 border-white/20"
                           >
                             <Rocket className="w-5 h-5" />
                             Enroll Now (Limited Seats)
@@ -307,7 +306,7 @@ export default function CourseDetailsSection() {
 
               {/* Secondary CTA */}
               <motion.button
-                className="mt-3 w-full px-6 py-3 rounded-2xl bg-white text-purple-700 font-bold hover:bg-purple-50 transition shadow-lg text-sm sm:text-base flex items-center justify-center gap-2 border-2 border-purple-200"
+                className="mt-3 w-full px-6 py-3 rounded-2xl bg-white text-purple-700 font-bold hover:bg-purple-50 transition shadow-lg text-xs sm:text-base flex items-center justify-center gap-2 border-2 border-purple-200"
                 whileHover={{ scale: 1.03 }}
                 whileTap={{ scale: 0.98 }}
               >
@@ -337,8 +336,6 @@ export default function CourseDetailsSection() {
           <div className="inline-flex items-center gap-2 bg-green-100 text-green-700 px-4 py-2 rounded-xl text-xs sm:text-sm font-medium">
             <Lock className="w-4 h-4" />
             <span>Secure Payment</span>
-            <span>•</span>
-            <span>7-day money-back guarantee</span>
           </div>
         </motion.div>
       </div>

@@ -1,7 +1,6 @@
 "use client";
-import React from 'react';
 import { motion } from 'framer-motion';
-import { Smartphone, Frown, School, AlertTriangle, Target, Dumbbell, Users, Bot, Brain, Sparkles, BookOpen, Star, Rocket, Heart, Wand2, Palette, Lightbulb, Code, Gamepad2 } from 'lucide-react';
+import { Smartphone, Frown, School, AlertTriangle, Target, Dumbbell, Users, Bot, Brain, Sparkles, Star, Rocket, Heart, Wand2, Palette, Lightbulb, Code, Gamepad2 } from 'lucide-react';
 import { FloatingConfetti } from './DecorativeElements';
 
 export default function StorySection() {
@@ -147,7 +146,7 @@ export default function StorySection() {
             animate={{ rotate: [0, 10, -10, 0] }}
             transition={{ repeat: Infinity, duration: 3 }}
           >
-            <BookOpen className="w-8 h-8 text-purple-600" />
+            <img src="/images/mainLogoPurple.svg" alt="PadhAI logo" className="h-8 w-auto" />
           </motion.span>
           <h2 className="text-3xl sm:text-4xl md:text-5xl font-extrabold gradient-text">
             The PadhAi Story

@@ -237,17 +237,17 @@ export default function ProblemSection() {
         >
           <div className="flex items-center justify-center gap-2 mb-6">
             <h3
-              className="text-center text-2xl sm:text-3xl font-extrabold"
+              className="text-center text-xl sm:text-3xl font-extrabold"
               style={{ WebkitTextStroke: '0.6px white', WebkitTextFillColor: '#4c1d95', color: '#4c1d95' }}
             >
-              See what students saying
+              See what students are saying
             </h3>
           </div>
           <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 sm:gap-5 justify-items-center">
             {testimonialVideos.slice(3, 6).map((src, i) => (
               <motion.div
                 key={i}
-                className="w-full max-w-xs"
+                className="w-full max-w-[200px] sm:max-w-[220px] md:max-w-[240px]"
                 initial={{ opacity: 0, scale: 0.9 }}
                 whileInView={{ opacity: 1, scale: 1 }}
                 viewport={{ once: true }}
@@ -257,14 +257,16 @@ export default function ProblemSection() {
                   className="rounded-2xl sm:rounded-[1.5rem] overflow-hidden shadow-xl border-3 border-white bg-slate-50"
                   whileHover={{ scale: 1.03, y: -5 }}
                 >
-                  <video
-                    src={src}
-                    poster={`/images/testimonials/testimonial-${['three', 'two', 'one'][i]}.svg`}
-                    controls
-                    playsInline
-                    className="w-full h-[280px] sm:h-[320px] md:h-[380px] object-cover"
-                    aria-label={`Testimonial video ${i + 1}`}
-                  />
+                  <div className="relative w-full bg-slate-100" style={{ aspectRatio: '9 / 16' }}>
+                    <video
+                      src={src}
+                      poster={`/images/testimonials/testimonial-${['three', 'two', 'one'][i]}.svg`}
+                      controls
+                      playsInline
+                      className="absolute inset-0 w-full h-full object-cover"
+                      aria-label={`Testimonial video ${i + 1}`}
+                    />
+                  </div>
                 </motion.div>
               </motion.div>
             ))}

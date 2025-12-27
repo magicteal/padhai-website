@@ -20,7 +20,7 @@ export default function FloatingWhatsAppCTA() {
 
   if (!toWaMeNumber(number)) return null;
 
-  const text = "Free AI Counselling Call • ";
+  const text = "Connect on whatsApp with our mentor • ";
 
   return (
     <div className="fixed bottom-6 right-6 z-50">
@@ -28,7 +28,7 @@ export default function FloatingWhatsAppCTA() {
       <div className="relative w-20 h-20 sm:w-28 sm:h-28 flex items-center justify-center">
         {/* Rotating text circle */}
         <svg 
-          className="absolute w-full h-full animate-spin-slow"
+          className="absolute w-full h-full animate-spin-slow pointer-events-none"
           viewBox="0 0 100 100"
         >
           <defs>
@@ -51,7 +51,7 @@ export default function FloatingWhatsAppCTA() {
           target="_blank"
           rel="noopener noreferrer"
           aria-label="Chat on WhatsApp"
-          className="h-10 w-10 sm:h-14 sm:w-14 rounded-full bg-gradient-to-br from-purple-600 via-violet-600 to-fuchsia-600 shadow-lg shadow-purple-500/30 flex items-center justify-center hover:scale-110 active:scale-95 transition-transform"
+          className="relative z-10 h-10 w-10 sm:h-14 sm:w-14 rounded-full bg-gradient-to-br from-purple-600 via-violet-600 to-fuchsia-600 shadow-lg shadow-purple-500/30 flex items-center justify-center hover:scale-110 active:scale-95 transition-transform"
         >
           <FaWhatsapp className="h-5 w-5 sm:h-7 sm:w-7 text-white" />
         </a>

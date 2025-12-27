@@ -87,7 +87,7 @@ export default function HeroSection({
       </div>
 
       <div className="relative z-10">
-        <div className="max-w-7xl mx-auto px-5 pt-78 sm:py-12 md:py-20 lg:py-28">
+        <div className="max-w-7xl mx-auto px-5 pt-[110%] sm:py-12 md:py-20 lg:py-28">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12 items-center">
             {/* LEFT CONTENT */}
             <motion.div 

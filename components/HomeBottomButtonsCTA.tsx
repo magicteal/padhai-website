@@ -3,6 +3,7 @@
 import React from "react";
 import { motion } from "framer-motion";
 import { Phone, ArrowRight } from "lucide-react";
+import LeadCapturePopup from "./LeadCapturePopup";
 
 function toWaMeNumber(input: string) {
   return input.replace(/[^\d]/g, "");
@@ -17,6 +18,7 @@ function buildWhatsAppUrl(numberRaw: string, message?: string) {
 
 export default function HomeBottomButtonsCTA() {
   const number = process.env.NEXT_PUBLIC_WHATSAPP_NUMBER || "+91 98765 43210";
+  const [showPopup, setShowPopup] = React.useState(false);
 
   const bookCallUrl = buildWhatsAppUrl(
     number,
@@ -40,17 +42,16 @@ export default function HomeBottomButtonsCTA() {
           className="p-5 sm:p-6 bg-transparent"
         >
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-3 sm:gap-4">
-            <motion.a
-              href={bookCallUrl}
-              target="_blank"
-              rel="noopener noreferrer"
+            <motion.button
+              type="button"
+              onClick={() => setShowPopup(true)}
               className="btn-primary w-full flex items-center justify-center gap-2"
               whileHover={{ scale: 1.02 }}
               whileTap={{ scale: 0.98 }}
             >
               <Phone className="w-4 h-4" />
-              <span>Book Free Parent Counselling Call</span>
-            </motion.a>
+              <span className="text-sm sm:text-base">Free Parent Counselling Call</span>
+            </motion.button>
 
             <motion.a
               href={reserveSeatUrl}
@@ -70,6 +71,7 @@ export default function HomeBottomButtonsCTA() {
           </div>
         </motion.div>
       </div>
+      {showPopup && <LeadCapturePopup onClose={() => setShowPopup(false)} />}
     </section>
   );
 }

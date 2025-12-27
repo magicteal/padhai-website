@@ -192,7 +192,7 @@ export default function TestimonialsSection() {
             {videoList.map((src, i) => (
               <motion.div 
                 key={src}
-                className="w-full max-w-sm"
+                className="w-full max-w-[200px] sm:max-w-[220px] md:max-w-[240px]"
                 initial={{ opacity: 0, scale: 0.9 }}
                 whileInView={{ opacity: 1, scale: 1 }}
                 viewport={{ once: true }}
@@ -203,19 +203,21 @@ export default function TestimonialsSection() {
                   whileHover={{ scale: 1.03, y: -5 }}
                   transition={{ type: "spring", stiffness: 300 }}
                 >
-                  <video
-                    src={src}
-                    poster={`/images/testimonials/testimonial-${['four','five','six'][i]}.svg`}
-                    controls
-                    playsInline
-                    className="w-full h-[240px] sm:h-[280px] md:h-[340px] object-cover bg-slate-100"
-                    aria-label={`Kid testimonial video ${i + 1}`}
-                  />
-                  <div className="absolute bottom-0 left-0 right-0 p-3 bg-gradient-to-t from-purple-900/80 to-transparent">
-                    <div className="flex items-center gap-1">
-                      {[...Array(5)].map((_, i) => (
-                        <Star key={i} className="w-3 h-3 sm:w-4 sm:h-4 fill-yellow-400 text-yellow-400" />
-                      ))}
+                  <div className="relative w-full bg-slate-100" style={{ aspectRatio: '9 / 16' }}>
+                    <video
+                      src={src}
+                      poster={`/images/testimonials/testimonial-${['four','five','six'][i]}.svg`}
+                      controls
+                      playsInline
+                      className="absolute inset-0 w-full h-full object-cover"
+                      aria-label={`Kid testimonial video ${i + 1}`}
+                    />
+                    <div className="pointer-events-none absolute inset-x-0 bottom-0 p-3 bg-gradient-to-t from-purple-900/80 to-transparent">
+                      <div className="flex items-center gap-1">
+                        {[...Array(5)].map((_, i) => (
+                          <Star key={i} className="w-3 h-3 sm:w-4 sm:h-4 fill-yellow-400 text-yellow-400" />
+                        ))}
+                      </div>
                     </div>
                   </div>
                 </motion.div>
@@ -262,7 +264,7 @@ export default function TestimonialsSection() {
                 {!hydrated ? (
                   <div className="grid grid-cols-1 lg:grid-cols-3 gap-4 sm:gap-5">
                     {Array.from({ length: 3 }).map((_, idx) => (
-                      <div key={idx} className="card-kid p-5 sm:p-6 h-40 relative">
+                      <div key={idx} className="card-kid p-5 sm:p-6 h-56 sm:h-60 relative">
                         <span
                           aria-hidden
                           className="absolute -bottom-3 left-10"
@@ -284,7 +286,7 @@ export default function TestimonialsSection() {
                       <motion.div
                         key={item.id}
                         whileHover={{ scale: 1.02, y: -4 }}
-                        className="card-kid p-5 sm:p-6 relative"
+                        className="card-kid p-5 sm:p-6 relative min-h-56 sm:min-h-60"
                       >
                         <div className="flex items-start gap-3 sm:gap-4">
                           <motion.div className="flex-shrink-0" whileHover={{ rotate: 5 }}>
@@ -333,7 +335,7 @@ export default function TestimonialsSection() {
                     ))}
                   </div>
                 ) : (
-                  <div className="card-kid p-5 sm:p-6 relative">
+                  <div className="card-kid p-5 sm:p-6 relative min-h-56 sm:min-h-60">
                     <p className="text-center text-slate-500">No testimonials yet</p>
                     <span
                       aria-hidden

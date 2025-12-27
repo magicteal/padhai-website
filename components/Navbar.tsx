@@ -13,7 +13,7 @@ type UserData = {
   role: string;
 };
 
-export default function Navbar() {
+export default function Navbar({ hasTopStrip = false }: { hasTopStrip?: boolean }) {
   const [isOpen, setIsOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
   const currentUser = useAppStore((s) => s.currentUser as UserData | null);
@@ -66,7 +66,7 @@ export default function Navbar() {
 
   return (
     <>
-      <header className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
+      <header className={`fixed ${hasTopStrip ? 'top-10' : 'top-0'} left-0 right-0 z-50 transition-all duration-300 ${
         scrolled 
           ? 'bg-purple-700 shadow-lg shadow-purple-900/20 text-white' 
           : 'bg-gradient-to-r from-purple-600 to-purple-700 text-white backdrop-blur-sm'
@@ -274,7 +274,7 @@ export default function Navbar() {
       </AnimatePresence>
 
       {/* Spacer for fixed header */}
-      <div className="h-14 sm:h-16" />
+      <div className={hasTopStrip ? "h-[96px] sm:h-[104px]" : "h-14 sm:h-16"} />
     </>
   );
 }
