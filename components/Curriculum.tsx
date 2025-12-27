@@ -1,7 +1,8 @@
 "use client";
 import React from 'react';
 import { motion } from 'framer-motion';
-import { Sparkles, Brain, Award, BookOpen, Search, BarChart3, Presentation, Trophy, Star } from 'lucide-react';
+import { Sparkles, Brain, Award, BookOpen, Search, BarChart3, Presentation, Trophy, Star, Bot, Wand2, Palette, Lightbulb, Code, Rocket } from 'lucide-react';
+import { FloatingAIIcons, KidFriendlyShapes } from './DecorativeElements';
 
 const CURRICULUM_MODULES = [
   {
@@ -44,6 +45,50 @@ export default function Curriculum() {
         {/* Decorative elements */}
         <div className="absolute top-20 right-10 w-40 h-40 bg-purple-200/20 rounded-full blur-3xl" />
         <div className="absolute bottom-20 left-10 w-60 h-60 bg-purple-300/20 rounded-full blur-3xl" />
+        
+        {/* Kid-friendly floating AI icons */}
+        <FloatingAIIcons />
+        
+        {/* Mobile decorations */}
+        <motion.div
+          className="absolute top-8 right-4 md:hidden"
+          animate={{ rotate: 360, scale: [1, 1.15, 1] }}
+          transition={{ rotate: { repeat: Infinity, duration: 10, ease: "linear" }, scale: { repeat: Infinity, duration: 2.5 } }}
+        >
+          <Star className="w-4 h-4 text-yellow-400 fill-yellow-400 opacity-70" />
+        </motion.div>
+        <motion.div
+          className="absolute bottom-20 left-3 md:hidden"
+          animate={{ y: [0, -6, 0], scale: [1, 1.1, 1] }}
+          transition={{ repeat: Infinity, duration: 3 }}
+        >
+          <Sparkles className="w-4 h-4 text-purple-400 opacity-60" />
+        </motion.div>
+        <motion.div
+          className="absolute top-1/3 right-2 md:hidden"
+          animate={{ scale: [1, 1.2, 1], opacity: [0.4, 0.7, 0.4] }}
+          transition={{ repeat: Infinity, duration: 2.5 }}
+        >
+          <Bot className="w-4 h-4 text-purple-500 opacity-50" />
+        </motion.div>
+        
+        {/* Desktop Floating decorative stars */}
+        <motion.div
+          className="absolute top-24 left-[8%] hidden lg:block"
+          animate={{ rotate: 360, scale: [1, 1.2, 1] }}
+          transition={{ rotate: { repeat: Infinity, duration: 8, ease: "linear" }, scale: { repeat: Infinity, duration: 2 } }}
+        >
+          <Star className="w-8 h-8 text-yellow-400 fill-yellow-400 drop-shadow-lg" />
+        </motion.div>
+        <motion.div
+          className="absolute bottom-32 right-[12%] hidden lg:block"
+          animate={{ y: [0, -15, 0], rotate: [0, 10, 0] }}
+          transition={{ repeat: Infinity, duration: 4 }}
+        >
+          <div className="w-12 h-12 bg-gradient-to-br from-pink-500 to-purple-500 rounded-xl shadow-lg flex items-center justify-center">
+            <Rocket className="w-6 h-6 text-white" />
+          </div>
+        </motion.div>
         
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
           {/* Header */}

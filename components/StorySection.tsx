@@ -1,7 +1,8 @@
 "use client";
 import React from 'react';
 import { motion } from 'framer-motion';
-import { Smartphone, Frown, School, AlertTriangle, Target, Dumbbell, Users, Bot, Brain, Sparkles, BookOpen, Star, Rocket } from 'lucide-react';
+import { Smartphone, Frown, School, AlertTriangle, Target, Dumbbell, Users, Bot, Brain, Sparkles, BookOpen, Star, Rocket, Heart, Wand2, Palette, Lightbulb, Code, Gamepad2 } from 'lucide-react';
+import { FloatingConfetti } from './DecorativeElements';
 
 export default function StorySection() {
   const containerVariants = {
@@ -36,6 +37,102 @@ export default function StorySection() {
       {/* Decorative elements */}
       <div className="absolute top-20 left-10 w-40 h-40 bg-purple-300/20 rounded-full blur-3xl animate-float" />
       <div className="absolute bottom-20 right-10 w-60 h-60 bg-indigo-300/20 rounded-full blur-3xl animate-float" style={{ animationDelay: '2s' }} />
+      
+      {/* Floating confetti */}
+      <FloatingConfetti />
+      
+      {/* Mobile decorations */}
+      <motion.div
+        className="absolute top-8 right-4 md:hidden"
+        animate={{ rotate: 360, scale: [1, 1.15, 1] }}
+        transition={{ rotate: { repeat: Infinity, duration: 10, ease: "linear" }, scale: { repeat: Infinity, duration: 2.5 } }}
+      >
+        <Star className="w-4 h-4 text-yellow-400 fill-yellow-400 opacity-70" />
+      </motion.div>
+      <motion.div
+        className="absolute bottom-16 left-3 md:hidden"
+        animate={{ y: [0, -6, 0], scale: [1, 1.1, 1] }}
+        transition={{ repeat: Infinity, duration: 3 }}
+      >
+        <Heart className="w-3 h-3 text-pink-400 fill-pink-400 opacity-60" />
+      </motion.div>
+      <motion.div
+        className="absolute top-1/3 left-2 md:hidden"
+        animate={{ scale: [1, 1.2, 1], opacity: [0.4, 0.7, 0.4] }}
+        transition={{ repeat: Infinity, duration: 2.5 }}
+      >
+        <Bot className="w-4 h-4 text-green-500 opacity-50" />
+      </motion.div>
+      <motion.div
+        className="absolute top-1/2 right-3 md:hidden"
+        animate={{ y: [0, -5, 0] }}
+        transition={{ repeat: Infinity, duration: 3.5 }}
+      >
+        <Sparkles className="w-3 h-3 text-purple-400 opacity-50" />
+      </motion.div>
+      
+      {/* Desktop AI Tools showcase icons */}
+      <motion.div
+        className="absolute top-32 left-[5%] hidden xl:block"
+        animate={{ y: [0, -15, 0], rotate: [0, 10, 0] }}
+        transition={{ repeat: Infinity, duration: 4 }}
+      >
+        <div className="w-14 h-14 bg-gradient-to-br from-green-400 to-emerald-500 rounded-2xl shadow-lg flex items-center justify-center">
+          <Bot className="w-7 h-7 text-white" />
+        </div>
+      </motion.div>
+      <motion.div
+        className="absolute top-48 right-[6%] hidden lg:block"
+        animate={{ y: [0, 12, 0], scale: [1, 1.1, 1] }}
+        transition={{ repeat: Infinity, duration: 5, delay: 0.5 }}
+      >
+        <div className="w-12 h-12 bg-gradient-to-br from-purple-500 to-pink-500 rounded-xl shadow-lg flex items-center justify-center">
+          <Palette className="w-6 h-6 text-white" />
+        </div>
+      </motion.div>
+      <motion.div
+        className="absolute bottom-1/3 left-[8%] hidden xl:block"
+        animate={{ x: [0, 8, 0], y: [0, -10, 0] }}
+        transition={{ repeat: Infinity, duration: 6, delay: 1 }}
+      >
+        <div className="w-11 h-11 bg-gradient-to-br from-blue-500 to-cyan-500 rounded-xl shadow-lg flex items-center justify-center">
+          <Code className="w-5 h-5 text-white" />
+        </div>
+      </motion.div>
+      <motion.div
+        className="absolute bottom-48 right-[10%] hidden lg:block"
+        animate={{ rotate: [0, -10, 10, 0], y: [0, 8, 0] }}
+        transition={{ repeat: Infinity, duration: 4.5 }}
+      >
+        <div className="w-10 h-10 bg-gradient-to-br from-orange-400 to-yellow-500 rounded-lg shadow-md flex items-center justify-center">
+          <Wand2 className="w-5 h-5 text-white" />
+        </div>
+      </motion.div>
+      
+      {/* Desktop Kid-friendly floating shapes */}
+      <motion.div
+        className="absolute top-1/4 left-[12%] hidden lg:block"
+        animate={{ rotate: 360, scale: [1, 1.2, 1] }}
+        transition={{ rotate: { repeat: Infinity, duration: 8, ease: "linear" }, scale: { repeat: Infinity, duration: 2 } }}
+      >
+        <Star className="w-7 h-7 text-yellow-400 fill-yellow-400 drop-shadow-lg" />
+      </motion.div>
+      <motion.div
+        className="absolute bottom-1/4 right-[8%] hidden xl:block"
+        animate={{ y: [0, -12, 0], scale: [1, 1.15, 1] }}
+        transition={{ repeat: Infinity, duration: 3.5 }}
+      >
+        <Heart className="w-6 h-6 text-pink-400 fill-pink-400 drop-shadow-lg" />
+      </motion.div>
+      <motion.div
+        className="absolute top-2/3 left-[4%] hidden xl:block"
+        animate={{ y: [0, 10, 0], rotate: [0, 15, 0] }}
+        transition={{ repeat: Infinity, duration: 5 }}
+      >
+        <div className="w-10 h-10 bg-gradient-to-br from-violet-500 to-purple-600 rounded-lg shadow-md flex items-center justify-center">
+          <Gamepad2 className="w-5 h-5 text-white" />
+        </div>
+      </motion.div>
       
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 space-y-16">
         {/* Header */}
@@ -163,15 +260,18 @@ export default function StorySection() {
           className="max-w-4xl mx-auto"
         >
           <motion.div 
-            className="rounded-3xl h-80 bg-gradient-to-br from-purple-400 via-violet-400 to-indigo-500 shadow-2xl flex items-center justify-center relative overflow-hidden"
+            className="rounded-3xl h-80 bg-cover bg-center shadow-2xl flex items-center justify-center relative overflow-hidden"
+            style={{ backgroundImage: "url('/images/screenTime.svg')" }}
             whileHover={{ scale: 1.02 }}
           >
-            {/* Floating decorative circles */}
-            <div className="absolute top-8 left-8 w-20 h-20 bg-white/20 rounded-full animate-float" />
-            <div className="absolute bottom-12 right-12 w-32 h-32 bg-white/20 rounded-full animate-float" style={{ animationDelay: '1s' }} />
-            <div className="absolute top-1/3 right-1/4 w-16 h-16 bg-white/30 rounded-full animate-pulse-glow" />
             
-            <div className="text-center relative z-10 px-6">
+            <div className="absolute inset-0 bg-black/50 z-0" />
+
+            <div className="absolute top-8 left-8 w-20 h-20 bg-white/20 rounded-full animate-float z-10" />
+            <div className="absolute bottom-12 right-12 w-32 h-32 bg-white/20 rounded-full animate-float z-10" style={{ animationDelay: '1s' }} />
+            <div className="absolute top-1/3 right-1/4 w-16 h-16 bg-white/30 rounded-full animate-pulse-glow z-10" />
+
+            <div className="text-center relative z-20 px-6">
               <motion.div 
                 className="w-24 h-24 sm:w-28 sm:h-28 rounded-2xl bg-white/20 backdrop-blur-sm flex items-center justify-center mx-auto mb-6"
                 animate={{ 

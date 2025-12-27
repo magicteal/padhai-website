@@ -1,7 +1,7 @@
 "use client";
 import React from 'react';
 import { motion } from 'framer-motion';
-import { ChevronLeft, ChevronRight, Star, Video, MessageSquare, User, Users } from 'lucide-react';
+import { ChevronLeft, ChevronRight, Star, Video, MessageSquare, User, Users, Bot, Sparkles, Heart, Lightbulb, Brain, Rocket, Palette } from 'lucide-react';
 import { useAppStore } from '@/lib/store';
 import testimonialVideosArray from '../data/testimonialVideos';
 
@@ -42,6 +42,108 @@ export default function TestimonialsSection() {
       {/* Decorative elements */}
       <div className="absolute top-10 right-10 w-32 h-32 bg-purple-200/30 rounded-full blur-3xl" />
       <div className="absolute bottom-20 left-10 w-48 h-48 bg-purple-300/20 rounded-full blur-3xl" />
+      
+      {/* Mobile decorations */}
+      <motion.div
+        className="absolute top-6 right-4 md:hidden"
+        animate={{ rotate: 360, scale: [1, 1.15, 1] }}
+        transition={{ rotate: { repeat: Infinity, duration: 10, ease: "linear" }, scale: { repeat: Infinity, duration: 2.5 } }}
+      >
+        <Star className="w-4 h-4 text-yellow-400 fill-yellow-400 opacity-70" />
+      </motion.div>
+      <motion.div
+        className="absolute bottom-20 left-3 md:hidden"
+        animate={{ y: [0, -6, 0], scale: [1, 1.1, 1] }}
+        transition={{ repeat: Infinity, duration: 3 }}
+      >
+        <Heart className="w-3 h-3 text-pink-400 fill-pink-400 opacity-60" />
+      </motion.div>
+      <motion.div
+        className="absolute top-1/4 left-2 md:hidden"
+        animate={{ scale: [1, 1.2, 1], opacity: [0.4, 0.7, 0.4] }}
+        transition={{ repeat: Infinity, duration: 2.5 }}
+      >
+        <Sparkles className="w-4 h-4 text-purple-400 opacity-50" />
+      </motion.div>
+      <motion.div
+        className="absolute bottom-1/3 right-3 md:hidden"
+        animate={{ y: [0, -5, 0] }}
+        transition={{ repeat: Infinity, duration: 3.5 }}
+      >
+        <Bot className="w-4 h-4 text-purple-500 opacity-40" />
+      </motion.div>
+      
+      {/* Desktop Floating AI Tool Icons */}
+      <motion.div
+        className="absolute top-20 left-[5%] hidden xl:block"
+        animate={{ y: [0, -12, 0], rotate: [0, 5, -5, 0] }}
+        transition={{ repeat: Infinity, duration: 4 }}
+      >
+        <div className="w-13 h-13 bg-gradient-to-br from-purple-500 to-violet-500 rounded-xl shadow-lg flex items-center justify-center p-2.5">
+          <Bot className="w-6 h-6 text-white" />
+        </div>
+      </motion.div>
+      <motion.div
+        className="absolute top-40 right-[6%] hidden lg:block"
+        animate={{ y: [0, 15, 0], scale: [1, 1.1, 1] }}
+        transition={{ repeat: Infinity, duration: 5, delay: 0.5 }}
+      >
+        <div className="w-12 h-12 bg-gradient-to-br from-pink-500 to-rose-500 rounded-xl shadow-lg flex items-center justify-center">
+          <Sparkles className="w-6 h-6 text-white" />
+        </div>
+      </motion.div>
+      <motion.div
+        className="absolute bottom-1/3 left-[4%] hidden xl:block"
+        animate={{ x: [0, 10, 0], y: [0, -8, 0] }}
+        transition={{ repeat: Infinity, duration: 6, delay: 1 }}
+      >
+        <div className="w-11 h-11 bg-gradient-to-br from-amber-400 to-orange-500 rounded-xl shadow-lg flex items-center justify-center">
+          <Lightbulb className="w-5 h-5 text-white" />
+        </div>
+      </motion.div>
+      <motion.div
+        className="absolute bottom-24 right-[8%] hidden lg:block"
+        animate={{ rotate: [0, 10, -10, 0], y: [0, 10, 0] }}
+        transition={{ repeat: Infinity, duration: 4.5 }}
+      >
+        <div className="w-10 h-10 bg-gradient-to-br from-green-400 to-emerald-500 rounded-lg shadow-md flex items-center justify-center">
+          <Brain className="w-5 h-5 text-white" />
+        </div>
+      </motion.div>
+      <motion.div
+        className="absolute top-1/2 right-[3%] hidden xl:block"
+        animate={{ y: [0, -10, 0], rotate: [0, 8, 0] }}
+        transition={{ repeat: Infinity, duration: 5.5, delay: 0.7 }}
+      >
+        <div className="w-11 h-11 bg-gradient-to-br from-violet-500 to-purple-600 rounded-xl shadow-lg flex items-center justify-center">
+          <Palette className="w-5 h-5 text-white" />
+        </div>
+      </motion.div>
+      
+      {/* Kid-friendly floating shapes */}
+      <motion.div
+        className="absolute top-16 left-[18%] hidden lg:block"
+        animate={{ rotate: 360, scale: [1, 1.2, 1] }}
+        transition={{ rotate: { repeat: Infinity, duration: 10, ease: "linear" }, scale: { repeat: Infinity, duration: 2 } }}
+      >
+        <Star className="w-7 h-7 text-yellow-400 fill-yellow-400 drop-shadow-lg" />
+      </motion.div>
+      <motion.div
+        className="absolute bottom-32 left-[10%] hidden xl:block"
+        animate={{ y: [0, -10, 0], scale: [1, 1.15, 1] }}
+        transition={{ repeat: Infinity, duration: 3 }}
+      >
+        <Heart className="w-6 h-6 text-red-400 fill-red-400 drop-shadow-lg" />
+      </motion.div>
+      <motion.div
+        className="absolute top-1/4 right-[15%] hidden lg:block"
+        animate={{ y: [0, -15, 0], rotate: [0, 10, 0] }}
+        transition={{ repeat: Infinity, duration: 4.5, delay: 0.5 }}
+      >
+        <div className="w-12 h-12 bg-gradient-to-br from-cyan-400 to-blue-500 rounded-xl shadow-lg flex items-center justify-center">
+          <Rocket className="w-6 h-6 text-white" />
+        </div>
+      </motion.div>
       
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         {/* Header */}
