@@ -12,6 +12,12 @@ export interface IUser {
   };
   childName?: string;
   childAge?: number;
+  enrolledCourses?: Array<{
+    courseId: string;
+    courseName: string;
+    purchaseId?: string;
+    purchasedAt?: Date;
+  }>;
   createdAt: Date;
   updatedAt: Date;
 }
@@ -58,6 +64,14 @@ const UserSchema = new Schema<IUser>(
       min: 5,
       max: 18,
     },
+    enrolledCourses: [
+      {
+        courseId: String,
+        courseName: String,
+        purchaseId: String,
+        purchasedAt: Date,
+      },
+    ],
   },
   {
     timestamps: true,

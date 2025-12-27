@@ -1,6 +1,7 @@
 "use client";
 import { motion } from 'framer-motion';
 import { Calendar, Monitor, Users, Languages, GraduationCap, Rocket, FileText } from 'lucide-react';
+import RazorpayButton from './RazorpayButton';
 
 export default function CourseHeroSection() {
   const stats = [
@@ -86,13 +87,17 @@ export default function CourseHeroSection() {
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.5 }}
         >
-          <motion.button 
-            className="w-full sm:w-auto px-6 sm:px-8 py-3 sm:py-4 rounded-xl font-bold text-base sm:text-lg bg-white text-purple-600 hover:bg-purple-50 transition shadow-xl flex items-center justify-center gap-2"
-            whileHover={{ scale: 1.05 }}
-            whileTap={{ scale: 0.98 }}
-          >
-            <Rocket className="w-5 h-5" /> Enroll Now (₹16,000)
-          </motion.button>
+          <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.98 }}>
+            <RazorpayButton
+              courseId="ai-foundation"
+              courseName="AI Foundation + Management Program"
+              amount={16000}
+              className="w-full sm:w-auto px-6 sm:px-8 py-3 sm:py-4 rounded-xl font-bold text-base sm:text-lg bg-white text-purple-600 hover:bg-purple-50 transition shadow-xl flex items-center justify-center gap-2"
+            >
+              <Rocket className="w-5 h-5" /> Enroll Now (₹16,000)
+            </RazorpayButton>
+          </motion.div>
+
           <motion.button 
             className="w-full sm:w-auto px-6 sm:px-8 py-3 sm:py-4 rounded-xl font-semibold text-base sm:text-lg border-2 border-white text-white hover:bg-white/10 transition flex items-center justify-center gap-2"
             whileHover={{ scale: 1.05 }}

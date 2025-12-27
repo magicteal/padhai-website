@@ -1,4 +1,5 @@
 import { Check, Zap } from 'lucide-react';
+import RazorpayButton from './RazorpayButton';
 
 export default function CoursePricing() {
   return (
@@ -54,9 +55,14 @@ export default function CoursePricing() {
             </div>
           </div>
 
-          <button className="w-full bg-purple-600 text-white font-bold text-xl py-5 rounded-xl hover:bg-purple-700 transition shadow-lg mb-4">
+          <RazorpayButton
+            courseId="ai-foundation"
+            courseName="AI Foundation + Management Program"
+            amount={16000}
+            className="w-full bg-purple-600 text-white font-bold text-xl py-5 rounded-xl hover:bg-purple-700 transition shadow-lg mb-4 flex items-center justify-center"
+          >
             Secure Spot for ₹16,000
-          </button>
+          </RazorpayButton>
 
           <p className="text-center text-sm text-gray-500">
             Small batches of 8–12 students only.

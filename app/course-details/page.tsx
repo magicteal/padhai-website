@@ -1,5 +1,3 @@
-import Navbar from "@/components/Navbar";
-import Footer from "@/components/Footer";
 import CourseHeroSection from "@/components/CourseHeroSection";
 import WhyCourseGrid from "@/components/WhyCourseGrid";
 import CourseSyllabus from "@/components/CourseSyllabus";

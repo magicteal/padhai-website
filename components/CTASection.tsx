@@ -2,6 +2,7 @@
 import React from 'react';
 import { motion } from 'framer-motion';
 import { Phone, Rocket, Clock, Users, Star, Shield, Lock } from 'lucide-react';
+import RazorpayButton from './RazorpayButton';
 
 export default function CTASection() {
   return (
@@ -86,14 +87,17 @@ export default function CTASection() {
             Book Free Call
           </motion.button>
           
-          <motion.button 
-            className="group w-full sm:w-auto bg-purple-500 hover:bg-purple-400 text-white font-extrabold py-3 sm:py-4 px-6 sm:px-8 rounded-xl shadow-xl transition-all text-base sm:text-lg flex items-center justify-center gap-2 border-2 border-white/20"
-            whileHover={{ scale: 1.03 }}
-            whileTap={{ scale: 0.98 }}
-          >
-            <Rocket className="w-5 h-5" />
-            Enroll Now – Limited Seats!
-          </motion.button>
+          <motion.div whileHover={{ scale: 1.03 }} whileTap={{ scale: 0.98 }}>
+            <RazorpayButton
+              courseId="ai-foundation"
+              courseName="AI Foundation + Management Program"
+              amount={16000}
+              className="group w-full sm:w-auto bg-purple-500 hover:bg-purple-400 text-white font-extrabold py-3 sm:py-4 px-6 sm:px-8 rounded-xl shadow-xl transition-all text-base sm:text-lg flex items-center justify-center gap-2 border-2 border-white/20"
+            >
+              <Rocket className="w-5 h-5" />
+              Enroll Now – Limited Seats!
+            </RazorpayButton>
+          </motion.div>
         </motion.div>
 
         {/* Urgency Badge */}

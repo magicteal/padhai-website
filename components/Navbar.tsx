@@ -1,6 +1,7 @@
 "use client";
 import Link from "next/link";
 import { useState, useEffect } from "react";
+import { useAppStore } from '@/lib/store';
 import { Menu, X, ArrowRight } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 import { useRouter } from "next/navigation";
@@ -15,36 +16,32 @@ type UserData = {
 export default function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
-  const [currentUser, setCurrentUser] = useState<UserData | null>(null);
-  const [isAuthenticated, setIsAuthenticated] = useState(false);
+  const currentUser = useAppStore((s) => s.currentUser as UserData | null);
+  const isAuthenticated = useAppStore((s) => s.isAuthenticated);
+  const setStoreCurrentUser = useAppStore((s) => s.setCurrentUser);
+  const storeLogout = useAppStore((s) => s.logout);
   const router = useRouter();
 
-  // Fetch current user on mount
+  // Initialize store from server on mount
   useEffect(() => {
     async function checkAuth() {
       try {
         const response = await fetch('/api/auth/me');
         const data = await response.json();
         if (data.success && data.user) {
-          setCurrentUser(data.user);
-          setIsAuthenticated(true);
-        } else {
-          setCurrentUser(null);
-          setIsAuthenticated(false);
+          setStoreCurrentUser(data.user);
         }
-      } catch {
-        setCurrentUser(null);
-        setIsAuthenticated(false);
+      } catch (e) {
+        // ignore
       }
     }
     checkAuth();
-  }, []);
+  }, [setStoreCurrentUser]);
 
   const handleLogout = async () => {
     try {
       await fetch('/api/auth/logout', { method: 'POST' });
-      setCurrentUser(null);
-      setIsAuthenticated(false);
+      storeLogout();
       setIsOpen(false);
       router.push("/");
     } catch (error) {

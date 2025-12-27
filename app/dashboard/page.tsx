@@ -14,6 +14,7 @@ type UserData = {
   childName?: string;
   childAge?: number;
   createdAt?: string;
+  enrolledCourses?: Array<{ courseId: string; courseName: string; purchaseId?: string; purchasedAt?: string }>;
 };
 
 export default function UserDashboard() {
@@ -63,7 +64,7 @@ export default function UserDashboard() {
   }
 
   const stats = [
-    { label: 'Enrolled Courses', value: 1, icon: BookOpen, color: 'from-purple-500 to-fuchsia-500' },
+    { label: 'Enrolled Courses', value: currentUser.enrolledCourses?.length || 0, icon: BookOpen, color: 'from-purple-500 to-fuchsia-500' },
     { label: 'Classes Attended', value: '12/24', icon: Calendar, color: 'from-blue-500 to-cyan-500' },
     { label: 'Projects Completed', value: '3', icon: Award, color: 'from-pink-500 to-orange-500' },
     { label: 'Progress', value: '50%', icon: TrendingUp, color: 'from-green-500 to-emerald-500' },
@@ -132,7 +133,7 @@ export default function UserDashboard() {
                 Upcoming Classes
               </h2>
               <div className="space-y-4">
-                {upcomingClasses.map((cls, idx) => (
+                 {upcomingClasses.map((cls, idx) => (
                   <div key={idx} className="flex items-start gap-4 p-4 rounded-xl bg-gradient-to-r from-purple-50 to-fuchsia-50 border border-purple-200">
                     <div className="flex-shrink-0 w-12 h-12 rounded-full bg-gradient-to-br from-purple-500 to-fuchsia-500 flex items-center justify-center text-white font-bold">
                       {idx + 1}
@@ -146,6 +147,31 @@ export default function UserDashboard() {
                     </button>
                   </div>
                 ))}
+              </div>
+            </motion.div>
+
+            {/* Enrolled Courses */}
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.6 }}
+              className="bg-white rounded-2xl p-6 shadow-lg border-2 border-purple-100 mt-6"
+            >
+              <h2 className="text-xl font-extrabold text-slate-900 mb-4 flex items-center gap-2">
+                <BookOpen className="w-6 h-6 text-purple-600" />
+                Enrolled Courses
+              </h2>
+              <div className="space-y-3">
+                {(currentUser.enrolledCourses && currentUser.enrolledCourses.length > 0) ? (
+                  currentUser.enrolledCourses.map((c, i) => (
+                    <div key={i} className="p-3 rounded-lg border border-purple-100">
+                      <div className="font-semibold text-slate-900">{c.courseName}</div>
+                      <div className="text-sm text-slate-600">Enrolled on {c.purchasedAt ? new Date(c.purchasedAt).toLocaleDateString() : '—'}</div>
+                    </div>
+                  ))
+                ) : (
+                  <p className="text-sm text-slate-600">You have not enrolled in any courses yet.</p>
+                )}
               </div>
             </motion.div>
 

@@ -27,6 +27,7 @@ export async function GET(request: NextRequest) {
         avatar: user.avatar,
         childName: user.childName,
         childAge: user.childAge,
+        enrolledCourses: user.enrolledCourses || [],
       },
     });
   } catch (error: any) {

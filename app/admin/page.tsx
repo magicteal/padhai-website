@@ -1,11 +1,45 @@
 "use client";
 import { motion } from 'framer-motion';
 import { useAppStore } from '@/lib/store';
-import { FolderKanban, MessageSquareQuote, TrendingUp, Users, Star, Sparkles } from 'lucide-react';
+import { FolderKanban, MessageSquareQuote, TrendingUp, Users, Star, Sparkles, BookOpen } from 'lucide-react';
 import Link from 'next/link';
+import { useEffect, useState } from 'react';
 
 export default function AdminDashboard() {
   const { projects, testimonials, users, currentUser } = useAppStore();
+  const [userList, setUserList] = useState<any[]>(users || []);
+  const [totalEnrollments, setTotalEnrollments] = useState(0);
+  const [recentEnrollments, setRecentEnrollments] = useState<Array<{ name: string; courseName: string; purchasedAt?: string }>>([]);
+
+  useEffect(() => {
+    async function fetchUsers() {
+      try {
+        const res = await fetch('/api/users');
+        const data = await res.json();
+        if (data.success && Array.isArray(data.users)) {
+          setUserList(data.users);
+          // compute enrollments
+          const enrolls: Array<{ name: string; courseName: string; purchasedAt?: string }> = [];
+          let total = 0;
+          for (const u of data.users) {
+            if (Array.isArray(u.enrolledCourses)) {
+              total += u.enrolledCourses.length;
+              for (const c of u.enrolledCourses) {
+                enrolls.push({ name: u.name, courseName: c.courseName, purchasedAt: c.purchasedAt });
+              }
+            }
+          }
+          setTotalEnrollments(total);
+          // sort recent and take last 5
+          enrolls.sort((a,b) => { const da = a.purchasedAt ? new Date(a.purchasedAt).getTime() : 0; const db = b.purchasedAt ? new Date(b.purchasedAt).getTime() : 0; return db - da; });
+          setRecentEnrollments(enrolls.slice(0,5));
+        }
+      } catch (err) {
+        console.error('Failed to fetch users for admin dashboard', err);
+      }
+    }
+    fetchUsers();
+  }, [users]);
 
   const stats = [
     { 
@@ -22,6 +56,14 @@ export default function AdminDashboard() {
       icon: Users, 
       color: 'from-green-500 to-emerald-500',
       emoji: '👥',
+      href: '/admin/users'
+    },
+    {
+      label: 'Total Enrollments',
+      value: totalEnrollments,
+      icon: BookOpen,
+      color: 'from-blue-500 to-cyan-500',
+      emoji: '🎓',
       href: '/admin/users'
     },
     { 
@@ -185,6 +227,64 @@ export default function AdminDashboard() {
         </motion.div>
       </div>
 
+      {/* Enrollment by Course + User List */}
+      <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: 0.4 }}
+          className="admin-card p-5 sm:p-6"
+        >
+          <div className="flex items-center justify-between mb-4">
+            <h2 className="text-lg font-bold text-slate-800">Enrollment by Course</h2>
+            <Link href="/admin/users" className="text-purple-600 hover:text-purple-700 text-sm font-medium">View Users →</Link>
+          </div>
+          <div className="space-y-3">
+            {(() => {
+              const map = new Map<string, number>();
+              for (const u of userList) {
+                if (Array.isArray(u.enrolledCourses)) {
+                  for (const c of u.enrolledCourses) {
+                    const key = c.courseName || c.courseId || 'Unknown';
+                    map.set(key, (map.get(key) || 0) + 1);
+                  }
+                }
+              }
+              const entries = Array.from(map.entries()).sort((a,b) => b[1]-a[1]);
+              if (entries.length === 0) return <p className="text-sm text-slate-600">No enrollments yet.</p>;
+              return entries.map(([course, count]) => (
+                <div key={course} className="flex items-center justify-between p-3 rounded-xl border border-purple-100">
+                  <div className="font-medium text-slate-800">{course}</div>
+                  <div className="text-sm text-slate-600">{count} enrolled</div>
+                </div>
+              ));
+            })()}
+          </div>
+        </motion.div>
+
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: 0.5 }}
+          className="admin-card p-5 sm:p-6"
+        >
+          <div className="flex items-center justify-between mb-4">
+            <h2 className="text-lg font-bold text-slate-800">Users</h2>
+            <div className="text-sm text-slate-500">Showing {userList.length} users</div>
+          </div>
+          <div className="space-y-3">
+            {userList.map((u) => (
+              <div key={u._id || u.id} className="flex items-center justify-between p-3 rounded-xl border border-purple-100">
+                <div>
+                  <div className="font-medium text-slate-800">{u.name}</div>
+                  <div className="text-xs text-slate-500">{u.email}</div>
+                </div>
+                <div className="text-sm text-slate-600">{Array.isArray(u.enrolledCourses) ? u.enrolledCourses.length : 0} courses</div>
+              </div>
+            ))}
+          </div>
+        </motion.div>
+      </div>
       {/* Quick Actions */}
       <motion.div
         initial={{ opacity: 0, y: 20 }}
