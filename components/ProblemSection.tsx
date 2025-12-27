@@ -58,7 +58,7 @@ export default function ProblemSection() {
   return (
     <section
       id="problem"
-      className="py-12 sm:py-16 md:py-24 relative overflow-hidden bg-cover bg-center bg-[url('/images/problemsection.png')]"
+      className="py-12 sm:py-16 md:py-24 relative overflow-hidden bg-cover bg-center bg-[url('/images/problemSection.png')]"
     >
       {/* Mobile decorations */}
       <motion.div
