@@ -176,7 +176,7 @@ export default function ProjectsSection() {
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6">
           <AnimatePresence mode="popLayout">
             {filteredProjects.map((project, idx) => (
-              <ProjectCard key={project.id} project={project} index={idx} />
+              <ProjectCard key={project.id} project={project} index={idx} compact />
             ))}
           </AnimatePresence>
         </div>

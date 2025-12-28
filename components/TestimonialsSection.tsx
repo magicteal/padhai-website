@@ -430,9 +430,13 @@ export default function TestimonialsSection() {
                 }))).map((p: any) => (
               <div key={p.id} className="rounded-xl overflow-hidden bg-white shadow-md p-3 flex flex-col items-center">
                 {p.imageSrc ? (
-                  <img src={p.imageSrc} alt={p.title} className="w-full h-28 object-cover rounded-md mb-2" />
+                  <div className="relative w-full rounded-md mb-2 overflow-hidden bg-slate-100" style={{ aspectRatio: '9 / 16' }}>
+                    <img src={p.imageSrc} alt={p.title} className="absolute inset-0 w-full h-full object-cover" />
+                  </div>
                 ) : (
-                  <div className="w-full h-28 rounded-md bg-gradient-to-br from-purple-200 to-pink-200 flex items-center justify-center text-3xl">{hydrated ? p.emoji : ''}</div>
+                  <div className="relative w-full rounded-md mb-2 overflow-hidden bg-gradient-to-br from-purple-200 to-pink-200" style={{ aspectRatio: '9 / 16' }}>
+                    <div className="absolute inset-0 flex items-center justify-center text-3xl">{hydrated ? p.emoji : ''}</div>
+                  </div>
                 )}
                 <div className="text-sm font-bold text-slate-800 mt-2 text-center">{hydrated ? p.title : ''}</div>
                 <div className="text-xs text-slate-500">{hydrated ? `by ${p.studentName}` : ''}</div>
