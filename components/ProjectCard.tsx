@@ -7,9 +7,10 @@ import { Star, Trophy } from 'lucide-react';
 interface ProjectCardProps {
   project: Project;
   index: number;
+  compact?: boolean;
 }
 
-export default function ProjectCard({ project, index }: ProjectCardProps) {
+export default function ProjectCard({ project, index, compact }: ProjectCardProps) {
   return (
     <motion.figure
       initial={{ opacity: 0, y: 30 }}
@@ -18,17 +19,22 @@ export default function ProjectCard({ project, index }: ProjectCardProps) {
       whileHover={{ y: -8 }}
       className="card-kid overflow-hidden group cursor-pointer"
     >
-      {/* Image Area */}
-      <div className="relative w-full h-36 sm:h-40 md:h-48 bg-gradient-to-br from-purple-200 via-violet-200 to-fuchsia-200 overflow-hidden">
+      {/* Image Area (9:16 portrait) */}
+      <div
+        className={compact
+          ? "relative mx-auto w-full max-w-[160px] sm:max-w-[180px] md:max-w-[200px] bg-gradient-to-br from-purple-200 via-violet-200 to-fuchsia-200 overflow-hidden"
+          : "relative w-full bg-gradient-to-br from-purple-200 via-violet-200 to-fuchsia-200 overflow-hidden"}
+        style={{ aspectRatio: '9 / 16' }}
+      >
         {project.imageSrc ? (
-          <img 
-            src={project.imageSrc} 
-            alt={`${project.title} photo`} 
-            className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110" 
+          <img
+            src={project.imageSrc}
+            alt={`${project.title} photo`}
+            className="absolute inset-0 w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
           />
         ) : (
-          <div className="flex items-center justify-center h-full">
-            <motion.div 
+          <div className="absolute inset-0 flex items-center justify-center">
+            <motion.div
               className="text-center"
               animate={{ y: [0, -5, 0] }}
               transition={{ repeat: Infinity, duration: 2 }}
