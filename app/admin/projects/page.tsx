@@ -6,21 +6,29 @@ import { Project, PROJECT_CATEGORIES, ProjectCategory } from '@/lib/types';
 import { Plus, Pencil, Trash2, X, Search, Star, AlertTriangle } from 'lucide-react';
 
 export default function AdminProjectsPage() {
-  const { projects, addProject, updateProject, deleteProject } = useAppStore();
+  const { projects, projectsLoading, fetchProjects, addProject, updateProject, deleteProject } = useAppStore();
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [editingProject, setEditingProject] = useState<Project | null>(null);
   const [imageSrc, setImageSrc] = useState<string>('');
   const [uploading, setUploading] = useState(false);
   const [deleteConfirm, setDeleteConfirm] = useState<string | null>(null);
   const [searchQuery, setSearchQuery] = useState('');
+  const [isSubmitting, setIsSubmitting] = useState(false);
+
+  // Fetch projects from MongoDB on mount
+  useEffect(() => {
+    fetchProjects();
+  }, [fetchProjects]);
 
   const filteredProjects = projects.filter(p => 
     p.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
     p.category.toLowerCase().includes(searchQuery.toLowerCase())
   );
 
-  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+    setIsSubmitting(true);
+    
     const formData = new FormData(e.currentTarget);
     
     const projectData = {
@@ -35,14 +43,20 @@ export default function AdminProjectsPage() {
       featured: formData.get('featured') === 'on',
     };
 
-    if (editingProject) {
-      updateProject(editingProject.id, projectData);
-    } else {
-      addProject(projectData);
+    try {
+      if (editingProject) {
+        await updateProject(editingProject.id, projectData);
+      } else {
+        await addProject(projectData);
+      }
+      setIsModalOpen(false);
+      setEditingProject(null);
+    } catch (error) {
+      console.error('Failed to save project:', error);
+      alert('Failed to save project. Please try again.');
+    } finally {
+      setIsSubmitting(false);
     }
-
-    setIsModalOpen(false);
-    setEditingProject(null);
   };
 
   useEffect(() => {
@@ -75,9 +89,14 @@ export default function AdminProjectsPage() {
     setIsModalOpen(true);
   };
 
-  const handleDelete = (id: string) => {
-    deleteProject(id);
-    setDeleteConfirm(null);
+  const handleDelete = async (id: string) => {
+    try {
+      await deleteProject(id);
+      setDeleteConfirm(null);
+    } catch (error) {
+      console.error('Failed to delete project:', error);
+      alert('Failed to delete project. Please try again.');
+    }
   };
 
   return (

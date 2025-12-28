@@ -6,13 +6,19 @@ import { Testimonial } from '@/lib/types';
 import { Plus, Pencil, Trash2, X, Search, Star, AlertTriangle } from 'lucide-react';
 
 export default function AdminTestimonialsPage() {
-  const { testimonials, addTestimonial, updateTestimonial, deleteTestimonial } = useAppStore();
+  const { testimonials, testimonialsLoading, fetchTestimonials, addTestimonial, updateTestimonial, deleteTestimonial } = useAppStore();
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [editingTestimonial, setEditingTestimonial] = useState<Testimonial | null>(null);
   const [deleteConfirm, setDeleteConfirm] = useState<string | null>(null);
   const [searchQuery, setSearchQuery] = useState('');
   const [imageSrc, setImageSrc] = useState<string>('');
   const [uploading, setUploading] = useState(false);
+  const [isSubmitting, setIsSubmitting] = useState(false);
+
+  // Fetch testimonials from MongoDB on mount
+  useEffect(() => {
+    fetchTestimonials();
+  }, [fetchTestimonials]);
 
   const filteredTestimonials = testimonials.filter(t => 
     t.author.toLowerCase().includes(searchQuery.toLowerCase()) ||
@@ -20,8 +26,10 @@ export default function AdminTestimonialsPage() {
     (t.location?.toLowerCase().includes(searchQuery.toLowerCase()))
   );
 
-  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+    setIsSubmitting(true);
+    
     const formData = new FormData(e.currentTarget);
     
     const testimonialData: Omit<Testimonial, 'id' | 'createdAt'> = {
@@ -33,14 +41,20 @@ export default function AdminTestimonialsPage() {
       imageSrc: (formData.get('imageSrc') as string) || null,
     };
 
-    if (editingTestimonial) {
-      updateTestimonial(editingTestimonial.id, testimonialData);
-    } else {
-      addTestimonial(testimonialData);
+    try {
+      if (editingTestimonial) {
+        await updateTestimonial(editingTestimonial.id, testimonialData);
+      } else {
+        await addTestimonial(testimonialData);
+      }
+      setIsModalOpen(false);
+      setEditingTestimonial(null);
+    } catch (error) {
+      console.error('Failed to save testimonial:', error);
+      alert('Failed to save testimonial. Please try again.');
+    } finally {
+      setIsSubmitting(false);
     }
-
-    setIsModalOpen(false);
-    setEditingTestimonial(null);
   };
 
   const handleEdit = (testimonial: Testimonial) => {
@@ -48,9 +62,14 @@ export default function AdminTestimonialsPage() {
     setIsModalOpen(true);
   };
 
-  const handleDelete = (id: string) => {
-    deleteTestimonial(id);
-    setDeleteConfirm(null);
+  const handleDelete = async (id: string) => {
+    try {
+      await deleteTestimonial(id);
+      setDeleteConfirm(null);
+    } catch (error) {
+      console.error('Failed to delete testimonial:', error);
+      alert('Failed to delete testimonial. Please try again.');
+    }
   };
 
   const openAddModal = () => {

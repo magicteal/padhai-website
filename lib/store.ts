@@ -1,162 +1,6 @@
 import { create } from 'zustand';
 import { persist } from 'zustand/middleware';
 import { Project, Testimonial, User } from './types';
-// Video testimonials are handled via static assets in the marketing site.
-
-// Initial Projects Data
-const initialProjects: Project[] = [
-  {
-    id: '1',
-    title: 'Fire-Fighting Robot',
-    grade: 'Grade 6',
-    category: 'robotics',
-    caption: '"This student used AI to plan, design, and optimize the model."',
-    description: 'A fully functional fire-fighting robot prototype that can detect heat sources and spray water to extinguish small fires.',
-    imageSrc: null,
-    emoji: '🤖',
-    featured: true,
-    createdAt: '2024-01-15',
-    studentName: 'Arjun K.',
-  },
-  {
-    id: '2',
-    title: 'Drone Prototype',
-    grade: 'Grade 7',
-    category: 'robotics',
-    caption: '"AI helped him understand aerodynamics and testing concepts."',
-    description: 'Custom-built drone with AI-assisted flight patterns and obstacle detection.',
-    imageSrc: null,
-    emoji: '✈️',
-    featured: true,
-    createdAt: '2024-02-10',
-    studentName: 'Priya M.',
-  },
-  {
-    id: '3',
-    title: 'Arduino Coding Model',
-    grade: 'Grade 8',
-    category: 'coding',
-    caption: '"AI taught him coding logic step-by-step."',
-    description: 'Interactive Arduino project with sensors and LED displays programmed from scratch.',
-    imageSrc: null,
-    emoji: '💻',
-    featured: true,
-    createdAt: '2024-03-05',
-    studentName: 'Rahul S.',
-  },
-  {
-    id: '4',
-    title: 'Smart Safety Project',
-    grade: 'Grade 5',
-    category: 'science',
-    caption: '"A complete school exhibition model powered by AI explanations."',
-    description: 'Smart home safety system that alerts parents when kids are home alone.',
-    imageSrc: null,
-    emoji: '🏠',
-    featured: true,
-    createdAt: '2024-03-20',
-    studentName: 'Ananya R.',
-  },
-  {
-    id: '5',
-    title: 'Human Dummy Research',
-    grade: 'Grade 9',
-    category: 'science',
-    caption: '"AI-assisted research on crash safety for advanced presentation."',
-    description: 'Detailed research project on crash test dummies and automotive safety.',
-    imageSrc: null,
-    emoji: '🔬',
-    featured: true,
-    createdAt: '2024-04-01',
-    studentName: 'Vikram P.',
-  },
-  {
-    id: '6',
-    title: '"The Space Turtle" Storybook',
-    grade: 'Grade 5',
-    category: 'story',
-    caption: '"Wrote the story, generated character art, and formatted the book using AI tools."',
-    description: 'A beautiful illustrated storybook about a turtle who dreams of exploring space.',
-    imageSrc: null,
-    emoji: '🐢',
-    featured: true,
-    createdAt: '2024-04-15',
-    studentName: 'Meera K.',
-  },
-  {
-    id: '7',
-    title: 'AI Art Gallery',
-    grade: 'Grade 4',
-    category: 'art',
-    caption: '"Created stunning digital art pieces using AI tools with creative direction."',
-    description: 'A collection of AI-assisted digital artworks exploring various themes.',
-    imageSrc: null,
-    emoji: '🎨',
-    featured: false,
-    createdAt: '2024-05-01',
-    studentName: 'Sanya L.',
-  },
-  {
-    id: '8',
-    title: 'Music Composition App',
-    grade: 'Grade 8',
-    category: 'music',
-    caption: '"Built a simple app that helps compose music using AI suggestions."',
-    description: 'An interactive music creation tool that generates melodies.',
-    imageSrc: null,
-    emoji: '🎵',
-    featured: false,
-    createdAt: '2024-05-15',
-    studentName: 'Dev A.',
-  },
-  {
-    id: '9',
-    title: 'Puzzle Adventure Game',
-    grade: 'Grade 7',
-    category: 'game',
-    caption: '"Designed game mechanics and levels with AI assistance."',
-    description: 'A puzzle-based adventure game with multiple levels and challenges.',
-    imageSrc: null,
-    emoji: '🎮',
-    featured: false,
-    createdAt: '2024-06-01',
-    studentName: 'Rohan T.',
-  },
-];
-
-// Initial Parent Testimonials Data
-const initialTestimonials: Testimonial[] = [
-  {
-    id: '4',
-    quote: '"My son now uses his tablet for creating instead of gaming."',
-    author: 'Parent',
-    location: 'Whitefield',
-    rating: 5,
-    featured: true,
-    imageSrc: null,
-    createdAt: '2024-02-01',
-  },
-  {
-    id: '5',
-    quote: '"My daughter made her school project with AI, unbelievable!"',
-    author: 'Parent',
-    location: 'Koramangala',
-    rating: 5,
-    featured: true,
-    imageSrc: null,
-    createdAt: '2024-02-15',
-  },
-  {
-    id: '6',
-    quote: '"This is the first course that made screen time useful."',
-    author: 'Parent',
-    location: 'Indiranagar',
-    rating: 5,
-    featured: true,
-    imageSrc: null,
-    createdAt: '2024-03-01',
-  },
-];
 
 // Admin User (default credentials - in production, use environment variables and proper auth)
 const defaultAdmin: User = {
@@ -209,15 +53,19 @@ const initialUsers: User[] = [
 interface AppState {
   // Projects
   projects: Project[];
-  addProject: (project: Omit<Project, 'id' | 'createdAt'>) => void;
-  updateProject: (id: string, project: Partial<Project>) => void;
-  deleteProject: (id: string) => void;
+  projectsLoading: boolean;
+  fetchProjects: () => Promise<void>;
+  addProject: (project: Omit<Project, 'id' | 'createdAt'>) => Promise<void>;
+  updateProject: (id: string, project: Partial<Project>) => Promise<void>;
+  deleteProject: (id: string) => Promise<void>;
   
   // Testimonials
   testimonials: Testimonial[];
-  addTestimonial: (testimonial: Omit<Testimonial, 'id' | 'createdAt'>) => void;
-  updateTestimonial: (id: string, testimonial: Partial<Testimonial>) => void;
-  deleteTestimonial: (id: string) => void;
+  testimonialsLoading: boolean;
+  fetchTestimonials: () => Promise<void>;
+  addTestimonial: (testimonial: Omit<Testimonial, 'id' | 'createdAt'>) => Promise<void>;
+  updateTestimonial: (id: string, testimonial: Partial<Testimonial>) => Promise<void>;
+  deleteTestimonial: (id: string) => Promise<void>;
   
   // Users
   users: User[];
@@ -237,53 +85,240 @@ interface AppState {
 export const useAppStore = create<AppState>()(
   persist(
     (set, get) => ({
-      // Projects
-      projects: initialProjects,
-      addProject: (project) => {
-        const newProject: Project = {
-          ...project,
-          id: Date.now().toString(),
-          createdAt: new Date().toISOString().split('T')[0],
-        };
-        set((state) => ({ projects: [...state.projects, newProject] }));
-      },
-      updateProject: (id, updatedProject) => {
-        set((state) => ({
-          projects: state.projects.map((p) =>
-            p.id === id ? { ...p, ...updatedProject } : p
-          ),
-        }));
-      },
-      deleteProject: (id) => {
-        set((state) => ({
-          projects: state.projects.filter((p) => p.id !== id),
-        }));
+      // ============ PROJECTS (MongoDB) ============
+      projects: [],
+      projectsLoading: false,
+
+      fetchProjects: async () => {
+        set({ projectsLoading: true });
+        try {
+          const res = await fetch('/api/projects');
+          const json = await res.json();
+          if (json.success) {
+            // Transform MongoDB format to frontend format
+            const transformedProjects = json.data.map((p: any) => ({
+              id: p.id || p._id,
+              title: p.title,
+              grade: p.grade || p.batchMonth || 'Grade 5',
+              category: p.category?.toLowerCase().replace(' ', '-') || 'other',
+              caption: p.caption || p.description?.substring(0, 100) || '',
+              description: p.description,
+              imageSrc: p.imageSrc || p.thumbnail?.url || null,
+              emoji: p.emoji || '💡',
+              featured: p.featured || false,
+              createdAt: p.createdAt ? new Date(p.createdAt).toISOString().split('T')[0] : new Date().toISOString().split('T')[0],
+              studentName: p.studentName,
+            }));
+            set({ projects: transformedProjects });
+          }
+        } catch (error) {
+          console.error('Failed to fetch projects:', error);
+        } finally {
+          set({ projectsLoading: false });
+        }
       },
 
-      // Testimonials
-      testimonials: initialTestimonials,
-      addTestimonial: (testimonial) => {
-        const newTestimonial: Testimonial = {
-          ...testimonial,
-          id: Date.now().toString(),
-          createdAt: new Date().toISOString().split('T')[0],
-        };
-        set((state) => ({ testimonials: [...state.testimonials, newTestimonial] }));
-      },
-      updateTestimonial: (id, updatedTestimonial) => {
-        set((state) => ({
-          testimonials: state.testimonials.map((t) =>
-            t.id === id ? { ...t, ...updatedTestimonial } : t
-          ),
-        }));
-      },
-      deleteTestimonial: (id) => {
-        set((state) => ({
-          testimonials: state.testimonials.filter((t) => t.id !== id),
-        }));
+      addProject: async (project) => {
+        try {
+          // Transform to MongoDB format
+          const mongoProject = {
+            title: project.title,
+            description: project.description || project.caption,
+            category: 'Other', // Map frontend categories to MongoDB enum
+            studentName: project.studentName || 'Student',
+            studentAge: 10,
+            batchMonth: project.grade || 'January 2025',
+            thumbnail: {
+              url: project.imageSrc || 'https://via.placeholder.com/400x300',
+              publicId: 'placeholder',
+            },
+            featured: project.featured || false,
+            approved: true,
+            // Store frontend-specific fields for retrieval
+            grade: project.grade,
+            caption: project.caption,
+            emoji: project.emoji,
+            imageSrc: project.imageSrc,
+          };
+
+          const res = await fetch('/api/projects', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(mongoProject),
+          });
+          const json = await res.json();
+          if (json.success) {
+            // Add to local state with frontend format
+            const newProject: Project = {
+              id: json.data.id || json.data._id,
+              title: project.title,
+              grade: project.grade || 'Grade 5',
+              category: project.category || 'other',
+              caption: project.caption || '',
+              description: project.description,
+              imageSrc: project.imageSrc || null,
+              emoji: project.emoji || '💡',
+              featured: project.featured || false,
+              createdAt: new Date().toISOString().split('T')[0],
+              studentName: project.studentName,
+            };
+            set((state) => ({ projects: [...state.projects, newProject] }));
+          }
+        } catch (error) {
+          console.error('Failed to add project:', error);
+        }
       },
 
-      // Users
+      updateProject: async (id, updatedProject) => {
+        try {
+          const res = await fetch(`/api/projects/${id}`, {
+            method: 'PUT',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(updatedProject),
+          });
+          const json = await res.json();
+          if (json.success) {
+            set((state) => ({
+              projects: state.projects.map((p) =>
+                p.id === id ? { ...p, ...updatedProject } : p
+              ),
+            }));
+          }
+        } catch (error) {
+          console.error('Failed to update project:', error);
+        }
+      },
+
+      deleteProject: async (id) => {
+        try {
+          const res = await fetch(`/api/projects/${id}`, { method: 'DELETE' });
+          const json = await res.json();
+          if (json.success) {
+            set((state) => ({ projects: state.projects.filter((p) => p.id !== id) }));
+          }
+        } catch (error) {
+          console.error('Failed to delete project:', error);
+        }
+      },
+
+      // ============ TESTIMONIALS (MongoDB) ============
+      testimonials: [],
+      testimonialsLoading: false,
+
+      fetchTestimonials: async () => {
+        set({ testimonialsLoading: true });
+        try {
+          const res = await fetch('/api/testimonials');
+          const json = await res.json();
+          if (json.success) {
+            // Transform MongoDB format to frontend format
+            const transformedTestimonials = json.data.map((t: any) => ({
+              id: t.id || t._id,
+              quote: t.quote || t.testimonialText || '',
+              author: t.author || t.parentName || 'Parent',
+              location: t.location,
+              rating: t.rating || 5,
+              featured: t.featured || false,
+              imageSrc: t.imageSrc || t.image?.url || null,
+              createdAt: t.createdAt ? new Date(t.createdAt).toISOString().split('T')[0] : new Date().toISOString().split('T')[0],
+            }));
+            set({ testimonials: transformedTestimonials });
+          }
+        } catch (error) {
+          console.error('Failed to fetch testimonials:', error);
+        } finally {
+          set({ testimonialsLoading: false });
+        }
+      },
+
+      addTestimonial: async (testimonial) => {
+        try {
+          // Transform to MongoDB format
+          const mongoTestimonial = {
+            parentName: testimonial.author || 'Parent',
+            childName: 'Child',
+            childAge: 10,
+            location: testimonial.location || 'Bangalore',
+            testimonialText: testimonial.quote,
+            rating: testimonial.rating || 5,
+            featured: testimonial.featured || false,
+            approved: true,
+            // Store frontend-specific fields
+            quote: testimonial.quote,
+            author: testimonial.author,
+            imageSrc: testimonial.imageSrc,
+            image: testimonial.imageSrc ? {
+              url: testimonial.imageSrc,
+              publicId: 'uploaded',
+            } : undefined,
+          };
+
+          const res = await fetch('/api/testimonials', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(mongoTestimonial),
+          });
+          const json = await res.json();
+          if (json.success) {
+            const newTestimonial: Testimonial = {
+              id: json.data.id || json.data._id,
+              quote: testimonial.quote,
+              author: testimonial.author || 'Parent',
+              location: testimonial.location,
+              rating: testimonial.rating || 5,
+              featured: testimonial.featured || false,
+              imageSrc: testimonial.imageSrc || null,
+              createdAt: new Date().toISOString().split('T')[0],
+            };
+            set((state) => ({ testimonials: [...state.testimonials, newTestimonial] }));
+          }
+        } catch (error) {
+          console.error('Failed to add testimonial:', error);
+        }
+      },
+
+      updateTestimonial: async (id, updatedTestimonial) => {
+        try {
+          // Transform to MongoDB format if needed
+          const mongoUpdate: any = { ...updatedTestimonial };
+          if (updatedTestimonial.quote) {
+            mongoUpdate.testimonialText = updatedTestimonial.quote;
+          }
+          if (updatedTestimonial.author) {
+            mongoUpdate.parentName = updatedTestimonial.author;
+          }
+
+          const res = await fetch(`/api/testimonials/${id}`, {
+            method: 'PUT',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(mongoUpdate),
+          });
+          const json = await res.json();
+          if (json.success) {
+            set((state) => ({
+              testimonials: state.testimonials.map((t) =>
+                t.id === id ? { ...t, ...updatedTestimonial } : t
+              ),
+            }));
+          }
+        } catch (error) {
+          console.error('Failed to update testimonial:', error);
+        }
+      },
+
+      deleteTestimonial: async (id) => {
+        try {
+          const res = await fetch(`/api/testimonials/${id}`, { method: 'DELETE' });
+          const json = await res.json();
+          if (json.success) {
+            set((state) => ({ testimonials: state.testimonials.filter((t) => t.id !== id) }));
+          }
+        } catch (error) {
+          console.error('Failed to delete testimonial:', error);
+        }
+      },
+
+      // ============ USERS (local for now) ============
       users: initialUsers,
       addUser: (user) => {
         const newUser: User = {
@@ -311,7 +346,7 @@ export const useAppStore = create<AppState>()(
         }));
       },
 
-      // Auth
+      // ============ AUTH ============
       isAuthenticated: false,
       currentUser: null,
       login: (email, password) => {
@@ -357,60 +392,24 @@ export const useAppStore = create<AppState>()(
     }),
     {
       name: 'padhai-storage',
-      version: 3,
-      migrate: (persistedState, _version) => {
+      version: 4,
+      migrate: (persistedState, version) => {
+        // Handle migration from older versions
         const state = persistedState as {
-          projects?: Project[];
-          testimonials?: Testimonial[];
           users?: User[];
           isAuthenticated?: boolean;
           currentUser?: User | null;
         } | undefined;
-        if (!state || !state.users) {
-          return {
-            projects: initialProjects,
-            testimonials: initialTestimonials,
-            users: initialUsers,
-            isAuthenticated: false,
-            currentUser: null,
-          };
-        }
-        const byEmail = new Map<string, User>(state.users.map((u) => [u.email, u]));
-        for (const seed of initialUsers) {
-          if (!byEmail.has(seed.email)) {
-            byEmail.set(seed.email, seed);
-          }
-        }
-        const migratedTestimonials = Array.isArray(state.testimonials)
-          ? (state.testimonials as any[])
-              .map((t) => {
-                // v2 format supported video/text; keep only text-like testimonials
-                if (t?.type === 'video') return null;
-                const quote = typeof t?.quote === 'string' ? t.quote : '';
-                const author = typeof t?.author === 'string' ? t.author : 'Parent';
-                const location = typeof t?.location === 'string' ? t.location : undefined;
-                const rating = typeof t?.rating === 'number' ? t.rating : 5;
-                const featured = typeof t?.featured === 'boolean' ? t.featured : true;
-                const imageSrc = typeof t?.imageSrc === 'string' ? t.imageSrc : null;
-                const createdAt = typeof t?.createdAt === 'string' ? t.createdAt : new Date().toISOString().split('T')[0];
-                const id = typeof t?.id === 'string' ? t.id : Date.now().toString();
-                if (!quote) return null;
-                return { id, quote, author, location, rating, featured, imageSrc, createdAt } as Testimonial;
-              })
-              .filter(Boolean) as Testimonial[]
-          : initialTestimonials;
-
+        
+        // Return migrated state with only auth data
         return {
-          projects: state.projects ?? initialProjects,
-          testimonials: migratedTestimonials.length > 0 ? migratedTestimonials : initialTestimonials,
-          users: Array.from(byEmail.values()),
-          isAuthenticated: state.isAuthenticated ?? false,
-          currentUser: state.currentUser ?? null,
+          users: state?.users ?? initialUsers,
+          isAuthenticated: state?.isAuthenticated ?? false,
+          currentUser: state?.currentUser ?? null,
         };
       },
       partialize: (state) => ({
-        projects: state.projects,
-        testimonials: state.testimonials,
+        // Only persist auth-related data, not projects/testimonials (those come from MongoDB)
         users: state.users,
         isAuthenticated: state.isAuthenticated,
         currentUser: state.currentUser,

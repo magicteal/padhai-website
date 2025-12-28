@@ -1,12 +1,12 @@
 "use client";
 import React from 'react';
 import { motion } from 'framer-motion';
-import { ChevronLeft, ChevronRight, Star, Video, MessageSquare, User, Users, Bot, Sparkles, Heart, Lightbulb, Brain, Rocket, Palette } from 'lucide-react';
+import { ChevronLeft, ChevronRight, Star, Video, MessageSquare, User, Users, Bot, Sparkles, Heart, Lightbulb, Brain, Rocket, Palette, Loader2 } from 'lucide-react';
 import { useAppStore } from '@/lib/store';
 import testimonialVideosArray from '../data/testimonialVideos';
 
 export default function TestimonialsSection() {
-  const { testimonials, projects } = useAppStore();
+  const { testimonials, testimonialsLoading, fetchTestimonials, projects, projectsLoading, fetchProjects } = useAppStore();
   const [hydrated, setHydrated] = React.useState(false);
   const [activePage, setActivePage] = React.useState(0);
   // Responsive page size (fix mobile carousel not advancing when <=3 items)
@@ -15,7 +15,10 @@ export default function TestimonialsSection() {
 
   React.useEffect(() => {
     setHydrated(true);
-  }, []);
+    // Fetch testimonials and projects from MongoDB on mount
+    fetchTestimonials();
+    fetchProjects();
+  }, [fetchTestimonials, fetchProjects]);
 
   // Compute pageSize responsively and update on resize
   React.useEffect(() => {

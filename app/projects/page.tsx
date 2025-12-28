@@ -1,17 +1,22 @@
 "use client";
-import { useState, useMemo } from 'react';
+import { useState, useMemo, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { useAppStore } from '@/lib/store';
 import { ProjectCategory, GradeLevel } from '@/lib/types';
 import ProjectFilter from '@/components/ProjectFilter';
 import ProjectCard from '@/components/ProjectCard';
-import { Sparkles, Search } from 'lucide-react';
+import { Sparkles, Search, Loader2 } from 'lucide-react';
 
 export default function ProjectsPage() {
-  const { projects } = useAppStore();
+  const { projects, projectsLoading, fetchProjects } = useAppStore();
   const [selectedCategory, setSelectedCategory] = useState<ProjectCategory>('all');
   const [selectedGrade, setSelectedGrade] = useState<GradeLevel>('all');
   const [searchQuery, setSearchQuery] = useState('');
+
+  // Fetch projects from MongoDB on mount
+  useEffect(() => {
+    fetchProjects();
+  }, [fetchProjects]);
 
   const filteredProjects = useMemo(() => {
     return projects.filter((project) => {
