@@ -9,9 +9,43 @@ export default function TestimonialsSection() {
   const { testimonials, projects } = useAppStore();
   const [hydrated, setHydrated] = React.useState(false);
   const [activePage, setActivePage] = React.useState(0);
+  // Responsive page size (fix mobile carousel not advancing when <=3 items)
+  const [pageSize, setPageSize] = React.useState(3);
+  const touchStartXRef = React.useRef<number | null>(null);
+
   React.useEffect(() => {
     setHydrated(true);
   }, []);
+
+  // Compute pageSize responsively and update on resize
+  React.useEffect(() => {
+    const computePageSize = (w: number) => {
+      if (w < 640) return 1;      // sm
+      if (w < 1024) return 2;     // md
+      return 3;                   // lg+
+    };
+    const updatePageSize = () => setPageSize(computePageSize(window.innerWidth));
+    updatePageSize();
+    window.addEventListener('resize', updatePageSize);
+    return () => window.removeEventListener('resize', updatePageSize);
+  }, []);
+
+  // Touch swipe handlers for mobile
+  const handleTouchStart = (e: React.TouchEvent) => {
+    touchStartXRef.current = e.changedTouches[0]?.clientX ?? null;
+  };
+  const handleTouchEnd = (e: React.TouchEvent) => {
+    const endX = e.changedTouches[0]?.clientX ?? null;
+    const startX = touchStartXRef.current;
+    touchStartXRef.current = null;
+    if (startX == null || endX == null) return;
+    const dx = endX - startX;
+    const threshold = 40;
+    if (Math.abs(dx) > threshold) {
+      if (dx < 0) goNext();
+      else goPrev();
+    }
+  };
 
   const videoList = testimonialVideosArray && testimonialVideosArray.length > 0
     ? testimonialVideosArray.slice(0, 3)
@@ -19,7 +53,6 @@ export default function TestimonialsSection() {
 
   const featuredParents = testimonials.filter((t) => t.featured);
   const parentTestimonials = featuredParents.length > 0 ? featuredParents : testimonials;
-  const pageSize = 3;
   const pageCount = Math.max(1, Math.ceil(parentTestimonials.length / pageSize));
   const safeActivePage = Math.min(activePage, pageCount - 1);
   const pageStart = safeActivePage * pageSize;
@@ -256,14 +289,16 @@ export default function TestimonialsSection() {
               </button>
 
               <motion.div
-                key={hydrated ? `page-${safeActivePage}` : 'loading'}
+                key={hydrated ? `page-${safeActivePage}-size-${pageSize}` : 'loading'}
                 initial={{ opacity: 0, y: 10 }}
                 animate={{ opacity: 1, y: 0 }}
                 className="w-full"
+                onTouchStart={handleTouchStart}
+                onTouchEnd={handleTouchEnd}
               >
                 {!hydrated ? (
-                  <div className="grid grid-cols-1 lg:grid-cols-3 gap-4 sm:gap-5">
-                    {Array.from({ length: 3 }).map((_, idx) => (
+                  <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-5">
+                    {Array.from({ length: pageSize }).map((_, idx) => (
                       <div key={idx} className="card-kid p-5 sm:p-6 h-56 sm:h-60 relative">
                         <span
                           aria-hidden
@@ -281,7 +316,7 @@ export default function TestimonialsSection() {
                     ))}
                   </div>
                 ) : pageItems.length > 0 ? (
-                  <div className="grid grid-cols-1 lg:grid-cols-3 gap-4 sm:gap-5">
+                  <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-5">
                     {pageItems.map((item) => (
                       <motion.div
                         key={item.id}
@@ -406,32 +441,6 @@ export default function TestimonialsSection() {
           </div>
         </motion.div>
 
-        <motion.div 
-          initial={{ opacity: 0, scale: 0.9 }}
-          whileInView={{ opacity: 1, scale: 1 }}
-          viewport={{ once: true }}
-          className="text-center"
-        >
-          <motion.div 
-            className="inline-block px-4 sm:px-6 py-3 sm:py-4 rounded-xl bg-white shadow-lg border-2 border-purple-100"
-            whileHover={{ scale: 1.02 }}
-          >
-            <div className="flex items-center gap-2 sm:gap-3 flex-wrap justify-center">
-              <motion.div 
-                className="w-12 h-12 rounded-xl bg-purple-100 flex items-center justify-center"
-                animate={{ scale: [1, 1.05, 1] }}
-                transition={{ repeat: Infinity, duration: 2 }}
-              >
-                <Users className="w-6 h-6 text-purple-600" />
-              </motion.div>
-              <div className="text-center sm:text-left">
-                <p className="text-slate-900 font-extrabold text-base sm:text-lg">
-                  Supported by <span className="gradient-text">13,000+</span> Families
-                </p>
-              </div>
-            </div>
-          </motion.div>
-        </motion.div>
       </div>
     </section>
   );

@@ -67,6 +67,19 @@ export default function HeroSection({
       {/* Gradient overlay for mobile only - better readability */}
       <div className="sm:hidden absolute inset-0 bg-gradient-to-b from-black/60 via-black/50 to-purple-900/70 z-0"></div>
 
+      {/* Mobile-only top badge */}
+      <div className="sm:hidden absolute top-10 left-0 right-0 flex justify-center z-20">
+        <motion.div
+          initial={{ opacity: 0, y: -10 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: 0.15 }}
+          className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white/15 backdrop-blur-md border border-white/30 shadow-lg"
+        >
+          <Star className="w-4 h-4 text-yellow-300 fill-yellow-300" />
+          <span className="text-white text-xs font-semibold">#1 AI Course for Kids</span>
+        </motion.div>
+      </div>
+
       {/* Animated background elements - Hidden on mobile for cleaner look */}
       <div className="hidden sm:block absolute inset-0 overflow-hidden pointer-events-none">
         <motion.div 
@@ -101,7 +114,7 @@ export default function HeroSection({
                 initial={{ opacity: 0, y: -20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: 0.2 }}
-                className="inline-flex items-center gap-1 sm:gap-2 px-2 sm:px-4 py-1 sm:py-2 rounded-full bg-white/15 backdrop-blur-md border border-white/30 mb-5 sm:mb-6 shadow-lg"
+                className="hidden sm:inline-flex items-center gap-1 sm:gap-2 px-2 sm:px-4 py-1 sm:py-2 rounded-full bg-white/15 backdrop-blur-md border border-white/30 mb-5 sm:mb-6 shadow-lg"
               >
                 <Star className="w-3 h-3 sm:w-4 sm:h-4 text-yellow-300 fill-yellow-300" />
                 <span className="text-white text-[9px] sm:text-sm font-semibold">#1 AI Course for Kids</span>
