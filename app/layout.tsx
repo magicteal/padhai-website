@@ -1,5 +1,4 @@
 import type { Metadata } from "next";
-import { Poppins } from "next/font/google";
 import Script from "next/script";
 import "./globals.css";
 import ConditionalNavbar from "../components/ConditionalNavbar";
@@ -10,12 +9,6 @@ import initializeServices from "@/lib/init";
 
 // Initialize MongoDB and Cloudinary on app startup
 initializeServices();
-
-const poppins = Poppins({
-  variable: "--font-poppins",
-  subsets: ["latin"],
-  weight: ["300","400","600","700","800"],
-});
 
 export const metadata: Metadata = {
   title: "PadhAI",
@@ -29,7 +22,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={`${poppins.variable} antialiased`}>
+      <body className={`antialiased`}>
         {/* Meta Pixel (Facebook) */}
         <Script id="facebook-pixel" strategy="afterInteractive">
           {`
