@@ -8,7 +8,6 @@ import RazorpayButton from './RazorpayButton';
 export default function CourseDetailsSection() {
   const features = [
     'Build 6+ real-world AI projects',
-    'Small batch sizes (max 12 students)',
     'Weekly progress reports for parents',
     'Certificate on completion',
     'Lifetime access to project resources'
@@ -179,14 +178,14 @@ export default function CourseDetailsSection() {
                 imageSrc: '/images/parentTwo.svg',
               },
             ].map((t) => (
-              <div key={t.id} className="card-kid p-4 bg-white/90 rounded-2xl shadow-md">
-                <div className="flex items-start gap-3">
+              <div key={t.id} className="card-kid p-5 sm:p-6 bg-white/90 rounded-2xl shadow-md">
+                <div className="flex items-start gap-4">
                   <div className="w-14 h-14 sm:w-16 sm:h-16 rounded-full overflow-hidden">
                     <img src={t.imageSrc} alt={`${t.author} photo`} className="w-full h-full object-cover" />
                   </div>
                   <div>
-                    <div className="font-bold text-sm text-slate-900">{t.author}</div>
-                    <div className="text-xs text-slate-600 mt-2">{t.quote}</div>
+                    <div className="font-bold text-base sm:text-lg text-slate-900">{t.author}</div>
+                    <div className="text-sm sm:text-base text-slate-600 mt-2 leading-relaxed">{t.quote}</div>
                   </div>
                 </div>
               </div>

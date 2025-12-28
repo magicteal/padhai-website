@@ -20,7 +20,7 @@ export default function FloatingWhatsAppCTA() {
 
   if (!toWaMeNumber(number)) return null;
 
-  const text = "Connect on whatsApp with our mentor • ";
+  const text = "Connect on WhatsApp with our mentor • ";
 
   return (
     <div className="fixed bottom-6 right-6 z-50">
