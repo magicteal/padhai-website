@@ -162,12 +162,27 @@ export default function CourseDetailsSection() {
         {/* Parent testimonials placed before pricing to build trust */}
         <div className="flex justify-center mb-6">
           <div className="max-w-3xl w-full grid grid-cols-1 md:grid-cols-2 gap-4">
-            {/** show up to 2 featured parent text testimonials */}
-            {useAppStore.getState().testimonials.filter(t => t.featured).slice(0, 2).map((t) => (
+            {/** two static parent testimonials with images */}
+            {[
+              {
+                id: 'parent-one',
+                author: 'Anita Sharma, Bengaluru',
+                quote:
+                  'My daughter now uses AI to plan homework and explain tough topics. The classes built her confidence and discipline.',
+                imageSrc: '/images/parentOne.svg',
+              },
+              {
+                id: 'parent-two',
+                author: 'Neha Verma, Pune',
+                quote:
+                  'The projects were practical and fun. My son learned to use AI safely and manages his time much better now.',
+                imageSrc: '/images/parentTwo.svg',
+              },
+            ].map((t) => (
               <div key={t.id} className="card-kid p-4 bg-white/90 rounded-2xl shadow-md">
                 <div className="flex items-start gap-3">
-                  <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-purple-400 to-purple-500 flex items-center justify-center text-white">
-                    <Users className="w-5 h-5" />
+                  <div className="w-14 h-14 sm:w-16 sm:h-16 rounded-full overflow-hidden">
+                    <img src={t.imageSrc} alt={`${t.author} photo`} className="w-full h-full object-cover" />
                   </div>
                   <div>
                     <div className="font-bold text-sm text-slate-900">{t.author}</div>
