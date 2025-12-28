@@ -4,6 +4,10 @@ import { motion } from 'framer-motion';
 import { Phone, Rocket, Clock, Users, Star, Shield, Lock, Heart, Sparkles, Gift } from 'lucide-react';
 import RazorpayButton from './RazorpayButton';
 
+const WHATSAPP_NUMBER = "917849878567";
+const WHATSAPP_MESSAGE = "Hi! I want to book a Free AI Counselling Call.";
+const WHATSAPP_URL = `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(WHATSAPP_MESSAGE)}`;
+
 export default function CTASection() {
   return (
     <section className="py-12 sm:py-16 md:py-20 relative overflow-hidden bg-gradient-to-br from-purple-600 via-purple-700 to-purple-800">
@@ -108,14 +112,17 @@ export default function CTASection() {
           transition={{ delay: 0.3 }}
           className="flex flex-col sm:flex-row gap-3 sm:gap-5 justify-center items-center mb-6"
         >
-          <motion.button 
+          <motion.a 
+            href={WHATSAPP_URL}
+            target="_blank"
+            rel="noopener noreferrer"
             className="group w-full sm:w-auto bg-white text-purple-700 hover:bg-purple-50 font-extrabold py-3 sm:py-4 px-6 sm:px-8 rounded-xl shadow-xl transition-all text-base sm:text-lg flex items-center justify-center gap-2"
             whileHover={{ scale: 1.03 }}
             whileTap={{ scale: 0.98 }}
           >
             <Phone className="w-5 h-5" />
             Book Free Call
-          </motion.button>
+          </motion.a>
           
           <motion.div whileHover={{ scale: 1.03 }} whileTap={{ scale: 0.98 }}>
             <RazorpayButton

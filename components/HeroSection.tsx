@@ -211,7 +211,7 @@ export default function HeroSection({
               <div className="mt-5 sm:hidden scale-90">
                 <HomeJanuaryOfferBox 
                   variant="bare" 
-                  text="New Year Offer: ₹23,600 → ₹16,000, Only 60 Bangalore seats for January batch" 
+                  text="New Year Offer: ₹23,600 → ₹16,000, Only 100 Bangalore seats for January batch" 
                 />
               </div>
             </motion.div>
@@ -225,7 +225,7 @@ export default function HeroSection({
         <div className="hidden sm:block mb-4 sm:mt-2 sm:mb-6">
           <HomeJanuaryOfferBox 
             variant="bare" 
-            text="New Year Offer: ₹23,600 → ₹16,000 | Only 60 Bangalore seats for January batch" 
+            text="New Year Offer: ₹23,600 → ₹16,000 | Only 100 Bangalore seats for January batch" 
           />
         </div>
 

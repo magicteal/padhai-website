@@ -1,7 +1,11 @@
 "use client";
 import { motion } from 'framer-motion';
-import { Mail, Phone, MapPin, Instagram, Heart, Link2, BookOpen, Globe, Users } from 'lucide-react';
+import { Mail, Phone, MapPin, Instagram, Heart, Link2, BookOpen, Globe, Users, MessageCircle } from 'lucide-react';
 import Link from 'next/link';
+
+const WHATSAPP_NUMBER = "917849878567";
+const WHATSAPP_MESSAGE = "Hi! I want to know more about the AI Course for kids.";
+const WHATSAPP_URL = `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(WHATSAPP_MESSAGE)}`;
 
 export default function Footer() {
   const socialLinks = [
@@ -93,6 +97,12 @@ export default function Footer() {
                 <Phone className="w-4 h-4 sm:w-5 sm:h-5 shrink-0 mt-0.5 text-purple-300" />
                 <a href="tel:+917849878567" className="hover:text-white transition">
                   +91 78498 78567
+                </a>
+              </li>
+              <li className="flex items-start gap-3 text-sm text-white/80 justify-center sm:justify-start">
+                <MessageCircle className="w-4 h-4 sm:w-5 sm:h-5 shrink-0 mt-0.5 text-green-400" />
+                <a href={WHATSAPP_URL} target="_blank" rel="noopener noreferrer" className="hover:text-white transition">
+                  WhatsApp Us
                 </a>
               </li>
               <li className="flex items-start gap-3 text-sm text-white/80 justify-center sm:justify-start">

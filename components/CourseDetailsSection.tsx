@@ -2,6 +2,10 @@
 import React from 'react';
 import { motion } from 'framer-motion';
 import { Check, Sparkles, Star, Gift, Rocket, Lock, Users, Phone, Bot, Brain, Lightbulb, Heart, Palette, Code, Wand2 } from 'lucide-react';
+
+const WHATSAPP_NUMBER = "917849878567";
+const WHATSAPP_MESSAGE = "Hi! I want to book a Free Parent Counselling Call for the AI Course.";
+const WHATSAPP_URL = `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(WHATSAPP_MESSAGE)}`;
 import { useAppStore } from '@/lib/store';
 import RazorpayButton from './RazorpayButton';
 
@@ -319,14 +323,17 @@ export default function CourseDetailsSection() {
               </motion.button>
 
               {/* Secondary CTA */}
-              <motion.button
+              <motion.a
+                href={WHATSAPP_URL}
+                target="_blank"
+                rel="noopener noreferrer"
                 className="mt-3 w-full px-6 py-3 rounded-2xl bg-white text-purple-700 font-bold hover:bg-purple-50 transition shadow-lg text-xs sm:text-base flex items-center justify-center gap-2 border-2 border-purple-200"
                 whileHover={{ scale: 1.03 }}
                 whileTap={{ scale: 0.98 }}
               >
                 <Phone className="w-5 h-5" />
                 Book Free Parent Counselling Call
-              </motion.button>
+              </motion.a>
 
               {/* Trust indicators */}
               <div className="mt-4 flex items-center justify-center gap-1 text-yellow-500">

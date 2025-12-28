@@ -4,6 +4,10 @@ import React from "react";
 import { motion } from "framer-motion";
 import { Check, Sparkles, Gift, Shield, Star, Phone, Rocket, Video, Save, Users, MessageCircle, Dumbbell, Palette, GraduationCap, Trophy, Clock, Monitor, AlertCircle, MapPin, AlertTriangle } from "lucide-react";
 
+const WHATSAPP_NUMBER = "917849878567";
+const WHATSAPP_MESSAGE = "Hi! I want to book a Free Child Skill Consultation for the AI Course.";
+const WHATSAPP_URL = `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(WHATSAPP_MESSAGE)}`;
+
 export default function PricingPageContent() {
   const containerVariants = {
     hidden: { opacity: 0 },
@@ -218,14 +222,17 @@ export default function PricingPageContent() {
 
               {/* CTA Buttons */}
               <div className="space-y-3">
-                <motion.button 
+                <motion.a 
+                  href={WHATSAPP_URL}
+                  target="_blank"
+                  rel="noopener noreferrer"
                   className="btn-primary w-full text-base sm:text-lg flex items-center justify-center gap-2"
                   whileHover={{ scale: 1.03 }}
                   whileTap={{ scale: 0.98 }}
                 >
                   <Phone className="w-5 h-5" />
                   Book a Free Child Skill Consultation
-                </motion.button>
+                </motion.a>
                 <motion.button 
                   className="w-full px-6 py-3 rounded-xl bg-white border-2 border-purple-500 text-purple-600 font-bold text-base sm:text-lg hover:bg-purple-50 transition-all flex items-center justify-center gap-2"
                   whileHover={{ scale: 1.03 }}
@@ -487,14 +494,17 @@ export default function PricingPageContent() {
             viewport={{ once: true }}
             className="max-w-md mx-auto space-y-3"
           >
-            <motion.button 
+            <motion.a 
+              href={WHATSAPP_URL}
+              target="_blank"
+              rel="noopener noreferrer"
               className="btn-primary w-full text-base sm:text-lg flex items-center justify-center gap-2"
               whileHover={{ scale: 1.03 }}
               whileTap={{ scale: 0.98 }}
             >
               <Phone className="w-5 h-5" />
               Book a Free Child Skill Consultation
-            </motion.button>
+            </motion.a>
             <motion.button 
               className="w-full px-6 py-3 rounded-xl bg-gradient-to-r from-purple-600 to-purple-700 text-white font-bold text-base sm:text-lg hover:from-purple-700 hover:to-purple-800 transition-all shadow-lg flex items-center justify-center gap-2"
               whileHover={{ scale: 1.03 }}

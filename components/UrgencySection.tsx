@@ -3,6 +3,10 @@ import React from "react";
 import { motion } from "framer-motion";
 import { Clock, Users, Sparkles, ArrowRight, Star, Heart, Bot } from "lucide-react";
 
+const WHATSAPP_NUMBER = "917849878567";
+const WHATSAPP_MESSAGE = "Hi! I want to book a Free Counselling Call for the AI Course.";
+const WHATSAPP_URL = `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(WHATSAPP_MESSAGE)}`;
+
 export default function UrgencySection() {
   const items = [
     {
@@ -64,14 +68,17 @@ export default function UrgencySection() {
               </p>
             </div>
 
-            <motion.button
+            <motion.a
+              href={WHATSAPP_URL}
+              target="_blank"
+              rel="noopener noreferrer"
               className="btn-primary w-full lg:w-auto flex items-center justify-center gap-2"
               whileHover={{ scale: 1.02 }}
               whileTap={{ scale: 0.98 }}
             >
               <span>Book Free Counselling</span>
               <ArrowRight className="w-4 h-4" />
-            </motion.button>
+            </motion.a>
           </div>
 
           <div className="mt-5 grid grid-cols-1 md:grid-cols-3 gap-4">
