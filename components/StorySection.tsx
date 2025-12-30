@@ -176,7 +176,7 @@ export default function StorySection() {
             whileInView="visible"
             viewport={{ once: true }}
             variants={containerVariants}
-            className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6"
+            className="grid grid-cols-2 sm:grid-cols-2 lg:grid-cols-4 gap-6"
           >
             {problems.map((item, idx) => {
               const Icon = item.icon;
@@ -300,20 +300,20 @@ export default function StorySection() {
           whileHover={{ scale: 1.02 }}
           className="bg-gradient-to-r from-purple-500 via-purple-600 to-purple-700 rounded-2xl shadow-2xl px-8 py-8 max-w-5xl mx-auto"
         >
-          <div className="flex flex-col sm:flex-row items-center justify-center gap-6 sm:gap-8 text-white text-center">
+          <div className="flex flex-row items-center justify-center gap-6 sm:gap-8 text-white text-center">
             <div className="flex items-center gap-2">
               <Star className="w-6 h-6" />
-              <p className="text-lg sm:text-xl font-bold">Think Smarter</p>
+              <p className="text-sm sm:text-xl font-bold">Think Smarter</p>
             </div>
             <div className="hidden sm:block w-1 h-8 bg-white/40 rounded-full" />
             <div className="flex items-center gap-2">
               <Rocket className="w-6 h-6" />
-              <p className="text-lg sm:text-xl font-bold">Grow Faster</p>
+              <p className="text-sm sm:text-xl font-bold">Grow Faster</p>
             </div>
             <div className="hidden sm:block w-1 h-8 bg-white/40 rounded-full" />
             <div className="flex items-center gap-2">
               <Sparkles className="w-6 h-6" />
-              <p className="text-lg sm:text-xl font-bold">Dream Bigger</p>
+              <p className="text-sm sm:text-xl font-bold">Dream Bigger</p>
             </div>
           </div>
         </motion.div>

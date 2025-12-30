@@ -1,5 +1,4 @@
 "use client";
-import React from 'react';
 import { motion } from 'framer-motion';
 import {
   Check,
@@ -29,15 +28,10 @@ const PROGRAM_ITEMS = [
   { text: 'Course Duration: 6 Weeks (5 Weeks AI + 1 Week Management)', icon: CalendarDays },
   { text: 'Mode: Live online classes + recordings available', icon: Video },
   { text: 'Batch Size: 20–22 kids (personal attention)', icon: Users },
-  { text: 'Age Groups: 5–8 • 9–12 • 13–14', icon: Star },
-  { text: 'Languages Supported: Kannada • English • Hindi', icon: Languages },
 ];
 
 const INCLUDE_ITEMS = [
-  { text: 'Real-time classes', icon: Check },
-  { text: 'Session recordings', icon: Video },
   { text: 'Doubt-solving', icon: Check },
-  { text: 'Weekly mentor check-ins', icon: Users },
   { text: 'Parent–teacher style meetings', icon: BadgeCheck },
   { text: 'Progress tracking & small tests', icon: ScrollText },
 ];
@@ -45,14 +39,12 @@ const INCLUDE_ITEMS = [
 const PROJECT_ITEMS = [
   { text: 'Science model ideas', icon: FlaskConical },
   { text: 'Video storytelling', icon: Video },
-  { text: 'Brand creation', icon: BadgeCheck },
   { text: 'Gaming or creative model', icon: Gamepad },
 ];
 
 const AWARD_ITEMS = [
   { text: '50% Scholarship', icon: Award },
   { text: 'Certificate', icon: ScrollText },
-  { text: 'AI Creativity Kit', icon: Gift },
   { text: 'Feature in our Gallery', icon: Camera },
 ];
 
@@ -177,7 +169,7 @@ export default function TrustSection() {
             <Check className="w-7 h-7 text-green-600" />
           </motion.span>
           <h2 className="text-2xl sm:text-3xl md:text-4xl font-extrabold leading-tight mb-3 gradient-text">
-            Program Structure: Clear, Simple, Trusted
+            Program Structure - Clear, Simple, Trusted
           </h2>
           <p className="text-slate-700 text-sm sm:text-lg font-medium max-w-3xl mx-auto">
             6 Weeks Total: 5 Weeks AI + real skills, 1 Week Management & Mindset
@@ -185,7 +177,7 @@ export default function TrustSection() {
         </motion.div>
 
         {/* Program Overview */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-4">
+        <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 sm:gap-4">
           {PROGRAM_ITEMS.map((point, idx) => (
             <motion.div
               key={idx}
@@ -210,7 +202,7 @@ export default function TrustSection() {
         </div>
 
         {/* Includes */}
-        <div className="mt-6 grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-4">
+        <div className="mt-6 grid grid-cols-1 sm:grid-cols-3 gap-3 sm:gap-4">
           {INCLUDE_ITEMS.map((point, idx) => (
             <motion.div
               key={idx}
@@ -253,7 +245,7 @@ export default function TrustSection() {
         </motion.div>
 
         {/* Project Types */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-4">
+        <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 sm:gap-4">
           {PROJECT_ITEMS.map((point, idx) => (
             <motion.div
               key={idx}
@@ -278,7 +270,7 @@ export default function TrustSection() {
         </div>
 
         {/* Awards */}
-        <div className="mt-6 grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-4">
+        <div className="mt-6 grid grid-cols-1 sm:grid-cols-3 gap-3 sm:gap-4">
           {AWARD_ITEMS.map((point, idx) => (
             <motion.div
               key={idx}

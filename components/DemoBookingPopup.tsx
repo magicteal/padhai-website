@@ -3,7 +3,7 @@ import React, { useEffect, useState } from "react";
 import { X, CheckCircle } from "lucide-react";
 
 const GOOGLE_SCRIPT_URL =
-  "https://script.google.com/macros/s/AKfycbxd4S1YeHTacABVebR2EMBtRqdVvNuCOneVYwNNfA2KOmyFZGOvDpY9ibh0egOyQDi6/exec";
+  "https://script.google.com/macros/s/AKfycbxoNUPdL8iO0_Bi7WkM3EO0KXO7WRTPln9vbOnq0Tfj1DRnbXKevSy014xt4QRHgeqT/exec";
 
 // Toast component
 function Toast({ message, onClose }: { message: string; onClose: () => void }) {
@@ -34,6 +34,7 @@ export default function DemoBookingPopup({ onClose }: { onClose: () => void }) {
   const [childAge, setChildAge] = useState("");
   const [parentName, setParentName] = useState("");
   const [email, setEmail] = useState("");
+  const [phoneNumber, setPhoneNumber] = useState("");
 
   const close = () => {
     onClose();
@@ -41,7 +42,7 @@ export default function DemoBookingPopup({ onClose }: { onClose: () => void }) {
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    if (!childName.trim() || !childAge || !parentName.trim() || !email.trim()) return;
+    if (!childName.trim() || !childAge || !parentName.trim() || !email.trim() || !phoneNumber.trim()) return;
 
     setLoading(true);
 
@@ -52,6 +53,7 @@ export default function DemoBookingPopup({ onClose }: { onClose: () => void }) {
       formData.append("childAge", childAge);
       formData.append("parentName", parentName);
       formData.append("email", email);
+      formData.append("phoneNumber", phoneNumber);
       formData.append("source", "Demo Booking Form");
 
       // Use no-cors mode to bypass CORS restrictions
@@ -147,6 +149,18 @@ export default function DemoBookingPopup({ onClose }: { onClose: () => void }) {
                   onChange={(e) => setParentName(e.target.value)}
                   className="w-full mt-1 px-3 py-2 rounded-lg border border-gray-200"
                   placeholder="Your name"
+                  required
+                />
+              </div>
+
+              <div>
+                <label className="text-xs text-slate-600">Phone Number</label>
+                <input
+                  type="tel"
+                  value={phoneNumber}
+                  onChange={(e) => setPhoneNumber(e.target.value)}
+                  className="w-full mt-1 px-3 py-2 rounded-lg border border-gray-200"
+                  placeholder="+91 XXXXXXXXXX"
                   required
                 />
               </div>

@@ -4,6 +4,7 @@ import { motion } from 'framer-motion';
 import { Clock, Car, Smartphone, AlertCircle, TrendingUp, Building, Bot, Sparkles, Star, Heart, Brain, Lightbulb, Rocket, Palette } from 'lucide-react';
 import ChatBubble from './ChatBubble';
 import testimonialVideos from '../data/testimonialVideos';
+import { testimonialVideos as testimonialVideosMap, testimonialPosters } from '../data/testimonialVideos';
 
 
 export const REALITY_CHAT_MESSAGES = [
@@ -244,32 +245,40 @@ export default function ProblemSection() {
             </h3>
           </div>
           <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 sm:gap-5 justify-items-center">
-            {testimonialVideos.slice(3, 6).map((src, i) => (
-              <motion.div
-                key={i}
-                className="w-full max-w-[200px] sm:max-w-[220px] md:max-w-[240px]"
-                initial={{ opacity: 0, scale: 0.9 }}
-                whileInView={{ opacity: 1, scale: 1 }}
-                viewport={{ once: true }}
-                transition={{ delay: i * 0.1 }}
-              >
+            {[
+              'testimonial-six',
+              'testimonial-three',
+              'testimonial-two',
+            ].map((key, i) => {
+              const src = testimonialVideosMap[key] || testimonialVideos[i];
+              const poster = testimonialPosters[key] || `/images/testimonials/testimonial-${i + 1}.svg`;
+              return (
                 <motion.div
-                  className="rounded-2xl sm:rounded-[1.5rem] overflow-hidden shadow-xl border-3 border-white bg-slate-50"
-                  whileHover={{ scale: 1.03, y: -5 }}
+                  key={key}
+                  className="w-full max-w-[200px] sm:max-w-[220px] md:max-w-[240px]"
+                  initial={{ opacity: 0, scale: 0.9 }}
+                  whileInView={{ opacity: 1, scale: 1 }}
+                  viewport={{ once: true }}
+                  transition={{ delay: i * 0.1 }}
                 >
-                  <div className="relative w-full bg-slate-100" style={{ aspectRatio: '9 / 16' }}>
-                    <video
-                      src={src}
-                      poster={`/images/testimonials/testimonial-${['three', 'two', 'one'][i]}.svg`}
-                      controls
-                      playsInline
-                      className="absolute inset-0 w-full h-full object-cover"
-                      aria-label={`Testimonial video ${i + 1}`}
-                    />
-                  </div>
+                  <motion.div
+                    className="rounded-2xl sm:rounded-[1.5rem] overflow-hidden shadow-xl border-3 border-white bg-slate-50"
+                    whileHover={{ scale: 1.03, y: -5 }}
+                  >
+                    <div className="relative w-full bg-slate-100" style={{ aspectRatio: '9 / 16' }}>
+                      <video
+                        src={src}
+                        poster={poster}
+                        controls
+                        playsInline
+                        className="absolute inset-0 w-full h-full object-cover"
+                        aria-label={`Testimonial video ${i + 1}`}
+                      />
+                    </div>
+                  </motion.div>
                 </motion.div>
-              </motion.div>
-            ))}
+              );
+            })}
           </div>
         </motion.div>
 

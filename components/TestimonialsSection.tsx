@@ -4,6 +4,7 @@ import { motion } from 'framer-motion';
 import { ChevronLeft, ChevronRight, Star, Video, MessageSquare, User, Users, Bot, Sparkles, Heart, Lightbulb, Brain, Rocket, Palette, Loader2 } from 'lucide-react';
 import { useAppStore } from '@/lib/store';
 import testimonialVideosArray from '../data/testimonialVideos';
+import { testimonialVideos as testimonialVideosMap, testimonialPosters } from '../data/testimonialVideos';
 
 export default function TestimonialsSection() {
   const { testimonials, testimonialsLoading, fetchTestimonials, projects, projectsLoading, fetchProjects } = useAppStore();
@@ -50,9 +51,11 @@ export default function TestimonialsSection() {
     }
   };
 
-  const videoList = testimonialVideosArray && testimonialVideosArray.length > 0
-    ? testimonialVideosArray.slice(0, 3)
-    : [];
+  const kidKeys = ['testimonial-five', 'testimonial-four', 'testimonial-one'];
+  const videoList = kidKeys.map((k) => ({
+    src: testimonialVideosMap[k] || testimonialVideosArray[0] || '',
+    poster: testimonialPosters[k] || `/images/testimonials/${k}.svg`,
+  }));
 
   const featuredParents = testimonials.filter((t) => t.featured);
   const parentTestimonials = featuredParents.length > 0 ? featuredParents : testimonials;
@@ -225,9 +228,9 @@ export default function TestimonialsSection() {
           </div>
           
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-5 justify-items-center">
-            {videoList.map((src, i) => (
+            {videoList.map((item, i) => (
               <motion.div 
-                key={src}
+                key={item.src || i}
                 className="w-full max-w-[200px] sm:max-w-[220px] md:max-w-[240px]"
                 initial={{ opacity: 0, scale: 0.9 }}
                 whileInView={{ opacity: 1, scale: 1 }}
@@ -241,8 +244,8 @@ export default function TestimonialsSection() {
                 >
                   <div className="relative w-full bg-slate-100" style={{ aspectRatio: '9 / 16' }}>
                     <video
-                      src={src}
-                      poster={`/images/testimonials/testimonial-${['four','five','six'][i]}.svg`}
+                      src={item.src}
+                      poster={item.poster}
                       controls
                       playsInline
                       className="absolute inset-0 w-full h-full object-cover"

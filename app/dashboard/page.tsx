@@ -99,7 +99,7 @@ export default function UserDashboard() {
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
         {/* Stats Grid */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 mb-8">
+        {/* <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 mb-8">
           {stats.map((stat, idx) => (
             <motion.div
               key={idx}
@@ -117,17 +117,17 @@ export default function UserDashboard() {
               <p className="text-slate-600 text-sm">{stat.label}</p>
             </motion.div>
           ))}
-        </div>
+        </div> */}
 
         <div className="grid lg:grid-cols-3 gap-6">
           {/* Main Content - Upcoming Classes */}
           <div className="lg:col-span-2">
-            <motion.div
+            {/* <motion.div
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.4 }}
               className="bg-white rounded-2xl p-6 shadow-lg border-2 border-purple-100 mb-6"
-            >
+             >
               <h2 className="text-xl font-extrabold text-slate-900 mb-4 flex items-center gap-2">
                 <Calendar className="w-6 h-6 text-purple-600" />
                 Upcoming Classes
@@ -148,7 +148,7 @@ export default function UserDashboard() {
                   </div>
                 ))}
               </div>
-            </motion.div>
+            </motion.div> */}
 
             {/* Enrolled Courses */}
             <motion.div
@@ -156,7 +156,7 @@ export default function UserDashboard() {
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.6 }}
               className="bg-white rounded-2xl p-6 shadow-lg border-2 border-purple-100 mt-6"
-            >
+             >
               <h2 className="text-xl font-extrabold text-slate-900 mb-4 flex items-center gap-2">
                 <BookOpen className="w-6 h-6 text-purple-600" />
                 Enrolled Courses
@@ -176,12 +176,12 @@ export default function UserDashboard() {
             </motion.div>
 
             {/* My Projects */}
-            <motion.div
+            {/* <motion.div
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.5 }}
               className="bg-white rounded-2xl p-6 shadow-lg border-2 border-purple-100"
-            >
+             >
               <h2 className="text-xl font-extrabold text-slate-900 mb-4 flex items-center gap-2">
                 <Award className="w-6 h-6 text-purple-600" />
                 My Projects
@@ -195,7 +195,7 @@ export default function UserDashboard() {
                   </div>
                 ))}
               </div>
-            </motion.div>
+            </motion.div> */}
           </div>
 
           {/* Sidebar - Profile */}
@@ -237,7 +237,7 @@ export default function UserDashboard() {
             </motion.div>
 
             {/* Quick Actions */}
-            <motion.div
+            {/* <motion.div
               initial={{ opacity: 0, x: 20 }}
               animate={{ opacity: 1, x: 0 }}
               transition={{ delay: 0.7 }}
@@ -257,7 +257,7 @@ export default function UserDashboard() {
                   Contact Support
                 </button>
               </div>
-            </motion.div>
+            </motion.div> */}
           </div>
         </div>
       </div>

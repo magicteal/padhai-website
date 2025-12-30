@@ -1,6 +1,6 @@
 "use client";
 import { motion } from 'framer-motion';
-import { Rocket, BookOpen, Code } from 'lucide-react';
+import { Rocket, BookOpen } from 'lucide-react';
 
 export default function WhyAIHeroSection() {
   return (
@@ -70,26 +70,23 @@ export default function WhyAIHeroSection() {
             transition={{ duration: 0.6, delay: 0.3 }}
           >
             <motion.div 
-              className="bg-white/10 backdrop-blur-md rounded-3xl p-6 sm:p-8 border-2 border-white/20 relative"
+              className="bg-white/10 backdrop-blur-md rounded-3xl border-2 border-white/20 relative overflow-hidden p-0"
               whileHover={{ scale: 1.02 }}
             >
               {/* Decorative elements */}
               <div className="absolute -top-3 -right-3 w-20 h-20 bg-violet-400/30 rounded-full blur-xl" />
               <div className="absolute -bottom-3 -left-3 w-16 h-16 bg-fuchsia-400/30 rounded-full blur-xl" />
-              
-              <motion.div 
-                className="w-28 h-28 sm:w-32 sm:h-32 md:w-36 md:h-36 rounded-2xl bg-white/20 flex items-center justify-center mx-auto"
-                animate={{ 
-                  y: [0, -10, 0],
-                  rotate: [0, 5, -5, 0]
+              <motion.img
+                src="/images/whyAI.svg"
+                alt=""
+                className="w-full h-full object-cover"
+                animate={{
+                  y: [0, -10, 0, 10, 0],
+                  rotate: [0, 2, 0, -2, 0],
+                  scale: [1, 1.02, 1, 1.02, 1],
                 }}
-                transition={{ repeat: Infinity, duration: 4 }}
-              >
-                <Code className="w-14 h-14 sm:w-16 sm:h-16 md:w-20 md:h-20 text-white" />
-              </motion.div>
-              <p className="text-center mt-4 text-purple-100 font-medium text-sm sm:text-base">
-                A confident creator, not just a consumer
-              </p>
+                transition={{ repeat: Infinity, duration: 10, ease: 'easeInOut' }}
+              />
             </motion.div>
           </motion.div>
         </div>

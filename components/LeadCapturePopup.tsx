@@ -145,7 +145,7 @@ export default function LeadCapturePopup({ onClose }: { onClose?: () => void }) 
                 value={phone}
                 onChange={(e) => setPhone(e.target.value)}
                 className="w-full mt-1 px-3 py-2 rounded-lg border border-gray-200"
-                placeholder="+91 9XXXXXXXXX"
+                placeholder="+91 XXXXXXXXXX"
                 inputMode="tel"
                 required
               />
@@ -162,7 +162,7 @@ export default function LeadCapturePopup({ onClose }: { onClose?: () => void }) 
                 <option value="">Select age</option>
                 {Array.from({ length: 10 }, (_, i) => 5 + i).map((age) => (
                   <option key={age} value={age}>
-                    {age}
+                    {age} years
                   </option>
                 ))}
               </select>

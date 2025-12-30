@@ -20,7 +20,7 @@ export default function FloatingWhatsAppCTA() {
 
   if (!toWaMeNumber(number)) return null;
 
-  const text = "Connect on WhatsApp with our mentor • ";
+  const text = "Connect on WhatsApp with our mentor •";
 
   return (
     <div className="fixed bottom-6 right-6 z-50">
@@ -40,7 +40,7 @@ export default function FloatingWhatsAppCTA() {
           </defs>
           <text className="text-[8px] sm:text-[9px] font-bold fill-purple-700 uppercase tracking-wider">
             <textPath href="#circlePath" startOffset="0%">
-              {text}{text}
+              {text}{"\u00A0\u2022\u00A0"}{text}
             </textPath>
           </text>
         </svg>
