@@ -246,8 +246,8 @@ export default function ProblemSection() {
           </div>
           <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 sm:gap-5 justify-items-center">
             {[
-              'testimonial-six',
               'testimonial-three',
+              'testimonial-six',
               'testimonial-two',
             ].map((key, i) => {
               const src = testimonialVideosMap[key] || testimonialVideos[i];
