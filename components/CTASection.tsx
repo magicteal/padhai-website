@@ -4,7 +4,7 @@ import { motion } from 'framer-motion';
 import { Phone, Rocket, Clock, Users, Star, Shield, Lock, Heart, Sparkles, Gift } from 'lucide-react';
 import RazorpayButton from './RazorpayButton';
 
-const WHATSAPP_NUMBER = "917849878567";
+const WHATSAPP_NUMBER = "8290478567";
 const WHATSAPP_MESSAGE = "Hi! I want to book a Free AI Counselling Call.";
 const WHATSAPP_URL = `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(WHATSAPP_MESSAGE)}`;
 

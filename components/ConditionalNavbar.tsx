@@ -9,7 +9,7 @@ export default function ConditionalNavbar() {
   if (isAdmin) return null;
   return (
     <>
-      <TopStrip text="Bangalore Parents Are Choosing This - Join In" />
+      <TopStrip text="⏳ Don’t Miss the AI Batch Everyone Is Talking About" />
       <Navbar hasTopStrip />
     </>
   );

@@ -66,7 +66,7 @@ export default function Navbar({ hasTopStrip = false }: { hasTopStrip?: boolean 
 
   return (
     <>
-      <header className={`fixed ${hasTopStrip ? 'top-10' : 'top-0'} left-0 right-0 z-50 transition-all duration-300 ${
+      <header className={`sticky top-0 z-50 transition-all duration-300 ${
         scrolled 
           ? 'bg-purple-700 shadow-lg shadow-purple-900/20 text-white' 
           : 'bg-gradient-to-r from-purple-600 to-purple-700 text-white backdrop-blur-sm'
@@ -273,8 +273,7 @@ export default function Navbar({ hasTopStrip = false }: { hasTopStrip?: boolean 
         )}
       </AnimatePresence>
 
-      {/* Spacer for fixed header */}
-      <div className={hasTopStrip ? "h-[96px] sm:h-[104px]" : "h-14 sm:h-16"} />
+      
     </>
   );
 }

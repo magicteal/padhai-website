@@ -17,7 +17,7 @@ function buildWhatsAppUrl(numberRaw: string, message?: string) {
 }
 
 export default function HomeBottomButtonsCTA() {
-  const number = process.env.NEXT_PUBLIC_WHATSAPP_NUMBER || "917849878567";
+  const number = process.env.NEXT_PUBLIC_WHATSAPP_NUMBER || "8290478567";
   const [showPopup, setShowPopup] = React.useState(false);
 
   const bookCallUrl = buildWhatsAppUrl(
