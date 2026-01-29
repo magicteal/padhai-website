@@ -1,6 +1,6 @@
 "use client";
 
-import { usePathname, useSearchParams } from "next/navigation";
+import { usePathname } from "next/navigation";
 import { useEffect, useRef } from "react";
 
 type FbqFunction = (...args: any[]) => void;
@@ -13,7 +13,6 @@ declare global {
 
 export default function FacebookPixelPageView() {
   const pathname = usePathname();
-  const searchParams = useSearchParams();
   const hasTrackedInitialPageView = useRef(false);
 
   useEffect(() => {
@@ -27,7 +26,7 @@ export default function FacebookPixelPageView() {
     if (typeof window.fbq !== "function") return;
 
     window.fbq("track", "PageView");
-  }, [pathname, searchParams]);
+  }, [pathname]);
 
   return null;
 }

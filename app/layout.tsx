@@ -6,10 +6,6 @@ import ConditionalFooter from "../components/ConditionalFooter";
 import FloatingWhatsAppCTA from "../components/FloatingWhatsAppCTA";
 import LeadCapturePopup from "../components/LeadCapturePopup";
 import FacebookPixelPageView from "../components/FacebookPixelPageView";
-import initializeServices from "@/lib/init";
-
-// Initialize MongoDB and Cloudinary on app startup
-initializeServices();
 
 export const metadata: Metadata = {
   title: "PadhAI",
