@@ -11,6 +11,9 @@ interface ProjectCardProps {
 }
 
 export default function ProjectCard({ project, index, compact }: ProjectCardProps) {
+  // Images are pre-optimized during upload to Supabase
+  const optimizedImageSrc = project.imageSrc || null;
+
   return (
     <motion.figure
       initial={{ opacity: 0, y: 30 }}
@@ -26,10 +29,11 @@ export default function ProjectCard({ project, index, compact }: ProjectCardProp
           : "relative w-full bg-gradient-to-br from-purple-200 via-violet-200 to-fuchsia-200 overflow-hidden"}
         style={{ aspectRatio: '9 / 16' }}
       >
-        {project.imageSrc ? (
+        {optimizedImageSrc ? (
           <img
-            src={project.imageSrc}
+            src={optimizedImageSrc}
             alt={`${project.title} photo`}
+            loading="lazy"
             className="absolute inset-0 w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
           />
         ) : (

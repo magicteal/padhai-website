@@ -3,7 +3,7 @@
  * Import this in layout or API routes to trigger connection on startup
  */
 import connectDB from './mongodb';
-import { verifyCloudinary } from './cloudinary';
+import { verifySupabase, getStorageUsage, formatBytes } from './supabase';
 
 let initialized = false;
 
@@ -12,22 +12,43 @@ export async function initializeServices() {
 
   console.log('\n🚀 Initializing services...\n');
 
+  let mongoOk = false;
+  let supabaseOk = false;
+
   try {
-    // Connect to MongoDB
     await connectDB();
+    mongoOk = true;
   } catch (error) {
     console.error('❌ MongoDB initialization failed:', error instanceof Error ? error.message : error);
   }
 
   try {
-    // Verify Cloudinary
-    await verifyCloudinary();
+    supabaseOk = await verifySupabase();
+    
+    // Log storage usage for monitoring (important for 1GB free plan!)
+    if (supabaseOk) {
+      const usage = await getStorageUsage();
+      console.log(`📦 Storage: ${formatBytes(usage.used)} / ${formatBytes(usage.limit)} (${usage.percentage}%)`);
+      if (usage.isWarning) {
+        console.warn('⚠️ Storage usage is high! Consider cleaning up old files.');
+      }
+      if (usage.isCritical) {
+        console.error('🚨 Storage is almost full! Clean up immediately!');
+      }
+    }
   } catch (error) {
-    console.error('❌ Cloudinary initialization failed:', error instanceof Error ? error.message : error);
+    console.error('❌ Supabase initialization failed:', error instanceof Error ? error.message : error);
   }
 
   initialized = true;
-  console.log('\n✨ Services initialized!\n');
+
+  if (mongoOk && supabaseOk) {
+    console.log('\n✨ Services initialized!\n');
+  } else {
+    console.log(
+      `\n⚠️ Services initialized with issues (mongo=${mongoOk ? 'ok' : 'failed'}, supabase=${supabaseOk ? 'ok' : 'failed'})\n`
+    );
+  }
 }
 
 export default initializeServices;

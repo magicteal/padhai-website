@@ -3,8 +3,7 @@ import React from 'react';
 import { motion } from 'framer-motion';
 import { Clock, Car, Smartphone, AlertCircle, TrendingUp, Building, Bot, Sparkles, Star, Heart, Brain, Lightbulb, Rocket, Palette } from 'lucide-react';
 import ChatBubble from './ChatBubble';
-import testimonialVideos from '../data/testimonialVideos';
-import { testimonialVideos as testimonialVideosMap, testimonialPosters } from '../data/testimonialVideos';
+import testimonialVideos, { getTestimonialKeyFromUrl, testimonialPosters } from '../data/testimonialVideos';
 
 
 export const REALITY_CHAT_MESSAGES = [
@@ -245,16 +244,12 @@ export default function ProblemSection() {
             </h3>
           </div>
           <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 sm:gap-5 justify-items-center">
-            {[
-              'testimonial-three',
-              'testimonial-six',
-              'testimonial-two',
-            ].map((key, i) => {
-              const src = testimonialVideosMap[key] || testimonialVideos[i];
-              const poster = testimonialPosters[key] || `/images/testimonials/testimonial-${i + 1}.svg`;
+            {testimonialVideos.slice(0, 3).map((src, i) => {
+              const key = getTestimonialKeyFromUrl(src);
+              const poster = testimonialPosters[key] || '';
               return (
                 <motion.div
-                  key={key}
+                  key={src || i}
                   className="w-full max-w-[200px] sm:max-w-[220px] md:max-w-[240px]"
                   initial={{ opacity: 0, scale: 0.9 }}
                   whileInView={{ opacity: 1, scale: 1 }}

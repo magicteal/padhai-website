@@ -4,7 +4,7 @@ import { motion } from 'framer-motion';
 import { ChevronLeft, ChevronRight, Star, Video, MessageSquare, User, Users, Bot, Sparkles, Heart, Lightbulb, Brain, Rocket, Palette, Loader2 } from 'lucide-react';
 import { useAppStore } from '@/lib/store';
 import testimonialVideosArray from '../data/testimonialVideos';
-import { testimonialVideos as testimonialVideosMap, testimonialPosters } from '../data/testimonialVideos';
+import { getTestimonialKeyFromUrl, testimonialPosters } from '../data/testimonialVideos';
 
 export default function TestimonialsSection() {
   const { testimonials, testimonialsLoading, fetchTestimonials, projects, projectsLoading, fetchProjects } = useAppStore();
@@ -51,11 +51,17 @@ export default function TestimonialsSection() {
     }
   };
 
-  const kidKeys = ['testimonial-five', 'testimonial-four', 'testimonial-one'];
-  const videoList = kidKeys.map((k) => ({
-    src: testimonialVideosMap[k] || testimonialVideosArray[0] || '',
-    poster: testimonialPosters[k] || `/images/testimonials/${k}.svg`,
-  }));
+  // Show only the last 3 videos here (i.e., "video 5/6/7")
+  const videoList = testimonialVideosArray
+    .filter(Boolean)
+    .slice(-3)
+    .map((src) => {
+      const key = getTestimonialKeyFromUrl(src);
+      return {
+        src,
+        poster: testimonialPosters[key] || '',
+      };
+    });
 
   const featuredParents = testimonials.filter((t) => t.featured);
   const parentTestimonials = featuredParents.length > 0 ? featuredParents : testimonials;
@@ -335,6 +341,7 @@ export default function TestimonialsSection() {
                               <img
                                 src={item.imageSrc}
                                 alt={item.author}
+                                loading="lazy"
                                 className="w-10 h-10 sm:w-12 sm:h-12 rounded-full object-cover border"
                               />
                             ) : (
@@ -437,7 +444,12 @@ export default function TestimonialsSection() {
               <div key={p.id} className="rounded-xl overflow-hidden bg-white shadow-md p-3 flex flex-col items-center">
                 {p.imageSrc ? (
                   <div className="relative w-full rounded-md mb-2 overflow-hidden bg-slate-100" style={{ aspectRatio: '9 / 16' }}>
-                    <img src={p.imageSrc} alt={p.title} className="absolute inset-0 w-full h-full object-cover" />
+                    <img 
+                      src={p.imageSrc} 
+                      alt={p.title} 
+                      loading="lazy"
+                      className="absolute inset-0 w-full h-full object-cover" 
+                    />
                   </div>
                 ) : (
                   <div className="relative w-full rounded-md mb-2 overflow-hidden bg-gradient-to-br from-purple-200 to-pink-200" style={{ aspectRatio: '9 / 16' }}>
