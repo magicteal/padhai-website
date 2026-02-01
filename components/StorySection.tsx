@@ -153,7 +153,7 @@ export default function StorySection() {
           </h2>
           <p className="text-slate-700 text-lg sm:text-xl font-medium max-w-2xl mx-auto flex items-center justify-center gap-2">
             <Sparkles className="w-5 h-5 text-purple-500" />
-            <span>Every Bangalore parent wants their child to stand out.</span>
+            <span>Every parent wants their child to stand out.</span>
           </p>
         </motion.div>
 

@@ -220,7 +220,7 @@ export default function ThankYouPage() {
         >
           <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-purple-100 text-purple-700">
             <Star className="w-4 h-4 fill-yellow-400 text-yellow-400" />
-            <span className="text-sm font-medium">Trusted by 1000+ parents across Bangalore</span>
+            <span className="text-sm font-medium">Trusted by 1000+ parents across India</span>
           </div>
         </motion.div>
       </div>

@@ -9,7 +9,7 @@ export default function ProjectsHeroSection() {
           See what happens when curious young minds get access to the world's most powerful AI tools. From robots to storybooks, our students build the future.
         </p>
         <p className="text-lg font-semibold text-yellow-300">
-          Real Projects by Bangalore Kids (Ages 5–15)
+          Real Projects by Kids (Ages 5–15)
         </p>
       </div>
     </section>

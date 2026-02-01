@@ -241,7 +241,7 @@ export default function FAQSection() {
           <h2 className="text-2xl sm:text-3xl md:text-4xl font-extrabold leading-tight mb-3 gradient-text">
             Frequently Asked Questions
           </h2>
-          <p className="text-base sm:text-lg text-slate-700 font-medium">Common questions from Bangalore parents</p>
+          <p className="text-base sm:text-lg text-slate-700 font-medium">Common questions from parents</p>
         </motion.div>
 
         {/* FAQ Items */}

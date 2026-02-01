@@ -5,10 +5,9 @@ import RazorpayButton from './RazorpayButton';
 
 export default function CourseHeroSection() {
   const stats = [
-    { icon: Calendar, label: 'Duration', value: '6 Weeks' },
+    { icon: Calendar, label: 'Duration', value: '3 months' },
     { icon: Monitor, label: 'Mode', value: 'Live Online' },
     { icon: Users, label: 'Ages', value: '5–15 Years' },
-    { icon: Languages, label: 'Languages', value: 'EN, HI, KA' },
   ];
 
   return (
@@ -47,13 +46,13 @@ export default function CourseHeroSection() {
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.2 }}
         >
-          A 6-week journey to turn your child's screen time into a superpower.{' '}
+          A 3-month journey to turn your child's screen time into a superpower.{' '}
           <span className="text-violet-200 font-semibold">AI skills, life discipline, and future readiness.</span>
         </motion.p>
 
         {/* Quick Stats */}
         <motion.div 
-          className="grid grid-cols-2 md:grid-cols-4 gap-3 sm:gap-4 mb-8 sm:mb-10 max-w-4xl mx-auto"
+          className="grid grid-cols-2 md:grid-cols-3 gap-3 sm:gap-4 mb-8 sm:mb-10 max-w-4xl mx-auto"
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.3 }}
@@ -91,20 +90,24 @@ export default function CourseHeroSection() {
             <RazorpayButton
               courseId="ai-foundation"
               courseName="AI Foundation + Management Program"
-              amount={16000}
+              amount={23600}
               className="w-full sm:w-auto px-6 sm:px-8 py-3 sm:py-4 rounded-xl font-bold text-base sm:text-lg bg-white text-purple-600 hover:bg-purple-50 transition shadow-xl flex items-center justify-center gap-2"
             >
-              <Rocket className="w-5 h-5" /> Enroll Now (₹16,000)
+              <Rocket className="w-5 h-5" /> Enroll Now (₹23,600)
             </RazorpayButton>
           </motion.div>
 
-          <motion.button 
+          <motion.a
+            href="/pdf/Python%20Fundamental%20Course.pdf"
+            download="Python Fundamental Course.pdf"
             className="w-full sm:w-auto px-6 sm:px-8 py-3 sm:py-4 rounded-xl font-semibold text-base sm:text-lg border-2 border-white text-white hover:bg-white/10 transition flex items-center justify-center gap-2"
             whileHover={{ scale: 1.05 }}
             whileTap={{ scale: 0.98 }}
+            target="_blank"
+            rel="noopener noreferrer"
           >
             <FileText className="w-5 h-5" /> Download Syllabus PDF
-          </motion.button>
+          </motion.a>
         </motion.div>
       </div>
     </section>

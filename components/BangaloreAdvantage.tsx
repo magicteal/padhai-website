@@ -2,7 +2,7 @@
 import { Building2, Star, Heart, Sparkles, Rocket } from 'lucide-react';
 import { motion } from 'framer-motion';
 
-export default function BangaloreAdvantage() {
+export default function FutureAdvantage() {
   return (
     <section className="py-16 px-4 bg-gradient-to-br from-purple-600 to-purple-700 text-white relative overflow-hidden">
       {/* Mobile decorations */}
@@ -41,13 +41,13 @@ export default function BangaloreAdvantage() {
             <Building2 className="w-10 h-10 text-white" />
           </div>
           <h2 className="text-3xl md:text-4xl font-bold mb-6">
-            You Live in India&apos;s Tech Hub. Does Your Child Have the Advantage?
+            The World is Changing. Does Your Child Have the Advantage?
           </h2>
         </div>
 
         <div className="bg-white/10 backdrop-blur-sm rounded-2xl p-8 border border-white/20">
           <p className="text-xl md:text-2xl leading-relaxed text-purple-50">
-            Bangalore is the innovation capital of India. The skills of the future are being built right next door. Your child deserves to be ahead of the curve, learning world-class skills early, right here in the city that defines the future.
+            India is becoming a global tech hub. The skills of the future are being built right now. Your child deserves to be ahead of the curve, learning world-class skills early, preparing for a future that demands innovation and creativity.
           </p>
         </div>
       </div>

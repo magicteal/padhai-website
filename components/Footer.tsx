@@ -38,7 +38,7 @@ export default function Footer() {
               />
             </Link>
             <p className="text-white/80 text-sm mb-4 leading-relaxed max-w-xs mx-auto sm:mx-0">
-              AI + Sanskar for the Next Generation. Bangalore's Favorite AI Foundation Course for Kids (Ages 5–15).
+              AI + Sanskar for the Next Generation. India's Favorite AI Foundation Course for Kids (Ages 5–15).
             </p>
             <div className="flex items-center justify-center sm:justify-start gap-2 text-white/60 text-xs">
               <span className="px-2 py-1 rounded-full bg-white/10">Safe</span>
@@ -107,7 +107,7 @@ export default function Footer() {
               </li>
               <li className="flex items-start gap-3 text-sm text-white/80 justify-center sm:justify-start">
                 <MapPin className="w-4 h-4 sm:w-5 sm:h-5 shrink-0 mt-0.5 text-purple-300" />
-                <span>Bangalore, Karnataka, India</span>
+                <span>India</span>
               </li>
             </ul>
           </motion.div>
@@ -159,7 +159,7 @@ export default function Footer() {
         >
           <div className="flex flex-col sm:flex-row items-center justify-between gap-4">
             <p className="text-white/60 text-xs sm:text-sm text-center sm:text-left flex items-center gap-1">
-              © {new Date().getFullYear()} PadhAi Club. Made with <Heart className="w-4 h-4 text-pink-400 fill-pink-400" /> in Bangalore
+              © {new Date().getFullYear()} PadhAi Club. Made with <Heart className="w-4 h-4 text-pink-400 fill-pink-400" /> in India
             </p>
             <div className="flex gap-4 sm:gap-6 text-xs sm:text-sm text-white/60">
               <Link href="/privacy" className="hover:text-white transition">Privacy</Link>

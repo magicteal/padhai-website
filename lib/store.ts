@@ -23,7 +23,7 @@ const initialUsers: User[] = [
     role: 'user',
     createdAt: '2024-02-15',
     phone: '+91 98765 43210',
-    location: 'Whitefield, Bangalore',
+    location: 'Delhi',
     enrolledCourses: ['AI Foundation Course'],
   },
   {
@@ -34,7 +34,7 @@ const initialUsers: User[] = [
     role: 'user',
     createdAt: '2024-03-01',
     phone: '+91 98765 43211',
-    location: 'Koramangala, Bangalore',
+    location: 'Mumbai',
     enrolledCourses: ['AI Foundation Course'],
   },
   {
@@ -45,7 +45,7 @@ const initialUsers: User[] = [
     role: 'user',
     createdAt: '2024-03-03',
     phone: '+91 98765 43211',
-    location: 'Koramangala, Bangalore',
+    location: 'Pune',
     enrolledCourses: ['AI Foundation Course'],
   },
 ];
@@ -238,7 +238,7 @@ export const useAppStore = create<AppState>()(
             parentName: testimonial.author || 'Parent',
             childName: 'Child',
             childAge: 10,
-            location: testimonial.location || 'Bangalore',
+            location: testimonial.location || 'India',
             testimonialText: testimonial.quote,
             rating: testimonial.rating || 5,
             featured: testimonial.featured || false,

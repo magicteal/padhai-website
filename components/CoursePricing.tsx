@@ -7,7 +7,7 @@ export default function CoursePricing() {
       <div className="max-w-3xl mx-auto">
         <div className="bg-white rounded-2xl p-10 shadow-2xl">
           <div className="inline-flex items-center gap-2 bg-yellow-400 text-yellow-900 px-4 py-2 rounded-xl font-bold text-sm mb-6">
-            <Zap className="w-4 h-4" /> January Launch Offer (Limited Seats)
+            <Zap className="w-4 h-4" /> Enroll Now (Limited Seats)
           </div>
 
           <h2 className="text-3xl md:text-4xl font-bold mb-4 text-gray-900">
@@ -15,20 +15,11 @@ export default function CoursePricing() {
           </h2>
 
           <div className="flex items-baseline gap-3 mb-8">
-            <span className="text-5xl font-bold text-purple-600">₹16,000</span>
-            <span className="text-2xl text-gray-400 line-through">₹23,600</span>
-            <span className="bg-green-100 text-green-700 px-3 py-1 rounded-xl font-semibold text-sm">
-              Save 30%
-            </span>
+            <span className="text-5xl font-bold text-purple-600">₹23,600</span>
           </div>
 
           <div className="space-y-3 mb-8">
-            <div className="flex items-start gap-3">
-              <span className="w-6 h-6 rounded-lg bg-green-100 flex items-center justify-center flex-shrink-0">
-                <Check className="w-4 h-4 text-green-600" />
-              </span>
-              <span className="text-gray-700">18 Live Classes (3 per week)</span>
-            </div>
+           
             <div className="flex items-start gap-3">
               <span className="w-6 h-6 rounded-lg bg-green-100 flex items-center justify-center flex-shrink-0">
                 <Check className="w-4 h-4 text-green-600" />
@@ -58,10 +49,10 @@ export default function CoursePricing() {
           <RazorpayButton
             courseId="ai-foundation"
             courseName="AI Foundation + Management Program"
-            amount={16000}
+            amount={23600}
             className="w-full bg-purple-600 text-white font-bold text-xl py-5 rounded-xl hover:bg-purple-700 transition shadow-lg mb-4 flex items-center justify-center"
           >
-            Secure Spot for ₹16,000
+            Secure Your Spot for ₹23,600
           </RazorpayButton>
 
           <p className="text-center text-sm text-gray-500">

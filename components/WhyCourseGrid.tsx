@@ -34,7 +34,7 @@ export default function WhyCourseGrid() {
               The &apos;Sanskar&apos; & Management Module
             </h3>
             <p className="text-gray-700 leading-relaxed">
-              We teach confidence, time management, and digital discipline. A unique module for Bangalore kids.
+              We teach confidence, time management, and digital discipline. A unique module for young learners.
             </p>
           </div>
 

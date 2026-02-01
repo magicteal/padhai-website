@@ -25,7 +25,7 @@ import {
 import { DoodleDecorations } from './DecorativeElements';
 
 const PROGRAM_ITEMS = [
-  { text: 'Course Duration: 6 Weeks (5 Weeks AI + 1 Week Management)', icon: CalendarDays },
+  { text: 'Course Duration: 3 Months', icon: CalendarDays },
   { text: 'Mode: Live online classes + recordings available', icon: Video },
   { text: 'Batch Size: 20–22 kids (personal attention)', icon: Users },
 ];
@@ -172,7 +172,7 @@ export default function TrustSection() {
             Program Structure - Clear, Simple, Trusted
           </h2>
           <p className="text-slate-700 text-sm sm:text-lg font-medium max-w-3xl mx-auto">
-            6 Weeks Total: 5 Weeks AI + real skills, 1 Week Management & Mindset
+            3 Months Total: AI + real skills, Management & Mindset
           </p>
         </motion.div>
 

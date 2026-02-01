@@ -15,7 +15,7 @@ export default function ProjectsCTA() {
 
         <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
           <button className="px-8 py-4 rounded-full font-bold text-lg bg-white text-purple-600 hover:bg-gray-100 transition shadow-xl">
-            Enroll for January Batch
+            Enroll Now
           </button>
           <a 
             href={WHATSAPP_URL}

@@ -42,7 +42,7 @@ export default function PricingPageContent() {
     { typical: 'Increase screen time without direction', padhAi: 'Convert screen time to skill time' }
   ];
 
-  const bangaloreParents = [
+  const workingParents = [
     { icon: Clock, text: 'Fit after-school hours' },
     { icon: GraduationCap, text: 'Reduce homework stress' },
     { icon: Sparkles, text: 'Make learning faster & smarter' },
@@ -130,7 +130,7 @@ export default function PricingPageContent() {
                 <Clock className="w-8 h-8 text-purple-600" />
                 <h4 className="text-lg sm:text-xl font-bold text-slate-900">Duration</h4>
               </div>
-              <p className="text-base sm:text-lg font-bold text-slate-900 mb-3">6 Weeks Total</p>
+              <p className="text-base sm:text-lg font-bold text-slate-900 mb-3">3 Months Total</p>
               <ul className="space-y-2">
                 <li className="flex items-start gap-3">
                   <span className="text-purple-600 font-bold">•</span>
@@ -200,19 +200,13 @@ export default function PricingPageContent() {
             {/* Pricing Card */}
             <div className="relative z-10 card-kid p-8 sm:p-10 text-center mt-4">
               <div className="mb-6">
-                <p className="text-sm sm:text-base text-slate-600 mb-2">Regular Program Value</p>
-                <p className="text-xl sm:text-2xl text-slate-400 line-through mb-4">₹23,600</p>
-                
-                <div className="inline-flex items-center gap-2 bg-gradient-to-r from-purple-50 to-purple-100 px-4 py-2 rounded-xl mb-3">
-                  <Sparkles className="w-4 h-4 text-purple-600" />
-                  <span className="text-xs sm:text-sm font-semibold text-purple-700">January Launch Offer</span>
-                </div>
+                <p className="text-sm sm:text-base text-slate-600 mb-2">Program Fee</p>
                 
                 <h3 className="text-4xl sm:text-5xl md:text-6xl font-extrabold gradient-text mb-2">
-                  ₹16,000
+                  ₹23,600
                 </h3>
                 <p className="text-xs sm:text-sm text-slate-600">
-                  (Limited seats for the first cohort)
+                  (Limited seats per batch)
                 </p>
               </div>
 
@@ -239,7 +233,7 @@ export default function PricingPageContent() {
                   whileTap={{ scale: 0.98 }}
                 >
                   <Rocket className="w-5 h-5" />
-                  Enroll for January Batch (Limited Seats)
+                  Enroll Now (Limited Seats)
                 </motion.button>
               </div>
 
@@ -388,7 +382,7 @@ export default function PricingPageContent() {
           </motion.div>
         </div>
 
-        {/* For Bangalore Parents */}
+        {/* For Working Parents */}
         <div className="space-y-8">
           <motion.h3 
             initial={{ opacity: 0 }}
@@ -399,7 +393,7 @@ export default function PricingPageContent() {
             <span className="w-10 h-10 rounded-xl bg-purple-100 flex items-center justify-center">
               <MapPin className="w-5 h-5 text-purple-600" />
             </span>
-            <span className="text-slate-900">For Working Bangalore Parents</span>
+            <span className="text-slate-900">For Working Parents</span>
           </motion.h3>
 
           <motion.div 
@@ -409,7 +403,7 @@ export default function PricingPageContent() {
             className="card-kid max-w-3xl mx-auto p-6"
           >
             <p className="text-sm sm:text-base text-slate-700 mb-4 text-center">
-              We understand Bangalore life:
+              We understand busy life:
             </p>
             <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 mb-6">
               {['Long work hours', 'Traffic', 'Busy schedules'].map((item, idx) => (
@@ -422,7 +416,7 @@ export default function PricingPageContent() {
               So we designed this program to:
             </p>
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
-              {bangaloreParents.map((item, idx) => (
+              {workingParents.map((item, idx) => (
                 <div key={idx} className="flex items-start gap-3 bg-green-50 rounded-xl p-3">
                   <item.icon className="text-xl" />
                   <span className="text-sm sm:text-base text-slate-700">{item.text}</span>
@@ -511,7 +505,7 @@ export default function PricingPageContent() {
               whileTap={{ scale: 0.98 }}
             >
               <Rocket className="w-5 h-5" />
-              Enroll for January Batch (Limited Seats)
+              Enroll Now (Limited Seats)
             </motion.button>
           </motion.div>
         </div>

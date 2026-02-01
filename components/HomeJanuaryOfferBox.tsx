@@ -9,7 +9,7 @@ type HomeJanuaryOfferBoxProps = {
 
 export default function HomeJanuaryOfferBox({
   variant = "section",
-  text = "January Launch Offer: ₹23,600 → ₹16,000 (Limited Bangalore Seats)",
+  text = "Limited Seats Available – Enroll Now for ₹23,600",
 }: HomeJanuaryOfferBoxProps) {
   const box = (
     <motion.div

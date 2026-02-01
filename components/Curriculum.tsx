@@ -108,7 +108,7 @@ export default function Curriculum() {
             <h2 className="text-2xl sm:text-3xl md:text-4xl font-extrabold mb-3 gradient-text">
               What Your Child Will Learn
             </h2>
-            <p className="text-slate-600 text-sm sm:text-base">The 360° Framework for Bangalore Kids</p>
+            <p className="text-slate-600 text-sm sm:text-base">The 360° Framework for Young Learners</p>
           </motion.div>
 
           {/* Modules Grid */}

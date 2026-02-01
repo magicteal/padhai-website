@@ -184,7 +184,7 @@ export default function ProblemSection() {
             <Building className="w-8 h-8 text-purple-600" />
           </motion.div>
           <h2 className="text-2xl sm:text-3xl md:text-4xl font-extrabold leading-tight mb-3 text-slate-900">
-            Bangalore Parents, <span className="gradient-text">We Get It!</span>
+            Parents, <span className="gradient-text">We Get It!</span>
           </h2>
         </motion.div>
 
@@ -289,7 +289,7 @@ export default function ProblemSection() {
             whileHover={{ scale: 1.02 }}
           >
             <p className="text-slate-900 font-extrabold text-sm sm:text-lg">
-              First structured, safe AI program for Bangalore kids!
+              First structured, safe AI program for kids!
             </p>
           </motion.div>
         </motion.div>

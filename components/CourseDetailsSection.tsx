@@ -157,9 +157,9 @@ export default function CourseDetailsSection() {
             <Gift className="w-7 h-7 text-purple-600" />
           </motion.div>
           <h2 className="text-2xl sm:text-3xl md:text-4xl font-extrabold gradient-text mb-2">
-            January Special Launch
+            Enroll Now
           </h2>
-          <p className="text-slate-600 text-sm sm:text-base">Original Fee → ₹23,600 • Launch Price → ₹16,000 Only</p>
+          <p className="text-slate-600 text-sm sm:text-base">Course Fee → ₹23,600</p>
         </motion.div>
 
         {/* Parent testimonials placed before pricing to build trust */}
@@ -246,7 +246,7 @@ export default function CourseDetailsSection() {
                   viewport={{ once: true }}
                   transition={{ delay: 0.2 }}
                 >
-                  <span className="text-slate-400 line-through text-lg sm:text-xl">₹23,600</span>
+                  {/* <span className="text-slate-400 line-through text-lg sm:text-xl">₹23,600</span> */}
                 </motion.div>
                 <motion.h3
                   className="text-4xl sm:text-5xl font-extrabold gradient-text"
@@ -255,7 +255,7 @@ export default function CourseDetailsSection() {
                   viewport={{ once: true }}
                   transition={{ delay: 0.3, type: "spring" }}
                 >
-                  ₹16,000
+                 ₹23,600
                 </motion.h3>
                 <p className="text-slate-500 text-sm mt-1">One time payment • No hidden fees</p>
 
@@ -263,8 +263,7 @@ export default function CourseDetailsSection() {
                 <ul className="mt-3 space-y-2 text-left">
                   {[
                     'Limited seats due to small batches',
-                    'Price increases after January',
-                    'Bangalore priority admissions',
+                    'Enroll now before seats fill up',
                   ].map((line, idx) => (
                     <motion.li
                       key={idx}
@@ -311,7 +310,7 @@ export default function CourseDetailsSection() {
                           <RazorpayButton
                             courseId="ai-foundation"
                             courseName="AI Foundation + Management Program"
-                            amount={16000}
+                            amount={23600}
                             className="group w-full sm:w-auto bg-purple-500 hover:bg-purple-400 text-white font-extrabold py-3 sm:py-4 px-6 sm:px-8 rounded-xl shadow-xl transition-all text-xs sm:text-lg flex items-center justify-center gap-2 border-2 border-white/20"
                           >
                             <Rocket className="w-5 h-5" />

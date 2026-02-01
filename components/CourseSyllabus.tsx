@@ -46,7 +46,7 @@ export default function CourseSyllabus() {
     <section className="py-16 px-4 bg-purple-50">
       <div className="max-w-4xl mx-auto">
         <h2 className="text-3xl md:text-4xl font-bold text-center mb-4 text-gray-900">
-          The 6-Week Learning Roadmap
+          The 3-Month Learning Roadmap
         </h2>
         <p className="text-center text-gray-600 mb-12 text-lg">
           Every week is packed with fun, learning, and real projects

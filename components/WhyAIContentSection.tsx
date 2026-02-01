@@ -57,7 +57,7 @@ export default function WhyAIContentSection() {
     'Become creators, not just consumers'
   ];
 
-  const bangaloreContext = [
+  const techContext = [
     { icon: Settings, text: 'Automation' },
     { icon: Laptop, text: 'Digital tools' },
     { icon: Bot, text: 'AI-assisted jobs' },
@@ -103,7 +103,7 @@ export default function WhyAIContentSection() {
           <div className="space-y-4 text-center">
             <p className="text-sm sm:text-base text-slate-700">
               AI is no longer a "future technology". It is already part of schools, jobs, creativity, and
-              daily life, especially in cities like Bangalore.
+              daily life, especially in modern cities.
             </p>
             <p className="text-sm sm:text-base text-slate-700">
               Your child doesn&apos;t need to become a programmer. They need to learn how to think, ask,
@@ -365,7 +365,7 @@ export default function WhyAIContentSection() {
           </motion.div>
         </div>
 
-        {/* Bangalore Parents */}
+        {/* For Parents */}
         <div className="space-y-8">
           <motion.h3 
             initial={{ opacity: 0 }}
@@ -374,11 +374,11 @@ export default function WhyAIContentSection() {
             className="text-2xl sm:text-3xl font-bold text-center flex items-center justify-center gap-3"
           >
             <Users className="w-8 h-8 text-purple-600" />
-            <span className="text-slate-900">For Bangalore Parents, This Matters Even More</span>
+            <span className="text-slate-900">For Parents, This Matters More Than Ever</span>
           </motion.h3>
 
           <p className="text-center text-sm sm:text-base text-slate-700 max-w-2xl mx-auto">
-            Bangalore is a tech-driven city. Your child will grow up around:
+            In today's tech-driven world, your child will grow up around:
           </p>
 
           <motion.div
@@ -388,7 +388,7 @@ export default function WhyAIContentSection() {
             variants={containerVariants}
             className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 max-w-4xl mx-auto"
           >
-            {bangaloreContext.map((item, idx) => (
+            {techContext.map((item, idx) => (
               <motion.div
                 key={idx}
                 variants={itemVariants}

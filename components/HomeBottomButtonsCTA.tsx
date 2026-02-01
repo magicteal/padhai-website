@@ -22,12 +22,12 @@ export default function HomeBottomButtonsCTA() {
 
   const bookCallUrl = buildWhatsAppUrl(
     number,
-    "Hi! I want to book a Free Parent Counselling Call for the January batch."
+    "Hi! I want to book a Free Parent Counselling Call."
   );
 
   const reserveSeatUrl = buildWhatsAppUrl(
     number,
-    "Hi! I want to reserve my January seat for the ₹16,000 January Launch Offer (Bangalore)."
+    "Hi! I want to reserve my seat for the AI Foundation Course (₹23,600)."
   );
 
   if (!toWaMeNumber(number)) return null;
@@ -61,7 +61,7 @@ export default function HomeBottomButtonsCTA() {
               whileHover={{ scale: 1.02 }}
               whileTap={{ scale: 0.98 }}
             >
-              <span>Reserve January Seat Now</span>
+              <span>Reserve Seat Now</span>
               <ArrowRight className="w-4 h-4" />
             </motion.a>
           </div>

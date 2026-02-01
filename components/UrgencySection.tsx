@@ -21,7 +21,7 @@ export default function UrgencySection() {
     },
     {
       icon: Sparkles,
-      title: "January Offer",
+      title: "Special Offer",
       body: "Scholarship + certification benefits for the current intake.",
     },
   ];

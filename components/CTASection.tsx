@@ -80,7 +80,7 @@ export default function CTASection() {
         >
           Give Your Child a{' '}
           <span className="text-purple-200">Superpower</span>{' '}
-          This January!
+          Start Today!
         </motion.h2>
         
         {/* Subheading */}
@@ -128,7 +128,7 @@ export default function CTASection() {
             <RazorpayButton
               courseId="ai-foundation"
               courseName="AI Foundation + Management Program"
-              amount={16000}
+              amount={23600}
               className="group w-full sm:w-auto bg-purple-500 hover:bg-purple-400 text-white font-extrabold py-3 sm:py-4 px-6 sm:px-8 rounded-xl shadow-xl transition-all text-base sm:text-lg flex items-center justify-center gap-2 border-2 border-white/20"
             >
               <Rocket className="w-5 h-5" />

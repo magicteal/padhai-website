@@ -174,7 +174,7 @@ export default function SignupPage() {
                   value={formData.location}
                   onChange={handleChange}
                   className="w-full pl-10 pr-4 py-3 rounded-xl bg-white/20 border-2 border-white/30 text-white placeholder-purple-200 focus:outline-none focus:border-white/50 transition"
-                  placeholder="Bangalore, Karnataka"
+                  placeholder="Your City, State"
                 />
               </div>
             </div>
