@@ -1,9 +1,12 @@
 "use client";
+import React from 'react';
 import { motion } from 'framer-motion';
 import { Calendar, Monitor, Users, Languages, GraduationCap, Rocket, FileText } from 'lucide-react';
 import RazorpayButton from './RazorpayButton';
+import DemoBookingPopup from './DemoBookingPopup';
 
 export default function CourseHeroSection() {
+  const [showSyllabusPopup, setShowSyllabusPopup] = React.useState(false);
   const stats = [
     { icon: Calendar, label: 'Duration', value: '3 months' },
     { icon: Monitor, label: 'Mode', value: 'Live Online' },
@@ -97,19 +100,25 @@ export default function CourseHeroSection() {
             </RazorpayButton>
           </motion.div>
 
-          <motion.a
-            href="/pdf/Python%20Fundamental%20Course.pdf"
-            download="Python Fundamental Course.pdf"
+          <motion.button
+            type="button"
+            onClick={() => setShowSyllabusPopup(true)}
             className="w-full sm:w-auto px-6 sm:px-8 py-3 sm:py-4 rounded-xl font-semibold text-base sm:text-lg border-2 border-white text-white hover:bg-white/10 transition flex items-center justify-center gap-2"
             whileHover={{ scale: 1.05 }}
             whileTap={{ scale: 0.98 }}
-            target="_blank"
-            rel="noopener noreferrer"
           >
             <FileText className="w-5 h-5" /> Download Syllabus PDF
-          </motion.a>
+          </motion.button>
         </motion.div>
       </div>
+
+      {showSyllabusPopup && (
+        <DemoBookingPopup
+          onClose={() => setShowSyllabusPopup(false)}
+          variant="syllabus"
+          pdfUrl="/pdf/Python%20Fundamental%20Course.pdf"
+        />
+      )}
     </section>
   );
 }

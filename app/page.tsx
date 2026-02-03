@@ -9,6 +9,7 @@ import CourseDetailsSection from "@/components/CourseDetailsSection";
 import FAQSection from "@/components/FAQSection";
 import HomeJanuaryOfferBox from "@/components/HomeJanuaryOfferBox";
 import HomeBottomButtonsCTA from "@/components/HomeBottomButtonsCTA";
+import HomeStickyDemoCTA from "@/components/HomeStickyDemoCTA";
 
 export default function Home() {
   return (
@@ -24,6 +25,7 @@ export default function Home() {
       <CourseDetailsSection />
       <FAQSection />
       <HomeBottomButtonsCTA />
+      <HomeStickyDemoCTA />
     </main>
   );
 }

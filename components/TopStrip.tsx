@@ -32,7 +32,9 @@ export default function TopStrip({ text }: TopStripProps) {
         </div>
       </div>
 
-      {showDemoPopup && <DemoBookingPopup onClose={() => setShowDemoPopup(false)} />}
+      {showDemoPopup && (
+        <DemoBookingPopup onClose={() => setShowDemoPopup(false)} />
+      )}
     </>
   );
 }
