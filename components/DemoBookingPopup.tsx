@@ -3,9 +3,6 @@ import React, { useState } from "react";
 import { useRouter } from "next/navigation";
 import { X } from "lucide-react";
 
-const GOOGLE_SCRIPT_URL =
-  "https://script.google.com/macros/s/AKfycbxoNUPdL8iO0_Bi7WkM3EO0KXO7WRTPln9vbOnq0Tfj1DRnbXKevSy014xt4QRHgeqT/exec";
-
 type Props = {
   onClose: () => void;
   variant?: "demo" | "syllabus";
@@ -86,20 +83,11 @@ export default function DemoBookingPopup({ onClose, variant = "demo", pdfUrl = "
         return;
       }
 
-      // Create form data for Google Apps Script
-      const formData = new FormData();
-      formData.append("childName", payload.childName);
-      formData.append("childAge", payload.childAge);
-      formData.append("parentName", payload.parentName);
-      formData.append("email", payload.email);
-      formData.append("phoneNumber", payload.phoneNumber);
-      formData.append("source", payload.source);
-
-      // Use no-cors mode to bypass CORS restrictions
-      await fetch(GOOGLE_SCRIPT_URL, {
+      // Send email notification for demo bookings
+      await fetch("/api/syllabus-request", {
         method: "POST",
-        mode: "no-cors",
-        body: formData,
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(payload),
       });
 
       // Redirect to thank-you page

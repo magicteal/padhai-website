@@ -22,9 +22,9 @@ export async function POST(req: Request) {
     helpWith: Array.isArray(body?.helpWith) ? body.helpWith : [],
     learningSupport: String(body?.learningSupport ?? "").trim(),
     budget: String(body?.budget ?? "").trim(),
-    parentName: String(body?.parentName ?? "").trim(),
-    phoneNumber: String(body?.phoneNumber ?? "").trim(),
-    preferredLanguage: String(body?.preferredLanguage ?? "").trim(),
+    parentName: body?.parentName ? String(body.parentName).trim() : undefined,
+    phoneNumber: body?.phoneNumber ? String(body.phoneNumber).trim() : undefined,
+    preferredLanguage: body?.preferredLanguage ? String(body.preferredLanguage).trim() : undefined,
     otpId: body?.otpId ? String(body.otpId).trim() : undefined,
     source: body?.source ? String(body.source).trim() : undefined,
   };
@@ -44,15 +44,7 @@ export async function POST(req: Request) {
   if (!payload.budget) {
     return NextResponse.json({ error: "Budget is required" }, { status: 400 });
   }
-  if (!payload.parentName) {
-    return NextResponse.json({ error: "Parent name is required" }, { status: 400 });
-  }
-  if (!payload.phoneNumber || !isValidIndianMobile(payload.phoneNumber)) {
-    return NextResponse.json({ error: "Valid phone number is required" }, { status: 400 });
-  }
-  if (!payload.preferredLanguage) {
-    return NextResponse.json({ error: "Preferred language is required" }, { status: 400 });
-  }
+  // parentName / phoneNumber / preferredLanguage are optional now
 
   // OTP is verified client-side via /api/otp/verify.
   // Here we simply record that the client provided an otpId.
@@ -63,7 +55,6 @@ export async function POST(req: Request) {
     const doc = await DemoBookingLead.create({
       ...payload,
       otpVerified: true,
-      phoneNumber: payload.phoneNumber,
     });
 
     return NextResponse.json({ ok: true, id: String(doc._id) }, { status: 200 });

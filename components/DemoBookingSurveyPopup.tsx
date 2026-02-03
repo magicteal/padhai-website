@@ -65,7 +65,7 @@ export default function DemoBookingSurveyPopup({ onClose, source }: Props) {
   const [learningSupport, setLearningSupport] = React.useState<LearningSupport | "">("");
   const [budget, setBudget] = React.useState<Budget | "">("");
 
-  const [parentName, setParentName] = React.useState("");
+  // Parent contact removed per request
   
 
   const close = () => onClose();
@@ -78,7 +78,7 @@ export default function DemoBookingSurveyPopup({ onClose, source }: Props) {
     !!helpWith &&
     !!learningSupport &&
     !!budget &&
-    parentName.trim().length > 0 &&
+    // parentName removed from requirement
     otpVerified &&
     !loading;
 
@@ -103,8 +103,8 @@ export default function DemoBookingSurveyPopup({ onClose, source }: Props) {
           helpWith: helpWith ? [helpWith] : [],
           learningSupport,
           budget,
-          parentName: parentName.trim(),
-          	  // preferredLanguage removed
+          // parentName removed
+          // preferredLanguage removed
           // phone/otp removed
           source: source ?? "Demo Booking Survey Popup",
         }),
@@ -114,6 +114,19 @@ export default function DemoBookingSurveyPopup({ onClose, source }: Props) {
       if (!res.ok) {
         throw new Error(data?.error || "Failed to submit");
       }
+
+      await fetch("/api/syllabus-request", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          childName: childName.trim(),
+          childAgeGroup,
+          helpWith: helpWith ? [helpWith] : [],
+          learningSupport,
+          budget,
+          source: source ?? "Demo Booking Survey Popup",
+        }),
+      });
 
       router.push("/thank-you");
     } catch (e) {
@@ -280,29 +293,7 @@ export default function DemoBookingSurveyPopup({ onClose, source }: Props) {
               </select>
             </div>
 
-            {/* Q6 */}
-            <div className="rounded-xl border border-purple-100 bg-purple-50/40 p-4">
-              <label className="text-sm font-semibold text-slate-800">Q6. Parent Contact</label>
-
-              <div className="mt-3 grid grid-cols-1 md:grid-cols-2 gap-3">
-                <div>
-                  <label className="text-xs text-slate-600">Parent Name</label>
-                  <input
-                    value={parentName}
-                    onChange={(e) => setParentName(e.target.value)}
-                    className="w-full mt-1 px-3 py-2.5 rounded-lg border border-gray-200 bg-white text-slate-900 placeholder:text-slate-400"
-                    placeholder="Parent name"
-                    required
-                  />
-                </div>
-
-                {/* <div>
-                  <p className="text-sm text-slate-600">We will contact you to schedule the demo after you submit this form.</p>
-                </div> */}
-              </div>
-
-              {/* Preferred language removed per request */}
-            </div>
+            {/* Parent contact removed — intentionally left empty */}
 
             {/* Desktop submit */}
             <div className="hidden sm:block">

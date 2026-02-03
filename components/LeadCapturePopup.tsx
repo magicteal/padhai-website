@@ -3,9 +3,6 @@ import React, { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import { X } from "lucide-react";
 
-const GOOGLE_SCRIPT_URL =
-  "https://script.google.com/macros/s/AKfycbwGtb0RSf8JZz2B2III2yB432Wy5V39psOBMxFzSjkXFtD5aCetrg_ZeaJZvoUEU4cqxA/exec";
-
 export default function LeadCapturePopup({ onClose }: { onClose?: () => void }) {
   const router = useRouter();
   const [visible, setVisible] = useState(false);
@@ -30,26 +27,21 @@ export default function LeadCapturePopup({ onClose }: { onClose?: () => void }) 
     onClose?.();
   };
 
-  /**
-   * Sends data to Google Sheet using no-cors mode
-   */
   const handleSubmit = async () => {
     if (!parentName || !phone || !childAge) return;
 
     setLoading(true);
 
     try {
-      // Create form data for Google Apps Script
-      const formData = new FormData();
-      formData.append("parentName", parentName);
-      formData.append("phone", phone);
-      formData.append("childAge", childAge);
-
-      // Use no-cors mode to bypass CORS restrictions
-      await fetch(GOOGLE_SCRIPT_URL, {
+      await fetch("/api/syllabus-request", {
         method: "POST",
-        mode: "no-cors",
-        body: formData,
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          parentName,
+          phone,
+          childAge,
+          source: "Lead Capture Popup",
+        }),
       });
 
       // Redirect to thank-you page

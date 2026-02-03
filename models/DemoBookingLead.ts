@@ -30,9 +30,9 @@ export interface IDemoBookingLead {
   helpWith: DemoBookingHelpWith[];
   learningSupport: DemoBookingLearningSupport;
   budget: DemoBookingBudget;
-  parentName: string;
-  phoneNumber: string;
-  preferredLanguage: DemoBookingPreferredLanguage;
+  parentName?: string;
+  phoneNumber?: string;
+  preferredLanguage?: DemoBookingPreferredLanguage;
   otpVerified?: boolean;
   otpId?: string;
   source?: string;
@@ -72,17 +72,17 @@ const DemoBookingLeadSchema = new Schema<IDemoBookingLead>(
     },
     parentName: {
       type: String,
-      required: true,
+      required: false,
       trim: true,
     },
     phoneNumber: {
       type: String,
-      required: true,
+      required: false,
       trim: true,
     },
     preferredLanguage: {
       type: String,
-      required: true,
+      required: false,
       enum: ["English", "Hindi"],
     },
     otpVerified: {

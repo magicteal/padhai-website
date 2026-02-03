@@ -4,7 +4,7 @@ import { motion } from "framer-motion";
 import { CheckCircle, Sparkles, Star, Rocket, Shield, Palette, Phone, Gift, ArrowRight } from "lucide-react";
 import HomeJanuaryOfferBox from "@/components/HomeJanuaryOfferBox";
 import LeadCapturePopup from "@/components/LeadCapturePopup";
-import DemoBookingPopup from "@/components/DemoBookingPopup";
+import DemoBookingSurveyPopup from "@/components/DemoBookingSurveyPopup";
 
 type HeroSectionProps = {
   illustration?: React.ReactNode;
@@ -269,7 +269,9 @@ export default function HeroSection({
       </div>
 
       {showPopup && <LeadCapturePopup onClose={() => setShowPopup(false)} />}
-      {showDemoPopup && <DemoBookingPopup onClose={() => setShowDemoPopup(false)} />}
+      {showDemoPopup && (
+        <DemoBookingSurveyPopup source="Hero Demo CTA" onClose={() => setShowDemoPopup(false)} />
+      )}
 
     </section>
   );

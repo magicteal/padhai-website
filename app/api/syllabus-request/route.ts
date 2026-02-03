@@ -1,14 +1,28 @@
 import { NextResponse } from "next/server";
 import nodemailer from "nodemailer";
 
-type RequestBody = {
-  childName: string;
-  childAge: string;
-  parentName: string;
-  email: string;
-  phoneNumber: string;
-  source?: string;
-};
+type RequestBody = Record<string, unknown> & { source?: string };
+
+function escapeHtml(input: string) {
+  return input
+    .replace(/&/g, "&amp;")
+    .replace(/</g, "&lt;")
+    .replace(/>/g, "&gt;")
+    .replace(/"/g, "&quot;")
+    .replace(/'/g, "&#039;");
+}
+
+function formatValue(value: unknown) {
+  if (value === null) return "null";
+  if (value === undefined) return "";
+  if (typeof value === "string") return value;
+  if (typeof value === "number" || typeof value === "boolean") return String(value);
+  try {
+    return JSON.stringify(value);
+  } catch {
+    return String(value);
+  }
+}
 
 async function sendNotificationEmail(data: RequestBody) {
   const smtpHost = process.env.SMTP_HOST;
@@ -34,57 +48,58 @@ async function sendNotificationEmail(data: RequestBody) {
     },
   });
 
+  const source = typeof data.source === "string" && data.source.trim() ? data.source.trim() : "Website Form";
+  const at = new Date().toLocaleString("en-IN", { timeZone: "Asia/Kolkata" });
+  const email = typeof data.email === "string" ? data.email : "";
+  const phone = typeof (data as any).phoneNumber === "string" ? (data as any).phoneNumber : (typeof (data as any).phone === "string" ? (data as any).phone : "");
+  const parentName = typeof (data as any).parentName === "string" ? (data as any).parentName : "";
+
+  const entries = Object.entries(data)
+    .filter(([key]) => key !== "source")
+    .map(([key, value]) => ({ key, value: formatValue(value) }));
+
+  const rowsHtml = entries
+    .map(({ key, value }, idx) => {
+      const bg = idx % 2 === 0 ? "#f3f4f6" : "#ffffff";
+      return `
+        <tr style="background: ${bg};">
+          <td style="padding: 10px; border: 1px solid #e5e7eb; font-weight: bold; width: 40%;">${escapeHtml(key)}</td>
+          <td style="padding: 10px; border: 1px solid #e5e7eb;">${escapeHtml(value)}</td>
+        </tr>
+      `;
+    })
+    .join("\n");
+
   const htmlContent = `
-    <div style="font-family: sans-serif; max-width: 600px; margin: auto;">
-      <h2 style="color: #7c3aed;">New Syllabus Download Request</h2>
+    <div style="font-family: sans-serif; max-width: 680px; margin: auto;">
+      <h2 style="color: #7c3aed;">New Form Submission</h2>
+      <p style="margin: 8px 0 0; color: #444;">Source: <strong>${escapeHtml(source)}</strong></p>
+      <p style="margin: 4px 0 0; color: #666; font-size: 12px;">Received at ${escapeHtml(at)}</p>
       <table style="width: 100%; border-collapse: collapse; margin-top: 16px;">
-        <tr style="background: #f3f4f6;">
-          <td style="padding: 12px; border: 1px solid #e5e7eb; font-weight: bold;">Child's Name</td>
-          <td style="padding: 12px; border: 1px solid #e5e7eb;">${data.childName}</td>
-        </tr>
-        <tr>
-          <td style="padding: 12px; border: 1px solid #e5e7eb; font-weight: bold;">Child's Age</td>
-          <td style="padding: 12px; border: 1px solid #e5e7eb;">${data.childAge}</td>
-        </tr>
-        <tr style="background: #f3f4f6;">
-          <td style="padding: 12px; border: 1px solid #e5e7eb; font-weight: bold;">Parent Name</td>
-          <td style="padding: 12px; border: 1px solid #e5e7eb;">${data.parentName}</td>
-        </tr>
-        <tr>
-          <td style="padding: 12px; border: 1px solid #e5e7eb; font-weight: bold;">Phone Number</td>
-          <td style="padding: 12px; border: 1px solid #e5e7eb;">${data.phoneNumber}</td>
-        </tr>
-        <tr style="background: #f3f4f6;">
-          <td style="padding: 12px; border: 1px solid #e5e7eb; font-weight: bold;">Email</td>
-          <td style="padding: 12px; border: 1px solid #e5e7eb;">${data.email}</td>
-        </tr>
-        <tr>
-          <td style="padding: 12px; border: 1px solid #e5e7eb; font-weight: bold;">Source</td>
-          <td style="padding: 12px; border: 1px solid #e5e7eb;">${data.source || "Syllabus Download"}</td>
-        </tr>
+        ${rowsHtml || "<tr><td style=\"padding:10px;border:1px solid #e5e7eb;\">(no fields)</td></tr>"}
       </table>
-      <p style="margin-top: 24px; color: #666; font-size: 12px;">
-        Sent from PadhAi Club website at ${new Date().toLocaleString("en-IN", { timeZone: "Asia/Kolkata" })}
-      </p>
     </div>
   `;
+
+  const subjectParts = ["New Form:", source];
+  const who = [parentName, email, phone].filter(Boolean).join(" | ");
+  if (who) subjectParts.push("—", who);
+  const subject = subjectParts.join(" ");
+
+  const textLines = [
+    "New Form Submission",
+    "",
+    `Source: ${source}`,
+    `Received at: ${at}`,
+    "",
+    ...entries.map((e) => `${e.key}: ${e.value}`),
+  ];
 
   await transporter.sendMail({
     from: `"PadhAi Club" <${fromEmail}>`,
     to: notifyEmail,
-    subject: `📚 New Syllabus Request: ${data.parentName} (${data.phoneNumber})`,
-    text: `
-New Syllabus Download Request
-
-Child's Name: ${data.childName}
-Child's Age: ${data.childAge}
-Parent Name: ${data.parentName}
-Phone Number: ${data.phoneNumber}
-Email: ${data.email}
-Source: ${data.source || "Syllabus Download"}
-
-Sent at ${new Date().toLocaleString("en-IN", { timeZone: "Asia/Kolkata" })}
-    `,
+    subject,
+    text: textLines.join("\n"),
     html: htmlContent,
   });
 
@@ -94,25 +109,12 @@ Sent at ${new Date().toLocaleString("en-IN", { timeZone: "Asia/Kolkata" })}
 export async function POST(req: Request) {
   const body = (await req.json().catch(() => null)) as RequestBody | null;
 
-  if (!body) {
+  if (!body || typeof body !== "object") {
     return NextResponse.json({ error: "Invalid request body" }, { status: 400 });
   }
 
-  const { childName, childAge, parentName, email, phoneNumber, source } = body;
-
-  if (!childName || !childAge || !parentName || !email || !phoneNumber) {
-    return NextResponse.json({ error: "Missing required fields" }, { status: 400 });
-  }
-
   try {
-    await sendNotificationEmail({
-      childName,
-      childAge,
-      parentName,
-      email,
-      phoneNumber,
-      source,
-    });
+    await sendNotificationEmail(body);
 
     return NextResponse.json({ ok: true });
   } catch (e) {
