@@ -251,7 +251,7 @@ export default function StorySection() {
         </div>
 
         {/* Hero Visual Card */}
-        <motion.div
+        {/* <motion.div
           initial={{ opacity: 0, scale: 0.9 }}
           whileInView={{ opacity: 1, scale: 1 }}
           viewport={{ once: true }}
@@ -290,7 +290,7 @@ export default function StorySection() {
               </p>
             </div>
           </motion.div>
-        </motion.div>
+        </motion.div> */}
 
         {/* Bottom CTA Banner */}
         <motion.div
