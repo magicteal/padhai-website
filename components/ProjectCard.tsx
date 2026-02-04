@@ -13,7 +13,7 @@ interface ProjectCardProps {
 export default function ProjectCard({ project, index, compact }: ProjectCardProps) {
   // Images are pre-optimized during upload to Supabase
   const optimizedImageSrc = project.imageSrc || null;
-
+console.log('ProjectCard :', project);
   return (
     <motion.figure
       initial={{ opacity: 0, y: 30 }}

@@ -59,6 +59,24 @@ export async function PUT(
     const { id } = await params;
     const body = await request.json();
 
+    // If frontend sent `imageSrc` (from upload), map it into `thumbnail.url`
+    // so the DB stores the Supabase URL used by the frontend.
+    if (body?.imageSrc) {
+      body.thumbnail = body.thumbnail || {};
+      body.thumbnail.url = body.imageSrc;
+      // store a lightweight publicId indicating supabase path if available
+      if (!body.thumbnail.publicId && typeof body.imageSrc === 'string') {
+        try {
+          const urlParts = body.imageSrc.split('/');
+          body.thumbnail.publicId = urlParts.slice(-1)[0];
+        } catch (e) {
+          body.thumbnail.publicId = 'supabase';
+        }
+      }
+      // remove top-level imageSrc to avoid storing duplicate field
+      delete body.imageSrc;
+    }
+
     if (!mongoose.Types.ObjectId.isValid(id)) {
       return NextResponse.json(
         { success: false, error: 'Invalid project ID' },
