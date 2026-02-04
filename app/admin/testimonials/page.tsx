@@ -88,11 +88,46 @@ export default function AdminTestimonialsPage() {
     if (!file) return;
     setUploading(true);
     try {
+      // Compress client-side to WebP before uploading
+      const compressImage = async (inputFile: File) => {
+        try {
+          const imgBitmap = await createImageBitmap(inputFile);
+          const maxW = 800;
+          const maxH = 1200;
+          let { width, height } = imgBitmap;
+          if (width > maxW) {
+            height = Math.round((maxW / width) * height);
+            width = maxW;
+          }
+          if (height > maxH) {
+            width = Math.round((maxH / height) * width);
+            height = maxH;
+          }
+
+          const canvas = document.createElement('canvas');
+          canvas.width = width;
+          canvas.height = height;
+          const ctx = canvas.getContext('2d');
+          if (!ctx) throw new Error('Canvas not supported');
+          ctx.drawImage(imgBitmap, 0, 0, width, height);
+
+          const blob: Blob | null = await new Promise((resolve) =>
+            canvas.toBlob(resolve, 'image/webp', 0.7)
+          );
+          if (!blob) throw new Error('Image compression failed');
+          const newFile = new File([blob], inputFile.name.replace(/\.[^/.]+$/, '') + '.webp', { type: 'image/webp' });
+          return newFile;
+        } catch (err) {
+          return inputFile;
+        }
+      };
+
+      const compressed = await compressImage(file);
       const fd = new FormData();
-      fd.append('file', file);
+      fd.append('file', compressed);
       const res = await fetch('/api/testimonials/upload', { method: 'POST', body: fd });
-      if (!res.ok) throw new Error('Upload failed');
       const data = await res.json();
+      if (!res.ok) throw new Error(data?.error || 'Upload failed');
       setImageSrc(data.url);
     } catch (err) {
       console.error(err);

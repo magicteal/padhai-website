@@ -3,7 +3,20 @@ import mongoose, { Schema, Model } from 'mongoose';
 export interface IProject {
   title: string;
   description: string;
-  category: 'AI Tool' | 'Creative' | 'Problem Solving' | 'Games' | 'Other';
+  // Accept both legacy display labels and new frontend category keys
+  category:
+    | 'AI Tool'
+    | 'Creative'
+    | 'Problem Solving'
+    | 'Games'
+    | 'Other'
+    | 'robotics'
+    | 'coding'
+    | 'art'
+    | 'science'
+    | 'story'
+    | 'game'
+    | 'music';
   studentName: string;
   studentAge: number;
   batchMonth: string;
@@ -45,7 +58,20 @@ const ProjectSchema = new Schema<IProject>(
     category: {
       type: String,
       required: [true, 'Please select a category'],
-      enum: ['AI Tool', 'Creative', 'Problem Solving', 'Games', 'Other'],
+      enum: [
+        'AI Tool',
+        'Creative',
+        'Problem Solving',
+        'Games',
+        'Other',
+        'robotics',
+        'coding',
+        'art',
+        'science',
+        'story',
+        'game',
+        'music',
+      ],
     },
     studentName: {
       type: String,

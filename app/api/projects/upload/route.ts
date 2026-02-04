@@ -1,7 +1,11 @@
 import { NextResponse } from 'next/server';
+export const runtime = 'nodejs';
 import { uploadImage, BUCKETS, STORAGE_LIMITS } from '@/lib/supabase';
 
 export async function POST(req: Request) {
+  if (!process.env.SUPABASE_SERVICE_ROLE_KEY) {
+    return NextResponse.json({ error: 'Server misconfiguration: SUPABASE_SERVICE_ROLE_KEY not set' }, { status: 500 });
+  }
   try {
     const formData = await req.formData();
     const file = formData.get('file') as File;
@@ -34,9 +38,9 @@ export async function POST(req: Request) {
 
   } catch (error) {
     console.error('Upload Error:', error);
-
+    const msg = (error as any)?.message || String(error);
     return NextResponse.json(
-      { error: 'Upload failed' },
+      { error: msg },
       { status: 500 }
     );
   }

@@ -1,9 +1,13 @@
 import { createClient } from '@supabase/supabase-js';
 
 // Initialize Supabase client
-const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL!;
-const supabaseAnonKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!;
-const supabaseServiceKey = process.env.SUPABASE_SERVICE_ROLE_KEY!;
+const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL || '';
+const supabaseAnonKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY || '';
+const supabaseServiceKey = process.env.SUPABASE_SERVICE_ROLE_KEY || '';
+
+if (!supabaseUrl) console.error('Missing NEXT_PUBLIC_SUPABASE_URL');
+if (!supabaseAnonKey) console.error('Missing NEXT_PUBLIC_SUPABASE_ANON_KEY');
+if (!supabaseServiceKey) console.error('Missing SUPABASE_SERVICE_ROLE_KEY');
 
 // Client for public operations
 export const supabase = createClient(supabaseUrl, supabaseAnonKey);
@@ -60,6 +64,22 @@ export const uploadImage = async (
   bucket: string,
   filename?: string
 ): Promise<UploadResult> => {
+  // Ensure bucket exists (try to create if missing)
+  const ensureBucketExists = async (b: string) => {
+    try {
+      const { error } = await supabaseAdmin.storage.createBucket(b, {
+        public: true,
+        fileSizeLimit: b === BUCKETS.VIDEOS ? STORAGE_LIMITS.MAX_VIDEO_SIZE : STORAGE_LIMITS.MAX_IMAGE_SIZE,
+      });
+      if (error && !error.message.includes('already exists')) {
+        console.warn(`Could not create bucket ${b}:`, error.message || error);
+      }
+    } catch (e) {
+      console.warn(`createBucket failed for ${b}:`, e);
+    }
+  };
+
+  await ensureBucketExists(bucket);
   // Generate unique filename with timestamp
   const timestamp = Date.now();
   const randomId = Math.random().toString(36).substring(2, 8);
@@ -81,13 +101,29 @@ export const uploadImage = async (
     throw new Error(`Upload failed: ${error.message}`);
   }
 
-  // Get public URL
-  const { data: urlData } = supabaseAdmin.storage
+  // Try to get a public URL; if the bucket is private, create a signed URL
+  const { data: publicData } = supabaseAdmin.storage
     .from(bucket)
     .getPublicUrl(data.path);
 
+  let finalUrl = publicData?.publicUrl || '';
+
+  if (!finalUrl) {
+    // Create a signed URL valid for 30 days as a fallback
+    const expiresIn = 60 * 60 * 24 * 30; // 30 days
+    const { data: signedData, error: signedError } = await supabaseAdmin.storage
+      .from(bucket)
+      .createSignedUrl(data.path, expiresIn);
+
+    if (signedError) {
+      console.error('Signed URL error:', signedError);
+    } else if (signedData?.signedUrl) {
+      finalUrl = signedData.signedUrl;
+    }
+  }
+
   return {
-    url: urlData.publicUrl,
+    url: finalUrl,
     path: data.path,
     size: buffer.length,
   };
@@ -122,12 +158,27 @@ export const uploadVideo = async (
     throw new Error(`Video upload failed: ${error.message}`);
   }
 
-  const { data: urlData } = supabaseAdmin.storage
+  const { data: publicData } = supabaseAdmin.storage
     .from(bucket)
     .getPublicUrl(data.path);
 
+  let finalUrl = publicData?.publicUrl || '';
+
+  if (!finalUrl) {
+    const expiresIn = 60 * 60 * 24 * 30; // 30 days
+    const { data: signedData, error: signedError } = await supabaseAdmin.storage
+      .from(bucket)
+      .createSignedUrl(data.path, expiresIn);
+
+    if (signedError) {
+      console.error('Signed URL error:', signedError);
+    } else if (signedData?.signedUrl) {
+      finalUrl = signedData.signedUrl;
+    }
+  }
+
   return {
-    url: urlData.publicUrl,
+    url: finalUrl,
     path: data.path,
     size: buffer.length,
   };
