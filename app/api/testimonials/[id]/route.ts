@@ -59,6 +59,14 @@ export async function PUT(
     const { id } = await params;
     const body = await request.json();
 
+    // If frontend sent `imageSrc`, map it to `image.url` so it's persisted
+    if (body?.imageSrc) {
+      body.image = body.image || {};
+      body.image.url = body.imageSrc;
+      body.image.publicId = body.image.publicId || 'supabase';
+      delete body.imageSrc;
+    }
+
     if (!mongoose.Types.ObjectId.isValid(id)) {
       return NextResponse.json(
         { success: false, error: 'Invalid testimonial ID' },

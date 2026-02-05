@@ -56,6 +56,14 @@ export async function POST(request: NextRequest) {
 
     const body = await request.json();
 
+    // Map frontend `imageSrc` into `image.url` so DB stores the uploaded Supabase URL
+    if (body?.imageSrc) {
+      body.image = body.image || {};
+      body.image.url = body.imageSrc;
+      body.image.publicId = body.image.publicId || 'supabase';
+      delete body.imageSrc;
+    }
+
     const testimonial = new Testimonial(body);
     await testimonial.save();
     const testimonialObj = testimonial.toObject();
