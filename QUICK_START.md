@@ -8,6 +8,11 @@ NEXT_PUBLIC_SUPABASE_URL=           # From Supabase Dashboard → Settings → A
 NEXT_PUBLIC_SUPABASE_ANON_KEY=      # From Supabase Dashboard → Settings → API
 SUPABASE_SERVICE_ROLE_KEY=          # From Supabase Dashboard → Settings → API (keep secret!)
 JWT_SECRET=                         # Generate with: node -e "console.log(require('crypto').randomBytes(32).toString('hex'))"
+
+# Optional (local dev): bootstrap a dev admin on first login
+# ENABLE_DEV_ADMIN=true
+# DEV_ADMIN_EMAIL=admin@padhai.com
+# DEV_ADMIN_PASSWORD=admin123
 ```
 
 ## 🔗 Quick Links
