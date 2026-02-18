@@ -4,9 +4,6 @@
 
 ```env
 MONGODB_URI=                        # From MongoDB Atlas
-NEXT_PUBLIC_SUPABASE_URL=           # From Supabase Dashboard → Settings → API
-NEXT_PUBLIC_SUPABASE_ANON_KEY=      # From Supabase Dashboard → Settings → API
-SUPABASE_SERVICE_ROLE_KEY=          # From Supabase Dashboard → Settings → API (keep secret!)
 JWT_SECRET=                         # Generate with: node -e "console.log(require('crypto').randomBytes(32).toString('hex'))"
 
 # Optional (local dev): bootstrap a dev admin on first login
@@ -37,23 +34,25 @@ import Project from '@/models/Project';
 import connectDB from '@/lib/mongodb';
 import { getFeaturedProjects, getApprovedTestimonials } from '@/lib/db-utils';
 
-// Media Upload (Supabase Storage)
-import { uploadImage, uploadVideo, deleteFile, BUCKETS } from '@/lib/supabase';
+// Media Upload (Local Compressed Storage)
+import { uploadImage, uploadVideo, deleteFile, STORAGE_BUCKETS } from '@/lib/media-storage';
 
-// Storage Monitoring (Important for 1GB free plan!)
-import { getStorageUsage, formatBytes } from '@/lib/supabase';
+// Storage Monitoring (1GB local limit)
+import { getStorageUsage, formatBytes } from '@/lib/media-storage';
 ```
 
-## 📊 Storage Optimization Tips (1GB Free Plan)
+## 📊 Storage Optimization Tips
 
-- **Max image size:** 500KB (pre-compress before upload)
-- **Max video size:** 10MB (compress videos before upload)
-- **Monitor usage:** Check `/api/storage/usage` regularly
-- **Clean up:** Delete unused files to free space
+- **Auto-compression:** All images are automatically compressed to WebP format
+- **Max image size:** 500KB (enforced at upload)
+- **Max video size:** 10MB (enforced at upload)
+- **Storage location:** `/public/uploads` (auto-created at startup)
+- **Metadata tracking:** Automatic file tracking in `/public/uploads/.metadata/files.json`
+- **Monitor usage:** Check `/api/storage/usage` to view storage stats
 
 ## ⚡ Quick Start
 
-1. Copy credentials to `.env`
+1. Copy credentials to `.env` (only MONGODB_URI and JWT_SECRET needed now)
 2. Run: `npm run dev`
 3. Test: http://localhost:3000/api/test-connection
 4. Check storage: http://localhost:3000/api/storage/usage

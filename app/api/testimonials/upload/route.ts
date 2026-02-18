@@ -1,12 +1,9 @@
 import { NextResponse } from 'next/server';
 export const runtime = 'nodejs';
-import { uploadImage, BUCKETS, STORAGE_LIMITS } from '@/lib/supabase';
+import { uploadImage, STORAGE_BUCKETS, STORAGE_LIMITS } from '@/lib/media-storage';
 
 export async function POST(req: Request) {
   try {
-    if (!process.env.SUPABASE_SERVICE_ROLE_KEY) {
-      return NextResponse.json({ error: 'Server misconfiguration: SUPABASE_SERVICE_ROLE_KEY not set' }, { status: 500 });
-    }
     const formData = await req.formData();
     const file = formData.get('file') as File;
 
@@ -17,7 +14,7 @@ export async function POST(req: Request) {
       );
     }
 
-    // SIZE LIMIT - Reduced for free plan optimization
+    // SIZE LIMIT
     if (file.size > STORAGE_LIMITS.MAX_IMAGE_SIZE) {
       return NextResponse.json(
         { error: `Max file size allowed is ${STORAGE_LIMITS.MAX_IMAGE_SIZE / 1024}KB. Please compress your image.` },
@@ -28,7 +25,7 @@ export async function POST(req: Request) {
     const bytes = await file.arrayBuffer();
     const buffer = Buffer.from(bytes);
 
-    const result = await uploadImage(buffer, BUCKETS.TESTIMONIALS, file.name);
+    const result = await uploadImage(buffer, STORAGE_BUCKETS.TESTIMONIALS, file.name);
 
     return NextResponse.json({
       url: result.url,

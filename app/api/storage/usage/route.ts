@@ -1,13 +1,13 @@
 import { NextResponse } from 'next/server';
-import { getStorageUsage, formatBytes, getLargestFiles, BUCKETS } from '@/lib/supabase';
+import { getStorageUsage, formatBytes, getLargestFiles, STORAGE_BUCKETS } from '@/lib/media-storage';
 
 export async function GET() {
   try {
     const usage = await getStorageUsage();
 
     // Get largest files for potential cleanup recommendations
-    const largestProjects = await getLargestFiles(BUCKETS.PROJECTS, 5);
-    const largestTestimonials = await getLargestFiles(BUCKETS.TESTIMONIALS, 5);
+    const largestProjects = await getLargestFiles(STORAGE_BUCKETS.PROJECTS, 5);
+    const largestTestimonials = await getLargestFiles(STORAGE_BUCKETS.TESTIMONIALS, 5);
 
     return NextResponse.json({
       success: true,

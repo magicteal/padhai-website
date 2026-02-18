@@ -6,7 +6,7 @@ module.exports = {
     './pages/**/*.{js,ts,jsx,tsx}',
   ],
   safelist: [
-    "bg-[url('/images/problemsection.png')]",
+    "bg-[url('/images/problemSection.webp')]",
   ],
   theme: {
     extend: {},

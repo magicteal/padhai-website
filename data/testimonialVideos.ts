@@ -1,7 +1,8 @@
 import videos from './testimonialVideos.json';
 
-// For Supabase, videos are served directly without transformation
-// They should be pre-optimized before upload to save storage
+// For local media storage, videos are served directly from /uploads directory
+// They should be pre-optimized before upload to save storage space
+// Videos are stored in /public/uploads/videos/
 
 const safeVideos = (videos || []).filter(Boolean);
 

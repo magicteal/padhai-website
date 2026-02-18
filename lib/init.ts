@@ -3,7 +3,7 @@
  * Import this in layout or API routes to trigger connection on startup
  */
 import connectDB from './mongodb';
-import { verifySupabase, getStorageUsage, formatBytes } from './supabase';
+import { verifyMediaStorage, initializeStorage, getStorageUsage, formatBytes } from './media-storage';
 
 let initialized = false;
 
@@ -13,7 +13,7 @@ export async function initializeServices() {
   console.log('\n🚀 Initializing services...\n');
 
   let mongoOk = false;
-  let supabaseOk = false;
+  let mediaStorageOk = false;
 
   try {
     await connectDB();
@@ -23,10 +23,11 @@ export async function initializeServices() {
   }
 
   try {
-    supabaseOk = await verifySupabase();
+    initializeStorage();
+    mediaStorageOk = verifyMediaStorage();
     
-    // Log storage usage for monitoring (important for 1GB free plan!)
-    if (supabaseOk) {
+    // Log storage usage for monitoring
+    if (mediaStorageOk) {
       const usage = await getStorageUsage();
       console.log(`📦 Storage: ${formatBytes(usage.used)} / ${formatBytes(usage.limit)} (${usage.percentage}%)`);
       if (usage.isWarning) {
@@ -37,16 +38,16 @@ export async function initializeServices() {
       }
     }
   } catch (error) {
-    console.error('❌ Supabase initialization failed:', error instanceof Error ? error.message : error);
+    console.error('❌ Media Storage initialization failed:', error instanceof Error ? error.message : error);
   }
 
   initialized = true;
 
-  if (mongoOk && supabaseOk) {
+  if (mongoOk && mediaStorageOk) {
     console.log('\n✨ Services initialized!\n');
   } else {
     console.log(
-      `\n⚠️ Services initialized with issues (mongo=${mongoOk ? 'ok' : 'failed'}, supabase=${supabaseOk ? 'ok' : 'failed'})\n`
+      `\n⚠️ Services initialized with issues (mongo=${mongoOk ? 'ok' : 'failed'}, media-storage=${mediaStorageOk ? 'ok' : 'failed'})\n`
     );
   }
 }

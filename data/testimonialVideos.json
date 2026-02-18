@@ -1,8 +1,9 @@
 [
-  "https://wwiwvwigyngedqlozhxy.supabase.co/storage/v1/object/public/Testimonials/akshara.mp4",
-  "https://wwiwvwigyngedqlozhxy.supabase.co/storage/v1/object/public/Testimonials/vivan.mp4",
-  "https://wwiwvwigyngedqlozhxy.supabase.co/storage/v1/object/public/Testimonials/kartik.mp4",
-  "https://wwiwvwigyngedqlozhxy.supabase.co/storage/v1/object/public/Testimonials/aarav.mp4",
-  "https://wwiwvwigyngedqlozhxy.supabase.co/storage/v1/object/public/Testimonials/ananya.mp4",
-  "https://wwiwvwigyngedqlozhxy.supabase.co/storage/v1/object/public/Testimonials/ishika.mp4"
+  "/uploads/videos/akshara.mp4",
+  "/uploads/videos/vivan.mp4",
+  "/uploads/videos/kartik.mp4",
+  "/uploads/videos/aarav.mp4",
+  "/uploads/videos/ananya.mp4",
+  "/uploads/videos/ishika.mp4",
+  "/uploads/videos/vedika.mp4"
 ]

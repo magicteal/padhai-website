@@ -3,6 +3,8 @@ import React from 'react';
 import { motion } from 'framer-motion';
 import { ChevronLeft, ChevronRight, Star, Video, MessageSquare, User, Users, Bot, Sparkles, Heart, Lightbulb, Brain, Rocket, Palette, Loader2 } from 'lucide-react';
 import { useAppStore } from '@/lib/store';
+import OptimizedVideo from './OptimizedVideo';
+import OptimizedImage from './OptimizedImage';
 import testimonialVideosArray from '../data/testimonialVideos';
 import { getTestimonialKeyFromUrl, testimonialPosters } from '../data/testimonialVideos';
 
@@ -249,7 +251,7 @@ export default function TestimonialsSection() {
                   transition={{ type: "spring", stiffness: 300 }}
                 >
                   <div className="relative w-full bg-slate-100" style={{ aspectRatio: '9 / 16' }}>
-                    <video
+                    <OptimizedVideo
                       src={item.src}
                       poster={item.poster}
                       controls
@@ -338,11 +340,12 @@ export default function TestimonialsSection() {
                         <div className="flex items-start gap-3 sm:gap-4">
                           <motion.div className="flex-shrink-0" whileHover={{ rotate: 5 }}>
                             {item.imageSrc ? (
-                              <img
+                              <OptimizedImage
                                 src={item.imageSrc}
                                 alt={item.author}
-                                loading="lazy"
                                 className="w-10 h-10 sm:w-12 sm:h-12 rounded-full object-cover border"
+                                width={48}
+                                height={48}
                               />
                             ) : (
                               <div className="w-10 h-10 sm:w-12 sm:h-12 rounded-full bg-gradient-to-br from-purple-400 to-purple-600 flex items-center justify-center text-white">

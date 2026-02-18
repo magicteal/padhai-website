@@ -3,6 +3,7 @@ import React from 'react';
 import { motion } from 'framer-motion';
 import { Clock, Car, Smartphone, AlertCircle, TrendingUp, Building, Bot, Sparkles, Star, Heart, Brain, Lightbulb, Rocket, Palette } from 'lucide-react';
 import ChatBubble from './ChatBubble';
+import OptimizedVideo from './OptimizedVideo';
 import testimonialVideos, { getTestimonialKeyFromUrl, testimonialPosters } from '../data/testimonialVideos';
 
 
@@ -58,7 +59,7 @@ export default function ProblemSection() {
   return (
     <section
       id="problem"
-      className="py-12 sm:py-16 md:py-24 relative overflow-hidden bg-cover bg-center bg-[url('/images/problemSection.png')]"
+      className="py-12 sm:py-16 md:py-24 relative overflow-hidden bg-cover bg-center bg-[url('/images/problemSection.webp')]"
     >
       {/* Mobile decorations */}
       <motion.div
@@ -261,7 +262,7 @@ export default function ProblemSection() {
                     whileHover={{ scale: 1.03, y: -5 }}
                   >
                     <div className="relative w-full bg-slate-100" style={{ aspectRatio: '9 / 16' }}>
-                      <video
+                      <OptimizedVideo
                         src={src}
                         poster={poster}
                         controls
