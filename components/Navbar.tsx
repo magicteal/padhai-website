@@ -72,7 +72,7 @@ export default function Navbar({ hasTopStrip = false }: { hasTopStrip?: boolean 
           : 'bg-gradient-to-r from-purple-600 to-purple-700 text-white backdrop-blur-sm'
       }`}>
         <div className="max-w-7xl mx-auto px-4 py-3">
-          <div className="flex items-center justify-between">
+          <div className="grid grid-cols-3 items-center">
             {/* Logo */}
             <motion.div 
               initial={{ opacity: 0, x: -20 }}
@@ -91,7 +91,7 @@ export default function Navbar({ hasTopStrip = false }: { hasTopStrip?: boolean 
             </motion.div>
 
             {/* Desktop Navigation */}
-            <nav className="hidden md:flex items-center gap-4 lg:gap-6" aria-label="Primary navigation">
+            <nav className="hidden md:flex items-center justify-center gap-4 lg:gap-6" aria-label="Primary navigation">
               {navLinks.map((link, idx) => (
                 <motion.div
                   key={link.href}
@@ -119,7 +119,7 @@ export default function Navbar({ hasTopStrip = false }: { hasTopStrip?: boolean 
             <motion.div 
               initial={{ opacity: 0, x: 20 }}
               animate={{ opacity: 1, x: 0 }}
-              className="hidden md:flex items-center gap-2 lg:gap-3"
+              className="hidden md:flex items-center justify-end gap-2 lg:gap-3"
             >
               {!isAuthenticated ? (
                 <>
@@ -180,7 +180,7 @@ export default function Navbar({ hasTopStrip = false }: { hasTopStrip?: boolean 
 
             {/* Mobile Menu Button */}
             <motion.button
-              className="md:hidden p-2 text-white rounded-xl hover:bg-white/10 transition touch-target"
+              className="md:hidden p-2 text-white rounded-xl hover:bg-white/10 transition touch-target ml-auto"
               onClick={() => setIsOpen(!isOpen)}
               whileTap={{ scale: 0.9 }}
               aria-label="Toggle menu"

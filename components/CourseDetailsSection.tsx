@@ -216,11 +216,11 @@ export default function CourseDetailsSection() {
               viewport={{ once: true }}
               transition={{ delay: 0.3, type: "spring" }}
             >
-              <div className="bg-gradient-to-r from-purple-600 to-fuchsia-600 text-white px-4 py-1.5 rounded-full text-xs sm:text-sm font-bold flex items-center gap-1.5 shadow-lg">
+              {/* <div className="bg-gradient-to-r from-purple-600 to-fuchsia-600 text-white px-4 py-1.5 rounded-full text-xs sm:text-sm font-bold flex items-center gap-1.5 shadow-lg">
                 <Gift className="w-3.5 h-3.5" />
                 <span>29% OFF</span>
                 <Sparkles className="w-3.5 h-3.5" />
-              </div>
+              </div> */}
             </motion.div>
 
             {/* Pricing Card */}
@@ -231,7 +231,7 @@ export default function CourseDetailsSection() {
             >
               {/* Premium Ribbons - inside card so they scale together */}
               <div className="ribbon ribbon-top-right z-50">
-                <span>New Year Deal</span>
+                <span>Limited Seats</span>
               </div>
               <div className="ribbon ribbon-bottom-left">
                 <span>Limited Seats</span>
@@ -339,7 +339,7 @@ export default function CourseDetailsSection() {
                 {[...Array(5)].map((_, i) => (
                   <Star key={i} className="w-4 h-4 fill-current" />
                 ))}
-                <span className="text-slate-600 text-xs sm:text-sm ml-2">200+ happy parents</span>
+                <span className="text-slate-600 text-xs sm:text-sm ml-2">1000+ happy parents</span>
               </div>
             </motion.div>
           </motion.div>

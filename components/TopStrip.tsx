@@ -21,13 +21,13 @@ export default function TopStrip({ text }: TopStripProps) {
               {text ?? "New batches starting soon — Enroll today!"}
             </p>
 
-            <button
+            {/* <button
               onClick={() => setShowDemoPopup(true)}
               className="px-2 py-1 bg-white text-purple-800 rounded-md text-xs font-semibold hover:opacity-95"
               aria-label="Join Now"
             >
               Join Now
-            </button>
+            </button> */}
           </div>
         </div>
       </div>

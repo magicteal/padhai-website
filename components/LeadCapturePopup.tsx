@@ -11,7 +11,9 @@ export default function LeadCapturePopup({ onClose }: { onClose?: () => void }) 
 
   const [parentName, setParentName] = useState("");
   const [phone, setPhone] = useState("");
+  const [childName, setChildName] = useState("");
   const [childAge, setChildAge] = useState("");
+  const [childStatus, setChildStatus] = useState("");
 
   useEffect(() => {
     if (typeof window === "undefined") return;
@@ -28,7 +30,7 @@ export default function LeadCapturePopup({ onClose }: { onClose?: () => void }) 
   };
 
   const handleSubmit = async () => {
-    if (!parentName || !phone || !childAge) return;
+    if (!parentName || !phone || !childName || !childAge || !childStatus) return;
 
     setLoading(true);
 
@@ -39,7 +41,9 @@ export default function LeadCapturePopup({ onClose }: { onClose?: () => void }) 
         body: JSON.stringify({
           parentName,
           phone,
+          childName,
           childAge,
+          childStatus,
           source: "Lead Capture Popup",
         }),
       });
@@ -101,6 +105,17 @@ export default function LeadCapturePopup({ onClose }: { onClose?: () => void }) 
           </div>
 
           <div>
+            <label className="text-xs text-slate-600">Child Name</label>
+            <input
+              value={childName}
+              onChange={(e) => setChildName(e.target.value)}
+              className="w-full mt-1 px-3 py-2 rounded-lg border border-gray-200"
+              placeholder="Child name"
+              required
+            />
+          </div>
+
+          <div>
             <label className="text-xs text-slate-600">Child Age</label>
             <select
               value={childAge}
@@ -114,6 +129,20 @@ export default function LeadCapturePopup({ onClose }: { onClose?: () => void }) 
                   {age} years
                 </option>
               ))}
+            </select>
+          </div>
+
+          <div>
+            <label className="text-xs text-slate-600">Child Status</label>
+            <select
+              value={childStatus}
+              onChange={(e) => setChildStatus(e.target.value)}
+              className="w-full mt-1 px-3 py-2 rounded-lg border border-gray-200"
+              required
+            >
+              <option value="">Select status</option>
+              <option value="Only school">Only school</option>
+              <option value="School + tuitions">School + tuitions</option>
             </select>
           </div>
 

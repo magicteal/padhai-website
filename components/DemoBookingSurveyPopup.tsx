@@ -64,6 +64,8 @@ export default function DemoBookingSurveyPopup({ onClose, source }: Props) {
   const [helpWith, setHelpWith] = React.useState<HelpWithOption | "">("");
   const [learningSupport, setLearningSupport] = React.useState<LearningSupport | "">("");
   const [budget, setBudget] = React.useState<Budget | "">("");
+  const [phone, setPhone] = React.useState("");
+  const [email, setEmail] = React.useState("");
 
   // Parent contact removed per request
   
@@ -78,6 +80,8 @@ export default function DemoBookingSurveyPopup({ onClose, source }: Props) {
     !!helpWith &&
     !!learningSupport &&
     !!budget &&
+    phone.trim().length > 0 &&
+    email.trim().length > 0 &&
     // parentName removed from requirement
     otpVerified &&
     !loading;
@@ -87,7 +91,7 @@ export default function DemoBookingSurveyPopup({ onClose, source }: Props) {
     setError(null);
 
     if (!canSubmit) {
-      setError("Please complete all fields and verify OTP.");
+      setError("Please complete all fields.");
       return;
     }
 
@@ -103,9 +107,10 @@ export default function DemoBookingSurveyPopup({ onClose, source }: Props) {
           helpWith: helpWith ? [helpWith] : [],
           learningSupport,
           budget,
+          phone: phone.trim(),
+          email: email.trim(),
           // parentName removed
           // preferredLanguage removed
-          // phone/otp removed
           source: source ?? "Demo Booking Survey Popup",
         }),
       });
@@ -124,6 +129,8 @@ export default function DemoBookingSurveyPopup({ onClose, source }: Props) {
           helpWith: helpWith ? [helpWith] : [],
           learningSupport,
           budget,
+          phone: phone.trim(),
+          email: email.trim(),
           source: source ?? "Demo Booking Survey Popup",
         }),
       });
@@ -291,6 +298,32 @@ export default function DemoBookingSurveyPopup({ onClose, source }: Props) {
                   </option>
                 ))}
               </select>
+            </div>
+
+            {/* Q6 */}
+            <div>
+              <label className="text-sm font-semibold text-slate-800">Q6. Phone Number</label>
+              <input
+                type="tel"
+                value={phone}
+                onChange={(e) => setPhone(e.target.value)}
+                className="w-full mt-2 px-3 py-2.5 rounded-lg border border-gray-200 bg-white text-slate-900 placeholder:text-slate-400"
+                placeholder="e.g. 9876543210"
+                required
+              />
+            </div>
+
+            {/* Q7 */}
+            <div>
+              <label className="text-sm font-semibold text-slate-800">Q7. Email Address</label>
+              <input
+                type="email"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+                className="w-full mt-2 px-3 py-2.5 rounded-lg border border-gray-200 bg-white text-slate-900 placeholder:text-slate-400"
+                placeholder="e.g. parent@example.com"
+                required
+              />
             </div>
 
             {/* Parent contact removed — intentionally left empty */}

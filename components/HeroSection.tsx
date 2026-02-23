@@ -187,7 +187,7 @@ export default function HeroSection({
               >
                 <motion.button
                   onClick={() => setShowPopup(true)}
-                  className="flex-1 sm:flex-none sm:w-auto px-3 sm:px-6 py-2 sm:py-3 rounded-lg sm:rounded-xl bg-purple-900 text-white font-bold shadow-xl shadow-green-500/30 flex items-center justify-center gap-1 sm:gap-2 text-xs sm:text-base"
+                  className="flex-1 sm:flex-none sm:w-auto px-3 sm:px-6 py-2 sm:py-3 rounded-lg sm:rounded-xl bg-purple-900 text-white font-bold shadow-xl shadow-green-500/30 sm:hidden flex items-center justify-center gap-1 sm:gap-2 text-xs sm:text-base"
                   whileHover={{ scale: 1.03 }}
                   whileTap={{ scale: 0.98 }}
                 >

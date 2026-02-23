@@ -242,7 +242,7 @@ export default function PricingPageContent() {
                 {[...Array(5)].map((_, i) => (
                   <Star key={i} className="w-4 h-4 fill-current" />
                 ))}
-                <span className="text-slate-600 text-xs sm:text-sm ml-2">200+ happy parents</span>
+                <span className="text-slate-600 text-xs sm:text-sm ml-2">1000+ happy parents</span>
               </div>
             </div>
           </div>
