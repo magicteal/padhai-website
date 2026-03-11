@@ -2,10 +2,17 @@ import bcrypt from 'bcryptjs';
 import jwt from 'jsonwebtoken';
 import { IUser } from '@/models/User';
 
-const JWT_SECRET = process.env.JWT_SECRET || '';
-
-if (!JWT_SECRET) {
-  throw new Error('JWT_SECRET is not defined in environment variables');
+/**
+ * Lazy getter – defers the JWT_SECRET check to request time so that
+ * `next build` (which evaluates route modules at build) doesn't crash
+ * when environment variables haven't been injected yet (e.g. Docker build).
+ */
+function getJwtSecret(): string {
+  const secret = process.env.JWT_SECRET || '';
+  if (!secret) {
+    throw new Error('JWT_SECRET is not defined in environment variables');
+  }
+  return secret;
 }
 
 /**
@@ -32,7 +39,7 @@ export async function comparePassword(
 export function generateToken(userId: string, role: 'user' | 'admin'): string {
   return jwt.sign(
     { userId, role },
-    JWT_SECRET,
+    getJwtSecret(),
     { expiresIn: '30d' }
   );
 }
@@ -42,7 +49,7 @@ export function generateToken(userId: string, role: 'user' | 'admin'): string {
  */
 export function verifyToken(token: string): { userId: string; role: 'user' | 'admin' } | null {
   try {
-    const decoded = jwt.verify(token, JWT_SECRET) as { userId: string; role: 'user' | 'admin' };
+    const decoded = jwt.verify(token, getJwtSecret()) as { userId: string; role: 'user' | 'admin' };
     return decoded;
   } catch (error) {
     return null;

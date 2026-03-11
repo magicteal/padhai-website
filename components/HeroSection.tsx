@@ -1,7 +1,7 @@
 "use client";
 import React, { useState } from "react";
 import { motion } from "framer-motion";
-import { CheckCircle, Sparkles, Star, Rocket, Shield, Palette, Phone, Gift, ArrowRight } from "lucide-react";
+import { CheckCircle, Sparkles, Star, Rocket, Shield, Palette, Gift } from "lucide-react";
 import HomeJanuaryOfferBox from "@/components/HomeJanuaryOfferBox";
 import LeadCapturePopup from "@/components/LeadCapturePopup";
 import DemoBookingSurveyPopup from "@/components/DemoBookingSurveyPopup";
@@ -180,29 +180,18 @@ export default function HeroSection({
 
               {/* CTA Buttons */}
               <motion.div 
-                className="mt-6 sm:mt-10 flex flex-row items-center justify-center lg:justify-start gap-2 sm:gap-4"
+                className="mt-6 sm:mt-10 flex flex-col sm:flex-row items-center justify-center lg:justify-start gap-3 sm:gap-4"
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: 1 }}
               >
                 <motion.button
-                  onClick={() => setShowPopup(true)}
-                  className="flex-1 sm:flex-none sm:w-auto px-3 sm:px-6 py-2 sm:py-3 rounded-lg sm:rounded-xl bg-purple-900 text-white font-bold shadow-xl shadow-green-500/30 sm:hidden flex items-center justify-center gap-1 sm:gap-2 text-xs sm:text-base"
-                  whileHover={{ scale: 1.03 }}
-                  whileTap={{ scale: 0.98 }}
-                >
-                  <Phone className="w-3 h-3 sm:w-4 sm:h-4" />
-                  <span className="hidden sm:inline">Free Guidance Call </span>
-                  <span className="sm:hidden">Book Free Call</span>
-                  <ArrowRight className="w-3 h-3 sm:w-4 sm:h-4 hidden sm:block" />
-                </motion.button>
-                <motion.button
                   onClick={() => setShowDemoPopup(true)}
-                  className="flex-1 sm:flex-none sm:w-auto px-3 sm:px-6 py-2 sm:py-3 rounded-lg sm:rounded-xl bg-white/95 text-purple-700 font-bold hover:bg-white transition shadow-lg text-xs sm:text-base flex items-center justify-center gap-1 sm:gap-2"
+                  className="w-full sm:w-auto px-6 py-3.5 sm:py-3 rounded-xl bg-white/95 text-purple-700 font-extrabold hover:bg-white transition shadow-xl shadow-purple-500/20 text-base sm:text-lg flex items-center justify-center gap-2"
                   whileHover={{ scale: 1.03 }}
                   whileTap={{ scale: 0.98 }}
                 >
-                  <Gift className="w-3 h-3 sm:w-4 sm:h-4 text-purple-500" />
+                  <Gift className="w-5 h-5 text-purple-500" />
                   <span>Book a Demo Seat</span>
                 </motion.button>
               </motion.div>

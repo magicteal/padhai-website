@@ -8,21 +8,21 @@ const CURRICULUM_MODULES = [
   {
     title: 'AI Super Skills That Actually Matter',
     description:
-      'Prompt writing, simple chatbot creation, image & video generation, homework help & assignment creation, presentations, stories & project designs, real-life skills, not theory.',
+      'Prompt writing, chatbot & image generation, project designs, and real-life AI applications, not just theory.',
     icon: Sparkles,
     color: 'from-purple-500 to-violet-500',
   },
   {
     title: 'Real-World & Future Skills (Kid Level)',
     description:
-      'Creative problem solving, digital communication, brand & logo creation, marketing basics, innovation mindset, industry-relevant thinking in a kid-friendly way.',
+      'Creative problem solving, digital communication, brand creation, and an innovation mindset in a kid-friendly way.',
     icon: Brain,
     color: 'from-purple-600 to-purple-400',
   },
   {
     title: 'Personal Growth + Management Advantage',
     description:
-      'Communication, presentation confidence, collaboration & teamwork, creative curiosity, focus & time management, plus balanced screen habits, task prioritisation, goal setting, discipline & self-confidence.',
+      'Communication, focus, time management, balanced screen habits, task prioritization, and self-confidence.',
     icon: Award,
     color: 'from-violet-500 to-purple-500',
   },

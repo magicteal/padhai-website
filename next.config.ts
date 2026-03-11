@@ -1,6 +1,8 @@
 import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
+  // Required for Docker: produces a self-contained server.js
+  output: 'standalone',
   images: {
     remotePatterns: [
       {

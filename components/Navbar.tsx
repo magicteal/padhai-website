@@ -72,7 +72,7 @@ export default function Navbar({ hasTopStrip = false }: { hasTopStrip?: boolean 
           : 'bg-gradient-to-r from-purple-600 to-purple-700 text-white backdrop-blur-sm'
       }`}>
         <div className="max-w-7xl mx-auto px-4 py-3">
-          <div className="grid grid-cols-3 items-center">
+          <div className="flex items-center justify-between">
             {/* Logo */}
             <motion.div 
               initial={{ opacity: 0, x: -20 }}

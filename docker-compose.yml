@@ -1,0 +1,52 @@
+services:
+  # ─── Next.js Application ──────────────────────────────────
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: padhai-app
+    restart: unless-stopped
+    ports:
+      - "${APP_PORT:-3000}:3000"
+    env_file:
+      - .env
+    environment:
+      - NODE_ENV=production
+    volumes:
+      - uploads_data:/app/public/uploads
+    networks:
+      - padhai-network
+
+  # ─── MongoDB Database (Optional — only if not using Atlas) ─
+  # Uncomment the block below if you want a local MongoDB
+  # instead of your Atlas connection in .env
+  #
+  # mongo:
+  #   image: mongo:7
+  #   container_name: padhai-mongo
+  #   restart: unless-stopped
+  #   ports:
+  #     - "27017:27017"
+  #   environment:
+  #     MONGO_INITDB_ROOT_USERNAME: ${MONGO_USERNAME:-padhai_admin}
+  #     MONGO_INITDB_ROOT_PASSWORD: ${MONGO_PASSWORD:-padhai_secret_2026}
+  #     MONGO_INITDB_DATABASE: ${MONGO_DB_NAME:-padhai}
+  #   volumes:
+  #     - mongo_data:/data/db
+  #     - ./docker/mongo-init.js:/docker-entrypoint-initdb.d/init.js:ro
+  #   networks:
+  #     - padhai-network
+  #   healthcheck:
+  #     test: ["CMD", "mongosh", "--eval", "db.adminCommand('ping')"]
+  #     interval: 10s
+  #     timeout: 5s
+  #     retries: 5
+  #     start_period: 30s
+
+volumes:
+  uploads_data:
+    driver: local
+
+networks:
+  padhai-network:
+    driver: bridge
